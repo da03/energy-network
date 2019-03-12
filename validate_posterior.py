@@ -3,6 +3,9 @@ import sys
 import math
 
 import visdom
+import plotly
+import plotly.plotly as py
+import plotly.graph_objs as go
 import torch
 import torchtext
 import torch.optim as optim
@@ -29,6 +32,8 @@ parser.add_argument("--direction", default="ende",
                     choices=["ende", "deen"],  help="Direction of translation")
 parser.add_argument("--mode", default="soft",
                     choices=["soft", "var"],  help="Training model. Default to be vanilla transformer with soft attention.")
+parser.add_argument("--env", required=True,
+                    ,  help="Training model. Default to be vanilla transformer with soft attention.")
 #TODO: 
 parser.add_argument("--share_decoder_embeddings", default=1,
                     choices=[1, 0],  help="Share decoder embeddings or not.")
@@ -41,10 +46,17 @@ parser.add_argument("--epochs", type=int, default=15, help="Number of Epochs")
 parser.add_argument("--learning_rate", type=float, default=0.001, help="Learning Rate")
 parser.add_argument("--temperature", type=float, default=0.1, help="Gumbel Softmax temperature")
 parser.add_argument("--train_from", default="", help="Model Path")
+parser.add_argument("--dependent_posterior", default=0, type=int,
+                    choices=[1, 0],  help="Share decoder embeddings or not.")
 opts = parser.parse_args()
 
 
 def main(opts):
+    if opts.train_from != '':
+        print ('Loading Model from %s'%opts.train_from)
+        checkpoint = torch.load(opts.train_from)
+        for k in checkpoint['opts']:
+            opts[k] = checkpoint['opts'][k]
     if opts.direction == 'ende':
         exts = ['.en', '.de']
     elif opts.direction == 'deen':
@@ -66,7 +78,7 @@ def main(opts):
             exts=exts, filter_pred=filter_pred,
             fields=[('src', SRC), ('trg', TRG)])
 
-    BATCH_SIZE = opts.batch_size
+    BATCH_SIZE = 1
     train_iter = MyIterator(train, batch_size=BATCH_SIZE, device=torch.device('cuda:0'),
                             repeat=False, sort_key=lambda x: (len(x.src), len(x.trg)), shuffle=True,
                             train=True)
@@ -83,11 +95,9 @@ def main(opts):
     print ('Building Model')
     model = make_model(opts.mode, src_vocab_size, trg_vocab_size, n_enc=5, n_dec=5,
                    d_model=278, d_ff=507, h=2, dropout=0.1, share_decoder_embeddings=opts.share_decoder_embeddings,
-                   share_word_embeddings=opts.share_word_embeddings)
+                   share_word_embeddings=opts.share_word_embeddings, dependent_posterior=opts.dependent_posterior)
     print (model)
     if opts.train_from != '':
-        print ('Loading Model from %s'%opts.train_from)
-        checkpoint = torch.load(opts.train_from)
         model.load_state_dict(checkpoint['model'])
         optimizer = checkpoint['optimizer']
     else:
@@ -172,34 +182,114 @@ def main(opts):
             #optimizer = loss_compute.optimizer
             #loss_compute.optimizer = None
             #import pdb; pdb.set_trace()
-            decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model(src, trg, src_mask, trg_mask, opts.temperature)
-            prior_attentions = posterior_attentions
-            prior_attentions = [prior_attention[0] for prior_attention in prior_attentions]
-            num_layers = len(prior_attentions)
-            num_heads = prior_attentions[0].size(0)
-            vis = visdom.Visdom()
-            for l in range(num_layers):
-                for h in range(num_heads):
-                    attention = prior_attentions[l][h].transpose(0 ,1).cpu().data.numpy() # trg by src
-                    row_names = [SRC.vocab.itos[i] for i in src.view(-1).cpu().data.numpy()]
-                    col_names = [TRG.vocab.itos[i] for i in trg_y.view(-1).cpu().data.numpy()]
-                    title = 'layer: %d, head: %d'%(l, h)
-                    vis.heatmap(
-                                 X=attention,
-                                 opts=dict(
-                                     rownames=row_names,
-                                     columnnames=col_names,
-                                     colormap="Hot",
-                                     title=title,
-                                     width=750,
-                                     height=750,
-                                     marginleft=150,
-                                     marginright=150,
-                                     margintop=150,
-                                     marginbottom=150
-                                 ),
-                                 win=title
-                             )
+            decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model(src, trg, src_mask, trg_mask, 0)
+            samples = model.samples
+            outputs = model.generator(decoder_output)[0]
+            log_probs = outputs.gather(1, trg_y.view(-1, 1)).view(-1)
+            probs = log_probs.exp()
+            if opts.mode == 'var':
+                assert samples is not None
+                attentions = posterior_attentions
+                attentions = [attention[0] for attention in attentions]
+                samples = [sample[0] for sample in samples]
+                num_layers = len(attentions)
+                num_heads = attentions[0].size(0)
+                vis = visdom.Visdom(env=opts.env)
+                subplot_titles = []
+                for l in range(num_layers):
+                    for h in range(num_heads):
+                        title = 'layer: %d, head: %d'%(l, h)
+                        subplot_titles.append(title + ' probs')
+                        subplot_titles.append(title + ' sample')
+                #layout = go.Layout(autosize=True, width=600*2, height=600*num_layers*num_heads, showlegend=False)
+                fig = plotly.tools.make_subplots(rows=num_layers*num_heads, cols=2, subplot_titles=subplot_titles)
+                fig['layout'].update(width=600*2, height=600*num_layers*num_heads, autosize=False, showlegend=False)
+                for l in range(num_layers):
+                    for h in range(num_heads):
+                        attention = attentions[l][h].transpose(0 ,1).cpu().data.numpy() # trg by src
+                        sample = samples[l][h].transpose(0, 1).cpu().data.numpy()
+                        row_names = [SRC.vocab.itos[i] for i in src.contiguous().view(-1).cpu().data.numpy()]
+                        print (row_names)
+                        col_names = [TRG.vocab.itos[i]+' %f'%(1/p) for i,p in zip(trg_y.contiguous().view(-1).cpu().data.numpy(), probs.cpu().data.numpy())]
+                        title = 'layer: %d, head: %d'%(l, h)
+                        f = go.Heatmap(z=attention, x=col_names, y=row_names, colorscale='Hot', legendgroup=title+' probs', showscale=False, showlegend=False)
+                        #f.legendgroup(title + ' probs')
+                        fig.append_trace(f, l*num_heads+h+1, 1)
+                        f = go.Heatmap(z=sample, x=col_names, y=row_names, colorscale='Hot', legendgroup=title+' sample', showscale=False, showlegend=False)
+                        #f.legendgroup(title + ' sample')
+                        fig.append_trace(f, l*num_heads+h+1, 2)
+                fig['layout'].update(width=600*2, height=600*num_layers*num_heads, showlegend=False, autosize=False, title='Mode: %s'%opts.mode)
+
+
+                #fig['layout'] = layout
+                vis.plotlyplot(fig)
+            else:
+                attentions = posterior_attentions
+                attentions = [attention[0] for attention in attentions]
+                samples = [sample[0] for sample in samples]
+                num_layers = len(attentions)
+                num_heads = attentions[0].size(0)
+                vis = visdom.Visdom(env=opts.env)
+                subplot_titles = []
+                for l in range(num_layers):
+                    for h in range(num_heads):
+                        title = 'layer: %d, head: %d'%(l, h)
+                        subplot_titles.append(title + ' probs')
+                        subplot_titles.append(title + ' sample')
+                #layout = go.Layout(autosize=True, width=600*2, height=600*num_layers*num_heads, showlegend=False)
+                fig = plotly.tools.make_subplots(rows=num_layers*num_heads, cols=2, subplot_titles=subplot_titles)
+                fig['layout'].update(width=600*2, height=600*num_layers*num_heads, autosize=False, showlegend=False)
+                for l in range(num_layers):
+                    for h in range(num_heads):
+                        attention = attentions[l][h].transpose(0 ,1).cpu().data.numpy() # trg by src
+                        sample = samples[l][h].transpose(0, 1).cpu().data.numpy()
+                        row_names = [SRC.vocab.itos[i] for i in src.contiguous().view(-1).cpu().data.numpy()]
+                        print (row_names)
+                        col_names = [TRG.vocab.itos[i]+' %f'%(1/p) for i,p in zip(trg_y.contiguous().view(-1).cpu().data.numpy(), probs.cpu().data.numpy())]
+                        title = 'layer: %d, head: %d'%(l, h)
+                        f = go.Heatmap(z=attention, x=col_names, y=row_names, colorscale='Hot', legendgroup=title+' probs', showscale=False, showlegend=False)
+                        #f.legendgroup(title + ' probs')
+                        fig.append_trace(f, l*num_heads+h+1, 1)
+                        f = go.Heatmap(z=sample, x=col_names, y=row_names, colorscale='Hot', legendgroup=title+' sample', showscale=False, showlegend=False)
+                        #f.legendgroup(title + ' sample')
+                        fig.append_trace(f, l*num_heads+h+1, 2)
+                fig['layout'].update(width=600*2, height=600*num_layers*num_heads, showlegend=False, autosize=False, title='Mode: %s'%opts.mode)
+
+
+                #fig['layout'] = layout
+                vis.plotlyplot(fig)
+                    #vis.heatmap(
+                    #             X=attention,
+                    #             opts=dict(
+                    #                 rownames=row_names,
+                    #                 columnnames=col_names,
+                    #                 colormap="Hot",
+                    #                 title=title,
+                    #                 width=600,
+                    #                 height=600,
+                    #                 marginleft=100,
+                    #                 marginright=100,
+                    #                 margintop=100,
+                    #                 marginbottom=100
+                    #             ),
+                    #             win=title
+                    #         )
+                    #vis.heatmap(
+                    #             X=sample,
+                    #             opts=dict(
+                    #                 rownames=row_names,
+                    #                 columnnames=col_names,
+                    #                 colormap="Hot",
+                    #                 title=title,
+                    #                 width=600,
+                    #                 height=600,
+                    #                 marginleft=100,
+                    #                 marginright=100,
+                    #                 margintop=100,
+                    #                 marginbottom=100
+                    #             ),
+                    #             win=title
+                    #         )
             
             break
             #l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions)

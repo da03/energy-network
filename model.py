@@ -36,25 +36,15 @@ class Model(nn.Module):
         self.generator = generator
                                                                                     
     def forward(self, src, trg, src_mask, trg_mask, temperature=None):
+        self.samples = None
         src_embeddings = self.src_embed(src)
         trg_embeddings = self.trg_embed(trg)
         h = self.encoder(src_embeddings, src_mask)
         if trg is not None: # try both self attn and inter attn
             if self.mode == 'var':
                 assert temperature is not None
-                log_posterior_attentions, posterior_attentions = self.inference_network(h, trg_embeddings[:, 1:], src_mask) # a list of attentions, we need to sample
-                posterior_samples = []
-                for posterior_attention, log_posterior_attention in zip(posterior_attentions, log_posterior_attentions):
-                    if temperature > 0:
-                        posterior_sample = gumbel_softmax_sample(log_posterior_attention, temperature)
-                    else: # true categorical sample, equivalently we can use argmax to replace softmax in gumbel, here we use categorical for sanity check.
-                        #import pdb; pdb.set_trace()
-                        h1, h2, h3, h4 = posterior_attention.size()
-                        p = Categorical(posterior_attention.view(-1, h4))
-                        posterior_sample_id = p.sample().view(h1, h2, h3, 1)
-                        posterior_sample = posterior_attention.new_full(posterior_attention.size(), 0.).to(posterior_attention)
-                        posterior_sample.scatter_(3, posterior_sample_id, 1.)
-                    posterior_samples.append(posterior_sample)
+                log_posterior_attentions, posterior_attentions, posterior_samples = self.inference_network(h, trg_embeddings[:, 1:], src_mask, temperature) # a list of attentions, we need to sample
+                self.samples = posterior_samples
                 decoder_output, log_prior_attentions, prior_attentions = self.decoder(h, trg_embeddings[:, :-1], src_mask, trg_mask[:, :-1, :-1], posterior_samples, attn_dropout=False)
             elif self.mode == 'soft':
                 if trg_mask is not None:
@@ -129,8 +119,8 @@ class SublayerConnection(nn.Module):
         if num_outputs == 1:
             return x + self.dropout(sublayer(self.norm(x)))
         else:
-            log_prior_attention, prior_attention, z = sublayer(self.norm(x))
-            return log_prior_attention, prior_attention, x + self.dropout(z)
+            log_prior_attention, prior_attention, sample, z = sublayer(self.norm(x))
+            return log_prior_attention, prior_attention, sample, x + self.dropout(z)
 
 
 class EncoderLayer(nn.Module):
@@ -162,14 +152,14 @@ class Decoder(nn.Module):
         if posterior_attentions is not None:
             for posterior_attention, layer in zip(posterior_attentions, self.layers):
                 #import pdb; pdb.set_trace()
-                log_prior_attention, prior_attention, z = layer(z, h, src_mask, trg_mask, posterior_attention, attn_dropout=attn_dropout)
+                log_prior_attention, prior_attention, sample, z = layer(z, h, src_mask, trg_mask, posterior_attention, attn_dropout=attn_dropout)
                 prior_attentions.append(prior_attention)
                 log_prior_attentions.append(log_prior_attention)
             z = self.norm(z)
             return z, log_prior_attentions, prior_attentions
         else:
             for layer in self.layers:
-                log_prior_attention, prior_attention, z = layer(z, h, src_mask, trg_mask, attn_dropout=attn_dropout)
+                log_prior_attention, prior_attention, sample, z = layer(z, h, src_mask, trg_mask, attn_dropout=attn_dropout)
                 prior_attentions.append(prior_attention)
                 log_prior_attentions.append(log_prior_attention)
             z = self.norm(z)
@@ -252,7 +242,7 @@ class DecoderLayer(nn.Module):
         self.feed_forward = feed_forward
         self.sublayer = clones(SublayerConnection(size, dropout), 3)
                                                                  
-    def forward(self, x, h, src_mask, trg_mask=None, posterior_attention=None, attn_dropout=True, z_selfattend=None):
+    def forward(self, x, h, src_mask, trg_mask=None, posterior_attention=None, attn_dropout=True, z_selfattend=None, dependent_posterior=0, temperature=None):
         "Follow Figure 1 (right) for connections."
         if z_selfattend is None:
             z_selfattend = x
@@ -261,25 +251,28 @@ class DecoderLayer(nn.Module):
         #else:
         #    x = self.sublayer[0](x, lambda x: self.self_attn(x, z_selfattend, z_selfattend, trg_mask))
         x = self.sublayer[0](x, lambda x: self.self_attn(x, z_selfattend, z_selfattend, trg_mask))
-        log_prior_attention, prior_attention, x = self.sublayer[1](x, lambda x: self.src_attn(x, h, h, src_mask, num_outputs=2, attn=posterior_attention, attn_dropout=attn_dropout), num_outputs=2)
-        return log_prior_attention, prior_attention, self.sublayer[2](x, self.feed_forward)
+        log_prior_attention, prior_attention, sample, x = self.sublayer[1](x, lambda x: self.src_attn(x, h, h, src_mask, num_outputs=2, attn=posterior_attention, attn_dropout=attn_dropout, dependent_posterior=dependent_posterior, temperature=temperature), num_outputs=2)
+        return log_prior_attention, prior_attention, sample, self.sublayer[2](x, self.feed_forward)
 
 class InferenceNetwork(nn.Module):
     "Generic N layer decoder with masking."
-    def __init__(self, layer, N):
+    def __init__(self, layer, N, dependent_posterior):
         super(InferenceNetwork, self).__init__()
         self.layers = clones(layer, N)
+        self.dependent_posterior = dependent_posterior
                                                
     # maybe consider disallowing attending to oneself
-    def forward(self, h, trg, src_mask):
+    def forward(self, h, trg, src_mask, temperature):
         log_posterior_attentions = []
         posterior_attentions = []
         z = trg
+        samples = []
         for layer in self.layers:
-            log_posterior_attention, posterior_attention, z = layer(z, h, src_mask)
+            log_posterior_attention, posterior_attention, sample, z = layer(z, h, src_mask, dependent_posterior=self.dependent_posterior, temperature=temperature)
+            samples.append(sample)
             log_posterior_attentions.append(log_posterior_attention)
             posterior_attentions.append(posterior_attention)
-        return log_posterior_attentions, posterior_attentions
+        return log_posterior_attentions, posterior_attentions, samples
 
 def subsequent_mask(size):
     "Mask out subsequent positions."
@@ -287,7 +280,7 @@ def subsequent_mask(size):
     subsequent_mask = np.triu(np.ones(attn_shape), k=1).astype('uint8')
     return torch.from_numpy(subsequent_mask) == 0
 
-def attention(query, key, value, mask=None, dropout=None, attn=None, attn_dropout=True):
+def attention(query, key, value, mask=None, dropout=None, attn=None, attn_dropout=True, dependent_posterior=0, temperature=None):
     "Compute 'Scaled Dot Product Attention'"
     d_k = query.size(-1)
     scores = torch.matmul(query, key.transpose(-2, -1)) \
@@ -299,9 +292,23 @@ def attention(query, key, value, mask=None, dropout=None, attn=None, attn_dropou
     if attn_dropout and (dropout is not None):
         p_attn = dropout(p_attn)
     if attn is None:
-        return torch.matmul(p_attn, value), log_p_attn, p_attn
+        if temperature is None:
+            return torch.matmul(p_attn, value), log_p_attn, p_attn, None
+        if temperature > 0:
+            sample = gumbel_softmax_sample(log_p_attn, temperature)
+        else: # true categorical sample, equivalently we can use argmax to replace softmax in gumbel, here we use categorical for sanity check.
+            #import pdb; pdb.set_trace()
+            h1, h2, h3, h4 = p_attn.size()
+            p = Categorical(p_attn.view(-1, h4))
+            sample_id = p.sample().view(h1, h2, h3, 1)
+            sample = p_attn.new_full(p_attn.size(), 0.).to(p_attn)
+            sample.scatter_(3, sample_id, 1.)
+        if dependent_posterior == 0:
+            return torch.matmul(p_attn, value), log_p_attn, p_attn, sample
+        else:
+            return torch.matmul(sample, value), log_p_attn, p_attn, sample
     else:
-        return torch.matmul(attn, value), log_p_attn, p_attn
+        return torch.matmul(attn, value), log_p_attn, p_attn, None
 
 class MultiHeadedAttention(nn.Module):
     def __init__(self, h, d_model, dropout=0.1):
@@ -315,7 +322,7 @@ class MultiHeadedAttention(nn.Module):
         self.attn = None
         self.dropout = nn.Dropout(p=dropout)
                                                                                             
-    def forward(self, query, key, value, mask=None, num_outputs=1, attn=None, attn_dropout=True):
+    def forward(self, query, key, value, mask=None, num_outputs=1, attn=None, attn_dropout=True, dependent_posterior=0, temperature=None):
         "Implements Figure 2"
         if mask is not None:
             # Same mask applied to all h heads.
@@ -328,8 +335,8 @@ class MultiHeadedAttention(nn.Module):
         for l, x in zip(self.linears, (query, key, value))]
       
         # 2) Apply attention on all the projected vectors in batch. 
-        x, log_attn, self.attn = attention(query, key, value, mask=mask, 
-        dropout=self.dropout, attn=attn, attn_dropout=attn_dropout)
+        x, log_attn, self.attn, sample = attention(query, key, value, mask=mask, 
+        dropout=self.dropout, attn=attn, attn_dropout=attn_dropout, dependent_posterior=dependent_posterior, temperature=temperature)
         
         # 3) "Concat" using a view and apply a final linear. 
         x = x.transpose(1, 2).contiguous() \
@@ -337,7 +344,7 @@ class MultiHeadedAttention(nn.Module):
         if num_outputs == 1:
             return self.linears[-1](x)
         else:
-            return log_attn, self.attn, self.linears[-1](x)
+            return log_attn, self.attn, sample, self.linears[-1](x)
 
 class PositionwiseFeedForward(nn.Module):
     "Implements FFN equation."
@@ -386,7 +393,7 @@ class PositionalEncoding(nn.Module):
 
 def make_model(mode, src_vocab, trg_vocab, n_enc=6, n_dec=6,
                        d_model=512, d_ff=2048, h=8, dropout=0.1, share_decoder_embeddings=0,
-                       share_word_embeddings=0):
+                       share_word_embeddings=0, dependent_posterior=0):
     "Helper: Construct a model from hyperparameters."
     c = copy.deepcopy
     attn = MultiHeadedAttention(h, d_model)
@@ -398,12 +405,12 @@ def make_model(mode, src_vocab, trg_vocab, n_enc=6, n_dec=6,
                   Decoder(DecoderLayer(d_model, c(attn), c(attn), c(ff), dropout), n_dec),
                   nn.Sequential(Embeddings(d_model, src_vocab), c(position)),
                   nn.Sequential(Embeddings(d_model, trg_vocab), c(position)),
-                  InferenceNetwork(DecoderLayer(d_model, c(attn), c(attn), c(ff), dropout), n_dec),
+                  InferenceNetwork(DecoderLayer(d_model, c(attn), c(attn), c(ff), dropout), n_dec, dependent_posterior),
                   Generator(d_model, trg_vocab))
 
-    #if share_decoder_embeddings == 1:
-    #    model.generator.proj.weight = model.trg_embed[0].lut.weight
-    #    #model.generator.proj.bias = None
+    if share_decoder_embeddings == 1:
+        model.generator.proj.weight = model.trg_embed[0].lut.weight
+        #model.generator.proj.bias = None
     #if share_word_embeddings == 1:
     #    model.src_embed[0].lut.weight = model.trg_embed[0].lut.weight
                                 

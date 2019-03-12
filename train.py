@@ -26,7 +26,9 @@ parser.add_argument("--direction", default="ende",
 parser.add_argument("--mode", default="soft",
                     choices=["soft", "var"],  help="Training model. Default to be vanilla transformer with soft attention.")
 #TODO: 
-parser.add_argument("--share_decoder_embeddings", default=1,
+parser.add_argument("--share_decoder_embeddings", default=1, type=int,
+                    choices=[1, 0],  help="Share decoder embeddings or not.")
+parser.add_argument("--dependent_posterior", default=0, type=int,
                     choices=[1, 0],  help="Share decoder embeddings or not.")
 parser.add_argument("--share_word_embeddings", default=0,
                     choices=[1, 0],  help="Share src trg embeddings or not.")
@@ -115,7 +117,7 @@ def main(opts):
     BATCH_SIZE = opts.batch_size
     train_iter = MyIterator(train, batch_size=BATCH_SIZE, device=torch.device('cuda:0'),
                             repeat=False, sort_key=lambda x: (len(x.src), len(x.trg)),
-                            batch_size_fn=batch_size_fn, train=True)
+                            batch_size_fn=batch_size_fn, train=True, shuffle=True)
     val_iter = MyIterator(val, batch_size=BATCH_SIZE, device=torch.device('cuda:0'),
                             repeat=False, sort_key=lambda x: (len(x.src), len(x.trg)),
                             batch_size_fn=batch_size_fn, train=False)
@@ -129,7 +131,7 @@ def main(opts):
     print ('Building Model')
     model = make_model(opts.mode, src_vocab_size, trg_vocab_size, n_enc=5, n_dec=5,
                    d_model=278, d_ff=507, h=2, dropout=0.1, share_decoder_embeddings=opts.share_decoder_embeddings,
-                   share_word_embeddings=opts.share_word_embeddings)
+                   share_word_embeddings=opts.share_word_embeddings, dependent_posterior=opts.dependent_posterior)
     print (model)
     if opts.train_from != '':
         print ('Loading Model from %s'%opts.train_from)
