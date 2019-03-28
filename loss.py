@@ -18,6 +18,7 @@ class MultiGPULossCompute:
         self.model = model
         self.devices = devices
         self.chunk_size = chunk_size
+        self.count_ = 0
         
     def __call__(self, out, targets, normalize, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions):
         total = 0.0
@@ -75,9 +76,8 @@ class MultiGPULossCompute:
                     out_grad[j].append(out_column[j][0].grad.data.clone())
 
         total_kl = 0. 
-        if self.mode == 'var':
+        if self.mode == 'var' or self.mode == 'lstmvar':
             for log_prior_attention, prior_attention, log_posterior_attention, posterior_attention in zip(log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions):
-                #import pdb; pdb.set_trace()
                 batch_size, h, trg_size, src_size = prior_attention.size()
                 prior_attention = prior_attention.transpose(1, 2).contiguous().view(-1, h, src_size)
                 log_prior_attention = log_prior_attention.transpose(1, 2).contiguous().view(-1, h, src_size)
@@ -96,7 +96,7 @@ class MultiGPULossCompute:
 
         # Backprop all loss through transformer.            
         if self.optimizer is not None:
-            if self.mode == 'var':
+            if self.mode == 'var' or self.mode == 'lstmvar':
                 total_kl = total_kl
                 total_kl.backward(retain_graph = True)
                 total_kl = total_kl.item()
@@ -117,6 +117,9 @@ class MultiGPULossCompute:
                 #print([x[0] for x in nans])
                 for _, param in nans:
                     param.grad[param.grad!=param.grad] = 0
-            self.optimizer.step()
-            self.optimizer.zero_grad()
+            if self.count_ == self.accum_grad:
+                self.optimizer.step()
+                self.optimizer.zero_grad()
+                self.count_ = 0
+            self.count_ += 1
         return total * normalize, total_xent * normalize, total_kl * normalize, total_correct, total_nonpadding

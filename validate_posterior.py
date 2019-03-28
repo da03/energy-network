@@ -31,16 +31,20 @@ parser.add_argument("--dataset", required=True, help="Path to the dataset")
 parser.add_argument("--direction", default="ende",
                     choices=["ende", "deen"],  help="Direction of translation")
 parser.add_argument("--mode", default="soft",
-                    choices=["soft", "var"],  help="Training model. Default to be vanilla transformer with soft attention.")
+                    choices=["soft", "var", "hard"],  help="Training model. Default to be vanilla transformer with soft attention.")
+parser.add_argument("--split", default="train",
+                    choices=["train", "val"],  help="Training model. Default to be vanilla transformer with soft attention.")
 parser.add_argument("--env", required=True,
-                    ,  help="Training model. Default to be vanilla transformer with soft attention.")
+                    help="Training model. Default to be vanilla transformer with soft attention.")
 #TODO: 
 parser.add_argument("--share_decoder_embeddings", default=1,
                     choices=[1, 0],  help="Share decoder embeddings or not.")
 parser.add_argument("--share_word_embeddings", default=0,
                     choices=[1, 0],  help="Share src trg embeddings or not.")
-parser.add_argument("--max_src_len", type=int, default=150, help="Maximum Src Length")
-parser.add_argument("--max_trg_len", type=int, default=150, help="Maximum Trg Length")
+parser.add_argument("--max_src_len", type=int, default=15, help="Maximum Src Length")
+parser.add_argument("--max_trg_len", type=int, default=15, help="Maximum Trg Length")
+parser.add_argument("--min_src_len", type=int, default=13, help="Maximum Src Length")
+parser.add_argument("--min_trg_len", type=int, default=13, help="Maximum Trg Length")
 parser.add_argument("--batch_size", type=int, default=1, help="Number of tokens per minibatch")
 parser.add_argument("--epochs", type=int, default=15, help="Number of Epochs")
 parser.add_argument("--learning_rate", type=float, default=0.001, help="Learning Rate")
@@ -55,8 +59,9 @@ def main(opts):
     if opts.train_from != '':
         print ('Loading Model from %s'%opts.train_from)
         checkpoint = torch.load(opts.train_from)
-        for k in checkpoint['opts']:
-            opts[k] = checkpoint['opts'][k]
+        for k in checkpoint['opts'].__dict__:
+            if k not in ['train_from', 'batch_size', 'epochs', 'env', 'max_src_len', 'min_src_len', 'max_trg_len', 'min_trg_len']:
+                opts.__dict__[k] = checkpoint['opts'].__dict__[k]
     if opts.direction == 'ende':
         exts = ['.en', '.de']
     elif opts.direction == 'deen':
@@ -70,8 +75,8 @@ def main(opts):
             init_token=BOS_WORD, eos_token=EOS_WORD,
             pad_token=PAD_WORD)
     def filter_pred(example):
-        return 0 < len(example.src) <= opts.max_src_len \
-            and 0 < len(example.trg) <= opts.max_trg_len 
+        return opts.min_src_len <= len(example.src) <= opts.max_src_len \
+            and opts.min_trg_len <= len(example.trg) <= opts.max_trg_len 
     train, val = torchtext.datasets.TranslationDataset.splits(
             path=opts.dataset, train='train/train.tags.en-de.bpe',
             validation='dev/valid.en-de.bpe', test=None,
@@ -85,7 +90,7 @@ def main(opts):
     val_iter = MyIterator(val, batch_size=BATCH_SIZE, device=torch.device('cuda:0'),
                             repeat=False, sort_key=lambda x: (len(x.src), len(x.trg)),
                             train=False)
-    TRG.build_vocab(train.src, train.trg)
+    TRG.vocab = checkpoint['trg_vocab']
     SRC.vocab = TRG.vocab
 
     # Build Model
@@ -122,46 +127,10 @@ def main(opts):
         attn_shape = (1, size, size)
         subsequent_mask = np.triu(np.ones(attn_shape), k=1).astype('uint8')
         return torch.from_numpy(subsequent_mask) == 0
-    #print ('')
-    #print ('Epoch: %d' %epoch)
-    #print ('Training')
-    #model.train()
-    #start = time.time()
-    #for i, batch in enumerate(train_iter):
-    #    num_steps += 1
-    #    src = batch.src[0].transpose(0, 1) # batch, len
-    #    src_mask = (src != SRC.vocab.stoi["<blank>"]).unsqueeze(-2)
-    #    trg = batch.trg.transpose(0, 1) # batch, len
-    #    trg_mask = (trg != TRG.vocab.stoi["<blank>"]).unsqueeze(-2)
-    #    trg_mask = trg_mask & Variable(subsequent_mask(trg.size(-1)).to(trg_mask))
-    #    trg_y = trg[:, 1:]
-    #    ntokens = (trg_y != TRG.vocab.stoi["<blank>"]).data.view(-1).sum().item()
-
-    #    decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model_par(src, trg, src_mask, trg_mask, opts.temperature)
-    #    l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions)
-    #    total_loss += l
-    #    total_xent += l_xent
-    #    total_kl += l_kl
-    #    total_correct += l_correct
-    #    total_nonpadding += l_nonpadding
-    #    loss_all += l
-    #    loss_xent += l_xent
-    #    loss_kl += l_kl
-    #    total_tokens += ntokens
-    #    tokens += ntokens
-    #    if i % 50 == 1:
-    #        elapsed = max(0.1, time.time() - start)
-    #        print("Epoch Step: %d PPL: %f, Acc: %f, exp xent: %f, xent: %f, kl: %f. Tokens per Sec: %f" %
-    #        (i, math.exp(min(100, loss_all / tokens)), float(total_correct)/total_nonpadding,  math.exp(min(100, loss_xent / tokens)), loss_xent/tokens, loss_kl/tokens, tokens / elapsed))
-    #        sys.stdout.flush()
-    #        start = time.time()
-    #        tokens = 0
-    #        loss_all = 0.
-    #        loss_xent = 0.
-    #        loss_kl = 0.
-    #        total_correct = 0
-    #        total_nonpadding = 0
-
+    if opts.split == 'train':
+        it = train_iter
+    elif opts.split == 'val':
+        it = val_iter
     print ('Validation')
     model.eval()
     #val_loss_all = 0
@@ -169,7 +138,7 @@ def main(opts):
     #val_total_correct = 0
     #val_total_nonpadding = 0
     with torch.no_grad():
-        for i, batch in enumerate(train_iter):
+        for i, batch in enumerate(it):
             num_steps += 1
             src = batch.src[0].transpose(0, 1) # batch, len
             trg = batch.trg.transpose(0, 1) # batch, len
@@ -178,30 +147,72 @@ def main(opts):
             trg_mask = trg_mask & Variable(subsequent_mask(trg.size(-1)).to(trg_mask))
             trg_y = trg[:, 1:]
             ntokens = (trg_y != TRG.vocab.stoi["<blank>"]).data.view(-1).sum().item()
-            #decoder_output, prior_attentions, posterior_attentions = model_par(src, trg, src_mask, trg_mask)
-            #optimizer = loss_compute.optimizer
-            #loss_compute.optimizer = None
-            #import pdb; pdb.set_trace()
             decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model(src, trg, src_mask, trg_mask, 0)
             samples = model.samples
             outputs = model.generator(decoder_output)[0]
             log_probs = outputs.gather(1, trg_y.view(-1, 1)).view(-1)
             probs = log_probs.exp()
+            vis = visdom.Visdom(env='%s_%s'%(opts.split, opts.env))
             if opts.mode == 'var':
                 assert samples is not None
                 attentions = posterior_attentions
+                attentions0 = prior_attentions
+                if opts.mode == 'hard':
+                    attentions = prior_attentions
+                attentions = [attention[0] for attention in attentions]
+                attentions0 = [attention[0] for attention in attentions0]
+                samples = [sample[0] for sample in samples]
+                num_layers = len(attentions)
+                num_heads = attentions[0].size(0)
+                subplot_titles = []
+                for l in range(num_layers):
+                    for h in range(num_heads):
+                        title = 'layer: %d, head: %d'%(l, h)
+                        subplot_titles.append(title + ' priors')
+                        subplot_titles.append(title + ' posteriors-priors')
+                        subplot_titles.append(title + ' posteriors')
+                        subplot_titles.append(title + ' sample')
+                fig = plotly.tools.make_subplots(rows=num_layers*num_heads, cols=4, subplot_titles=subplot_titles)
+                fig['layout'].update(width=600*4, height=600*num_layers*num_heads, autosize=False, showlegend=False)
+                for l in range(num_layers):
+                    for h in range(num_heads):
+                        attention = attentions[l][h].transpose(0 ,1).cpu().data.numpy() # trg by src
+                        attention0 = attentions0[l][h].transpose(0 ,1).cpu().data.numpy() # trg by src
+                        sample = samples[l][h].transpose(0, 1).cpu().data.numpy()
+                        row_names = [SRC.vocab.itos[i] for i in src.contiguous().view(-1).cpu().data.numpy()]
+                        print (row_names)
+                        col_names = [TRG.vocab.itos[i]+' %f'%(1/p) for i,p in zip(trg_y.contiguous().view(-1).cpu().data.numpy(), probs.cpu().data.numpy())]
+                        title = 'layer: %d, head: %d'%(l, h)
+                        f = go.Heatmap(z=attention0, x=col_names, y=row_names, colorscale='Hot', legendgroup=title+' priors', showscale=False, showlegend=False)
+                        fig.append_trace(f, l*num_heads+h+1, 1)
+                        f = go.Heatmap(z=(attention-attention0), x=col_names, y=row_names, colorscale='Hot', legendgroup=title+' priors', showscale=False, showlegend=False)
+                        fig.append_trace(f, l*num_heads+h+1, 2)
+                        f = go.Heatmap(z=attention, x=col_names, y=row_names, colorscale='Hot', legendgroup=title+' posteriors', showscale=False, showlegend=False)
+                        #f.legendgroup(title + ' probs')
+                        fig.append_trace(f, l*num_heads+h+1, 3)
+                        f = go.Heatmap(z=sample, x=col_names, y=row_names, colorscale='Hot', legendgroup=title+' sample', showscale=False, showlegend=False)
+                        #f.legendgroup(title + ' sample')
+                        fig.append_trace(f, l*num_heads+h+1, 4)
+                fig['layout'].update(width=600*2, height=600*num_layers*num_heads, showlegend=False, autosize=False, title='Mode: %s'%opts.mode)
+
+
+                #fig['layout'] = layout
+                vis.plotlyplot(fig)
+            elif opts.mode == 'hard':
+                assert samples is not None
+                attentions = posterior_attentions
+                if opts.mode == 'hard':
+                    attentions = prior_attentions
                 attentions = [attention[0] for attention in attentions]
                 samples = [sample[0] for sample in samples]
                 num_layers = len(attentions)
                 num_heads = attentions[0].size(0)
-                vis = visdom.Visdom(env=opts.env)
                 subplot_titles = []
                 for l in range(num_layers):
                     for h in range(num_heads):
                         title = 'layer: %d, head: %d'%(l, h)
                         subplot_titles.append(title + ' probs')
                         subplot_titles.append(title + ' sample')
-                #layout = go.Layout(autosize=True, width=600*2, height=600*num_layers*num_heads, showlegend=False)
                 fig = plotly.tools.make_subplots(rows=num_layers*num_heads, cols=2, subplot_titles=subplot_titles)
                 fig['layout'].update(width=600*2, height=600*num_layers*num_heads, autosize=False, showlegend=False)
                 for l in range(num_layers):
@@ -224,89 +235,31 @@ def main(opts):
                 #fig['layout'] = layout
                 vis.plotlyplot(fig)
             else:
-                attentions = posterior_attentions
+                attentions = prior_attentions
                 attentions = [attention[0] for attention in attentions]
-                samples = [sample[0] for sample in samples]
                 num_layers = len(attentions)
                 num_heads = attentions[0].size(0)
-                vis = visdom.Visdom(env=opts.env)
                 subplot_titles = []
                 for l in range(num_layers):
                     for h in range(num_heads):
                         title = 'layer: %d, head: %d'%(l, h)
                         subplot_titles.append(title + ' probs')
-                        subplot_titles.append(title + ' sample')
-                #layout = go.Layout(autosize=True, width=600*2, height=600*num_layers*num_heads, showlegend=False)
-                fig = plotly.tools.make_subplots(rows=num_layers*num_heads, cols=2, subplot_titles=subplot_titles)
-                fig['layout'].update(width=600*2, height=600*num_layers*num_heads, autosize=False, showlegend=False)
+                fig = plotly.tools.make_subplots(rows=num_layers*num_heads, cols=1, subplot_titles=subplot_titles)
+                fig['layout'].update(width=600, height=600*num_layers*num_heads, autosize=False, showlegend=False)
                 for l in range(num_layers):
                     for h in range(num_heads):
                         attention = attentions[l][h].transpose(0 ,1).cpu().data.numpy() # trg by src
-                        sample = samples[l][h].transpose(0, 1).cpu().data.numpy()
                         row_names = [SRC.vocab.itos[i] for i in src.contiguous().view(-1).cpu().data.numpy()]
                         print (row_names)
                         col_names = [TRG.vocab.itos[i]+' %f'%(1/p) for i,p in zip(trg_y.contiguous().view(-1).cpu().data.numpy(), probs.cpu().data.numpy())]
                         title = 'layer: %d, head: %d'%(l, h)
                         f = go.Heatmap(z=attention, x=col_names, y=row_names, colorscale='Hot', legendgroup=title+' probs', showscale=False, showlegend=False)
-                        #f.legendgroup(title + ' probs')
                         fig.append_trace(f, l*num_heads+h+1, 1)
-                        f = go.Heatmap(z=sample, x=col_names, y=row_names, colorscale='Hot', legendgroup=title+' sample', showscale=False, showlegend=False)
-                        #f.legendgroup(title + ' sample')
-                        fig.append_trace(f, l*num_heads+h+1, 2)
-                fig['layout'].update(width=600*2, height=600*num_layers*num_heads, showlegend=False, autosize=False, title='Mode: %s'%opts.mode)
+                fig['layout'].update(width=600, height=600*num_layers*num_heads, showlegend=False, autosize=False, title='Mode: %s'%opts.mode)
 
 
-                #fig['layout'] = layout
                 vis.plotlyplot(fig)
-                    #vis.heatmap(
-                    #             X=attention,
-                    #             opts=dict(
-                    #                 rownames=row_names,
-                    #                 columnnames=col_names,
-                    #                 colormap="Hot",
-                    #                 title=title,
-                    #                 width=600,
-                    #                 height=600,
-                    #                 marginleft=100,
-                    #                 marginright=100,
-                    #                 margintop=100,
-                    #                 marginbottom=100
-                    #             ),
-                    #             win=title
-                    #         )
-                    #vis.heatmap(
-                    #             X=sample,
-                    #             opts=dict(
-                    #                 rownames=row_names,
-                    #                 columnnames=col_names,
-                    #                 colormap="Hot",
-                    #                 title=title,
-                    #                 width=600,
-                    #                 height=600,
-                    #                 marginleft=100,
-                    #                 marginright=100,
-                    #                 margintop=100,
-                    #                 marginbottom=100
-                    #             ),
-                    #             win=title
-                    #         )
-            
             break
-            #l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions)
-            #decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model_par(src, trg, src_mask, trg_mask, 0)
-            #word_probs = model.generator(decoder_output)
-
-            #l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions)
-            #l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, mus, sigmas, decoder_mus, decoder_sigmas)
-            #loss_compute.optimizer = optimizer
-            #val_loss_all += l
-            #val_tokens += ntokens
-            #val_total_correct += l_correct
-            #val_total_nonpadding += l_nonpadding
-        #print("Val Result: PPL: %f, Acc: %f." %
-        #    (math.exp(min(100, val_loss_all / val_tokens)), float(val_total_correct)/val_total_nonpadding))
-        #torch.save({'model': model.state_dict(), 'src_vocab': SRC.vocab, 'trg_vocab': TRG.vocab, 'opts': opts, 'optimizer': optimizer}, '%s.e%d.pt'%(opts.save_to, epoch))
-    model.train()
 
 if __name__ == '__main__':
     main(opts)

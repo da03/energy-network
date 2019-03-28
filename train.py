@@ -24,11 +24,11 @@ parser.add_argument("--dataset", required=True, help="Path to the dataset")
 parser.add_argument("--direction", default="ende",
                     choices=["ende", "deen"],  help="Direction of translation")
 parser.add_argument("--mode", default="soft",
-                    choices=["soft", "var"],  help="Training model. Default to be vanilla transformer with soft attention.")
+                    choices=["soft", "var", "hard", "lstmvar"],  help="Training model. Default to be vanilla transformer with soft attention.")
 #TODO: 
 parser.add_argument("--share_decoder_embeddings", default=1, type=int,
                     choices=[1, 0],  help="Share decoder embeddings or not.")
-parser.add_argument("--dependent_posterior", default=0, type=int,
+parser.add_argument("--dependent_posterior", default=1, type=int,
                     choices=[1, 0],  help="Share decoder embeddings or not.")
 parser.add_argument("--share_word_embeddings", default=0,
                     choices=[1, 0],  help="Share src trg embeddings or not.")
@@ -36,6 +36,7 @@ parser.add_argument("--fix_model_steps", type=int, default=-1, help="Maximum Src
 parser.add_argument("--max_src_len", type=int, default=150, help="Maximum Src Length")
 parser.add_argument("--max_trg_len", type=int, default=150, help="Maximum Trg Length")
 parser.add_argument("--batch_size", type=int, default=3200, help="Number of tokens per minibatch")
+parser.add_argument("--accum_grad", type=int, default=1, help="Number of tokens per minibatch")
 parser.add_argument("--epochs", type=int, default=50, help="Number of Epochs")
 parser.add_argument("--learning_rate", type=float, default=0.001, help="Learning Rate")
 parser.add_argument("--temperature", type=float, default=0.1, help="Gumbel Softmax temperature")
@@ -117,7 +118,7 @@ def main(opts):
     BATCH_SIZE = opts.batch_size
     train_iter = MyIterator(train, batch_size=BATCH_SIZE, device=torch.device('cuda:0'),
                             repeat=False, sort_key=lambda x: (len(x.src), len(x.trg)),
-                            batch_size_fn=batch_size_fn, train=True, shuffle=True)
+                            batch_size_fn=batch_size_fn, train=True, shuffle=True, sort_within_batch=True)
     val_iter = MyIterator(val, batch_size=BATCH_SIZE, device=torch.device('cuda:0'),
                             repeat=False, sort_key=lambda x: (len(x.src), len(x.trg)),
                             batch_size_fn=batch_size_fn, train=False)
@@ -127,6 +128,7 @@ def main(opts):
     # Build Model
     src_vocab_size = len(SRC.vocab.itos)
     trg_vocab_size = len(TRG.vocab.itos)
+    print (' '.join(sys.argv))
     print ('SRC Vocab Size: %d, TRG Vocab Size: %d'%(src_vocab_size, trg_vocab_size))
     print ('Building Model')
     model = make_model(opts.mode, src_vocab_size, trg_vocab_size, n_enc=5, n_dec=5,
@@ -143,6 +145,7 @@ def main(opts):
     devices = [0]
     #devices = [0, 1, 2, 3]
     print (opts)
+    model.trg_pad = TRG.vocab.stoi["<blank>"]
     model_par = nn.DataParallel(model, device_ids=devices)
 
     weight = torch.ones(trg_vocab_size)
@@ -164,6 +167,7 @@ def main(opts):
     num_steps = 0
     loss_compute = MultiGPULossCompute(opts.mode, TRG, model.generator, criterion, devices=devices, optimizer=optimizer, model=model)
     loss_compute.alpha = 0
+    loss_compute.accum_grad = opts.accum_grad
     def subsequent_mask(size):
         "Mask out subsequent positions."
         attn_shape = (1, size, size)
@@ -184,8 +188,9 @@ def main(opts):
                     for module in modules:
                         for parameter in module.parameters():
                             parameter.requires_grad = False
-                    print ('Fixing loss')
-                    loss_compute.t_ = False
+                    #print ('Fixing loss')
+                    #loss_compute.t_ = False
+                    loss_compute.t_ = True
                 if global_steps == opts.fix_model_steps:
                     print ('Training model')
                     modules = [model.encoder, model.decoder, model.src_embed, model.trg_embed, model.generator]
@@ -202,6 +207,8 @@ def main(opts):
             trg_mask = trg_mask & Variable(subsequent_mask(trg.size(-1)).to(trg_mask))
             trg_y = trg[:, 1:]
             ntokens = (trg_y != TRG.vocab.stoi["<blank>"]).data.view(-1).sum().item()
+            #temperature = 1. - min(1.0, global_steps * 1.0 / (1500*40)) * (1.-opts.temperature)
+            temperature = opts.temperature
 
             decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model_par(src, trg, src_mask, trg_mask, opts.temperature)
             l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions)
@@ -217,8 +224,8 @@ def main(opts):
             tokens += ntokens
             if i % 50 == 1:
                 elapsed = max(0.1, time.time() - start)
-                print("Epoch Step: %d PPL: %f, Acc: %f, exp xent: %f, xent: %f, kl: %f. Tokens per Sec: %f" %
-                (i, math.exp(min(100, loss_all / tokens)), float(total_correct)/total_nonpadding,  math.exp(min(100, loss_xent / tokens)), loss_xent/tokens, loss_kl/tokens, tokens / elapsed))
+                print("Epoch Step: %d temperature: %f, lr: %f, PPL: %f, Acc: %f, exp xent: %f, xent: %f, kl: %f. Tokens per Sec: %f" %
+                (i, temperature, loss_compute.optimizer._rate, math.exp(min(100, loss_all / tokens)), float(total_correct)/total_nonpadding,  math.exp(min(100, loss_xent / tokens)), loss_xent/tokens, loss_kl/tokens, tokens / elapsed))
                 sys.stdout.flush()
                 start = time.time()
                 tokens = 0

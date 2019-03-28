@@ -14,6 +14,7 @@ class NoamOpt:
         "Update parameters and rate"
         self._step += 1
         rate = self.rate()
+        #rate = 1e-4
         for p in self.optimizer.param_groups:
             p['lr'] = rate
         self._rate = rate
