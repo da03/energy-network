@@ -101,6 +101,7 @@ def main(opts):
     model = make_model(opts.mode, src_vocab_size, trg_vocab_size, n_enc=5, n_dec=5,
                    d_model=278, d_ff=507, h=2, dropout=0.1, share_decoder_embeddings=opts.share_decoder_embeddings,
                    share_word_embeddings=opts.share_word_embeddings, dependent_posterior=opts.dependent_posterior)
+    model.trg_pad = TRG.vocab.stoi["<blank>"]
     print (model)
     if opts.train_from != '':
         model.load_state_dict(checkpoint['model'])
@@ -153,7 +154,7 @@ def main(opts):
             log_probs = outputs.gather(1, trg_y.view(-1, 1)).view(-1)
             probs = log_probs.exp()
             vis = visdom.Visdom(env='%s_%s'%(opts.split, opts.env))
-            if opts.mode == 'var':
+            if opts.mode == 'var' or opts.mode == 'lstmvar':
                 assert samples is not None
                 attentions = posterior_attentions
                 attentions0 = prior_attentions

@@ -207,10 +207,10 @@ def main(opts):
             trg_mask = trg_mask & Variable(subsequent_mask(trg.size(-1)).to(trg_mask))
             trg_y = trg[:, 1:]
             ntokens = (trg_y != TRG.vocab.stoi["<blank>"]).data.view(-1).sum().item()
-            #temperature = 1. - min(1.0, global_steps * 1.0 / (1500*40)) * (1.-opts.temperature)
-            temperature = opts.temperature
+            temperature = 1. - min(1.0, math.floor(epoch/5) * 1.0 / 8) * (1.-opts.temperature)
+            #temperature = opts.temperature
 
-            decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model_par(src, trg, src_mask, trg_mask, opts.temperature)
+            decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model_par(src, trg, src_mask, trg_mask, temperature)
             l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions)
             total_loss += l
             total_xent += l_xent

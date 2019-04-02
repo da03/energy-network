@@ -97,7 +97,7 @@ class MultiGPULossCompute:
         # Backprop all loss through transformer.            
         if self.optimizer is not None:
             if self.mode == 'var' or self.mode == 'lstmvar':
-                total_kl = total_kl
+                total_kl = total_kl 
                 total_kl.backward(retain_graph = True)
                 total_kl = total_kl.item()
             if self.t_:
