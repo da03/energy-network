@@ -40,6 +40,8 @@ parser.add_argument("--accum_grad", type=int, default=1, help="Number of tokens 
 parser.add_argument("--epochs", type=int, default=50, help="Number of Epochs")
 parser.add_argument("--learning_rate", type=float, default=0.001, help="Learning Rate")
 parser.add_argument("--temperature", type=float, default=0.1, help="Gumbel Softmax temperature")
+parser.add_argument("--anneal_temperature", type=int, default=0, help="Gumbel Softmax temperature")
+parser.add_argument("--sharelstm", type=int, default=0, help="Gumbel Softmax temperature")
 parser.add_argument("--train_from", default="", help="Model Path")
 parser.add_argument("--save_to", type=str, required=True, help="Model Path")
 opts = parser.parse_args()
@@ -133,7 +135,7 @@ def main(opts):
     print ('Building Model')
     model = make_model(opts.mode, src_vocab_size, trg_vocab_size, n_enc=5, n_dec=5,
                    d_model=278, d_ff=507, h=2, dropout=0.1, share_decoder_embeddings=opts.share_decoder_embeddings,
-                   share_word_embeddings=opts.share_word_embeddings, dependent_posterior=opts.dependent_posterior)
+                   share_word_embeddings=opts.share_word_embeddings, dependent_posterior=opts.dependent_posterior, sharelstm=opts.sharelstm)
     print (model)
     if opts.train_from != '':
         print ('Loading Model from %s'%opts.train_from)
@@ -207,8 +209,10 @@ def main(opts):
             trg_mask = trg_mask & Variable(subsequent_mask(trg.size(-1)).to(trg_mask))
             trg_y = trg[:, 1:]
             ntokens = (trg_y != TRG.vocab.stoi["<blank>"]).data.view(-1).sum().item()
-            temperature = 1. - min(1.0, math.floor(epoch/5) * 1.0 / 8) * (1.-opts.temperature)
-            #temperature = opts.temperature
+            if opts.anneal_temperature == 1:
+                temperature = 1. - min(1.0, math.floor(epoch/5) * 1.0 / 8) * (1.-opts.temperature)
+            else:
+                temperature = opts.temperature
 
             decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model_par(src, trg, src_mask, trg_mask, temperature)
             l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions)
@@ -238,6 +242,8 @@ def main(opts):
         print ('Validation')
         model.eval()
         val_loss_all = 0
+        val_loss_xent = 0
+        val_loss_kl = 0
         val_tokens = 0
         val_total_correct = 0
         val_total_nonpadding = 0
@@ -264,11 +270,13 @@ def main(opts):
                 #l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, mus, sigmas, decoder_mus, decoder_sigmas)
                 loss_compute.optimizer = optimizer
                 val_loss_all += l
+                val_loss_xent += l_xent
+                val_loss_kl += l_kl
                 val_tokens += ntokens
                 val_total_correct += l_correct
                 val_total_nonpadding += l_nonpadding
-            print("Val Result: PPL: %f, Acc: %f." %
-                (math.exp(min(100, val_loss_all / val_tokens)), float(val_total_correct)/val_total_nonpadding))
+            print("Val Result: PPL: %f, Acc: %f. exp xent: %f, xent: %f, kl: %f" %
+                (math.exp(min(100, val_loss_all / val_tokens)), float(val_total_correct)/val_total_nonpadding, math.exp(val_loss_xent/val_tokens), val_loss_xent/val_tokens, val_loss_kl/val_tokens))
             torch.save({'model': model.state_dict(), 'src_vocab': SRC.vocab, 'trg_vocab': TRG.vocab, 'opts': opts, 'optimizer': optimizer}, '%s.e%d.pt'%(opts.save_to, epoch))
         model.train()
 

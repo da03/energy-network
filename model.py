@@ -302,12 +302,15 @@ class InferenceNetwork(nn.Module):
 
 class LSTMInferenceNetwork(nn.Module):
     "Generic N layer decoder with masking."
-    def __init__(self, layer, W, N):
+    def __init__(self, layer, W, N, sharelstm=0):
         super(LSTMInferenceNetwork, self).__init__()
         self.layers_src = clones(layer, N)
         self.layers_trg = clones(layer, N)
+       
         self.Ws = clones(W, N)
         self.dependent_posterior = 0
+        self.sharelstm = sharelstm
+        print ('sharelstm: %d'%sharelstm)
                                                
     # maybe consider disallowing attending to oneself
     def forward(self, h, trg, src_mask, temperature, trg_mask, src):
@@ -340,7 +343,16 @@ class LSTMInferenceNetwork(nn.Module):
         #                    
         #                        # restore the sorting
         #                                decoded = output.gather(0, odx)
+        s1 = None
+        s2 = None
         for src_layer, trg_layer, W in zip(self.layers_src, self.layers_trg, self.Ws):
+            if s1 is None:
+                s1 = src_layer
+            if s2 is None:
+                s2 = trg_layer
+            if self.sharelstm != 0:
+                src_layer = s1
+                trg_layer = s2
             #print (z.size()) # batch_size, trg_len, hidden
             packed_trg_, _ = trg_layer(packed_trg)
             trg_outputs = pad_packed_sequence(packed_trg_)[0]
@@ -504,7 +516,7 @@ class PositionalEncoding(nn.Module):
 
 def make_model(mode, src_vocab, trg_vocab, n_enc=6, n_dec=6,
                        d_model=512, d_ff=2048, h=8, dropout=0.1, share_decoder_embeddings=0,
-                       share_word_embeddings=0, dependent_posterior=0):
+                       share_word_embeddings=0, dependent_posterior=0, sharelstm=0):
     "Helper: Construct a model from hyperparameters."
     c = copy.deepcopy
     attn = MultiHeadedAttention(h, d_model)
@@ -521,7 +533,7 @@ def make_model(mode, src_vocab, trg_vocab, n_enc=6, n_dec=6,
     else:
         W = torch.nn.Linear(d_model*2, d_model*2, bias=False)
         layer = torch.nn.LSTM(d_model, d_model, 2, dropout=dropout, bidirectional=True)
-        inference_network = LSTMInferenceNetwork(layer, W, n_dec)
+        inference_network = LSTMInferenceNetwork(layer, W, n_dec, sharelstm)
         inference_network.h = h
     generator = Generator(d_model, trg_vocab)
     model = Model(
