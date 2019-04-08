@@ -30,7 +30,7 @@ class Model(nn.Module):
     A standard Encoder-Decoder architecture. Base for this and many 
     other models.
     """
-    def __init__(self, mode, encoder, decoder, src_embed, trg_embed, inference_network, generator):
+    def __init__(self, mode, encoder, decoder, src_embed, trg_embed, inference_network, generator, residual_var=0):
         super(Model, self).__init__()
         self.mode = mode
         self.encoder = encoder
@@ -39,6 +39,7 @@ class Model(nn.Module):
         self.trg_embed = trg_embed
         self.trg_pad = None
         self.inference_network = inference_network
+        self.residual_var = residual_var
         self.generator = generator
                                                                                     
     def forward(self, src, trg, src_mask, trg_mask, temperature=None):
@@ -50,9 +51,14 @@ class Model(nn.Module):
         if trg is not None: # try both self attn and inter attn
             if self.mode == 'var' or self.mode == 'lstmvar':
                 assert temperature is not None
-                log_posterior_attentions, posterior_attentions, posterior_samples = self.inference_network(h, trg_embeddings[:, 1:], src_mask, temperature, trg_mask=trg[:,1:].ne(self.trg_pad), src=src_embeddings) # a list of attentions, we need to sample
-                self.samples = posterior_samples
-                decoder_output, log_prior_attentions, prior_attentions = self.decoder(h, trg_embeddings[:, :-1], src_mask, trg_mask[:, :-1, :-1], posterior_samples, attn_dropout=False)
+                if self.residual_var == 0:
+                    log_posterior_attentions, posterior_attentions, posterior_samples = self.inference_network(h, trg_embeddings[:, 1:], src_mask, temperature, trg_mask=trg[:,1:].ne(self.trg_pad), src=src_embeddings) # a list of attentions, we need to sample
+                    self.samples = posterior_samples
+                    decoder_output, log_prior_attentions, prior_attentions = self.decoder(h, trg_embeddings[:, :-1], src_mask, trg_mask[:, :-1, :-1], posterior_samples, attn_dropout=False)
+                else:
+                    decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, samples = self.decoder.forward_withinf(
+                        h, trg_embeddings[:, 1:], src_mask, temperature, trg[:,1:].ne(self.trg_pad), src_embeddings, trg_embeddings[:, :-1], trg_mask[:, :-1, :-1], attn_dropout=False, inference_network=self.inference_network)
+                    self.samples = samples
             elif self.mode == 'soft':
                 if trg_mask is not None:
                     trg_mask = trg_mask[:, :-1, :-1]
@@ -184,6 +190,90 @@ class Decoder(nn.Module):
                 return z, log_prior_attentions, prior_attentions, samples
             else:
                 return z, log_prior_attentions, prior_attentions
+
+    def forward_withinf(self, h, trg_output, src_mask, temperature, trg_output_mask=None, src_embeddings=None, trg_input=None, trg_input_mask=None, attn_dropout=False, inference_network=None):
+        log_posterior_attentions = []
+        posterior_attentions = []
+        log_prior_attentions = []
+        prior_attentions = []
+        trg_lengths = trg_output_mask.sum(-1).contiguous().view(-1)
+        src_lengths = src_mask.sum(-1).contiguous().view(-1).cpu().numpy()
+        samples = []
+        z = trg_input
+        h_enc = h
+        if type(inference_network) is LSTMInferenceNetwork:
+            src = src_embeddings
+            src = src.transpose(0, 1)
+            trg = trg_output
+            # pack them up nicely
+            trg_lengths_s, perm_index = trg_lengths.sort(0, descending=True)
+            trg = trg[perm_index]
+            trg = trg.transpose(0, 1)
+            packed_trg = pack_padded_sequence(trg, trg_lengths_s.cpu().numpy())
+
+            packed_src = pack_padded_sequence(src, src_lengths)
+
+            s1 = None
+            s2 = None
+            for src_layer, trg_layer, W, layer in zip(inference_network.layers_src, inference_network.layers_trg, inference_network.Ws, self.layers):
+                if s1 is None:
+                    s1 = src_layer
+                if s2 is None:
+                    s2 = trg_layer
+                if inference_network.sharelstm != 0:
+                    src_layer = s1
+                    trg_layer = s2
+                #print (z.size()) # batch_size, trg_len, hidden
+                packed_trg_, _ = trg_layer(packed_trg)
+                trg_outputs = pad_packed_sequence(packed_trg_)[0]
+                packed_src_, _ = src_layer(packed_src)
+                src_outputs = pad_packed_sequence(packed_src_)[0]
+                src_memory_bank = src_outputs.transpose(0, 1)
+                src_memory_bank = src_memory_bank.transpose(1, 2) # bsz, rnn, src_len
+
+
+                bsz = src_memory_bank.size(0)
+                rnn = src_memory_bank.size(1)
+                src_len = src_memory_bank.size(-1)
+                h = inference_network.h
+                src_memory_bank = src_memory_bank.contiguous().view(bsz, h, rnn//h, -1).contiguous().view(-1, rnn//h, src_len)
+                trg_outputs = trg_outputs.transpose(0, 1)
+                odx = perm_index.contiguous().view(-1, 1).unsqueeze(1).expand(trg_outputs.size(0), trg_outputs.size(1), trg_outputs.size(2))
+                trg_outputs = trg_outputs.gather(0, odx)
+                trg_memory_bank = W(trg_outputs) # bsz, trg_len, rnn_size
+                trg_memory_bank = trg_memory_bank.transpose(1, 2)
+                trg_len = trg_memory_bank.size(-1)
+                trg_memory_bank = trg_memory_bank.contiguous().view(bsz, h, rnn//h, -1).contiguous().view(-1, rnn//h, trg_len).transpose(1,2)
+
+                scores = torch.bmm(trg_memory_bank, src_memory_bank).contiguous().view(bsz, h, trg_len, src_len)
+                #p_attn = F.softmax(scores, dim = -1)
+                #log_p_attn = F.log_softmax(scores, dim = -1)
+                log_prior_attention, prior_attention, _, z_tmp = layer(z, h_enc, src_mask, trg_input_mask, attn_dropout=attn_dropout)
+                log_posterior_attention = log_prior_attention + scores
+                log_posterior_attention.data.masked_fill_(src_mask.unsqueeze(1).expand(bsz, h, trg_len, src_len)==0, -1e9)
+                posterior_attention = F.softmax(log_posterior_attention, dim=-1)
+                log_posterior_attention = F.log_softmax(log_posterior_attention, dim=-1)
+                log_prior_attentions.append(log_prior_attention)
+                prior_attentions.append(prior_attention)
+                log_posterior_attentions.append(log_posterior_attention)
+                posterior_attentions.append(posterior_attention)
+                log_p_attn = log_posterior_attention
+                p_attn = posterior_attention
+
+                assert temperature is not None
+                if temperature > 0:
+                    sample = gumbel_softmax_sample(log_p_attn, temperature)
+                else: # true categorical sample, equivalently we can use argmax to replace softmax in gumbel, here we use categorical for sanity check.
+                    #import pdb; pdb.set_trace()
+                    h1, h2, h3, h4 = p_attn.size()
+                    p = Categorical(p_attn.view(-1, h4))
+                    sample_id = p.sample().view(h1, h2, h3, 1)
+                    sample = p_attn.new_full(p_attn.size(), 0.).to(p_attn)
+                    sample.scatter_(3, sample_id, 1.)
+                samples.append(sample)
+                _, _, _, z = layer(z, h_enc, src_mask, trg_input_mask, sample, attn_dropout=attn_dropout)
+            z = self.norm(z)
+        return z, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, samples
 
     def beam_search_soft(self, beam_size, generator, trg_embed, memory, src_mask, sos, eos, max_length, attn_dropout=True):
         trg_embed[1].offset = 0
@@ -328,21 +418,6 @@ class LSTMInferenceNetwork(nn.Module):
 
         packed_src = pack_padded_sequence(src, src_lengths)
 
-        # throw them through your LSTM (remember to give batch_first=True here if you packed with it)
-        #packed_output, (ht, ct) = lstm(packed_input)
-
-        # unpack your output if required
-        #output, _ = pad_packed_sequence(packed_output)
-        #print (output)
-        #lengths, perm_index = lengths.sort(0, descending=True)
-        #    input = input[perm_index]
-
-        #        packed_input = pack(input, list(lengths.data), batch_first=True)
-        #            output, hidden = self.rnn(packed_input, hidden)
-        #                output = unpack(output, batch_first=True)[0]
-        #                    
-        #                        # restore the sorting
-        #                                decoded = output.gather(0, odx)
         s1 = None
         s2 = None
         for src_layer, trg_layer, W in zip(self.layers_src, self.layers_trg, self.Ws):
@@ -516,7 +591,7 @@ class PositionalEncoding(nn.Module):
 
 def make_model(mode, src_vocab, trg_vocab, n_enc=6, n_dec=6,
                        d_model=512, d_ff=2048, h=8, dropout=0.1, share_decoder_embeddings=0,
-                       share_word_embeddings=0, dependent_posterior=0, sharelstm=0):
+                       share_word_embeddings=0, dependent_posterior=0, sharelstm=0, residual_var=0):
     "Helper: Construct a model from hyperparameters."
     c = copy.deepcopy
     attn = MultiHeadedAttention(h, d_model)
@@ -543,7 +618,7 @@ def make_model(mode, src_vocab, trg_vocab, n_enc=6, n_dec=6,
                   src_emb,
                   trg_emb,
                   inference_network,
-                  generator)
+                  generator, residual_var=residual_var)
 
     if share_decoder_embeddings == 1:
         model.generator.proj.weight = model.trg_embed[0].lut.weight

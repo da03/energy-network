@@ -41,6 +41,7 @@ parser.add_argument("--epochs", type=int, default=50, help="Number of Epochs")
 parser.add_argument("--learning_rate", type=float, default=0.001, help="Learning Rate")
 parser.add_argument("--temperature", type=float, default=0.1, help="Gumbel Softmax temperature")
 parser.add_argument("--anneal_temperature", type=int, default=0, help="Gumbel Softmax temperature")
+parser.add_argument("--residual_var", type=int, default=0, help="Gumbel Softmax temperature")
 parser.add_argument("--sharelstm", type=int, default=0, help="Gumbel Softmax temperature")
 parser.add_argument("--train_from", default="", help="Model Path")
 parser.add_argument("--save_to", type=str, required=True, help="Model Path")
@@ -135,7 +136,8 @@ def main(opts):
     print ('Building Model')
     model = make_model(opts.mode, src_vocab_size, trg_vocab_size, n_enc=5, n_dec=5,
                    d_model=278, d_ff=507, h=2, dropout=0.1, share_decoder_embeddings=opts.share_decoder_embeddings,
-                   share_word_embeddings=opts.share_word_embeddings, dependent_posterior=opts.dependent_posterior, sharelstm=opts.sharelstm)
+                   share_word_embeddings=opts.share_word_embeddings, dependent_posterior=opts.dependent_posterior,
+                   sharelstm=opts.sharelstm, residual_var=opts.residual_var)
     print (model)
     if opts.train_from != '':
         print ('Loading Model from %s'%opts.train_from)
