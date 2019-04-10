@@ -20,7 +20,7 @@ class MultiGPULossCompute:
         self.chunk_size = chunk_size
         self.count_ = 0
         self.steps = 0
-        self.anneal_kl = 0
+        self.anneal_kl = anneal_kl
         
     def __call__(self, out, targets, normalize, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions):
         total = 0.0
