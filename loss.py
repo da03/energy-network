@@ -7,7 +7,7 @@ from torch.distributions.kl import kl_divergence
 # Skip if not interested in multigpu.
 class MultiGPULossCompute:
     "A multi-gpu loss compute and train function."
-    def __init__(self, mode, TRG, generator, criterion, devices, optimizer=None, model=None, chunk_size=5):
+    def __init__(self, mode, TRG, generator, criterion, devices, optimizer=None, model=None, chunk_size=5, anneal_kl=0):
         # Send out to different gpus.
         self.mode = mode
         self.t_ = True
@@ -19,6 +19,8 @@ class MultiGPULossCompute:
         self.devices = devices
         self.chunk_size = chunk_size
         self.count_ = 0
+        self.steps = 0
+        self.anneal_kl = 0
         
     def __call__(self, out, targets, normalize, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions):
         total = 0.0
@@ -26,6 +28,8 @@ class MultiGPULossCompute:
         total_kl = 0.0
         total_nonpadding = 0
         total_correct = 0
+        self.steps += 1
+        self.alpha = min(self.steps*1.0/self.anneal_kl, 1.0)
         out_scatter = nn.parallel.scatter(out, 
                                           target_gpus=self.devices)
         generator = nn.parallel.replicate(self.generator, 
@@ -97,8 +101,8 @@ class MultiGPULossCompute:
         # Backprop all loss through transformer.            
         if self.optimizer is not None:
             if self.mode == 'var' or self.mode == 'lstmvar':
-                total_kl = total_kl 
-                total_kl.backward(retain_graph = True)
+                total_kl_ = total_kl * self.alpha
+                total_kl_.backward(retain_graph = True)
                 total_kl = total_kl.item()
             if self.t_:
                 out_grad = [Variable(torch.cat(og, dim=1)) for og in out_grad]

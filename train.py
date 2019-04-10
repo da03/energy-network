@@ -41,6 +41,7 @@ parser.add_argument("--epochs", type=int, default=50, help="Number of Epochs")
 parser.add_argument("--learning_rate", type=float, default=0.001, help="Learning Rate")
 parser.add_argument("--temperature", type=float, default=0.1, help="Gumbel Softmax temperature")
 parser.add_argument("--anneal_temperature", type=int, default=0, help="Gumbel Softmax temperature")
+parser.add_argument("--anneal_kl", type=int, default=0, help="Gumbel Softmax temperature")
 parser.add_argument("--residual_var", type=int, default=0, help="Gumbel Softmax temperature")
 parser.add_argument("--sharelstm", type=int, default=0, help="Gumbel Softmax temperature")
 parser.add_argument("--train_from", default="", help="Model Path")
@@ -169,7 +170,7 @@ def main(opts):
     loss_kl = 0.
     tokens = 0
     num_steps = 0
-    loss_compute = MultiGPULossCompute(opts.mode, TRG, model.generator, criterion, devices=devices, optimizer=optimizer, model=model)
+    loss_compute = MultiGPULossCompute(opts.mode, TRG, model.generator, criterion, devices=devices, optimizer=optimizer, model=model, anneal_kl=opts.anneal_kl)
     loss_compute.alpha = 0
     loss_compute.accum_grad = opts.accum_grad
     def subsequent_mask(size):
@@ -230,8 +231,8 @@ def main(opts):
             tokens += ntokens
             if i % 50 == 1:
                 elapsed = max(0.1, time.time() - start)
-                print("Epoch Step: %d temperature: %f, lr: %f, PPL: %f, Acc: %f, exp xent: %f, xent: %f, kl: %f. Tokens per Sec: %f" %
-                (i, temperature, loss_compute.optimizer._rate, math.exp(min(100, loss_all / tokens)), float(total_correct)/total_nonpadding,  math.exp(min(100, loss_xent / tokens)), loss_xent/tokens, loss_kl/tokens, tokens / elapsed))
+                print("Epoch Step: %d temperature: %f, lr: %f, PPL: %f, Acc: %f, exp xent: %f, xent: %f, kl: %f. alpha: %f, Tokens per Sec: %f" %
+                (i, temperature, loss_compute.optimizer._rate, math.exp(min(100, loss_all / tokens)), float(total_correct)/total_nonpadding,  math.exp(min(100, loss_xent / tokens)), loss_xent/tokens, loss_kl/tokens, loss_compute.alpha, tokens / elapsed))
                 sys.stdout.flush()
                 start = time.time()
                 tokens = 0
