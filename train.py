@@ -25,13 +25,18 @@ parser.add_argument("--direction", default="ende",
                     choices=["ende", "deen"],  help="Direction of translation")
 parser.add_argument("--mode", default="soft",
                     choices=["soft", "var", "hard", "lstmvar"],  help="Training model. Default to be vanilla transformer with soft attention.")
+parser.add_argument("--selfmode", required=True,
+                    choices=["soft", "var", "hard", "lstmvar"],  help="Training model. Default to be vanilla transformer with soft attention.")
 #TODO: 
 parser.add_argument("--share_decoder_embeddings", default=1, type=int,
                     choices=[1, 0],  help="Share decoder embeddings or not.")
 parser.add_argument("--dependent_posterior", default=1, type=int,
                     choices=[1, 0],  help="Share decoder embeddings or not.")
+parser.add_argument("--selfdependent_posterior", default=1, type=int,
+                    choices=[1, 0],  help="Share decoder embeddings or not.")
 parser.add_argument("--share_word_embeddings", default=0,
                     choices=[1, 0],  help="Share src trg embeddings or not.")
+parser.add_argument("--heads", type=int, default=2, help="Number of tokens per minibatch")
 parser.add_argument("--fix_model_steps", type=int, default=-1, help="Maximum Src Length")
 parser.add_argument("--max_src_len", type=int, default=150, help="Maximum Src Length")
 parser.add_argument("--max_trg_len", type=int, default=150, help="Maximum Trg Length")
@@ -39,7 +44,8 @@ parser.add_argument("--batch_size", type=int, default=3200, help="Number of toke
 parser.add_argument("--accum_grad", type=int, default=1, help="Number of tokens per minibatch")
 parser.add_argument("--epochs", type=int, default=50, help="Number of Epochs")
 parser.add_argument("--learning_rate", type=float, default=0.001, help="Learning Rate")
-parser.add_argument("--temperature", type=float, default=0.1, help="Gumbel Softmax temperature")
+parser.add_argument("--temperature", type=float, required=True, help="Gumbel Softmax temperature")
+parser.add_argument("--selftemperature", type=float, required=True, help="Gumbel Softmax temperature")
 parser.add_argument("--anneal_temperature", type=int, default=0, help="Gumbel Softmax temperature")
 parser.add_argument("--anneal_kl", type=int, default=1, help="Gumbel Softmax temperature")
 parser.add_argument("--residual_var", type=int, default=0, help="Gumbel Softmax temperature")
@@ -136,9 +142,9 @@ def main(opts):
     print ('SRC Vocab Size: %d, TRG Vocab Size: %d'%(src_vocab_size, trg_vocab_size))
     print ('Building Model')
     model = make_model(opts.mode, src_vocab_size, trg_vocab_size, n_enc=5, n_dec=5,
-                   d_model=278, d_ff=507, h=2, dropout=0.1, share_decoder_embeddings=opts.share_decoder_embeddings,
+                   d_model=278, d_ff=507, h=opts.heads, dropout=0.1, share_decoder_embeddings=opts.share_decoder_embeddings,
                    share_word_embeddings=opts.share_word_embeddings, dependent_posterior=opts.dependent_posterior,
-                   sharelstm=opts.sharelstm, residual_var=opts.residual_var)
+                   sharelstm=opts.sharelstm, residual_var=opts.residual_var, selfmode = opts.selfmode, selfdependent_posterior=opts.selfdependent_posterior)
     print (model)
     if opts.train_from != '':
         print ('Loading Model from %s'%opts.train_from)
@@ -216,8 +222,8 @@ def main(opts):
                 temperature = 1. - min(1.0, math.floor(epoch/5) * 1.0 / 8) * (1.-opts.temperature)
             else:
                 temperature = opts.temperature
-
-            decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model_par(src, trg, src_mask, trg_mask, temperature)
+            selftemperature = opts.selftemperature
+            decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors = model_par(src, trg, src_mask, trg_mask, temperature, selftemperature=selftemperature)
             l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions)
             total_loss += l
             total_xent += l_xent
@@ -231,8 +237,8 @@ def main(opts):
             tokens += ntokens
             if i % 50 == 1:
                 elapsed = max(0.1, time.time() - start)
-                print("Epoch Step: %d temperature: %f, lr: %f, PPL: %f, Acc: %f, exp xent: %f, xent: %f, kl: %f. alpha: %f, Tokens per Sec: %f" %
-                (i, temperature, loss_compute.optimizer._rate, math.exp(min(100, loss_all / tokens)), float(total_correct)/total_nonpadding,  math.exp(min(100, loss_xent / tokens)), loss_xent/tokens, loss_kl/tokens, loss_compute.alpha, tokens / elapsed))
+                print("Epoch Step: %d temperature: %f selft: %f, lr: %f, PPL: %f, Acc: %f, exp xent: %f, xent: %f, kl: %f. alpha: %f, Tokens per Sec: %f" %
+                (i, temperature, selftemperature, loss_compute.optimizer._rate, math.exp(min(100, loss_all / tokens)), float(total_correct)/total_nonpadding,  math.exp(min(100, loss_xent / tokens)), loss_xent/tokens, loss_kl/tokens, loss_compute.alpha, tokens / elapsed))
                 sys.stdout.flush()
                 start = time.time()
                 tokens = 0
@@ -264,7 +270,7 @@ def main(opts):
                 optimizer = loss_compute.optimizer
                 loss_compute.optimizer = None
                 #import pdb; pdb.set_trace()
-                decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model_par(src, trg, src_mask, trg_mask, 0)
+                decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors = model_par(src, trg, src_mask, trg_mask, 0, selftemperature=0)
                 l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions)
                 #decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model_par(src, trg, src_mask, trg_mask, 0)
                 #word_probs = model.generator(decoder_output)

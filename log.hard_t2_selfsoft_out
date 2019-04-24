@@ -1,0 +1,1143 @@
+Loading Model from models/hard/t2.e28.pt
+SRC Vocab Size: 39553, TRG Vocab Size: 39553
+Src: when I was 11 , I remember waking up one morning to the sound of joy in my house .
+Ground Truth: als ich 11 Jahre alt war , wurde ich eines Morgens von den K@@ längen h@@ eller Freude geweckt .
+Predicted (-10.803518): als ich 11 war , erinnere ich mich an , eines Morgens an der Freude in meinem Haus zu wachen .
+Src: my father was listening to BBC News on his small , gray radio .
+Ground Truth: mein Vater hörte sich auf seinem kleinen , grauen Radio die Nachrichten@@ sendung der BBC an .
+Predicted (-4.245082): mein Vater hörte BBC News auf seinem kleinen , grauen Radio .
+Src: there was a big smile on his face which was unusual then , because the news mostly depressed him .
+Ground Truth: er sah sehr glücklich aus , was damals ziemlich ungewöhnlich war , da ihn die Nachrichten meistens deprimi@@ erten .
+Predicted (-8.238093): es gab ein großes Lächeln auf seinem Gesicht , das ungewöhnlich war , weil die Nachrichten hauptsächlich deprimiert ihn .
+Src: &quot; the Taliban are gone ! &quot; my father sh@@ ou@@ ted .
+Ground Truth: er rief : &quot; die Taliban sind weg ! &quot;
+Predicted (-7.949803): &quot; die Taliban sind weg ! &quot; mein Vater sch@@ auf@@ gelegt .
+Src: I didn &apos;t know what it meant , but I could see that my father was very , very happy .
+Ground Truth: ich wusste nicht , was das bedeutete , aber es machte meinen Vater offensichtlich sehr , sehr glücklich .
+Predicted (-2.380890): ich wusste nicht , was es bedeutete , aber ich konnte sehen , dass mein Vater sehr , sehr glücklich war .
+Src: &quot; you can go to a real school now , &quot; he said .
+Ground Truth: &quot; jetzt kannst du auf eine richtige Schule gehen &quot; , sagte er .
+Predicted (-4.289228): &quot; du kannst jetzt in die reale Schule gehen &quot; , sagte er .
+Src: a morning that I will never forget .
+Ground Truth: diesen Morgen werde ich niemals vergessen .
+Predicted (-1.883287): eines Morgens werde ich nie vergessen .
+Src: a real school .
+Ground Truth: eine richtige Schule .
+Predicted (-1.155845): eine echte Schule .
+Src: you see , I was six when the Taliban took over Afghanistan and made it illegal for girls to go to school .
+Ground Truth: die Taliban ergri@@ ffen die Macht in Afghanistan , als ich sechs war , und verboten es Mädchen , zur Schule zu gehen .
+Predicted (-11.051125): ich war sechs , als die Taliban über Afghanistan ein@@ führten und es für Mädchen illegal war , in die Schule zu gehen .
+Src: so for the next five years , I dressed as a boy to esc@@ ort my older sister , who was no longer allowed to be outside alone , to a secret school .
+Ground Truth: deshalb ver@@ klei@@ dete ich mich fünf Jahre lang als Junge und beglei@@ tete meine ältere Schwester , die nicht mehr alleine ausgehen durfte , zu einer geheimen Schule .
+Predicted (-20.823124): also , in den nächsten fünf Jahren , zog ich mich als Junge an die Malerei meiner älteren Schwester , die nicht mehr außerhalb war , zu einer geheimen Schule .
+Src: it was the only way we both could be educated .
+Ground Truth: nur so konnten wir beide zur Schule gehen .
+Predicted (-4.248637): nur so konnten wir beide ausgebildet werden .
+Src: each day , we took a different route so that no one would suspect where we were going .
+Ground Truth: jeden Tag nahmen wir einen anderen Weg , sodass niemand erraten konnte , wohin wir gingen .
+Predicted (-11.562220): jeden Tag nahmen wir eine andere Route , damit niemand be@@ vermute , wohin wir gehen würden .
+Src: we would cover our books in grocery bags so it would seem we were just out shopping .
+Ground Truth: wir versteckten unsere Bücher in Ein@@ kauf@@ stü@@ ten , damit es so aussah , als würden wir nur einkaufen gehen .
+Predicted (-14.408580): wir bedecken unsere Bücher in Lebensmittel@@ sä@@ cke , damit es scheinbar nicht ein@@ kauft .
+Src: the school was in a house , more than 100 of us packed in one small living room .
+Ground Truth: unterrichtet wurden wir in einem Haus , über 100 Mädchen in einem kleinen Wohnzimmer .
+Predicted (-4.894897): die Schule war in einem Haus , mehr als 100 von uns einge@@ packt in einem kleinen Wohnzimmer .
+Src: it was co@@ zy in winter but extremely hot in summer .
+Ground Truth: im Winter war es gemü@@ tlich , aber im Sommer war es unglaublich heiß .
+Predicted (-5.997785): es war im Winter gemü@@ tlich , aber extrem heiß im Sommer .
+Src: we all knew we were ris@@ king our lives -- the teacher , the students and our parents .
+Ground Truth: wir alle wussten , dass wir unser Leben riski@@ erten : Lehrer , Schüler und unsere Eltern .
+Predicted (-5.740483): wir alle wussten , dass wir unser Leben riskiert hatten - den Lehrern , Studenten und unsere Eltern .
+Src: from time to time , the school would suddenly be can@@ cel@@ ed for a week because Taliban were suspicious .
+Ground Truth: immer wieder musste der Unterricht plötzlich für eine Woche aus@@ fallen , weil die Taliban Ver@@ dacht gesch@@ ö@@ pft hatten .
+Predicted (-9.730033): von Zeit zu Zeit wurde die Schule plötzlich für eine Woche aufge@@ deckt , weil Taliban mis@@ strau@@ isch waren .
+Src: we always wondered what they knew about us .
+Ground Truth: wir waren uns nie sicher , wie viel sie über uns wussten .
+Predicted (-2.708388): wir haben uns immer gefragt , was sie über uns wussten .
+Src: were we being followed ?
+Ground Truth: verfolgten sie uns ?
+Predicted (-1.441743): waren wir gefolgt ?
+Src: do they know where we live ?
+Ground Truth: wussten sie , wo wir wohnen ?
+Predicted (-0.626535): wissen sie wo wir leben ?
+Src: we were scared , but still , school was where we wanted to be .
+Ground Truth: wir hatten Angst , aber wir wollten trotzdem zur Schule gehen .
+Predicted (-6.795774): wir hatten Angst , aber noch immer , die Schule war , wo wir sein wollten .
+Src: I was very lucky to grow up in a family where education was pri@@ zed and daughters were treas@@ ured .
+Ground Truth: ich hatte großes Glück in einer Familie aufzu@@ wachsen , in der Bildung als wichtig galt und Töchter geschätzt wurden .
+Predicted (-18.929388): ich hatte viel Glück in einer Familie zu wachsen , in der Bildung unge@@ fa@@ chter und Töchter ausge@@ wertet wurden .
+Src: my grandfather was an extraordinary man for his time .
+Ground Truth: mein Großvater war seiner Zeit weit voraus .
+Predicted (-2.832873): mein Großvater war ein außergewöhnlicher Mann für seine Zeit .
+Src: a total ma@@ ver@@ ick from a remote province of Afghanistan , he insisted that his daughter , my mom , go to school , and for that he was dis@@ owned by his father .
+Ground Truth: ein Außensei@@ ter aus einer entlegenen Provinz Afghan@@ ist@@ ans . er bestand darauf , seine Tochter - meine Mutter - zur Schule zu schicken und wurde dafür von seinem Vater ver@@ stoßen .
+Predicted (-16.954813): eine komplette Mak@@ ver@@ ick aus einer entlegenen Provinz Afghan@@ ist@@ ans , er bestand darauf , dass seine Tochter , meine Mutter , zur Schule ging , und dafür war er nicht seinem Vater .
+Src: but my educated mother became a teacher .
+Ground Truth: meine gebildete Mutter aber wurde Lehrerin .
+Predicted (-2.183814): aber meine ausgebildeten Mutter wurde Lehrerin .
+Src: there she is .
+Ground Truth: das ist sie .
+Predicted (-1.077299): da ist sie .
+Src: she retired two years ago , only to turn our house into a school for girls and women in our neighborhood .
+Ground Truth: vor zwei Jahren ging sie in den Ruhestand , nur um unser Haus in eine Schule für Mädchen und Frauen aus der Nachbarschaft zu verwandeln .
+Predicted (-7.176942): sie war vor zwei Jahren im Ruhestand , nur um unser Haus in eine Schule für Mädchen und Frauen in unserer Nachbarschaft zu verwandeln .
+Src: and my father -- that &apos;s him -- he was the first ever in his family to receive an education .
+Ground Truth: und mein Vater - hier zu sehen - war der Erste in seiner Familie , der jemals eine Schulbildung erhielt .
+Predicted (-5.631726): und mein Vater - das ist er - er war das erste Mal in seiner Familie , um eine Ausbildung zu erhalten .
+Src: there was no question that his children would receive an education , including his daughters , despite the Taliban , despite the risks .
+Ground Truth: für ihn war stets klar , dass seine Kinder eine Ausbildung erhalten würden , auch seine Töchter , trotz der Taliban , trotz aller Risiken .
+Predicted (-3.362752): es gab keine Frage , dass seine Kinder eine Ausbildung erhalten würden , einschließlich seiner Töchter , trotz der Taliban , trotz der Risiken .
+Src: to him , there was greater risk in not educating his children .
+Ground Truth: er sah es als ein viel größeres Risiko an , seine Kinder nicht zur Schule zu schicken .
+Predicted (-5.067073): für ihn war es mehr Risiko , seine Kinder nicht zu unterrichten .
+Src: during Taliban years , I remember there were times I would get so frustrated by our life and always being scared and not seeing a future .
+Ground Truth: ich weiß noch genau , dass ich in den Jahren unter den Taliban manchmal so frustriert war von unserem Leben , von der ständigen Angst und der Perspek@@ tiv@@ losigkeit ,
+Predicted (-15.015452): während der Taliban Jahre , erinnere ich mich , dass es Zeiten gab , die ich so frustriert durch unser Leben erhalte , und immer Angst hatte und keine Zukunft sehen würde .
+Src: I would want to quit , but my father , he would say , &quot; Listen , my daughter , you can lose everything you own in your life .
+Ground Truth: dass ich gute Lust hatte , aufzugeben . aber mein Vater sagte dann : &quot; Tochter , hör mir zu . du kannst in deinem Leben alles verlieren .
+Predicted (-9.807280): ich würde aufhören , aber mein Vater , er würde sagen : &quot; hören Sie , meine Tochter , Sie können alles verlieren , was Sie im Leben besitzen .
+Src: your money can be stolen . you can be forced to leave your home during a war .
+Ground Truth: dein Geld kann gestohlen werden . du kannst im Krieg aus deinem Haus vertrieben werden .
+Predicted (-8.083223): ihr Geld kann gestohlen werden . ihr könnt eure Heimat während eines Krieges verlassen .
+Src: but the one thing that will always remain with you is what is here , and if we have to sell our blood to pay your school fees , we will .
+Ground Truth: doch eine Sache wird dir immer bleiben : das , was hier drin ist . und selbst wenn wir mit unserem Blut für deine Schul@@ gebühren zahlen müssen , werden wir das tun .
+Predicted (-19.655022): aber das eine , was Ihnen immer noch noch immer bleiben wird , ist was hier ist , und wenn wir unser Blut verkaufen müssen , um das Schul@@ geld zu zahlen , werden wir es tun .
+Src: so do you still not want to continue ? &quot;
+Ground Truth: also - willst du immer noch aufgeben ? &quot;
+Predicted (-5.543688): wollen Sie noch nicht weiter weitermachen ? &quot;
+Src: today I am 22 .
+Ground Truth: heute bin ich 22 Jahre alt .
+Predicted (-1.053436): heute bin ich 22 Jahre alt .
+Src: I was raised in a country that has been destroyed by decades of war .
+Ground Truth: ich bin in einem Land aufgewachsen , das durch Jahrzehnte des Krieges zerstört worden ist .
+Predicted (-4.196466): ich wurde in einem Land aufgewachsen , das von Jahrzehnten des Krieges zerstört wurde .
+Src: fewer than six percent of women my age have made it beyond high school , and had my family not been so committed to my education , I would be one of them .
+Ground Truth: weniger als 6 % der Frauen meines Alters haben einen höheren Abschluss als den Sek@@ un@@ dar@@ abschluss . und wenn meine Familie sich nicht so stark für meine Schulbildung eingesetzt hätte , wäre auch ich eine dieser Frauen .
+Predicted (-21.482269): weniger als 6 % meiner Alters@@ genossen haben sie weit über die Schule geschafft und meine Familie war nicht so verpflichtet , meiner Ausbildung zu engagi@@ erten , ich wäre einer davon .
+Src: instead , I stand here a proud graduate of Mi@@ dd@@ leb@@ ury College .
+Ground Truth: stattdessen stehe ich heute hier , als stol@@ ze Absol@@ venti@@ n des Mi@@ dd@@ leb@@ ury College .
+Predicted (-7.476078): stattdessen stehe ich hier einen stol@@ zer Gra@@ dd@@ leb@@ ury College .
+Src: when I returned to Afghanistan , my grandfather , the one ex@@ iled from his home for dar@@ ing to educate his daughters , was among the first to congrat@@ ulate me .
+Ground Truth: als ich nach Afghanistan zurück@@ kehrte , war mein Großvater , der , der von seiner Familie ver@@ stoßen wurde , weil er es ge@@ wa@@ gt hat , seine Töchter zur Schule zu schicken , einer der Ersten , der mir gratu@@ lierte .
+Predicted (-21.239773): als ich nach Afghanistan zurück@@ kehrte , war mein Großvater , der ein ausge@@ zeichn@@ etes aus seinem Haus , um seine Töchter zu bilden , unter dem ersten , um mich zu gratu@@ lieren .
+Src: he not only bra@@ gs about my college degree , but also that I was the first woman , and that I am the first woman to drive him through the streets of Kabul .
+Ground Truth: er pra@@ hlt nicht nur mit meinem Hochschul@@ abschluss , sondern auch damit , dass ich die erste Frau war und bin , die ihn mit dem Auto durch Kabul fährt .
+Predicted (-14.264134): er kn@@ allt nicht nur auf meinen Hochschul@@ abschluss , sondern auch , dass ich die erste Frau war , und dass ich die erste Frau bin , die ihn durch die Straßen von Kabul gefahren hat .
+Src: my family believes in me .
+Ground Truth: meine Familie glaubt an mich .
+Predicted (-0.544188): meine Familie glaubt an mich .
+Src: I dream big , but my family dreams even bigger for me .
+Ground Truth: ich habe große Träume , aber meine Familie hat noch größere Träume für mich .
+Predicted (-5.513075): ich habe große Träume , aber meine Familie hat noch größer für mich .
+Src: that &apos;s why I am a global ambassador for 10@@ x@@ 10 , a global campaign to educate women .
+Ground Truth: deshalb bin ich globale Bot@@ schaf@@ terin für 10@@ x@@ 10 , einer weltweiten Kampagne für die Bildung von Frauen .
+Predicted (-6.111790): deshalb bin ich ein globaler Botschafter für 10@@ x@@ 10 , eine globale Kampagne für Frauen zu erziehen .
+Src: that &apos;s why I co@@ founded Sol@@ a , the first and perhaps only boarding school for girls in Afghanistan , a country where it &apos;s still risky for girls to go to school .
+Ground Truth: deshalb habe ich geholfen , Sol@@ a zu gründen , das erste und vielleicht einzige Inter@@ n@@ at für Mädchen in Afghanistan , einem Land , in dem der Schul@@ besu@@ ch für Mädchen immer noch riskant ist .
+Predicted (-14.189340): deshalb habe ich Sol@@ a gegründet , das erste und vielleicht nur für Mädchen in Afghanistan , ein Land , in dem es noch riskant für Mädchen ist , zur Schule zu gehen .
+Src: the exciting thing is that I see students at my school with ambition grabbing at opportunity .
+Ground Truth: es ist wundervoll zu sehen , wie die Schü@@ ler@@ innen an meiner Schule mit großem Ehrgeiz alle ihnen geb@@ ot@@ enen Chancen wahrnehmen möchten .
+Predicted (-13.984488): das Aufre@@ gende ist , dass ich Studenten an meiner Schule sehe , mit Ehrgeiz sich Chancen auf@@ greifen kann .
+Src: and I see their parents and their fathers who , like my own , advocate for them , despite and even in the face of daunting opposition .
+Ground Truth: und zu sehen , wie ihre Eltern und Väter für sie ein@@ stehen , wie damals auch meine Eltern für mich , trotz und entgegen aller ab@@ schreck@@ enden Wider@@ stände .
+Predicted (-20.838217): und ich sehe ihre Eltern und Väter , die wie mein eigenes , Für@@ sorger für sie , trotz und sogar im Angesicht entmuti@@ gend ein ein@@ schüchter@@ nder Opp@@ osi@@ tions@@ verhältnis .
+Src: like Ahmed . that &apos;s not his real name , and I cannot show you his face , but Ahmed is the father of one of my students .
+Ground Truth: so wie Ahmed . das ist nicht sein wirk@@ licher Name und ich kann auch sein Gesicht nicht zeigen , aber Ahmed ist der Vater einer meiner Schü@@ ler@@ innen .
+Predicted (-5.843980): wie Ahmed . das ist nicht sein richtiger Name , und ich kann Ihnen sein Gesicht zeigen , aber Ahmed ist der Vater einer meiner Schüler .
+Src: less than a month ago , he and his daughter were on their way from Sol@@ a to their village , and they literally missed being killed by a road@@ side bomb by minutes .
+Ground Truth: vor knapp einem Monat waren seine Tochter und er auf dem Heim@@ weg von Sol@@ a in ihr Dorf und sie sind dem Tod durch eine Bombe am Straßenrand nur um wenige Minuten entkommen .
+Predicted (-13.276303): vor weniger als einem Monat , war er und seine Tochter auf dem Weg von Sol@@ a zu ihrem Dorf , und sie haben buchstäblich von einer Straßen@@ bombe um Minuten umgebracht .
+Src: as he arrived home , the phone rang , a voice warning him that if he sent his daughter back to school , they would try again .
+Ground Truth: als er zu Hause ankam , klin@@ gelte das Telefon und eine Stimme droh@@ te ihm , falls er seine Tochter weiter zur Schule schickte , würden sie es erneut versuchen .
+Predicted (-12.148301): als er nach Hause kam , sah das Telefon klin@@ gelte , eine Stimme , die ihn , wenn er seine Tochter zurück zur Schule geschickt hat , würden sie wieder versuchen .
+Src: &quot; kill me now , if you wish , &quot; he said , &quot; but I will not ruin my daughter &apos;s future because of your old and backward ideas . &quot;
+Ground Truth: darauf sagte er : &quot; tötet mich jetzt , wenn ihr mö@@ chtet , doch ich werde nicht die Zukunft meiner Tochter aufs Spiel setzen wegen eurer alter@@ tü@@ m@@ lichen und über@@ holten Vorstellungen &quot; .
+Predicted (-15.922815): &quot; tö@@ te mich jetzt , wenn du dich wünschen &quot; , sagte er , &quot; aber ich werde die Zukunft meiner Tochter nicht ru@@ inieren wegen Ihrer alten und rückwärts Ideen &quot; .
+Src: what I &apos;ve come to realize about Afghanistan , and this is something that is often dis@@ missed in the West , that behind most of us who succeed is a father who recognizes the value in his daughter and who sees that her success is his success .
+Ground Truth: was Afghanistan angeht , so habe ich etwas erkannt , das im Westen oftmals ab@@ getan wird : hinter den meisten von uns , die Erfolg haben , steht ein Vater , der den Wert seiner Tochter erkennt und dem bewusst ist , dass ihr Erfolg auch sein Erfolg ist .
+Predicted (-19.376213): was ich über Afghanistan klar habe , und das ist etwas , das oft nicht im Westen ver@@ fehlt , dass hinter den meisten von uns , ein Vater ist , der den Wert seiner Tochter erkennt und der sieht , dass ihr Erfolg sein Erfolg ist .
+Src: it &apos;s not to say that our mothers aren &apos;t key in our success .
+Ground Truth: das soll nicht heißen , dass unsere Mütter keine wichtige Rolle in unserem Erfolg spielen .
+Predicted (-5.039476): es ist nicht zu sagen , dass unsere Mütter nicht der Schlüssel in unserem Erfolg sind .
+Src: in fact , they &apos;re often the initial and convincing negoti@@ ators of a bright future for their daughters , but in the context of a society like in Afghanistan , we must have the support of men .
+Ground Truth: vielmehr sind sie häufig diejenigen , die sich anfän@@ glich und überzeugend für eine vielver@@ sprechende Zukunft ihrer Töchter aus@@ sprechen . doch in einer Gesellschaft wie der in Afghanistan ist die Unterstützung der Männer unver@@ zi@@ cht@@ bar .
+Predicted (-11.749250): tatsächlich sind sie oft die ersten und überzeu@@ genden Ver@@ handel@@ ungen einer hellen Zukunft für ihre Töchter , aber im Kontext einer Gesellschaft wie in Afghanistan müssen wir die Unterstützung von Männern haben .
+Src: under the Taliban , girls who went to school num@@ bered in the hundreds -- remember , it was illegal .
+Ground Truth: unter den Taliban gingen nur wenige hundert Mädchen zur Schule - denn es war ja illegal .
+Predicted (-14.938396): unter den Taliban war die Mädchen , die in die Schule ging , um in den hunderte zu schicken - erinnern Sie sich , es war illegal .
+Src: but today , more than three million girls are in school in Afghanistan .
+Ground Truth: heute jedoch drücken in Afghanistan über drei Millionen Mädchen die Schul@@ bank .
+Predicted (-2.010236): aber heute sind mehr als drei Millionen Mädchen in Afghanistan .
+Src: Afghanistan looks so different from here in America .
+Ground Truth: Afghanistan erscheint , von Amerika aus betrachtet , so anders .
+Predicted (-2.547307): Afghanistan sieht so unterschiedlich aus .
+Src: I find that Americans see the fragi@@ lity in changes .
+Ground Truth: die Amerikaner erkennen , wie unsicher solche Veränderungen sind .
+Predicted (-2.529488): Amerikaner sehen die Zer@@ brech@@ lichkeit in Veränderungen .
+Src: I fear that these changes will not last much beyond the U.S. troops &apos; with@@ dra@@ wal .
+Ground Truth: ich be@@ fürchte , dass die Veränderungen nicht von Dauer sind und sich mit dem Ab@@ zug der US @-@ Truppen wieder alles ändert .
+Predicted (-16.376974): ich fürchte , dass diese Veränderungen nicht viel über die US @-@ Soldaten in der US @-@ Truppen der US @-@ Soldaten hinausgehen .
+Src: but when I am back in Afghanistan , when I see the students in my school and their parents who advocate for them , who encourage them , I see a promising future and lasting change .
+Ground Truth: doch wenn ich in Afghanistan bin , wenn ich die Schü@@ ler@@ innen in meiner Schule sehe , und ihre Eltern , die sich für sie einsetzen , die sie ermutigen , dann sehe ich eine vielver@@ sprechende Zukunft und einen lan@@ gan@@ halten@@ den Wandel .
+Predicted (-20.838530): aber wenn ich in Afghanistan zurück bin , wenn ich die Studenten in meiner Schule und ihre Eltern sehe , die für sie sich ein@@ spannen , die sie ermutigen , sehe ich eine Zukunft und andau@@ ernde Veränderungen .
+Src: to me , Afghanistan is a country of hope and bo@@ und@@ less possibilities , and every single day the girls of Sol@@ a remind me of that .
+Ground Truth: Afghanistan ist für mich ein Land der Hoffnung und der unbegrenz@@ ten Möglichkeiten , und daran erinnern mich jeden Tag die Mädchen , die Sol@@ a besuchen .
+Predicted (-7.620579): für mich ist Afghanistan ein Land voller Hoffnung und grenzen@@ lose Möglichkeiten und jeden Tag erinnern die Mädchen von Sol@@ a mich daran .
+Src: like me , they are dreaming big .
+Ground Truth: genau wie ich haben sie große Träume .
+Predicted (-3.334423): wie ich , sie träumen große .
+Src: thank you .
+Ground Truth: vielen Dank .
+Predicted (-0.778209): danke .
+Src: everything I do , and everything I do profession@@ ally -- my life -- has been shaped by seven years of work as a young man in Africa .
+Ground Truth: alles was ich mache , auch beruflich - mein Leben - wurde geprägt von sieben Jahren der Arbeit in Afrika als junger Mann .
+Predicted (-9.109642): alles was ich tue , und alles was ich beruflich tue - mein Leben - wurde von sieben Jahren Arbeit als junger Mann in Afrika geformt .
+Src: from 1971 to 1977 -- I look young , but I &apos;m not - -- I worked in Zambia , Kenya , I@@ vory Coast , Al@@ geria , Somalia , in projects of technical cooperation with African countries .
+Ground Truth: von 1971 bis 1977 - ich sehe jung aus , bin es aber nicht - - habe ich in Sam@@ bia , Kenia , der Elfenbein@@ küste , Al@@ ger@@ ien und Somalia an Projekten der technischen Zusammenarbeit mit afrikanischen Ländern gearbeitet .
+Predicted (-11.066590): von 1971 bis 1977 - ich schaue jung aus , aber ich bin nicht - Ich arbeitete in Sam@@ bia , Kenia , Elfenbein@@ küste , Al@@ ger@@ ien , Somalia in Projekten in technische Kooperation mit afrikanischen Ländern .
+Src: I worked for an Italian NGO , and every single project that we set up in Africa failed .
+Ground Truth: ich habe für eine italien@@ ische NR@@ O gearbeitet und jedes einzelne Projekt , das wir auf die Beine stellten , schei@@ terte .
+Predicted (-6.588330): ich arbeitete für eine italien@@ ische NGO und jedes einzelne Projekt , das wir in Afrika ein@@ setzten , schei@@ terte .
+Src: and I was di@@ strau@@ ght .
+Ground Truth: ich war verzweifelt .
+Predicted (-0.980130): ich war best@@ ürzt .
+Src: I thought , age 21 , that we Itali@@ ans were good people and we were doing good work in Africa .
+Ground Truth: ich , 21 Jahre , dachte , dass wir Itali@@ ener gute Menschen sind und gute Arbeit in Afrika lei@@ steten .
+Predicted (-8.694278): ich dachte , 21 Jahre waren wir Itali@@ ener gute Menschen und wir taten gute Arbeit in Afrika .
+Src: instead , everything we touched we killed .
+Ground Truth: stattdessen töteten wir alles , was wir an@@ fassten .
+Predicted (-8.383568): stattdessen , alles , was wir berühr@@ ten , umgebracht haben .
+Src: our first project , the one that has inspired my first book , &quot; rip@@ ples from the Z@@ am@@ be@@ z@@ i , &quot; was a project where we Itali@@ ans decided to teach Z@@ ambi@@ an people how to grow food .
+Ground Truth: unser erstes Projekt , was mein erstes Buch &quot; Ri@@ p@@ ples from the Z@@ am@@ be@@ z@@ i &quot; inspirierte , war eines , in dem wir Itali@@ ener den Menschen Sam@@ bias zeigen wollten , wie Nahrung an@@ gebaut wird .
+Predicted (-22.657375): unser erstes Projekt , das , das mein erstes Buch inspiriert hat , &quot; Wellen aus dem Z@@ am@@ be@@ z@@ i &quot; , war ein Projekt , in dem wir Itali@@ ener beschlossen haben , Z@@ ambi@@ tion@@ iert zu unterrichten , wie man Nahrung züchten kann .
+Src: so we arrived there with Italian seeds in southern Zambia in this absolutely magnificent valley going down to the Z@@ am@@ be@@ z@@ i River , and we taught the local people how to grow Italian tom@@ atoes and zu@@ c@@ ch@@ ini and ...
+Ground Truth: wir kamen mit italien@@ ischem Saatgut in Süd @-@ Sam@@ bia an ; in dieses umwerf@@ ende Tal , was zum Sam@@ bes@@ i @-@ Fluss führt . wir lehr@@ ten der ein@@ heimischen Bevölkerung den Anbau italien@@ ischer Tomaten und Zu@@ c@@ ch@@ ini und ...
+Predicted (-104.298325): wir kamen dort mit italienischen Samen im Süden Sam@@ bia in diesem absolut wunderbares Tal , das in den Z@@ am@@ be@@ z@@ i Fluss herunter@@ ging , und wir lehr@@ ten die örtlichen Menschen , wie man italien@@ ische Tomaten wachsen und zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@ zu@@
+Src: and of course the local people had absolutely no interest in doing that , so we paid them to come and work , and sometimes they would show up .
+Ground Truth: natürlich hatten die An@@ sä@@ ssigen absolut kein Interesse daran , also bezahlten wir sie für das Arbeiten , und manchmal tauchten sie auch auf .
+Predicted (-21.513256): und natürlich hatten die lokalen Menschen absolut kein Interesse daran , so dass wir sie also dafür bezahlt haben , arbeiten zu lassen und manchmal würden sie auf@@ warten .
+Src: and we were amazed that the local people , in such a fer@@ tile valley , would not have any agriculture .
+Ground Truth: wir waren erstaunt , dass es in einem so frucht@@ baren Tal keine Landwirtschaft gab .
+Predicted (-6.850840): und wir waren erstaunt , dass die lokalen Menschen , in so einem frucht@@ baren Tal , keine Landwirtschaft haben würden .
+Src: but instead of asking them how come they were not growing anything , we simply said , &quot; Thank God we &apos;re here . &quot;
+Ground Truth: aber anstatt zu fragen , warum sie nichts an@@ bauten , sagten wir einfach &quot; Gott sei Dank , dass wir hier sind ! &quot;
+Predicted (-7.379769): aber anstatt sie zu fragen , wie sie nichts wachsen würden , sagten wir einfach : &quot; Gott , den wir hier sind &quot; .
+Src: &quot; just in the nick of time to save the Z@@ ambi@@ an people from starvation . &quot;
+Ground Truth: &quot; gerade noch rechtzeitig , um die Menschen Sam@@ bias vor dem Ver@@ hungern zu retten &quot; .
+Predicted (-12.364558): &quot; einfach im kurzer Zeit , den Menschen aus Hunger zu retten &quot; .
+Src: and of course , everything in Africa grew beautifully .
+Ground Truth: natürlich ge@@ die@@ h alles wunderbar in Afrika .
+Predicted (-3.069890): und natürlich wuchs alles in Afrika wunderbar .
+Src: we had these magnificent tom@@ atoes . in Italy , a tomato would grow to this size . in Zambia , to this size .
+Ground Truth: wir hatten diese pra@@ cht@@ vollen Tomaten . in Italien wurden sie so groß , in Sam@@ bia so groß .
+Predicted (-10.521049): wir hatten diese großartigen Tomaten . in Italien wachsen eine Tom@@ aten@@ ei in diese Größe . in Sam@@ bia , zu dieser Größe .
+Src: and we could not believe , and we were telling the Z@@ ambi@@ ans , &quot; Look how easy agriculture is . &quot;
+Ground Truth: wir konnten es nicht glauben und sagten den Sam@@ bi@@ ern : &quot; schaut , wie einfach Landwirtschaft ist &quot; .
+Predicted (-11.195597): wir konnten nicht glauben und wir erzählten den Z@@ ambi@@ ans , &quot; Sch@@ auen Sie , wie einfach die Landwirtschaft ist &quot; .
+Src: when the tom@@ atoes were nice and ri@@ pe and red , overnight , some 200 hi@@ ppo@@ s came out from the river and they ate everything .
+Ground Truth: als die Tomaten reif und rot waren , kamen über Nacht etwa 200 N@@ il@@ pfer@@ de aus dem Fluss und fra@@ ßen alles .
+Predicted (-12.528121): als die Tomaten schön und rot waren , kamen einige 200 hi@@ Afghanistan aus dem Fluss und alles aßen .
+Src: and we said to the Z@@ ambi@@ ans , &quot; My God , the hi@@ ppo@@ s ! &quot;
+Ground Truth: wir sagten zu den Sam@@ bi@@ ern : &quot; Oh Gott , die N@@ il@@ pfer@@ de ! &quot;
+Predicted (-8.944434): und wir sagten den Z@@ ambi@@ ans : &quot; mein Gott , die hi@@ Afghanistan ! &quot;
+Src: and the Z@@ ambi@@ ans said , &quot; Yes , that &apos;s why we have no agriculture here . &quot;
+Ground Truth: und sie sagten : &quot; ja , deswegen haben wir keine Landwirtschaft hier &quot; .
+Predicted (-5.377337): und die Z@@ ambi@@ aner sagten : &quot; ja , deshalb haben wir hier keine Landwirtschaft &quot; .
+Src: &quot; why didn &apos;t you tell us ? &quot; &quot; you never asked . &quot;
+Ground Truth: &quot; warum habt ihr uns das nicht gesagt ? &quot; &quot; ihr habt uns niemals gefragt &quot; .
+Predicted (-4.640239): &quot; warum erzähl@@ st du uns nicht ? &quot; &quot; , hast du nie gefragt &quot; .
+Src: I thought it was only us Itali@@ ans bl@@ undering around Africa , but then I saw what the Americans were doing , what the English were doing , what the French were doing , and after seeing what they were doing , I became quite proud of our project in Zambia .
+Ground Truth: ich dachte nur , wir Itali@@ ener waren so toll@@ pat@@ schi@@ g in Afrika , aber dann sah ich , was die Amerikaner machten , was die Engl@@ änder machten , was die Franzosen machten . nachdem ich sah , was sie taten , wurde ich ziemlich stolz auf unser Projekt in Sam@@ bia .
+Predicted (-22.013706): ich dachte , dass es nur uns Itali@@ ener in Afrika gab , aber dann sah ich , was die Amerikaner taten , was das englische Englisch machte , was die Franzosen taten , und nachdem ich sah , was sie taten , wurde ich ziemlich stolz auf unser Projekt in Sam@@ bia .
+Src: because , you see , at least we fed the hi@@ ppo@@ s .
+Ground Truth: wir füt@@ terten zumindest die N@@ il@@ pfer@@ de .
+Predicted (-11.517124): denn , Sie sehen , zumindest haben wir die hi@@ ppo@@ s gefüttert .
+Src: you should see the rub@@ bish - -- You should see the rub@@ bish that we have besto@@ wed on uns@@ us@@ pe@@ cting African people .
+Ground Truth: sie sollten den Unsinn sehen - - Sie sollten den Unsinn sehen , den wir den nicht@@ sa@@ h@@ nenden afrikanischen Menschen besch@@ ert haben .
+Predicted (-19.228756): sie sollten den Unsinn sehen , Sie sollten den Unsinn sehen , den wir uns darauf ge@@ klär@@ t haben , afrikanische Menschen zu befreien .
+Src: you want to read the book , read &quot; Dead Aid , &quot; by Dam@@ bis@@ a Mo@@ yo , Z@@ ambi@@ an woman economist .
+Ground Truth: sie sollten das Buch &quot; Dead Aid &quot; von Dam@@ bis@@ a Mo@@ yo lesen , sie ist eine sam@@ bische Wirtschafts@@ wissenschaft@@ lerin .
+Predicted (-12.223528): sie möchten das Buch lesen , &quot; Dead Aid &quot; lesen , &quot; von Dam@@ B@@ a Mo@@ yo , Z@@ ambi@@ an an der Frau .
+Src: the book was published in 2009 .
+Ground Truth: das Buch wurde 2009 veröffentlicht .
+Predicted (-0.337111): das Buch wurde 2009 veröffentlicht .
+Src: we Western donor countries have given the African continent two trillion American dollars in the last 50 years .
+Ground Truth: wir Ge@@ ber@@ länder haben dem afrikanischen Kontinent 1,5 Billionen Euro in den letzten 50 Jahren gegeben .
+Predicted (-9.046064): wir westlichen Spender@@ länder haben den afrikanischen Kontinent zwei Billionen amerikanische Dollar in den letzten 50 Jahren gegeben .
+Src: I &apos;m not going to tell you the damage that that money has done .
+Ground Truth: ich werde Ihnen nicht erzählen , was dieses Geld an@@ gerichtet hat .
+Predicted (-5.339800): ich werde Ihnen nicht den Schaden sagen , den das Geld getan hat .
+Src: just go and read her book .
+Ground Truth: lesen Sie einfach ihr Buch .
+Predicted (-5.830460): einfach lesen und ihr Buch lesen .
+Src: read it from an African woman , the damage that we have done .
+Ground Truth: lesen Sie von einer Afri@@ kan@@ erin , was wir an@@ gerichtet haben .
+Predicted (-4.102448): lesen Sie es aus einer afrikanischen Frau , den Schaden , den wir gemacht haben .
+Src: we Western people are imperi@@ alist , coloni@@ alist mission@@ aries , and there are only two ways we deal with people : we either pat@@ ron@@ ize them , or we are pat@@ ern@@ alistic .
+Ground Truth: wir westlichen Menschen sind Imperi@@ alisten , Koloni@@ alisten , Mission@@ are und es gibt nur zwei Arten , wie wir mit Menschen umgehen . wir pat@@ ron@@ isieren sie oder wir sind patri@@ arch@@ al@@ isch .
+Predicted (-26.707481): wir westlichen Menschen sind Imperi@@ alisten , Koloni@@ alist alist @-@ Mission@@ are , und es gibt zwei Möglichkeiten , mit denen wir uns Leuten beschäftigen : wir pat@@ rou@@ illi@@ eren sie oder wir sind imm@@ ern@@ alistisch .
+Src: the two words come from the Latin root &quot; p@@ ater , &quot; which means &quot; father . &quot;
+Ground Truth: beide Wörter stammen von der latein@@ ischen Wurzel &quot; P@@ ater &quot; , was &quot; Vater &quot; bedeutet .
+Predicted (-9.200609): die beiden Wörter kommen vom latein@@ ischen Wurzel@@ wur@@ zeln &quot; , was &quot; Vater &quot; bedeutet .
+Src: but they mean two different things .
+Ground Truth: aber sie haben zwei verschiedene Bedeutungen .
+Predicted (-1.646209): aber sie bedeuten zwei verschiedene Dinge .
+Src: pat@@ ern@@ alistic , I treat anybody from a different culture as if they were my children . &quot; I love you so much . &quot;
+Ground Truth: patri@@ arch@@ al@@ isch : ich behand@@ ele jeden einer anderen Kultur , als wären sie meine Kinder . &quot; ich liebe euch so sehr &quot; .
+Predicted (-11.472923): Pat@@ ern@@ alistisch , ich behand@@ le jeden aus einer anderen Kultur , als wären sie meine Kinder . &quot; ich liebe dich so sehr &quot; .
+Src: pat@@ ron@@ izing , I treat everybody from another culture as if they were my servan@@ ts .
+Ground Truth: Pat@@ ron@@ isi@@ erend : ich behand@@ ele jeden einer anderen Kultur , als wären sie meine Dien@@ er .
+Predicted (-13.439161): ich behand@@ le jeden anderen aus einer anderen Kultur als wären sie meine Con@@ stru@@ ts .
+Src: that &apos;s why the white people in Africa are called &quot; b@@ wana , &quot; boss .
+Ground Truth: deshalb werden weiße Menschen in Afrika &quot; b@@ wana &quot; , Chef , genannt .
+Predicted (-11.780431): deshalb werden die weißen Menschen in Afrika &quot; b@@ atz@@ los &quot; genannt , &quot; Chef &quot; .
+Src: I was given a sla@@ p in the face reading a book , &quot; Small is Be@@ auti@@ ful , &quot; written by Schu@@ macher , who said , above all in economic development , if people do not wish to be helped , leave them alone .
+Ground Truth: ich wurde wach@@ gerü@@ ttelt , als ich das Buch &quot; Small is Be@@ auti@@ ful &quot; von Schu@@ macher las . er sagte , vor allem in der Wirtschafts@@ entwicklung , wenn Menschen keine Hilfe wollen , dann lass sie in Ruhe .
+Predicted (-36.403404): ich wurde einem Schlag ins Gesicht gegeben , ein Buch zu lesen , &quot; Kl@@ ar ist Au@@ ti@@ y , &quot; geschrieben von Schu@@ tzt gegen &quot; , sagte , über die gesamte wirtschaftliche Entwicklung , wenn Menschen nicht helfen wollen , sie alleine zu lassen .
+Src: this should be the first principle of aid .
+Ground Truth: dies sollte das erste Prinzip der Hilfe sein .
+Predicted (-2.196898): das sollte das erste Prinzip der Entwicklungshilfe sein .
+Src: the first principle of aid is respect .
+Ground Truth: das erste Prinzip der Hilfe ist Respekt .
+Predicted (-1.699105): das erste Prinzip der Entwicklungshilfe ist Respekt .
+Src: this morning , the gentleman who opened this conference lay a stick on the floor , and said , &quot; Can we -- can you imagine a city that is not neo@@ colon@@ ial ? &quot;
+Ground Truth: heute morgen legte der Herr , der diese Konferenz eröffnete , einen Stab auf den Boden und fragte : &quot; können Sie sich eine Stadt vorstellen , die nicht ne@@ ok@@ ol@@ on@@ ial ist ? &quot;
+Predicted (-16.353895): heute Morgen öffnete der Herr , der diese Konferenz öffnete , einen Stock auf dem Boden lag und sagte : &quot; können Sie sich eine Stadt vorstellen , die nicht in der ne@@ ok@@ or@@ alen kol@@ oni@@ alen kol@@ oni@@ alen ist ? &quot;
+Src: I decided when I was 27 years old to only respond to people , and I invented a system called Enter@@ prise Fac@@ ili@@ tation , where you never initi@@ ate anything , you never motivate anybody , but you become a servant of the local passion , the servant of local people who have a dream to become a better person .
+Ground Truth: als ich 27 Jahre alt war , entschied ich mich , nur auf Menschen zu reagieren und erfand ein System namens Unternehmens@@ förderung , bei dem niemals etwas initi@@ iert wird , niemals jemand motiviert wird , doch man wird zum Dienst@@ lei@@ ster der örtlichen Pas@@ sion , der Dien@@ er der örtlichen Menschen , die den Traum haben , eine bessere Person zu werden .
+Predicted (-37.482513): ich entschied mich , als ich 27 Jahre alt war , um nur auf Menschen zu antworten , und ich erfand ein System namens Enter@@ netter Angebot , wo man nie irgendetwas initi@@ iert , motivieren Sie nie jemanden , aber Sie werden eine Dien@@ er der lokalen Leidenschaft , der Dien@@ er der lokalen Menschen , die einen Traum haben , eine bessere Person zu werden .
+Src: so what you do -- you shut up .
+Ground Truth: was man macht - man hält den Mund .
+Predicted (-11.341073): also was Sie tun - Sie haben es zu@@ geschnitten .
+Src: you never arrive in a community with any ideas , and you sit with the local people .
+Ground Truth: man erreicht niemals eine Gemeinde mit Ideen , man setzt sich mit den Ein@@ heimischen zusammen .
+Predicted (-10.945690): sie kommen nie in einer Gemeinschaft mit Hilfe von Ideen an und Sie sitzen mit den örtlichen Menschen .
+Src: we don &apos;t work from offices .
+Ground Truth: wir arbeiten nicht von Büros aus .
+Predicted (-1.690089): wir arbeiten nicht aus Büros .
+Src: we meet at the cafe . we meet at the pu@@ b .
+Ground Truth: wir treffen uns in Caf@@ és . wir treffen uns in Knei@@ pen .
+Predicted (-3.219947): wir treffen uns im Café . wir treffen im Pu@@ b .
+Src: we have zero infrastructure .
+Ground Truth: wir haben keine Infrastruktur .
+Predicted (-1.431658): wir haben null Infrastruktur .
+Src: and what we do , we become friends , and we find out what that person wants to do .
+Ground Truth: wir schließen Freund@@ schaften und finden heraus , was die Person möchte .
+Predicted (-5.627438): und was wir tun , werden wir Freunde und wir finden heraus , was die Person tun möchte .
+Src: the most important thing is passion .
+Ground Truth: das Wichtigste ist die Leidenschaft .
+Predicted (-1.025702): das Wichtigste ist Leidenschaft .
+Src: you can give somebody an idea .
+Ground Truth: man kann jemandem eine Idee vermitteln .
+Predicted (-2.594501): sie können jemandem eine Idee geben .
+Src: if that person doesn &apos;t want to do it , what are you going to do ?
+Ground Truth: wenn diese Person diese nicht mag , was soll man tun ?
+Predicted (-5.049182): wenn diese Person das nicht tun will , was werden Sie tun ?
+Src: the passion that the person has for her own growth is the most important thing .
+Ground Truth: die Pas@@ sion für das eigene Wachstum der Person ist das Wichtigste .
+Predicted (-2.543410): die Leidenschaft , die die Person für ihr eigenes Wachstum hat , ist das Wichtigste .
+Src: the passion that that man has for his own personal growth is the most important thing .
+Ground Truth: die Pas@@ sion für das eigene Wachsen ist das Wichtigste der Menschheit .
+Predicted (-3.094372): die Leidenschaft , die dieser Mann für sein eigenes persönliches Wachstum hat , ist das Wichtigste .
+Src: and then we help them to go and find the knowledge , because nobody in the world can succeed alone .
+Ground Truth: wir helfen ihnen , das Wissen zu finden , denn niemand kann allein erfolgreich sein .
+Predicted (-6.252418): und dann helfen wir ihnen , das Wissen zu finden , weil niemand auf der Welt alleine Erfolg haben kann .
+Src: the person with the idea may not have the knowledge , but the knowledge is available .
+Ground Truth: die Person mit der Idee hat vielleicht nicht das Wissen , doch es ist verfügbar .
+Predicted (-3.807634): die Person mit der Idee könnte kein Wissen haben , aber das Wissen ist verfügbar .
+Src: so years and years ago , I had this idea : why don &apos;t we , for once , instead of arriving in the community to tell people what to do , why don &apos;t , for once , listen to them ? but not in community meetings .
+Ground Truth: vor vielen Jahren hatte ich diesen Ein@@ fall : warum , anstatt in einer Gemeinde anzukommen und den Menschen zu sagen , was sie tun sollen , warum hören wir ihnen nicht zu ? aber nicht in Gemeinde@@ versamm@@ lungen .
+Predicted (-27.510187): vor Jahren und Jahren hatte ich diese Idee : warum sind wir nicht einmal , anstatt in der Gemeinde zu kommen , um den Leuten zu erzählen , warum nicht , für einmal , hören sie zu ? aber nicht in den Gemeinde@@ büchern .
+Src: let me tell you a secret .
+Ground Truth: lassen Sie mich Ihnen ein Geheimnis verraten .
+Predicted (-1.222173): ich erzähle Ihnen ein Geheimnis .
+Src: there is a problem with community meetings .
+Ground Truth: es gibt ein Problem mit Gemeinde@@ versamm@@ lungen .
+Predicted (-4.188563): es gibt ein Problem mit Gemeinschaft@@ stre@@ ffen .
+Src: entrepreneurs never come , and they never tell you , in a public meeting , what they want to do with their own money , what opportunity they have identified .
+Ground Truth: Unternehmer haben niemals teil und sie werden niemals öffentlich sagen , was sie mit ihrem Geld anstellen wollen , was für Möglichkeiten sie sehen .
+Predicted (-10.320530): Unternehmer kommen nie und sie sagen Ihnen nie , in einem öffentlichen Meeting , was sie mit ihrem Geld tun wollen , was sie identifiziert haben .
+Src: so planning has this blind spot .
+Ground Truth: Planung hat diesen blinden Fleck .
+Predicted (-3.667075): Planung hat diesen blinden Fleck .
+Src: the smartest people in your community you don &apos;t even know , because they don &apos;t come to your public meetings .
+Ground Truth: die klü@@ gsten Menschen der Gemeinde kennt man nicht , weil sie nie zu öffentlichen Treffen erscheinen .
+Predicted (-10.022222): die schlau@@ esten Menschen in der Gemeinschaft , die Sie nicht einmal wissen , weil sie nicht in Ihre öffentlichen Meetings kommen .
+Src: what we do , we work one @-@ on @-@ one , and to work one @-@ on @-@ one , you have to create a social infrastructure that doesn &apos;t exist .
+Ground Truth: wir arbeiten eins zu eins , um dies zu tun , muss eine soziale Infrastruktur hergestellt werden , die nicht existiert .
+Predicted (-8.292220): wir arbeiten eins und müssen eine soziale Infrastruktur schaffen , die nicht existiert .
+Src: you have to create a new profession .
+Ground Truth: ein neuer Beruf muss geschaffen werden .
+Predicted (-2.491169): man muss einen neuen Beruf schaffen .
+Src: the profession is the family doctor of enterprise , the family doctor of business , who sits with you in your house , at your kitchen table , at the cafe , and helps you find the resources to transform your passion into a way to make a living .
+Ground Truth: dies ist der Haus@@ arzt des Unternehmens , der Haus@@ arzt des Betrie@@ bes , der mit Ihnen im Haus , an Ihrem Küch@@ entisch und im Café sitzt , Ihnen hilft , die Mittel zu finden , Ihre Leidenschaft in eine Art , das Leben zu bestreiten zu transformieren .
+Predicted (-28.616116): der Berufs@@ stand ist der Familien@@ arzt von Unternehmen , der Familien@@ arzt des Business , der mit Ihnen in Ihrem Haus sitzt , auf dem Küch@@ entisch , im Café , und Ihnen hilft , die Mittel zu finden , um Ihre Leidenschaft in einen Weg zu verwandeln , um einen Lebensunterhalt zu verdienen .
+Src: I started this as a try@@ out in E@@ sper@@ ance , in Western Australia .
+Ground Truth: ich habe dies in E@@ sper@@ ance , West @-@ Australien , versucht .
+Predicted (-6.918296): ich begann dies als Ren@@ dez@@ v@@ it in E@@ sper@@ ance , in West@@ austr@@ aliens .
+Src: I was a doing a Ph.D. at the time , trying to go away from this pat@@ ron@@ izing bull@@ shit that we arrive and tell you what to do .
+Ground Truth: ich pro@@ movi@@ erte zu der Zeit und versuchte , dem herab@@ las@@ senden Schwach@@ sinn , wo wir anderen sagen , was sie tun sollen , zu entkommen .
+Predicted (-24.339161): ich machte damals einen Doktoranden , versuchte , von diesem &quot; Pat@@ ron@@ ße &quot; abzu@@ holen , den wir ankommen und Ihnen zu sagen , was wir tun sollten .
+Src: and so what I did in E@@ sper@@ ance that first year was to just walk the streets , and in three days I had my first client , and I helped this first guy who was smoking fish from a garage , was a Ma@@ or@@ i guy , and I helped him to sell to the restaurant in Per@@ th , to get organized , and then the fishermen came to me to say , &quot; You the guy who helped Ma@@ or@@ i ? can you help us ? &quot;
+Ground Truth: und so lief ich im ersten Jahr nur durch die Straßen und hatte innerhalb der ersten drei Tage meinen ersten Kunden . ich half ihm . er r@@ äu@@ ch@@ erte Fisch in einer Garage , er war Ma@@ or@@ i . ich half ihm , an ein Restaurant in Per@@ th zu verkaufen und sich zu organisieren . danach kamen die Fischer und sagten : &quot; du hast dem Ma@@ or@@ i geholfen . kannst du uns helfen ? &quot;
+Predicted (-38.442455): und was ich in E@@ sper@@ ance im ersten Jahr tat , war , die Straßen zu laufen , und in drei Tagen hatte ich meinen ersten Kunden und ich half diesem Typen , der Fisch aus einer Garage rau@@ chte , war ein Ma@@ or@@ i @-@ Typ , und ich half ihm , das Restaurant in Per@@ th zu verkaufen , und dann sagten die Fischer zu mir : &quot; kannst du dir den Typen helfen ? &quot;
+Src: and I helped these five fishermen to work together and get this beautiful tuna not to the can@@ nery in Alb@@ any for 60 cents a kil@@ o , but we found a way to take the fish for sushi to Japan for 15 dollars a kil@@ o , and the farmers came to talk to me , said , &quot; Hey , you helped them . can you help us ? &quot;
+Ground Truth: ich half diesen 5 Fis@@ chern , zusammen zu arbeiten und diesen wunderbaren Thunfisch nicht an eine Fabrik in Alb@@ any für 60 Cents / Kilo zu verkaufen , sondern nach Japan für Sus@@ hi für 15 Dollar / Kilo . dann kamen die Bauern zu mir und sagten : &quot; Hey , du hast ihnen geholfen . kannst du uns helfen ? &quot;
+Predicted (-39.081379): und ich half diesen fünf Fischer zusammen zu arbeiten und diesen wunderbaren Thunfisch zu holen , nicht für den Kan@@ ad@@ at in Al@@ ban@@ al@@ gen für 60 Cent pro Kilo , sondern wir fanden einen Weg , den Fisch für Sus@@ hi in Japan für 15 Dollar ein Kilo Kilo zu nehmen und die Bauern kamen zu mir zu sagen , &quot; Hey , du hast ihnen geholfen . kannst du uns helfen ? &quot;
+Src: in a year , I had 27 projects going on , and the government came to see me to say , &quot; How can you do that ?
+Ground Truth: in einem Jahr hatte ich 27 Projekte laufen . die Regierung kam , um mich zu fragen : &quot; wie machen Sie das ?
+Predicted (-13.912317): in einem Jahr hatte ich 27 Projekte , die mich an@@ schauten , zu sagen : &quot; wie kannst du das tun ?
+Src: how can you do - ? &quot; and I said , &quot; I do something very , very , very difficult .
+Ground Truth: wie machen Sie ... ? &quot; ich sagte : &quot; ich mache etwas sehr , sehr Schwier@@ iges .
+Predicted (-6.101153): wie kann man das tun ? und ich sagte : &quot; ich mache etwas sehr , sehr , sehr schwer .
+Src: I shut up , and listen to them . &quot;
+Ground Truth: ich halte den Mund und höre ihnen zu &quot; .
+Predicted (-4.986042): ich schließe ab und höre zu ihnen &quot; .
+Src: so - - So the government says , &quot; Do it again . &quot;
+Ground Truth: also - - Also sagt die Regierung : &quot; machen Sie es nochmal &quot; .
+Predicted (-6.768062): also - - die Regierung sagt : &quot; mach es nochmal &quot; .
+Src: we &apos;ve done it in 300 communities around the world .
+Ground Truth: wir haben es weltweit in 300 Gemeinden gemacht .
+Predicted (-2.317256): wir haben es in 300 Gemeinden auf der ganzen Welt getan .
+Src: we have helped to start 40,000 businesses .
+Ground Truth: wir haben 40 000 Unternehmen bei der Gründung geholfen .
+Predicted (-4.118622): wir haben geholfen , 40.000 Unternehmen zu gründen .
+Src: there is a new generation of entrepreneurs who are dying of soli@@ tude .
+Ground Truth: es gibt eine neue Generation von Unternehmen , die an Einsamkeit ver@@ gehen .
+Predicted (-6.227773): es gibt eine neue Generation von Unternehmern , die an Fest@@ ungen sterben .
+Src: Peter Drucker , one of the greatest management consultants in history , died age 96 , a few years ago .
+Ground Truth: Peter Drucker , einer der besten Unternehmens@@ berater der Geschichte , starb mit 96 vor einigen Jahren .
+Predicted (-23.857794): Peter schlimmsten , einer der größten Management @-@ Berat@@ ungs@@ vor@@ s@@ au@@ s@@ rie@@ gel@@ nden Berat@@ ungen in der Geschichte starb 96 , vor ein paar Jahren .
+Src: Peter Drucker was a professor of philosophy before becoming involved in business , and this is what Peter Drucker says : &quot; planning is actually in@@ compatible with an entrepreneurial society and economy . &quot;
+Ground Truth: Peter Drucker war Philosop@@ hie@@ professor , bevor er sich mit Unternehmen beschäftigte . Peter Drucker sagte : Planung ist in Wirklichkeit un@@ vereinbar mit einer unternehmer@@ ischen Gesellschaft und der Wirtschaft &quot; .
+Predicted (-30.208839): Peter Natur Natur war Professor für Philosophie , bevor er in Business tätig wurde , und das ist , was Peter Natur Natur denkt : &quot; Planung ist tatsächlich un@@ vereinbar mit einer unternehmer@@ ischen Gesellschaft und Wirtschaft &quot; .
+Src: planning is the kiss of death of entrepreneurship .
+Ground Truth: Planung ist der Todes@@ k@@ uss des Unternehmer@@ geist@@ es .
+Predicted (-5.657799): Plan@@ ten ist der Kuss des Unternehmer@@ tums .
+Src: so now you &apos;re rebuilding Christ@@ church without knowing what the smartest people in Christ@@ church want to do with their own money and their own energy .
+Ground Truth: also baut man Christ@@ church um , ohne zu wissen , was die klü@@ gsten Mensch Christ@@ chur@@ chs mit ihrem Geld und ihrer Energie anstellen wollen .
+Predicted (-17.101017): jetzt bauen wir Christ@@ Kirche wieder auf , ohne zu wissen , was die schlau@@ esten Menschen in Christ@@ Kirche mit ihrem Geld und ihrer Energie machen wollen .
+Src: you have to learn how to get these people to come and talk to you .
+Ground Truth: man muss lernen , wie man diese dazu bringt , auf einen zuzu@@ kommen .
+Predicted (-10.708668): sie müssen lernen , wie man diese Leute dazu bringt , sich zu unterhalten und mit Ihnen zu reden .
+Src: you have to offer them confi@@ denti@@ ality , privacy , you have to be fantastic at helping them , and then they will come , and they will come in dro@@ ves .
+Ground Truth: man muss ihnen Dis@@ kre@@ tion und Privatsphäre anbieten . man muss großartig darin sein , ihnen zu helfen , und sie werden schar@@ en@@ weise kommen .
+Predicted (-22.394447): man muss ihnen Vertrauen auf die Ein@@ falls@@ reichtum , Privatsphäre anbieten , man muss fantastisch sein , ihnen zu helfen , und dann kommen sie und werden in Sch@@ aren kommen .
+Src: in a community of 10,000 people , we get 200 clients .
+Ground Truth: in einer Gemeinde von 10 000 Menschen bekommen wir 200 Kunden .
+Predicted (-4.458837): in einer 10.000 Menschen bekommen wir 200 Kunden .
+Src: can you imagine a community of 400,000 people , the intelligence and the passion ?
+Ground Truth: können Sie sich eine Gemeinde von 400 000 Menschen vorstellen , die Intelligenz und die Leidenschaft ?
+Predicted (-2.564219): können Sie sich eine Gemeinschaft von 400.000 Menschen vorstellen , die Intelligenz und die Leidenschaft ?
+Src: which presentation have you applau@@ ded the most this morning ?
+Ground Truth: für welche Präsentation haben Sie am meisten appl@@ audi@@ ert heute morgen ?
+Predicted (-10.372423): welcher Vortrag hast du heute Morgen am meisten Abend appl@@ audi@@ ert ?
+Src: local , passionate people . that &apos;s who you have applau@@ ded .
+Ground Truth: örtliche , leidenschaft@@ liche Menschen . diesen haben Sie appl@@ audi@@ ert .
+Predicted (-4.838009): lokale , leidenschaft@@ liche Menschen . das haben Sie appl@@ audi@@ ert .
+Src: so what I &apos;m saying is that entrepreneurship is where it &apos;s at .
+Ground Truth: ich möchte damit sagen , dass Unternehmertum der richtige Weg ist .
+Predicted (-8.888351): ich sage also , dass Unternehmertum in der Vergangenheit ist .
+Src: we are at the end of the first industrial revolution -- non@@ renewable fossil fuels , manufacturing -- and all of a sudden , we have systems which are not sustainable .
+Ground Truth: wir sind am Ende der ersten industriellen Revolution - ni@@ chter@@ neuer@@ bare fossile Brennstoffe , Fer@@ tigung - und plötzlich gibt es Systeme , die nicht nachhaltig sind .
+Predicted (-9.101232): wir sind am Ende der ersten Industri@@ ellen Revolution - nicht erneuer@@ bar fossilen Brennstoffe , Produktion - und plötzlich haben wir Systeme , die nicht nachhaltig sind .
+Src: the internal combustion engine is not sustainable .
+Ground Truth: die Verbrenn@@ ungs@@ kraft@@ maschine ist nicht nachhaltig .
+Predicted (-0.609775): der Verbrenn@@ ungs@@ motor ist nicht nachhaltig .
+Src: Fre@@ on way of maintaining things is not sustainable .
+Ground Truth: die Fre@@ on @-@ Art der In@@ stand@@ haltung ist nicht nachhaltig .
+Predicted (-4.610276): Fre@@ on Weg , Dinge zu erhalten , ist nicht nachhaltig .
+Src: what we have to look at is at how we feed , cure , educate , transport , communicate for seven billion people in a sustainable way .
+Ground Truth: wir müssen uns anschauen , wie wir sieben Milliarden Menschen auf nachhaltige Weise ernähren , heilen , bilden , transportieren und mit ihnen kor@@ respon@@ dieren können .
+Predicted (-8.999524): wir müssen uns anschauen , wie wir Nahrung , Heilung , Transport , 7 Milliarden Menschen auf nachhaltige Art kommunizieren .
+Src: the technologies do not exist to do that .
+Ground Truth: die Technologien dafür existieren nicht .
+Predicted (-1.599793): die Technologien existieren nicht .
+Src: who is going to invent the technology for the green revolution ? universities ? forget about it !
+Ground Truth: wer wird diese Technologie für die grüne Revolution erfinden ? Universitäten ? vergessen Sie &apos; s !
+Predicted (-4.655090): wer wird die Technologie für die grüne Revolution erfinden ? die Universitäten ?
+Src: government ? forget about it !
+Ground Truth: die Regierung ? vergessen Sie &apos; s !
+Predicted (-2.405708): die Regierung ? vergessen Sie es !
+Src: it will be entrepreneurs , and they &apos;re doing it now .
+Ground Truth: es werden Unternehmer sein . und sie machen es schon jetzt .
+Predicted (-3.758369): es wird Unternehmer sein und sie machen es jetzt .
+Src: there &apos;s a lovely story that I read in a futur@@ ist magazine many , many years ago .
+Ground Truth: ich las eine herr@@ liche Geschichte in einem futu@@ rist@@ ischen Magazin vor vielen Jahren .
+Predicted (-11.698375): es gibt eine hübsche Geschichte , die ich vor vielen , vielen Jahren in einem Cyber@@ organisation gelesen habe .
+Src: there was a group of experts who were invited to discuss the future of the city of New York in 18@@ 60 .
+Ground Truth: es gab eine Gruppe von Experten , die eingeladen waren , um die Zukunft der Stadt New York im Jahr 18@@ 60 zu besprechen .
+Predicted (-3.836683): es gab eine Gruppe von Experten , die eingeladen wurden , die die Zukunft der New York 18@@ 60 zu diskutieren .
+Src: and in 18@@ 60 , this group of people came together , and they all spec@@ ulated about what would happen to the city of New York in 100 years , and the conclusion was un@@ anim@@ ous : the city of New York would not exist in 100 years .
+Ground Truth: in 18@@ 60 kamen sie zusammen und spe@@ ku@@ lierten , was in 100 Jahren mit der Stadt New York passieren würde . die Schlussfolgerung war ein@@ heitlich : die Stadt New York würde nicht mehr existieren in 100 Jahren .
+Predicted (-18.618763): 18@@ 60 kamen diese Gruppe von Menschen zusammen und sie spe@@ ku@@ liert alles , was in der Stadt New York in 100 Jahren geschehen würde , und das Ergebnis war un@@ stimmi@@ g : die Stadt New York würde in 100 Jahren nicht existieren .
+Src: why ? because they looked at the curve and said , if the population keeps growing at this rate , to move the population of New York around , they would have needed six million horses , and the manure created by six million horses would be impossible to deal with .
+Ground Truth: warum ? sie sahen sich die Kurve an und sagten , wenn die Bevölkerung in diesem Tempo weiter wächst , brauchten sie sechs Millionen Pferde , um die Menschen zu befördern , und es wäre unmöglich , mit dem Mist von sechs Millionen Pfer@@ den fertig zu werden .
+Predicted (-22.713615): warum ? weil sie die Kurve betrachteten und sagten , wenn die Population sich an dieser Rate immer weiter wächst , um die Population von New York zu bewegen , hätten sie 6 Millionen Pferde benötigt , und der Dung entstand von sechs Millionen Pferde unmöglich .
+Src: they were already drowning in manure .
+Ground Truth: denn sie gingen schon im Mist unter .
+Predicted (-4.237120): sie er@@ trinken bereits im Dung .
+Src: so 18@@ 60 , they are seeing this dirty technology that is going to cho@@ ke the life out of New York .
+Ground Truth: 18@@ 60 sehen sie die schmutzige Technologie , die das Leben aus New York sau@@ gt .
+Predicted (-11.042356): 18@@ 60 sehen sie diese schmut@@ zigen Technologie , die das Leben aus New York ver@@ wür@@ gen wird .
+Src: so what happens ? in 40 years &apos; time , in the year 1900 , in the United States of America , there were 1,@@ 00@@ 1 car manufacturing companies -- 1,@@ 00@@ 1 .
+Ground Truth: was passiert ? 40 Jahre später , 1900 , gab es in den USA 10@@ 0@@ 1 Automobil@@ hersteller - 10@@ 0@@ 1 .
+Predicted (-14.359622): was passiert also ? im Jahr 1900 , im Vereinigten Staaten von Amerika , gab es 1.@@ 00@@ 1 Auto@@ produktion @-@ Firmen - 1.@@ 00@@ 1 .
+Src: the idea of finding a different technology had absolutely taken over , and there were tiny , tiny little factories in back@@ waters .
+Ground Truth: die Idee , eine andere Technologie zu finden , hatte das Rennen gemacht . es gab winzig kleine Fabriken im Hinter@@ land .
+Predicted (-12.801769): die Idee einer anderen Technologie war absolut durch@@ gekommen und es gab winzig winzig winzig kleine Fabriken in Hinter@@ wasser .
+Src: D@@ ear@@ born , Michigan . Henry Ford .
+Ground Truth: D@@ ear@@ born , Michigan . Henry Ford .
+Predicted (-1.276977): Henry Ford .
+Src: however , there is a secret to work with entrepreneurs .
+Ground Truth: es gibt ein Geheimnis , um mit Unternehmern zu arbeiten .
+Predicted (-3.569549): aber es gibt ein Geheimnis , mit Unternehmern zu arbeiten .
+Src: first , you have to offer them confi@@ denti@@ ality .
+Ground Truth: als erstes muss ihnen Dis@@ kre@@ tion angeboten werden .
+Predicted (-3.638222): zuerst muss man Vertrauen anbieten .
+Src: otherwise they don &apos;t come and talk to you .
+Ground Truth: ansonsten kommen sie nicht und sprechen mit Ihnen .
+Predicted (-3.515879): ansonsten kommen sie nicht mit Ihnen .
+Src: then you have to offer them absolute , dedicated , passionate service to them .
+Ground Truth: als nächstes müssen Sie ihnen absoluten , engagi@@ erten und leidenschaft@@ lichen Service bieten .
+Predicted (-6.201574): dann muss man ihnen absolut , engagi@@ erte , leidenschaft@@ liche Service anbieten .
+Src: and then you have to tell them the truth about entrepreneurship .
+Ground Truth: dann müssen Sie ihnen die absolute Wahrheit über das Unternehmertum verraten .
+Predicted (-3.368549): und dann muss man ihnen die Wahrheit über Unternehmertum erzählen .
+Src: the smallest company , the biggest company , has to be capable of doing three things beautifully : the product that you want to sell has to be fantastic , you have to have fantastic marketing , and you have to have tremendous financial management .
+Ground Truth: von der kleinsten bis zur größten Firma müssen alle in der Lage sein , drei Dinge auszuführen : das zu verkauf@@ ende Produkt muss grandi@@ os sein , die Vermark@@ tung muss grandi@@ os sein und die Finanz@@ buch@@ haltung muss gewaltig sein .
+Predicted (-17.000351): die kleinste Firma , die größte Firma , muss fähig sein drei Dinge schön zu machen : das Produkt , das Sie verkaufen wollen , muss fantastisch sein , man muss fantastisch Marketing haben und man muss eine großartige Finanz@@ führung haben .
+Src: guess what ?
+Ground Truth: raten Sie mal ?
+Predicted (-2.528757): raten Sie mal mal ?
+Src: we have never met a single human being in the world who can make it , sell it and look after the money .
+Ground Truth: wir haben niemals eine einzige Person getroffen , die gleichzeitig etwas produzieren , verkaufen und sich um das Geld kümmern kann .
+Predicted (-7.657407): wir haben nie einen einzigen Menschen getroffen , der es machen kann , verkaufen sie und nach dem Geld suchen kann .
+Src: it doesn &apos;t exist .
+Ground Truth: so etwas existiert nicht .
+Predicted (-0.841012): es existiert nicht .
+Src: this person has never been born .
+Ground Truth: diese Person wurde niemals geboren .
+Predicted (-1.376428): diese Person wurde nie geboren .
+Src: we &apos;ve done the research , and we have looked at the 100 iconic companies of the world -- Carnegie , West@@ in@@ gh@@ ouse , Edison , Ford , all the new companies , Google , Yahoo .
+Ground Truth: wir haben Forschung betrieben und uns die 100 i@@ kon@@ ischsten Firmen der Welt angeschaut - Carnegie , West@@ in@@ gh@@ ouse , Edison , Ford die neuen Firmen , Google , Yahoo .
+Predicted (-13.656495): wir haben die Forschung gemacht und wir haben die 100 i@@ kon@@ ische Firmen der Welt untersucht - Carnegie , West@@ in@@ gh@@ Erwachsene , Edison , Ford , all die neuen Firmen , Google , Yahoo .
+Src: there &apos;s only one thing that all the successful companies in the world have in common , only one : none were started by one person .
+Ground Truth: es gibt nur eine Sache , die alle erfolgreichen Firmen der Welt gemein haben , nur eine : keine wurde von nur einer Person gegründet .
+Predicted (-8.548729): es gibt nur eine Sache , die alle erfolgreichen Unternehmen der Welt gemeinsam haben , nur eins : niemand wurde von einer Person gegründet .
+Src: now we teach entrepreneurship to 16 @-@ year @-@ olds in Nor@@ thum@@ ber@@ land , and we start the class by giving them the first two pages of Richard Bran@@ son &apos;s autobi@@ ography , and the task of the 16 @-@ year @-@ olds is to under@@ line , in the first two pages of Richard Bran@@ son &apos;s autobi@@ ography how many times Richard uses the word &quot; I &quot; and how many times he uses the word &quot; we . &quot;
+Ground Truth: jetzt lehren wir 16 @-@ Jährigen in Nor@@ thum@@ ber@@ land Unternehmertum und wir beginnen den Unterricht damit , ihnen die ersten zwei Seiten von Richard Bran@@ sons Auto@@ bi@@ ographie zu geben . die Aufgabe der 16 @-@ Jährigen ist es , in den ersten zwei Seiten von Richard Bran@@ sons Auto@@ bi@@ ographie zu unter@@ streichen , wie oft er das Wort &quot; ich &quot; benutzt und wie oft das Wort &quot; wir &quot; .
+Predicted (-42.657852): wir unterrichten das Unternehmertum in 16 @-@ jährigen in Nor@@ din@@ ber@@ land und wir beginnen die Klasse , indem wir ihnen die ersten zwei Seiten Richard Bran@@ son Auto@@ bi@@ ographie geben , und die Aufgabe der 16 @-@ jährigen ist unter@@ unter@@ unter@@ ziehen , in den ersten zwei Seiten von Richard Bran@@ son Pro@@ sons Auto@@ bi@@ ographie , wie oft Richard das Wort &quot; Ich &quot; und wie viele Male &quot; benutzt &quot; .
+Src: never the word &quot; I , &quot; and the word &quot; we &quot; 32 times .
+Ground Truth: niemals &quot; ich &quot; und 32 Mal &quot; wir &quot; .
+Predicted (-4.590628): nie das Wort &quot; Ich &quot; , und das Wort &quot; wir &quot; 32 Mal &quot; .
+Src: he wasn &apos;t alone when he started .
+Ground Truth: er war nicht allein , als er begann .
+Predicted (-2.355990): er war nicht alleine , als er anfing .
+Src: nobody started a company alone . no one .
+Ground Truth: niemand gründete eine Firma allein . niemand .
+Predicted (-3.480878): niemand gründete eine Firma allein . niemand .
+Src: so we can create the community where we have facili@@ tators who come from a small business background sitting in c@@ af@@ es , in bars , and your dedicated bud@@ dies who will do to you , what somebody did for this gentleman who talks about this epic , somebody who will say to you , &quot; What do you need ?
+Ground Truth: so können wir eine Gemeinde erschaffen , in der Vermittler , die einen klein@@ unternehmer@@ ischen Hintergrund haben , in Caf@@ és und B@@ ars sitzen . ihre engagi@@ erten Kumpel , die für sie tun werden , was jemand für diesen G@@ entle@@ man getan hat , der über dieses E@@ pos spricht . jemand der zu Ihnen sagen wird : &quot; was brauchen Sie ?
+Predicted (-35.811237): wir können also die Gemeinschaft schaffen , in der wir Mittel@@ sm@@ änner , die aus einem kleinen Hintergrund kommen , in Caf@@ és , in Gitter , und Ihre eigenen Ehe@@ ump@@ els , die Ihnen antun werden , was jemand für diesen G@@ entle@@ man für dieses ep@@ ische , jemand , der zu Ihnen sagt : &quot; was braucht man ?
+Src: what can you do ? can you make it ?
+Ground Truth: was können Sie ? können Sie es herstellen ?
+Predicted (-4.201304): was kann man tun ? kann man das machen ?
+Src: okay , can you sell it ? can you look after the money ? &quot;
+Ground Truth: okay , können Sie es verkaufen ? können Sie auf das Geld achten ? &quot;
+Predicted (-6.118121): können Sie es verkaufen ? können Sie sich das Geld anschauen ? &quot;
+Src: &quot; Oh , no , I cannot do this . &quot; &quot; would you like me to find you somebody ? &quot;
+Ground Truth: &quot; Oh , nein , das kann ich nicht &quot; . &quot; möchten Sie , dass ich jemanden für Sie finde ? &quot;
+Predicted (-6.896163): &quot; Oh , nein , ich kann das nicht &quot; . &quot; möchten Sie mich gerne jemanden finden ? &quot;
+Src: we activate communities .
+Ground Truth: wir aktivieren Gemeinschaften .
+Predicted (-1.129807): wir aktivieren Gemeinden .
+Src: we have groups of volunteers supporting the Enter@@ prise facili@@ tator to help you to find resources and people and we have discovered that the miracle of the intelligence of local people is such that you can change the culture and the economy of this community just by capturing the passion , the energy and imagination of your own people .
+Ground Truth: wir haben Gruppen von Freiwilligen , die die Unternehmens@@ ver@@ mittler darin unterstützen , ihnen beim Finden der Mittel und Leute zu helfen . wir haben herausgefunden , dass das Wunder der Intelligenz der örtlichen Bevölkerung bewirkt , dass die Kultur und die Wirtschaft dieser Gemeinschaft verändert werden kann , nur durch das Ein@@ fangen der Leidenschaft , Energie und Vorstellungskraft ihrer Menschen .
+Predicted (-31.093145): wir haben Gruppen von Freiwilligen , die die Enter@@ To@@ erer unterstützen , um Ihnen zu helfen , Ressourcen und Menschen zu finden und wir haben herausgefunden , dass das Wunder der örtlichen Gemeinschaft der lokalen Menschen so ist , dass man die Kultur und Wirtschaft dieser Gemeinschaft verändern kann , nur indem man die Leidenschaft , die Energie und Vorstellungskraft unserer eigenen Menschen erfassen kann .
+Src: thank you .
+Ground Truth: danke schön .
+Predicted (-0.778209): danke .
+Src: five years ago , I experienced a bit of what it must have been like to be Alice in W@@ onder@@ land .
+Ground Truth: vor fünf Jahren habe ich erfahren , wie es wohl sein muss , Alice im Wunder@@ land zu sein .
+Predicted (-11.124508): vor fünf Jahren erlebte ich etwas davon , was es sein muss , wie Alice in W@@ onder@@ land zu sein .
+Src: Penn State asked me , a communications teacher , to teach a communications class for engineering students .
+Ground Truth: die Penn State University bat mich - eine Do@@ z@@ entin für Kommunikation - an@@ gehenden Ingenieuren Unterricht in Kommunikation zu er@@ teilen .
+Predicted (-10.524978): der Penn State fragte mich , ein Kommunikations@@ lehrer , um eine Kommunikations@@ kurse für Ingenieur@@ studenten zu unterrichten .
+Src: and I was scared .
+Ground Truth: ich hatte Angst -
+Predicted (-1.129955): ich hatte Angst .
+Src: really scared . scared of these students with their big brains and their big books and their big , unfamiliar words .
+Ground Truth: richtige Angst . Angst vor diesen Studenten mit ihren großen Gehirnen und ihren großen Büchern und ihren großen , mir nicht vertrau@@ ten Wörtern .
+Predicted (-8.990437): wirklich Angst . vor diesen Studenten mit ihren großen Gehirnen und ihren großen Bücher und ihren großen , un@@ gew@@ oh@@ nten Worten .
+Src: but as these conversations un@@ folded , I experienced what Alice must have when she went down that rabbit hole and saw that door to a whole new world .
+Ground Truth: aber als sich die Gespräche entwickelten , er@@ ging es mir wie Alice , als sie sich hinunter zum Kan@@ nin@@ chen@@ loch k@@ nie@@ te und eine Tür zu einer ganz neuen Welt sah .
+Predicted (-20.450600): aber als diese Gespräche un@@ gefaltet wurden , habe ich das erfahren , was Alice hatte , wenn sie in das Kan@@ Loch ging und diese Tür in eine ganz neue Welt sah .
+Src: that &apos;s just how I felt as I had those conversations with the students . I was amazed at the ideas that they had , and I wanted others to experience this wonder@@ land as well .
+Ground Truth: genauso fühlte ich mich , als ich Gespräche mit den Studenten führte . ich war erstaunt über die Gedanken , die sie hatten und wollte , dass auch andere dieses Wunder@@ land entdeckten .
+Predicted (-15.210855): so fühlte ich mich , als ich diese Gespräche mit den Studenten hatte , erstaunt ich die Ideen , die sie hatten , und ich wollte andere , dieses Wunder@@ land zu erleben .
+Src: and I believe the key to opening that door is great communication .
+Ground Truth: ich glaube , um diese Tür zu öffnen , bedarf es großartiger Kommunikation .
+Predicted (-6.683233): und ich glaube , der Schlüssel zur Eröffnung der Tür ist eine großartige Kommunikation .
+Src: we desperately need great communication from our scientists and engineers in order to change the world .
+Ground Truth: wir brauchen unbedingt großartige Kommunikation von unseren Wissenschaftlern und Ingenieuren , um die Welt zu verändern .
+Predicted (-3.976995): wir brauchen dringend große Kommunikation von unseren Wissenschaftlern und Ingenieuren , um die Welt zu verändern .
+Src: our scientists and engineers are the ones that are tackling our grand@@ est challenges , from energy to environment to health care , among others , and if we don &apos;t know about it and understand it , then the work isn &apos;t done , and I believe it &apos;s our responsibility as non @-@ scientists to have these interactions .
+Ground Truth: denn unsere Wissenschaftler und Ingenieure sind diejenigen , die unsere größten Probleme , wie zum Beispiel Energie , Umwelt und Gesundheit angehen , und wenn wir nichts darüber wissen und es nicht verstehen , dann geht es nicht voran . ich glaube , dass es in unserer Verantwortung als Nicht @-@ Wissenschaftler liegt , diese Gespräche zu suchen .
+Predicted (-29.009441): unsere Wissenschaftler und Ingenieure sind diejenigen , die unsere Enkel an@@ packen , von der Energie in die Umwelt zu Gesundheits@@ für@@ sorge , unter anderem , und wenn wir nicht darüber wissen und verstehen , dann wird die Arbeit nicht getan , und ich glaube , dass es unsere Verantwortung ist , als nicht @-@ Wissenschaftler diese Interaktionen haben .
+Src: but these great conversations can &apos;t occur if our scientists and engineers don &apos;t invite us in to see their wonder@@ land .
+Ground Truth: aber diese großartigen Gespräche kommen nicht zustande , wenn unsere Wissenschaftler und Ingenieure uns nicht in ihr Wunder@@ land einladen .
+Predicted (-8.845496): aber diese großen Gespräche können nicht vorkommen , wenn unsere Wissenschaftler und Ingenieure uns nicht einladen , ihr Wunder Land zu sehen .
+Src: so scientists and engineers , please , talk nerdy to us .
+Ground Truth: also Wissenschaftler und Ingenieure , bitte , klär@@ t uns auf .
+Predicted (-5.976509): Wissenschaftler und Ingenieure , bitte , reden Sie uns .
+Src: I want to share a few keys on how you can do that to make sure that we can see that your science is sexy and that your engineering is engaging .
+Ground Truth: ich will euch ein paar Ansätze zeigen , wie ihr es anstellen könnt , dass wir sehen können , dass die Wissenschaft und die Technik , mit der ihr euch beschäftigt , sexy und spannend ist .
+Predicted (-16.387091): ich möchte Ihnen eine kleine Schlüssel zeigen , wie Sie das tun können , um sicherzustellen , dass unsere Wissenschaft sexy ist und dass sich unsere Technik beschäftigt .
+Src: first question to answer for us : so what ?
+Ground Truth: die erste Frage , die ihr uns beantworten müsst , ist : na und ?
+Predicted (-3.238587): erste Frage für uns : was ?
+Src: tell us why your science is relevant to us .
+Ground Truth: sagt uns , warum gerade euer wissenschaftliches Gebiet so relevant für uns ist .
+Predicted (-3.756236): sagen Sie uns , warum Ihre Wissenschaft für uns relevant ist .
+Src: don &apos;t just tell me that you study tr@@ ab@@ ec@@ ul@@ ae , but tell me that you study tr@@ ab@@ ec@@ ul@@ ae , which is the mesh @-@ like structure of our bones because it &apos;s important to understanding and treating o@@ ste@@ op@@ or@@ osis .
+Ground Truth: sagt uns nicht nur , dass ihr Tr@@ ab@@ ek@@ eln untersucht , sondern sagt uns auch , dass ihr Tr@@ ab@@ ek@@ eln , die masch@@ en@@ artige Struktur in unseren Knochen , untersucht , weil sie wichtig ist , um O@@ ste@@ op@@ or@@ ose verstehen und behandeln zu können .
+Predicted (-21.235899): sagen Sie mir nicht , dass Sie Tr@@ ab@@ ek@@ sen studieren , aber sagen Sie mir , dass Sie Tr@@ ab@@ ek@@ eln studieren , welche die verflo@@ cht@@ enen Strukturen unserer Knochen sind , weil es wichtig ist , und O@@ ste@@ op@@ or@@ ose zu behandeln .
+Src: and when you &apos;re describing your science , be@@ ware of jargon .
+Ground Truth: und wenn ihr das beschreibt , was ihr macht , dann vermei@@ det Fach@@ wörter .
+Predicted (-10.346577): und wenn Sie Ihre Wissenschaft beschreiben , be@@ ware für Fach@@ jargon .
+Src: jargon is a barrier to our understanding of your ideas .
+Ground Truth: Fach@@ wörter sind ein Hindernis zum Verständnis eurer Gedanken .
+Predicted (-5.447162): Fach@@ jargon ist eine Barriere für unser Verständnis von Ihren Ideen .
+Src: sure , you can say &quot; spatial and temporal , &quot; but why not just say &quot; space and time , &quot; which is so much more accessible to us ?
+Ground Truth: sicherlich könn@@ tet ihr &quot; räum@@ lich und zeitlich &quot; verwenden , aber warum sagt ihr nicht einfach &quot; Raum und Zeit &quot; , was viel verständ@@ licher für uns ist ?
+Predicted (-15.948388): klar , man kann &quot; räum@@ lich und Temporall@@ appen &quot; sagen , aber warum sagen wir nicht nur &quot; Raum und Zeit &quot; , was ist für uns so viel zugänglich ?
+Src: and making your ideas accessible is not the same as dum@@ bing it down .
+Ground Truth: uns eure Gedanken verständlich zu machen , ist nicht das Gleiche wie ihr Niveau herunter@@ zu@@ schrau@@ ben .
+Predicted (-9.506392): und Ihre Ideen zugänglich zu machen ist nicht dasselbe wie ein D@@ rü@@ mmer .
+Src: instead , as Einstein said , make everything as simple as possible , but no simpler .
+Ground Truth: wie Einstein bereits sagte : &quot; mache die Dinge so einfach wie möglich - aber nicht einfacher &quot; .
+Predicted (-5.844252): statt Einstein sagte , alles so einfach wie möglich zu machen , aber nicht einfacher .
+Src: you can clearly communicate your science without com@@ promising the ideas .
+Ground Truth: ihr könnt uns bestimmt etwas über euer wissenschaftliches Gebiet erzählen , ohne dabei Kompromisse eingehen zu müssen .
+Predicted (-8.845790): sie können deutlich Ihre Wissenschaft kommunizieren ohne die Ideen zu verletzen .
+Src: a few things to consider are having examples , stories and analogies . those are ways to engage and ex@@ cite us about your content .
+Ground Truth: ein paar Dinge sind dabei zu berücksichtigen : Beispiele , Geschichten und Analo@@ gien . auf diese Weise könnt ihr uns in euren B@@ ann ziehen .
+Predicted (-14.433683): ein paar Dinge , die bedenken , sind Beispiele , Geschichten und Analo@@ gien . diese sind Wege , uns über Ihre Inhalte zu begeistern und uns zu zitieren .
+Src: and when presenting your work , drop the bullet points .
+Ground Truth: und wenn ihr eure Arbeit präsentiert , dann lasst die Stich@@ punkte weg .
+Predicted (-10.137522): und wenn man seine Arbeit präsentieren , fallen die Kugel auf .
+Src: have you ever wondered why they &apos;re called bullet points ?
+Ground Truth: habt ihr euch jemals gefragt , warum es &quot; Stich@@ punkt &quot; heißt ?
+Predicted (-4.930103): haben Sie sich jemals gefragt , warum sie &quot; Listen &quot; nennen ?
+Src: what do bullets do ? bullets kill , and they will kill your presentation .
+Ground Truth: was geschieht , wenn jemand zu@@ sticht ? ein anderer wird er@@ sto@@ chen , und mit diesen Punkten er@@ ste@@ cht ihr euer Publikum .
+Predicted (-3.780626): was machen Kugeln ? Kugeln töten , und sie werden Ihre Präsentation umbringen .
+Src: a slide like this is not only boring , but it relies too much on the language area of our brain , and causes us to become overwhelmed .
+Ground Truth: eine Folie wie diese ist nicht nur langweilig , sondern setzt auch zu sehr auf den sprach@@ ver@@ arbeitenden Teil unseres Gehirns und dadurch sind wir schnell über@@ fordert .
+Predicted (-13.648924): eine Folie wie diese hier ist nicht nur langweilig , sondern es ist zu viel auf der Sprache unseres Gehirns abhängig und uns dazu bringt , überwältigt zu werden .
+Src: instead , this example slide by Gene@@ vie@@ ve Brown is much more effective . it &apos;s showing that the special structure of tr@@ ab@@ ec@@ ul@@ ae are so strong that they actually inspired the unique design of the Ei@@ ffel Tower .
+Ground Truth: diese Beisp@@ iel@@ fol@@ ie von Gene@@ vie@@ ve Brown ist viel wirkungs@@ voller . sie zeigt , dass die spezielle Struktur der Tr@@ ab@@ ek@@ el so stabil ist , dass sie sogar die Inspiration für das einzigartige Design des Ei@@ ffel@@ tur@@ ms war .
+Predicted (-23.074203): stattdessen ist dieses Beispiel Bild von britischen Kin@@ ve Brown viel effektiver . es zeigt , dass die spezielle Struktur von T@@ ab@@ eln so stark sind , dass sie tatsächlich das einzigartige Design des Ei@@ ffel@@ tur@@ tur@@ ms inspiriert haben .
+Src: and the trick here is to use a single , read@@ able sentence that the audience can key into if they get a bit lost , and then provide visuals which appeal to our other senses and create a deeper sense of understanding of what &apos;s being described .
+Ground Truth: der Trick hier ist , einen einzelnen , einfach les@@ baren Satz zu benutzen , an dem sich das Publikum , wenn es einmal den Faden verliert , ori@@ entieren kann . verwendet Bilder und Grafiken , die auch unsere anderen Sinne ansprechen und schafft dadurch ein tiefer@@ es Verständnis von dem , was ihr beschreibt .
+Predicted (-38.956631): der Trick hier ist , einen einzigen , les@@ baren Satz zu benutzen , den das Publikum in den Sinn bringen kann , wenn sie etwas verloren haben , und dann visuelle Bild@@ ungs @-@ anzubieten , die für unsere Sinne app@@ el@@ lieren und ein tiefer@@ es Verständnis dafür schaffen , was beschrieben wird .
+Src: so I think these are just a few keys that can help the rest of us to open that door and see the wonder@@ land that is science and engineering .
+Ground Truth: das sind nur ein paar Ansätze , die uns helfen können , diese Tür zu öffnen und das Wunder@@ land zu sehen , das die Wissenschaft und die Technik in sich bergen .
+Predicted (-13.406349): ich denke , das sind nur wenige Schlüssel , die uns helfen können , diese Tür zu öffnen und das &quot; Wunder Land &quot; zu sehen , das Wissenschaft und Technik ist .
+Src: and because the engineers that I &apos;ve worked with have taught me to become really in touch with my inner nerd , I want to summarize with an equation .
+Ground Truth: da die Ingenieure , die ich unterrichtet habe , mir beigebracht haben , mit dem &quot; Nerd in mir &quot; engen Kontakt herzustellen , möchte ich alles mit einer Gleichung zusammenfassen .
+Predicted (-12.436824): und weil die Ingenieure , die ich mit gearbeitet habe , gelehrt hat mich , wirklich in Kontakt zu meinem inneren Nerd zu werden , möchte ich mit einer Gleichung zusammenfassen .
+Src: take your science , subtra@@ ct your bullet points and your jargon , divide by relevance , meaning share what &apos;s relevant to the audience , and multiply it by the passion that you have for this incredible work that you &apos;re doing , and that is going to equal incredible interactions that are full of understanding .
+Ground Truth: zieht von eurer Wissenschaft eure Stich@@ punkte und eure Fach@@ wörter ab , teilt diese durch die Relev@@ anz , also sagt dem Publikum , was wichtig ist , und multip@@ liziert das Ganze mit der Leidenschaft , die ihr für eure unglaubliche Arbeit habt : und daraus ergeben sich un@@ vorstellbare Interaktionen , die voller neuer Erkenntnisse sind .
+Predicted (-34.047688): nehmen Sie Ihre Wissenschaft , zieht Ihre Kugel und Ihren Fach@@ jargon , teilen Sie durch Relev@@ anz , bedeutet das , was für das Publikum relevant ist , und multiplizieren Sie die Leidenschaft , die Sie für diese unglaubliche Arbeit haben , die Sie machen , und das wird eine unglaubliche Interaktionen die voller Verständnis sind .
+Src: and so , scientists and engineers , when you &apos;ve solved this equation , by all means , talk nerdy to me .
+Ground Truth: also Wissenschaftler und Ingenieure , wenn ihr diese Gleichung gelöst habt , klär@@ t mich unbedingt auf .
+Predicted (-25.210369): Wissenschaftler und Ingenieure , wenn Sie diese Gleichung gelöst haben , bedeutet das , dass Sie , mit allen mir einen ganzen Haufen reden .
+Src: thank you .
+Ground Truth: vielen Dank .
+Predicted (-0.778209): danke .
+Src: Hi . this is my mobile phone .
+Ground Truth: Hi . das ist mein Handy .
+Predicted (-1.284244): Hi . das ist mein Handy .
+Src: a mobile phone can change your life , and gives you individual freedom .
+Ground Truth: ein Handy kann ein Leben verändern und einem persönliche Freiheit geben .
+Predicted (-6.549771): ein Handy kann sein Leben verändern und Ihnen individuelle Freiheit geben .
+Src: with a mobile phone , you can shoot a crime against humanity in Syria .
+Ground Truth: mit einem Handy kann man ein Verbrechen an der Menschheit in Syrien filmen .
+Predicted (-2.995060): mit einem Handy kann man ein Verbrechen gegen die Menschheit in Syrien schießen .
+Src: with a mobile phone , you can tweet a message and start a protest in Egypt .
+Ground Truth: mit einem Handy kann man eine Nachricht t@@ wee@@ ten und eine Prote@@ stak@@ tion in Ägypten starten .
+Predicted (-8.985619): mit einem Handy kann man eine Nachricht an@@ st@@ ossen und ein Protest in Ägypten beginnen .
+Src: and with a mobile phone , you can record a song , load it up to Sound@@ Cloud and become famous .
+Ground Truth: und mit einem Handy kann man ein Lied aufnehmen , es hochladen bei Sound@@ Cloud und berühmt werden .
+Predicted (-20.621410): und mit einem Handy kann man ein Lied aufzeichnen , ihn auf Grund gegen wäre Cloud hoch@@ geladen und berühmt werden .
+Src: all this is possible with your mobile phone .
+Ground Truth: all das ist mit einem Handy möglich .
+Predicted (-3.313904): alles ist mit Ihrem Handy möglich .
+Src: I &apos;m a child of 1984 , and I live in the city of Berlin .
+Ground Truth: ich bin Jahr@@ gang 1984 und lebe in Berlin .
+Predicted (-2.430382): ich bin ein Kind von 1984 und ich lebe in der Stadt Berlin .
+Src: let &apos;s go back to that time , to this city .
+Ground Truth: gehen wir zurück in jene Zeit in diese Stadt .
+Predicted (-4.669712): zurück zu dieser Zeit , zu dieser Stadt .
+Src: here you can see how hundreds of thousands of people stood up and prote@@ sted for change .
+Ground Truth: dort können Sie sehen , wie hunderttausende von Menschen für Veränderungen auf die Straße gingen und demon@@ stri@@ erten .
+Predicted (-9.268543): hier sehen Sie , wie Tausende von Menschen sich auf und protesti@@ erten für Veränderungen protesti@@ erten .
+Src: this is au@@ tum@@ n 1989 , and imagine that all those people standing up and prote@@ sting for change had a mobile phone in their pocket .
+Ground Truth: wir sind im Herbst 1989 und stellen uns vor , dass all diese Leute , die auf@@ standen und Veränderungen forderten , ein Handy in der Tasche hatten .
+Predicted (-16.376680): das ist Herbst 1989 und stellen Sie sich vor , dass all diese Leute , die aufgestanden sind und gegen Veränderung protesti@@ erten , ein Handy in der Tasche hatten .
+Src: who in the room has a mobile phone with you ?
+Ground Truth: wer im Saal hat ein Handy dabei ?
+Predicted (-3.077954): wer im Raum hat ein Handy mit Ihnen ?
+Src: hold it up .
+Ground Truth: halten Sie es hoch .
+Predicted (-2.574509): halten Sie ihn hoch .
+Src: hold your phones up , hold your phones up !
+Ground Truth: halten Sie Ihre Handys hoch , halten Sie sie hoch !
+Predicted (-6.703905): halten Sie Ihre Telefone hoch , halten Sie Ihre Telefone !
+Src: hold it up . an Android , a Blackberry , wow .
+Ground Truth: halten Sie es hoch . ein Android , ein Blackberry , wow .
+Predicted (-2.988209): halten Sie es auf . ein Android , ein Blackberry , wow .
+Src: that &apos;s a lot . almost everybody today has a mobile phone .
+Ground Truth: das sind viele . fast jeder hat heutzutage ein Handy .
+Predicted (-3.605021): das ist viel . fast jeder heute hat ein Handy .
+Src: but today I will talk about me and my mobile phone , and how it changed my life .
+Ground Truth: doch heute will über mich und mein Handy reden und darüber , wie es mein Leben verändert hat .
+Predicted (-3.354383): aber heute werde ich über mich und mein Handy sprechen und wie es mein Leben veränderte .
+Src: and I will talk about this .
+Ground Truth: und ich werde über folgendes sprechen .
+Predicted (-2.716727): und darüber werde ich sprechen .
+Src: these are 3@@ 5,@@ 8@@ 30 lines of information .
+Ground Truth: dies sind 3@@ 5.@@ 8@@ 30 Zeilen voll Informationen .
+Predicted (-5.483897): das sind 3@@ 5.@@ 8@@ 30 @-@ Zeilen von Informationen .
+Src: raw data .
+Ground Truth: Roh@@ daten .
+Predicted (-0.454173): Roh@@ daten .
+Src: and why are these informa@@ tions there ?
+Ground Truth: und warum sind diese Informationen dort ?
+Predicted (-2.981632): warum sind diese Informationen da ?
+Src: because in the summer of 2006 , the E.U. Commission tab@@ led a dire@@ ctive .
+Ground Truth: weil im Sommer 2006 die E.@@ U.@@ -@@ Kommission eine Richtlinie vor@@ gelegt hat .
+Predicted (-8.573429): im Sommer 2006 führte die EU @-@ Kommission eine Ver@@ führung .
+Src: this dire@@ ctive &#91; is &#93; called Data re@@ tention dire@@ ctive .
+Ground Truth: diese Richtlinie heißt Richtlinie zur Vor@@ rat@@ s@@ daten@@ speich@@ erung .
+Predicted (-19.472046): diese Ver@@ führung heißt &quot; Dat@@ ru@@ fe@@ cht@@ ungs @-@ Bei@@ haltung &quot; .
+Src: this dire@@ ctive says that each phone company in Europe , each Internet service company all over Europe , has to store a wide range of information about the users .
+Ground Truth: diese Richtlinie besagt , dass jede Telefon@@ gesellschaft in Europa , jeder Internet@@ dienst@@ lei@@ ster im gesamten Europa , eine Bandbreite an Benutz@@ er@@ informationen speichern muss .
+Predicted (-16.856726): diese Regel@@ ung besagt , dass jede Telefon@@ gesellschaft in Europa , jede Internet@@ dienst@@ leistung in ganz Europa , eine große Bandbreite an Informationen über die Nutzer speichern muss .
+Src: who calls whom ? who sends whom an email ?
+Ground Truth: wer ruft wen an ? wer schickt wem eine E @-@ Mail ?
+Predicted (-4.273492): wer nennt das ? wer schreibt eine E @-@ Mail ?
+Src: who sends whom a text message ?
+Ground Truth: wer schickt wem eine SMS ?
+Predicted (-1.811026): wer schreibt wem eine SMS ?
+Src: and if you use your mobile phone , where you are .
+Ground Truth: und wenn man ein Handy benutzt , wo man ist .
+Predicted (-2.424397): und wenn Sie Ihr Handy benutzen , wo Sie sind .
+Src: all this information is stored for at least six months , up to two years by your phone company or your Internet service provider .
+Ground Truth: all diese Informationen werden für mindestens sechs Monate bis zu zwei Jahre von Ihrer Telefon@@ gesellschaft oder Ihrem Internet@@ an@@ bieter gespeichert .
+Predicted (-8.838280): all diese Informationen werden für mindestens sechs Monate gespeichert , bis zu zwei Jahre von Ihrem Telefon oder Ihrem Internet@@ dienst .
+Src: and all over Europe , people stood up and said , &quot; We don &apos;t want this . &quot;
+Ground Truth: und überall in Europa sind die Menschen aufgestanden und haben gesagt , &quot; Das wollen wir nicht &quot; .
+Predicted (-2.951682): und überall in Europa standen die Leute auf und sagten : &quot; wir wollen das nicht &quot; .
+Src: they said , we don &apos;t want this data re@@ tention .
+Ground Truth: sie sagten , wir wollen diese Vor@@ rat@@ s@@ daten@@ speich@@ erung nicht .
+Predicted (-6.189918): sie sagten : &quot; wir wollen diese Daten nicht zurück@@ halten .
+Src: we want self @-@ determination in the digital age , and we don &apos;t want that phone companies and Internet companies have to store all this information about us .
+Ground Truth: wir wollen Selbst@@ bestimm@@ ung im digitalen Zeitalter und wir wollen nicht , dass die Telefon@@ gesellschaften und Internet@@ dienst@@ lei@@ ster all diese Informationen über uns speichern müssen .
+Predicted (-9.132737): wir wollen Selbst@@ bestimm@@ ung in das digitale Zeitalter und wir wollen nicht , dass Telefon@@ gesellschaften und Internet@@ firmen all diese Informationen über uns speichern müssen .
+Src: they were lawyers , journalists , priests , they all said : &quot; we don &apos;t want this . &quot;
+Ground Truth: es gab Anwälte , Journalisten , Priester , die alle sagten : &quot; das wollen wir nicht &quot; .
+Predicted (-3.639575): sie waren Anwälte , Journalisten , Priester , sie sagten alle : &quot; wir wollen das nicht &quot; .
+Src: and here you can see , like 10 thousands of people went out on the streets of Berlin and said , &quot; Freedom , not fear . &quot;
+Ground Truth: und hier können Sie sehen , wie zehntausende Menschen auf die Straßen von Berlin strömten und sagten , &quot; Freiheit statt Angst &quot; .
+Predicted (-9.851226): und hier sehen Sie , wie 10 Tausende von Menschen auf den Straßen von Berlin unterwegs sind und sagten : &quot; Freiheit , keine Angst &quot; .
+Src: and some even said , this would be St@@ asi 2.0 .
+Ground Truth: und manche sagten sogar , dies könnte zur St@@ asi 2.0 werden .
+Predicted (-6.903797): und manche sagten sogar , das wäre St@@ ase 2.0 .
+Src: St@@ asi was the secret police in East Germany .
+Ground Truth: die St@@ asi war die Geheim@@ poli@@ zei in Ost@@ deut@@ sch@@ land .
+Predicted (-6.057199): St@@ ase war die geheime Polizei im Osten Deutschland .
+Src: and I also ask myself , does it really work ?
+Ground Truth: und ich frage mich ebenfalls , ob das wirklich funktioniert .
+Predicted (-3.178581): und ich frage mich auch , funktioniert das wirklich ?
+Src: can they really store all this information about us ?
+Ground Truth: können die wirklich all diese Informationen über uns speichern ?
+Predicted (-2.265335): können sie wirklich alle Informationen über uns speichern ?
+Src: every time I use my mobile phone ?
+Ground Truth: jedes Mal wenn ich mein Handy benutze ?
+Predicted (-1.907019): jedes Mal , wenn ich mein Handy benutze ?
+Src: so I asked my phone company , Deut@@ sche Tel@@ ek@@ om , which was at that time the largest phone company in Germany , and I asked them , please , send me all the information you have stored about me .
+Ground Truth: also fragte ich meine Telefon@@ gesellschaft , die Deut@@ sche Tel@@ ek@@ om , die damals die größte Telefon@@ gesellschaft in Deutschland war , und ich fragte sie , bitte , schickt mir alle Informationen , die ihr über mich gespeichert habt .
+Predicted (-20.512447): also fragte ich meine Telefon@@ gesellschaft , die Deut@@ sche Tel@@ ek@@ om , das zu dieser Zeit der größten Mobilfunk@@ gesellschaft in Deutschland war , und ich fragte sie , bitte , schicken Sie mir all die Informationen , die Sie über mich gespeichert haben .
+Src: and I asked them once , and I asked them again , and I got no real answer . it was only blah blah answers .
+Ground Truth: und ich fragte sie einmal und fragte sie erneut und bekam keine richtige Antwort . nur le@@ eres bla bla .
+Predicted (-10.145779): und ich bat sie einmal , und ich fragte sie wieder , und ich bekam keine richtige Antwort . es war nur bla Antworten .
+Src: but then I said , I want to have this information , because this is my life you are <unk> ing .
+Ground Truth: aber dann sagte ich mir , ich will diese Informationen haben , weil es mein Leben ist , das ihr da proto@@ kol@@ liert .
+Predicted (-13.673323): aber dann sagte ich , ich möchte diese Informationen haben , weil das mein Leben ist , das Sie teilen , diert .
+Src: so I decided to start a law@@ suit against them , because I wanted to have this information .
+Ground Truth: also entschied ich mich dazu , ein Gerichts@@ verfahren gegen sie einzul@@ eiten , weil ich diese Informationen haben wollte .
+Predicted (-9.132103): also entschied ich mich , gegen sie zu beginnen , weil ich diese Informationen haben wollte .
+Src: but Deut@@ sche Tel@@ ek@@ om said , no , we will not give you this information .
+Ground Truth: doch die Deut@@ sche Tel@@ ek@@ om sagte , nein , wir werden dir diese Informationen nicht geben .
+Predicted (-5.047386): die Deut@@ sche Tel@@ ek@@ om sagte , nein , wir werden Ihnen diese Informationen nicht geben .
+Src: so at the end , I had a settlement with them .
+Ground Truth: am Ende kam es zu einem Vergleich mit ihnen .
+Predicted (-2.025003): am Ende hatte ich eine Sied@@ lung .
+Src: I &apos;ll put down the law@@ suit and they will send me all the information I ask for .
+Ground Truth: ich ziehe die An@@ k@@ lage zurück , wofür sie mir alle verlangten Informationen schicken .
+Predicted (-11.996648): ich setze den K@@ lagen und sie werden mir all die Informationen schicken , die ich für mich bitte .
+Src: because in the mean time , the German constitu@@ tional Court ruled that the implementation of this E.U. dire@@ ctive into German law was un@@ constitu@@ tional .
+Ground Truth: weil in der Zwischenzeit das Bundes@@ ver@@ fass@@ ungs@@ gericht entschied , dass die Einführung der E.@@ U.@@ -@@ Richtlinie ins deutsche Recht ver@@ fass@@ ungs@@ wi@@ dri@@ g war .
+Predicted (-27.323547): denn in der Zeit hat der deutsche Wähl@@ erschaft das die Umsetzung dieser EU @-@ Kontrolle in deutsche Gesetzen in die englische Sprache un@@ kon@@ stitu@@ tion@@ elle war .
+Src: so I got this ugly brown envelope with a C@@ .D. inside .
+Ground Truth: also erhielt ich diesen hässlichen braunen Um@@ schlag mit einer CD .
+Predicted (-19.041658): ich habe diesen hässlichen braunen Um@@ schlag mit einem C@@ ell@@ ell@@ osen in sich genommen .
+Src: and on the C@@ .D. , this was on .
+Ground Truth: und auf der CD war dies :
+Predicted (-7.719737): und auf der CD war das .
+Src: thirty @-@ five thousand eight hundred thirty lines of information .
+Ground Truth: 3@@ 5.@@ 8@@ 30 Zeilen an Informationen .
+Predicted (-7.515707): 36 000 000 hundert Zeilen an Informationen .
+Src: at first I saw it , and I said , okay , it &apos;s a huge file . okay .
+Ground Truth: zuerst sah ich es und sagte zu mir , gut , es ist halt eine riesige Datei . mein@@ et@@ wegen .
+Predicted (-5.702383): zuerst sah ich es und sagte : okay , es ist eine riesige Datei . okay .
+Src: but then after a while I realized , this is my life .
+Ground Truth: aber dann erkannte ich nach einer Weile : das ist mein Leben .
+Predicted (-3.652112): aber nach einer Weile realisierte ich , dass dies mein Leben ist .
+Src: this is six months of my life , into this file .
+Ground Truth: das sind sechs Monate meines Lebens in dieser Datei .
+Predicted (-2.049573): das sind sechs Monate meines Lebens in diese Datei .
+Src: so I was a little bit skeptical , what should I do with it ?
+Ground Truth: also war ich ein bisschen skeptisch , was soll ich damit anfangen ?
+Predicted (-5.043269): ich war etwas skeptisch , was sollte ich damit anfangen ?
+Src: because you can see where I am , where I sleep at night , what I am doing .
+Ground Truth: weil man darin sieht , wo ich bin , wo ich nachts schla@@ fe , was ich mache .
+Predicted (-6.869927): weil Sie sehen können , wo ich nachts schlafen , was ich mache .
+Src: but then I said , I want to go out with this information .
+Ground Truth: aber dann sagte ich mir , ich will mit diesen Informationen an die Öffentlichkeit gehen .
+Predicted (-5.323992): aber dann sagte ich , ich möchte diese Informationen mitnehmen .
+Src: I want to make them public .
+Ground Truth: ich will sie publi@@ k machen .
+Predicted (-1.343733): ich möchte sie öffentlich machen .
+Src: because I want to show the people what does data re@@ tention mean .
+Ground Truth: denn ich will den Menschen zeigen , was Vor@@ rat@@ s@@ daten@@ speich@@ erung bedeutet .
+Predicted (-6.915960): weil ich den Leuten zeigen möchte , was die Daten zurück@@ fordern .
+Src: so together with Zeit Online and Open Data City , I did this .
+Ground Truth: zusammen mit Zeit Online und Open Data City habe ich also dies hier gemacht .
+Predicted (-11.993855): zusammen mit ausschließlich Gene Online und Open Data City habe ich das gemacht .
+Src: this is a visualization of six months of my life .
+Ground Truth: dies ist eine Visualisierung von sechs Monaten meines Lebens .
+Predicted (-1.652760): dies ist eine Visualisierung von sechs Monaten meines Lebens .
+Src: you can zoom in and zoom out , you can wind back and fast forward .
+Ground Truth: man kann r@@ einzo@@ omen und R@@ aus@@ zoomen , man kann vor@@ - und zurück@@ sp@@ ulen .
+Predicted (-14.950349): man kann hineinzo@@ omen und hineinzo@@ omen , kann er schnell zurück und schnell vorwärts kommen .
+Src: you can see every step I take .
+Ground Truth: man kann jeden Schritt , den ich mache , nach@@ verfolgen .
+Predicted (-2.745060): jeder Schritt nehme ich .
+Src: and you can even see how I go from Frank@@ fur@@ t by train to C@@ olog@@ ne , and how often I call in between .
+Ground Truth: und man kann sogar sehen , wie ich von Frank@@ fur@@ t mit dem Zug nach K@@ öl@@ n fahre , und wie viele Anrufe ich unterwegs mache .
+Predicted (-16.765285): und Sie können sogar sehen , wie ich von Frank@@ blau nach K@@ öl@@ ne trainieren kann , und wie oft ich dazwischen komme .
+Src: all this is possible with this information .
+Ground Truth: all das ist möglich anhand dieser Informationen .
+Predicted (-3.707396): all dies ist möglich mit dieser Information .
+Src: that &apos;s a little bit scary .
+Ground Truth: das macht ein bisschen Angst .
+Predicted (-1.223184): das ist ein bisschen beängstigend .
+Src: but it is not only about me .
+Ground Truth: aber es geht nicht nur um mich .
+Predicted (-0.803936): aber es geht nicht nur um mich .
+Src: it &apos;s about all of us .
+Ground Truth: es geht um uns alle .
+Predicted (-1.941909): es geht um uns alle .
+Src: first , it &apos;s only like , I call my wife and she calls me , and we talk to each other a couple of times .
+Ground Truth: zuerst ist es nur so , ich rufe meine Frau an und sie ruft mich an , und wir reden ein paar Mal miteinander .
+Predicted (-7.681555): erstens , es ist nur so , ich nenne meine Frau und sie nennt mich , und wir reden miteinander ein paar Mal .
+Src: and then there are some friends calling me , and they call each other .
+Ground Truth: und dann rufen mich ein paar Freunde an und sie rufen einander an .
+Predicted (-7.384358): und dann gibt es einige Freunde , die mich anrufen und sie rufen sich gegenseitig an .
+Src: and after a while you are calling you , and you are calling you , and you have this great communication network .
+Ground Truth: und nach einer Weile rufen Sie Sie an und Sie rufen Sie an und wir haben dieses riesige Kommunikations@@ netzwerk .
+Predicted (-9.655663): und nach einer Weile rufen Sie Sie Sie an und Sie rufen Sie Sie Sie an und Sie haben dieses großartige Kommunikations@@ netzwerk .
+Src: but you can see how your people are communicating with each other , what times they call each other , when they go to bed .
+Ground Truth: aber man kann sehen , wie die Menschen miteinander kommunizieren , zu welchen Zeiten sie einander anrufen , wann sie zu Bett gehen .
+Predicted (-7.763574): aber Sie können sehen , wie Ihre Leute miteinander kommunizieren , was , wenn sie sich gegenseitig nennen , wenn sie ins Bett gehen .
+Src: you can see all of this .
+Ground Truth: das kann man alles sehen .
+Predicted (-2.850915): sie können all das sehen .
+Src: you can see the hu@@ bs , like who are the leaders in the group .
+Ground Truth: man erkennt die zentralen Figuren , etwa wer die Anführer der Gruppe sind .
+Predicted (-8.111403): sie sehen die Dreh@@ kreu@@ zen , wie die Anführer in der Gruppe sind .
+Src: if you have access to this information , you can see what your society is doing .
+Ground Truth: wenn man Zugang zu diesen Informationen hat , kann man sehen , was die Gesellschaft macht .
+Predicted (-4.196070): wenn Sie Zugang zu dieser Information haben , können Sie sehen , was Ihre Gesellschaft tut .
+Src: if you have access to this information , you can control your society .
+Ground Truth: wenn man Zugang zu diesen Informationen hat , kann man die Gesellschaft kontrollieren .
+Predicted (-3.542697): wenn Sie Zugang zu dieser Information haben , können Sie Ihre Gesellschaft kontrollieren .
+Src: this is a blueprint for countries like China and Iran .
+Ground Truth: das ist ein Bau@@ plan für Länder wie China und den Iran .
+Predicted (-1.743357): dies ist ein Bau@@ plan für Länder wie China und Iran .
+Src: this is a blueprint how to survey your society , because you know who talks to whom , who sends whom an email , all this is possible if you have access to this information .
+Ground Truth: dies ist der perfekte Entwurf , wie man eine Gesellschaft überwachen kann , weil man weiß , wer mit wem redet , wer wem eine E @-@ Mail schickt , all das ist möglich , wenn man Zugang zu diesen Informationen hat .
+Predicted (-14.596685): das ist ein Bau@@ plan , wie man seine Gesellschaft erforscht , weil man weiß , wer wem spricht , der eine E @-@ Mail schreibt , all das ist möglich , wenn man Zugang zu dieser Information hat .
+Src: and this information is stored for at least six months in Europe , up to two years .
+Ground Truth: und diese Informationen werden für mindestens 6 Monate gespeichert , in Europa bis zu 2 Jahre .
+Predicted (-6.766766): diese Informationen werden für mindestens 6 Monate in Europa gespeichert , bis zu zwei Jahren .
+Src: like I said at the beginning , imagine that all those people on the streets of Berlin in au@@ tum@@ n of 1989 had a mobile phone in their pocket .
+Ground Truth: wie ich zu Beginn sagte , stellen wir uns vor , dass all diese Menschen in den Straßen Ber@@ l@@ ins im Herbst 1989 Handys in ihrer Tasche gehabt hätten .
+Predicted (-9.987205): wie ich am Anfang sagte , stellen Sie sich vor , dass all diese Leute auf den Straßen Berlin Berlin im Herbst 1989 ein Handy in der Tasche hatten .
+Src: and the St@@ asi would have known who took part at this protest , and if the St@@ asi would have known who are the leaders behind it , this may never have happened .
+Ground Truth: und die St@@ asi hätte gewusst , wer bei der Demonstration dabei war , und wenn die St@@ asi gewusst hätte , wer die Anführer gewesen sind , dann wäre dies vielleicht nie passiert .
+Predicted (-21.401806): und die St@@ ase hätte bekannt , wer an diesem Protest teil@@ nahmen , und wenn die St@@ ase bekannt wäre , wer die Anführer dahinter sind , hätte das nie geschehen .
+Src: the fall of the Berlin Wall would maybe not &#91; have been &#93; there .
+Ground Truth: der Fall der Ber@@ liner Mauer hätte vielleicht nicht stattgefunden .
+Predicted (-4.567235): der Fall der Ber@@ liner Mauer wäre vielleicht nicht da gewesen .
+Src: and in the aftermath , also not the fall of the Iron Cur@@ tain .
+Ground Truth: und auch danach nicht der Fall des ei@@ sernen Vor@@ hangs .
+Predicted (-14.942240): und in den Nach@@ hinein , nicht der Fall des Eisen@@ bahn@@ lat@@ zes .
+Src: because today , state agencies and companies want to store as much information as they can get about us , online and offline .
+Ground Truth: weil heute staatliche Agent@@ uren und Firmen so viele Informationen speichern wollen , wie sie über uns kriegen können , online und offline .
+Predicted (-15.661784): denn heute wollen staatliche Behörden und Unternehmen so viel Informationen wie sie uns kaufen können , online und Off@@ line .
+Src: they want to have the possibility to track our lives , and they want to store them for all time .
+Ground Truth: sie wollen die Möglichkeit haben , unser Leben zu verfolgen , und sie wollen das alles beliebig lange speichern .
+Predicted (-6.978525): sie wollen die Möglichkeit haben , unser Leben zu verfolgen , und sie wollen sie für die ganze Zeit speichern .
+Src: but self @-@ determination and living in the digital age is no contradiction .
+Ground Truth: aber Selbst@@ bestimm@@ ung und ein Leben im digitalen Zeitalter sind kein Widerspruch .
+Predicted (-4.725182): aber Selbst@@ bestimm@@ ung und in dem digitalen Zeitalter ist kein Widerspruch .
+Src: but you have to fight for your self @-@ determination today .
+Ground Truth: jedoch muss man für die Selbst@@ bestimm@@ ung heute kämpfen .
+Predicted (-4.283081): aber heute muss man für seine Selbst@@ bestimm@@ ung kämpfen .
+Src: you have to fight for it every day .
+Ground Truth: sie müssen dafür jeden Tag kämpfen .
+Predicted (-2.248186): sie müssen dafür jeden Tag kämpfen .
+Src: so , when you go home , tell your friends that privacy is a value of the 21st century , and it &apos;s not outdated .
+Ground Truth: wenn Sie also nach Hause gehen , sagen Sie Ihren Freunden , dass Privatsphäre ein Wert des 21. Jahrhunderts ist und dass dies nicht altmo@@ disch ist .
+Predicted (-7.319568): wenn Sie nach Hause gehen , sagen Sie Ihren Freunden , dass Privatsphäre ein Wert des 21. Jahrhunderts ist und es nicht veraltet ist .
+Src: when you go home , tell your representative only because companies and state agencies have the possibility to store certain information , they don &apos;t have to do it .
+Ground Truth: wenn Sie nach Hause gehen , sagen Sie Ihrem Abgeord@@ neten , nur weil Firmen und staatliche Stellen die Möglichkeit haben , bestimmte Informationen zu speichern , müssen sie es noch lange nicht tun .
+Predicted (-12.916835): wenn Sie nach Hause gehen , sagen Sie Ihren repräsent@@ ativen repräsent@@ ativen Unternehmen und staatlichen Behörden die Möglichkeit , Informationen zu speichern , müssen sie das nicht tun .
+Src: and if you don &apos;t believe me , ask your phone company what information they store about you .
+Ground Truth: und wenn Sie mir nicht glauben , fragen Sie Ihre Telefon@@ gesellschaft nach den Informationen , die sie über Sie gespeichert haben .
+Predicted (-9.715422): und wenn Sie mich nicht glauben , fragen Sie Ihr Telefon@@ gesellschaft , was Ihnen Informationen betrifft .
+Src: so , in the future , every time you use your mobile phone , let it be a reminder to you that you have to fight for self @-@ determination in the digital age .
+Ground Truth: also , in der Zukunft , jedes Mal , wenn Sie Ihr Handy benutzen , erinnern Sie sich daran , dass Sie um die Selbst@@ bestimm@@ ung im digitalen Zeitalter kämpfen müssen .
+Predicted (-12.593728): in der Zukunft , jedes Mal , wenn Sie Ihr Handy benutzen , lassen Sie es uns daran erinnern , dass Sie für Selbst@@ bestimm@@ ung in das digitale Zeitalter kämpfen müssen .
+Src: thank you .
+Ground Truth: danke schön .
+Predicted (-0.778209): danke .
+Src: I live in South Central .
+Ground Truth: ich lebe in South Central .
+Predicted (-7.001786): ich lebe in Süd@@ lan@@ e .
+Src: this is South Central : liqu@@ or stores , fast food , vac@@ ant lots .
+Ground Truth: das ist South Central : Spiritu@@ os@@ en@@ läden , Schnell@@ restaurants , Bra@@ ch@@ flächen .
+Predicted (-22.113356): das ist der Sü@@ da@@ fri@@ k@@ k@@ eng@@ er , Fast@@ food , le@@ ersteh@@ ende .
+Src: so the city planners , they get together and they figure they &apos;re going to change the name South Central to make it represent something else , so they change it to South Los Angeles , like this is going to fix what &apos;s really going wrong in the city .
+Ground Truth: die Stadt@@ plan@@ er treffen sich also und überlegten , den Namen South Central zu ändern , damit er für etwas anderes steht , sie änderten ihn in South Los Angeles , als ob das etwas daran ändert , was in der Stadt falsch läuft .
+Predicted (-33.610786): die Stadt@@ plan@@ er , sie treffen sich zusammen und sie finden heraus , dass sie den Namen Sü@@ zentr@@ al@@ Central verändern werden , um sie etwas anderes darzustellen , also ändern sie es in South Los Angeles , so wie das in Ordnung , was wirklich in der Stadt schief geht .
+Src: this is South Los Angeles .
+Ground Truth: das ist South Los Angeles .
+Predicted (-1.809214): das ist South Los Angeles .
+Src: liqu@@ or stores , fast food , vac@@ ant lots .
+Ground Truth: Spiritu@@ os@@ en@@ läden , Schnell@@ restaurants , Bra@@ ch@@ flächen .
+Predicted (-16.562567): in den H@@ ack , Fast Food , le@@ ersteh@@ enden .
+Src: just like 2@@ 6.@@ 5 million other Americans , I live in a food desert , South Central Los Angeles , home of the drive @-@ thr@@ u and the drive @-@ by .
+Ground Truth: so wie 2@@ 6,@@ 5 Millionen andere Amerikaner lebe ich in der Essens @-@ Wüste South Central Los Angeles , das Zuhause des Dri@@ ve @-@ th@@ rus und des Dri@@ ve @-@ bys .
+Predicted (-23.401562): wie 2@@ 6.@@ 5 Millionen anderer Amerikaner , lebe ich in einer Lebensmittel@@ wü@@ ppe , im Süden Mittel@@ land Los Angeles , Zuhause des Fahr@@ ra@@ thr@@ u und den Fahr@@ fahr@@ ern .
+Src: funny thing is , the drive @-@ th@@ rus are killing more people than the drive @-@ bys .
+Ground Truth: das Kom@@ ische ist , dass die Dri@@ ve @-@ th@@ rus mehr Menschen töten als die Dri@@ ve @-@ bys .
+Predicted (-14.651176): komische Sache ist , dass der T@@ is@@ rus mehr Menschen töten als die T@@ ags @-@ bys .
+Src: people are dying from cur@@ able diseases in South Central Los Angeles .
+Ground Truth: Menschen sterben in South Central Los Angeles an heil@@ baren Erkrankungen .
+Predicted (-5.862648): Menschen sterben aus heil@@ baren Krankheiten in South Central Los Angeles .
+Src: for instance , the obesity rate in my neighborhood is five times higher than , say , Beverly Hills , which is probably eight , 10 miles away .
+Ground Truth: die Fettlei@@ big@@ keits@@ rate in meinem Viertel ist z. B. fünf Mal höher als etwa in Beverly Hills , das circa 15 km entfernt ist .
+Predicted (-10.440204): zum Beispiel ist die Fettleibigkeit in meiner Nachbarschaft fünf mal höher als , sagen Sie , Beverly Hills , die wahrscheinlich 8 , 10 km entfernt sind .
+Src: I got tired of seeing this happening .
+Ground Truth: ich konnte das nicht mehr mit@@ ansehen .
+Predicted (-4.573257): ich hatte es leid , das zu sehen .
+Src: and I was wondering , how would you feel if you had no access to healthy food , if every time you walk out your door you see the ill effects that the present food system has on your neighborhood ?
+Ground Truth: und ich fragte mich , wie Sie sich fühlen würden , wenn Sie keinen Zugang zu ges@@ un@@ dem Essen hätten , wenn Sie jedes Mal , wenn Sie aus dem Haus gehen , die negativen Auswirkungen sehen , die das bestehende Ernähr@@ ungssystem auf Ihr Viertel hat .
+Predicted (-17.650204): und ich fragte mich , wie würden Sie sich fühlen , wenn Sie keinen Zugang zu gesunden Nahrung haben , wenn Sie jedes Mal , wenn Sie Ihre Tür verlassen , sehen Sie die kranken Effekte , die das Lebensmittel@@ system in Ihrer Nachbarschaft hat ?
+Src: I see wheel@@ chairs bought and sold like used cars .
+Ground Truth: ich erle@@ be , dass Roll@@ stühle gekauft und verkauft werden wie Gebrau@@ cht@@ wagen .
+Predicted (-4.025921): ich sehe Roll@@ stü@@ hlen und verkaufte Autos .
+Src: I see di@@ aly@@ sis centers popping up like Starbucks .
+Ground Truth: ich sehe Di@@ aly@@ se@@ zentren empor@@ schießen wie Starbucks .
+Predicted (-1.191736): ich sehe Di@@ aly@@ se Zentren wie Starbucks .
+Src: and I figured , this has to stop .
+Ground Truth: und ich hab begriffen , dass das aufhören muss .
+Predicted (-2.035517): und ich dachte , das muss aufhören .
+Src: so I figured that the problem is the solution .
+Ground Truth: ich kap@@ ierte , dass das Problem die Lösung ist .
+Predicted (-2.474599): ich habe herausgefunden , dass das Problem die Lösung ist .
+Src: food is the problem and food is the solution .
+Ground Truth: Essen ist das Problem und Essen ist die Lösung .
+Predicted (-2.373682): Nahrung ist das Problem und Nahrung die Lösung .
+Src: plus I got tired of driving 45 minutes round trip to get an apple that wasn &apos;t imp@@ reg@@ n@@ ated with pesticides .
+Ground Truth: außerdem hatte ich keine Lust mehr auf 45 @-@ Minuten @-@ Rund@@ fahrten , um einen Apfel zu bekommen , der nicht mit Pestizi@@ den im@@ prä@@ gni@@ ert ist .
+Predicted (-18.759562): und außerdem wurde ich müde , 45 Minuten lang mit dem Reisen einen Apfel zu bekommen , der nicht mit Pestizide betroffen war .
+Src: so what I did , I planted a food forest in front of my house .
+Ground Truth: also pflan@@ zte ich einen Essens @-@ Wald vor meinem Haus .
+Predicted (-6.435295): ich habe einen Nahrungs@@ wald vor meinem Haus ge@@ pflanzt .
+Src: it was on a strip of land that we call a par@@ k@@ way .
+Ground Truth: es ist ein Stück Land , das wir Par@@ kan@@ lage nennen .
+Predicted (-5.996823): es war auf einem Stück Land , das wir Par@@ k@@ way nennen .
+Src: it &apos;s 150 feet by 10 feet .
+Ground Truth: es ist 45 auf 3 Meter .
+Predicted (-5.903787): es sind ca. 10 Meter hoch .
+Src: thing is , it &apos;s owned by the city .
+Ground Truth: die Sache ist die , es gehört der Stadt .
+Predicted (-7.159491): es ist der Stadt besessen .
+Src: but you have to maintain it .
+Ground Truth: aber man muss es pflegen .
+Predicted (-3.283638): aber man muss es aufrechterhalten .
+Src: so I &apos;m like , &quot; C@@ ool . I can do whatever the hell I want , since it &apos;s my responsibility and I gotta maintain it . &quot;
+Ground Truth: ich denke also : &quot; cool . ich kann machen , was ich will , weil es meine Verantwortung ist und ich es in Stand halten muss &quot; .
+Predicted (-13.873764): ich sagte : &quot; C@@ ool . ich kann alles tun , was ich will , da es meine Verantwortung ist und ich sie aufrechterhalten &quot; .
+Src: and this is how I decided to maintain it .
+Ground Truth: und ich entschied , es so in Stand zu halten .
+Predicted (-4.264070): und so entschied ich mich , es zu bewahren .
+Src: so me and my group , L.A. Green grounds , we got together and we started planting my food forest , fruit trees , you know , the whole nine , vegetables .
+Ground Truth: also kamen ich und meine Gruppe , die L.A. Green Gro@@ unds , zusammen und wir fingen an , meinen Essens @-@ Wald , und Ob@@ st@@ bäume , zu pflanzen , also das ganze Programm , Gemüse .
+Predicted (-23.775576): also , ich und meine Gruppe , L.A. Green S@@ itzen , trafen wir zusammen und begannen , meine Nahrung zu pflanzen , Obst , Obst , die ganze neun , Gemüse zu pflanzen .
+Src: what we do , we &apos;re a pay @-@ it @-@ forward kind of group , where it &apos;s composed of gar@@ den@@ ers from all walks of life , from all over the city , and it &apos;s completely volunteer , and everything we do is free .
+Ground Truth: wir sind eine Art Vor@@ leist@@ ungs @-@ Gruppe , zusammengesetzt aus Gär@@ t@@ nern aus allen sozialen Schichten und aus der ganzen Stadt , es ist völlig freiwillig und alles , was wir machen , ist kostenlos .
+Predicted (-30.004387): was wir tun , wir sind eine Gruppe für Geld , in der es aus dem Leben aus allen Teilen des Lebens besteht , von überall in der Stadt , und es ist völlig freiwillig , und alles was wir tun ist frei .
+Src: and the garden , it was beautiful .
+Ground Truth: und der Garten ist wunderschön .
+Predicted (-1.952769): und der Garten , es war wunderschön .
+Src: and then somebody complained .
+Ground Truth: aber dann besch@@ werte sich jemand .
+Predicted (-2.251974): und dann besch@@ werte sich jemand .
+Src: the city came down on me , and basically gave me a c@@ itation saying that I had to remove my garden , which this c@@ itation was turning into a war@@ rant .
+Ground Truth: die Stadt kam auf mich zu und er@@ teilte mir praktisch eine Vor@@ ladung und sagte , dass ich meinen Garten beseitigen muss , die Vor@@ ladung wurde zu einer ri@@ chter@@ lichen Anordnung .
+Predicted (-30.373814): die Stadt kam auf mich herunter und gab mir im Grunde eine An@@ stellung , die sagte , dass ich meinen Garten entfernen musste , was diese An@@ mel@@ ung in eine War@@ te verwandelte .
+Src: and I &apos;m like , &quot; Come on , really ?
+Ground Truth: und ich dachte : &quot; kommt schon , echt ?
+Predicted (-4.444479): und ich dachte : &quot; komm schon ?
+Src: a war@@ rant for planting food on a piece of land that you could care less about ? &quot;
+Ground Truth: eine ri@@ chter@@ liche An@@ ordnungen wegen Anbau von Nahrungs@@ mitteln auf einem Stück Land , das euch total egal ist ? &quot;
+Predicted (-17.162525): ein Not@@ ru@@ fer für das Essen auf einem Stück Land , das Sie sich weniger interessieren könnten ? &quot;
+Src: and I was like , &quot; C@@ ool . bring it . &quot;
+Ground Truth: und ich dachte : &quot; cool . her damit &quot; .
+Predicted (-7.815786): und ich dachte : &quot; C@@ ool . bringe es &quot; .
+Src: because this time it wasn &apos;t coming up .
+Ground Truth: denn dieses Mal würde es nicht auf@@ gehen .
+Predicted (-3.868193): denn dieses Mal kam es nicht auf .
+Src: so L.A. Times got ah@@ old of it . Steve L@@ op@@ ez did a story on it and talked to the coun@@ c@@ il@@ man , and one of the Green grounds members , they put up a petition on Ch@@ ange@@ .org , and with 900 sig@@ natures , we were a success .
+Ground Truth: die L.A. Times bekam Wind davon . Steve L@@ op@@ ez machte eine Story darüber und sprach mit dem Stad@@ trat und mit einem Mitglied von Green Ground . sie ver@@ fassten eine Petition auf Ch@@ ange@@ .org und mit 900 Unter@@ schriften waren wir erfolgreich .
+Predicted (-34.108318): so hat L.A. Times ah@@ alte . Steve L@@ op@@ ez hat eine Geschichte darüber gemacht und sprach mit den Coun@@ t@@ man und einer der Green Bau@@ teile , sie haben eine Petition auf Ch@@ ange@@ .org aufgebaut , und mit 900 Unter@@ schriften waren wir ein Erfolg .
+Src: we had a victory on our hands .
+Ground Truth: wir hielten den Sieg in den Händen .
+Predicted (-2.263544): wir hatten einen Sieg auf unsere Hände .
+Src: my coun@@ c@@ il@@ man even called in and said how they endor@@ se and love what we &apos;re doing .
+Ground Truth: mein Stad@@ trat rief sogar an und sagte , dass sie es unterstützen und lieben , was wir tun .
+Predicted (-10.190002): meine Coun@@ t@@ mann rief sogar an und sagte , wie sie bestätigen und lieben , was wir tun .
+Src: I mean , come on , why wouldn &apos;t they ?
+Ground Truth: also echt , warum sollten sie das nicht tun ?
+Predicted (-3.155214): warum nicht ?
+Src: L.A. leads the United States in vac@@ ant lots that the city actually owns .
+Ground Truth: L.A. hat in den Vereinigten Staaten die meisten Bra@@ ch@@ flächen im Besitz der Stadt .
+Predicted (-13.284985): L.A. führt die Vereinigten Staaten im freien freien Strom , jede Stadt besitzt tatsächlich .
+Src: they own 26 square miles of vac@@ ant lots .
+Ground Truth: sie besitzen 67 k@@ m@@ 2 an Bra@@ ch@@ flächen .
+Predicted (-6.346843): sie besitzen 2@@ 26 Quadrat@@ m@@ eilen .
+Src: that &apos;s 20 Central Parks .
+Ground Truth: das sind 20 Central Parks .
+Predicted (-5.535993): das ist 20 Zentral@@ bank .
+Src: that &apos;s enough space to plant 7@@ 25 million tomato plants .
+Ground Truth: das ist genug Fläche , um 7@@ 25 Millionen Tom@@ aten@@ pflanzen zu pflanzen .
+Predicted (-8.143702): das ist genug Platz für die Pflanzen@@ pflanzen 7@@ 25 Millionen Tom@@ at@@ pflanzen .
+Src: why in the hell would they not okay this ?
+Ground Truth: warum zum Teufel sollten sie das nicht ok finden ?
+Predicted (-7.779455): warum wäre es ihnen nicht so ?
+Src: growing one plant will give you 1,000 , 10,000 seeds .
+Ground Truth: durch den Anbau einer Pflanze kriegt man 1.000 - 10.000 Samen .
+Predicted (-1.309466): eine Pflanze wird Ihnen 1000 , 10.000 Samen geben .
+Src: when one dollar &apos;s worth of green beans will give you 75 dollars &apos; worth of produce .
+Ground Truth: mit grünen B@@ ohnen im Wert von einem Dollar erhält man Obst und Gemüse im Wert von 75 Dollar .
+Predicted (-8.892021): wenn ein Dollar wert von grünen B@@ ohnen Ihnen Ihnen 75 Dollar geben wird .
+Src: it &apos;s my gos@@ pel , when I &apos;m telling people , grow your own food .
+Ground Truth: es ist meine Heil@@ s@@ bot@@ schaft , ich sage Leuten , dass sie ihr eigenes Essen anbauen sollen .
+Predicted (-6.716800): es ist mein G@@ os@@ pel , wenn ich Menschen erzähle , wachsen Ihr eigenes Essen .
+Src: growing your own food is like printing your own money .
+Ground Truth: sein eigenes Essen anzubauen ist wie sein eigenes Geld zu drucken .
+Predicted (-8.888461): ihr eigenes Essen zu züchten , ist wie das eigene Geld drucken zu lassen .
+Src: see , I have a legacy in South Central .
+Ground Truth: sehen Sie , ich habe ein Vermächtnis in South Central .
+Predicted (-6.798925): sehen Sie , ich habe ein Vermächtnis im Süden Zentral@@ mitte .
+Src: I grew up there . I raised my sons there .
+Ground Truth: ich wuchs dort auf . ich habe meine Söhne dort aufgezogen .
+Predicted (-4.818561): ich bin dort aufgewachsen . ich hob meine Söhne dort .
+Src: and I refuse to be a part of this manufactured reality that was manufactured for me by some other people , and I &apos;m manufacturing my own reality .
+Ground Truth: und ich wei@@ gere mich , Teil dieser vorge@@ fertigten Realität zu sein , die von anderen Menschen hergestellt wurde und ich fabri@@ ziere meine eigene Realität .
+Predicted (-13.580071): ich wei@@ gere mich , ein Teil dieser Realität zu sein , der für mich von einigen anderen Menschen produziert wurde , und ich baue meine eigene Realität .
+Src: see , I &apos;m an artist .
+Ground Truth: sehen Sie , ich bin ein Künstler .
+Predicted (-1.094275): ich bin Künstler .
+Src: gardening is my graffiti . I grow my art .
+Ground Truth: Garten@@ arbeit ist mein Graffiti . ich pflan@@ ze meine Kunst .
+Predicted (-6.242523): Gär@@ t@@ nern ist mein Graffiti . ich habe meine Kunst wachsen lassen .
+Src: just like a graffiti artist , where they beauti@@ fy walls , me , I beautiful lawns , par@@ k@@ ways .
+Ground Truth: genau wie ein Graffiti @-@ Künstler , der Wände versch@@ ön@@ ert , versch@@ ön@@ ere ich Rasen und Par@@ kan@@ lagen .
+Predicted (-17.144157): wie ein Graffiti @-@ Künstler , wo sie Wände nach@@ bilden , mich , ich , ich finde wunderschöne Rasen , Par@@ k@@ Wege .
+Src: I use the garden , the soil , like it &apos;s a piece of cloth , and the plants and the trees , that &apos;s my em@@ bel@@ li@@ shment for that cloth .
+Ground Truth: ich benutze den Garten , die Erde , wie ein Stück Stoff , und die Pflanzen und die Bäume sind meine Ver@@ zierungen für diesen Stoff .
+Predicted (-21.732555): ich benutze den Garten , der Boden , wie es ein Stück Stoff ist , und die Pflanzen und Bäume , das ist meine em@@ in@@ best@@ ei@@ me für den Stoff .
+Src: you &apos;d be surprised what the soil could do if you let it be your canvas .
+Ground Truth: sie wären überrascht , was der Erd@@ boden alles kann , wenn Sie ihn als Leinwand benutzen .
+Predicted (-8.094194): sie wären überrascht , was der Boden tun könnte , wenn Sie es Ihre Leinwand geben .
+Src: you just couldn &apos;t imagine how amazing a sun@@ flower is and how it affects people .
+Ground Truth: sie können sich nicht vorstellen , wie erstaunlich eine Sonnen@@ blu@@ me ist , und wie sie Menschen berührt .
+Predicted (-6.236767): man konnte sich nicht vorstellen , wie erstaunlich eine Sonnen@@ blu@@ me ist und wie sie Menschen beeinflusst .
+Src: so what happened ?
+Ground Truth: was passierte also ?
+Predicted (-1.783019): was ist also passiert ?
+Src: I have witnessed my garden become a tool for the education , a tool for the transformation of my neighborhood .
+Ground Truth: ich habe erlebt , wie mein Garten zu einem Instrument für die Erziehung und die Verwandlung meines Viertel@@ s wurde .
+Predicted (-6.386325): ich habe erlebt , dass mein Garten ein Werkzeug für die Ausbildung geworden ist , ein Werkzeug für die Transformation meiner Nachbarschaft .
+Src: to change the community , you have to change the composition of the soil .
+Ground Truth: um die Gemeinschaft zu ändern , muss man die Zusammensetzung des Bo@@ dens verändern .
+Predicted (-2.504722): um die Gemeinschaft zu verändern , muss man die Zusammensetzung des Bo@@ dens verändern .
+Src: we are the soil .
+Ground Truth: wir sind der Boden .
+Predicted (-0.716881): wir sind der Boden .
+Src: you &apos;d be surprised how kids are affected by this .
+Ground Truth: sie würden sich wundern , wie Kindern davon beeinflusst werden .
+Predicted (-2.149914): sie wären überrascht , wie Kinder davon betroffen sind .
+Src: gardening is the most therapeu@@ tic and defi@@ ant act you can do , especially in the inner city .
+Ground Truth: Gär@@ t@@ nern ist der therapeu@@ tisch@@ ste und küh@@ n@@ ste Akt , den man machen kann , besonders mitten in der Stadt .
+Predicted (-7.224538): Gär@@ t@@ nern sind die therapeu@@ tische und Defi@@ zi@@ te , die Sie tun können , besonders in der Innenstadt .
+Src: plus you get stra@@ w@@ berries .
+Ground Truth: außerdem kriegt man Erdbe@@ eren .
+Predicted (-4.463179): und außerdem gibt es Erdbe@@ eren .
+Src: I remember this time , there was this mother and a daughter came , it was , like , 10 : 30 at night , and they were in my yard , and I came out and they looked so ashamed .
+Ground Truth: ich erinnere mich an dieses Mal , als diese Mutter und ihre Tochter kamen , es war circa 10 : 30 nachts . sie waren in meinem Garten , und ich kam raus und sie schauten so beschä@@ mt .
+Predicted (-18.724110): ich erinnere mich an dieses Mal , es gab diese Mutter und eine Tochter kam , es war , 10 : 30 nachts , und sie waren in meinem Garten und ich kam raus und sie sahen so schä@@ mt aus .
+Src: so I &apos;m like , man , it made me feel bad that they were there , and I told them , you know , you don &apos;t have to do this like this .
+Ground Truth: ich hab &apos; mich echt schlecht gefühlt , weil sie dort waren und ich sagte ihnen : &quot; wisst ihr , ihr müsst das nicht so machen .
+Predicted (-17.481113): ich bin also Mann , es hat mich mir das Gefühl gemacht , dass sie da waren , und ich sagte ihnen , Sie müssen das nicht so machen .
+Src: this is on the street for a reason .
+Ground Truth: der Garten ist nicht ohne Grund auf der Straße &quot; .
+Predicted (-4.655284): das ist aus dem Grund auf Straße .
+Src: it made me feel ashamed to see people that were this close to me that were hungry , and this only rein@@ forced why I do this , and people asked me , &quot; F@@ in , aren &apos;t you afraid people are going to steal your food ? &quot;
+Ground Truth: ich habe mich geschä@@ mt , wenn ich Menschen sah , die mir so nah sind und hungrig waren , und das hat mich nur darin best@@ ärkt , das zu tun . Menschen fragten mich : &quot; F@@ in , hast du keine Angst , dass Leute dein Essen stehlen werden &quot; .
+Predicted (-29.514643): es hat mich schä@@ mt , Menschen zu sehen , die mir nahe standen , die hungrig waren , und das hat mich nur dazu gebracht , und die Leute fragten mich : &quot; Leute , sind keine Angst , die Leute werden Ihr Essen stehlen ? &quot;
+Src: and I &apos;m like , &quot; Hell no , I ain &apos;t afraid they &apos;re gonna steal it .
+Ground Truth: und ich sagte : &quot; zum Teufel , nein , ich hab &apos; keine Angst , dass sie was kl@@ auen .
+Predicted (-8.701551): und ich dachte : &quot; sicher , ich habe keine Angst , sie werden es stehlen .
+Src: that &apos;s why it &apos;s on the street .
+Ground Truth: dazu ist es doch auf der Straße .
+Predicted (-2.742657): deshalb ist es auf der Straße .
+Src: that &apos;s the whole idea .
+Ground Truth: das ist doch die Idee .
+Predicted (-0.506208): das ist die ganze Idee .
+Src: I want them to take it , but at the same time , I want them to take back their health . &quot;
+Ground Truth: ich will , dass sie es nehmen , aber gleichzeitig will ich , dass sie sich ihre Gesundheit zurück@@ nehmen &quot; .
+Predicted (-7.577433): ich möchte , dass sie es übernehmen , aber gleichzeitig möchte ich , dass sie ihre Gesundheit wieder verlassen &quot; .
+Src: there &apos;s another time when I put a garden in this homeless shelter in downtown Los Angeles .
+Ground Truth: zu einer anderen Zeit legte ich einen Garten in diesem Obdach@@ los@@ en@@ heim in Down@@ town L.A. an .
+Predicted (-10.451320): es gibt noch eine andere Zeit , in der ich einen Garten in diesen Obdachlose in Down@@ town Los Angeles lege .
+Src: these are the guys , they helped me un@@ load the truck .

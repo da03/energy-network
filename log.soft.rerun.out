@@ -1,0 +1,87 @@
+Loading Model from models/soft/rerun.e35.pt
+SRC Vocab Size: 39553, TRG Vocab Size: 39553
+Src: when I was 11 , I remember waking up one morning to the sound of joy in my house .
+Ground Truth: als ich 11 Jahre alt war , wurde ich eines Morgens von den K@@ längen h@@ eller Freude geweckt .
+Predicted (-9.465571): als ich 11 war , erinnere ich mich , wie ich eines Morgens an den Klang der Freude in meinem Haus aufwachen .
+Src: my father was listening to BBC News on his small , gray radio .
+Ground Truth: mein Vater hörte sich auf seinem kleinen , grauen Radio die Nachrichten@@ sendung der BBC an .
+Predicted (-4.318893): mein Vater hörte mir BBC News auf seinem kleinen , grauen Radio an .
+Src: there was a big smile on his face which was unusual then , because the news mostly depressed him .
+Ground Truth: er sah sehr glücklich aus , was damals ziemlich ungewöhnlich war , da ihn die Nachrichten meistens deprimi@@ erten .
+Predicted (-8.008946): es gab ein großes Lächeln auf seinem Gesicht , das damals ungewöhnlich war , weil die Nachrichten ihn meistens depressiv waren .
+Src: &quot; the Taliban are gone ! &quot; my father sh@@ ou@@ ted .
+Ground Truth: er rief : &quot; die Taliban sind weg ! &quot;
+Predicted (-5.145970): &quot; die Taliban sind weg ! &quot; mein Vater wurde besch@@ imp@@ ft .
+Src: I didn &apos;t know what it meant , but I could see that my father was very , very happy .
+Ground Truth: ich wusste nicht , was das bedeutete , aber es machte meinen Vater offensichtlich sehr , sehr glücklich .
+Predicted (-3.349712): ich wusste nicht , was es bedeutete , aber ich konnte sehen , dass mein Vater sehr , sehr glücklich war .
+Src: &quot; you can go to a real school now , &quot; he said .
+Ground Truth: &quot; jetzt kannst du auf eine richtige Schule gehen &quot; , sagte er .
+Predicted (-5.114066): &quot; jetzt geht es in eine echte Schule &quot; , sagte er .
+Src: a morning that I will never forget .
+Ground Truth: diesen Morgen werde ich niemals vergessen .
+Predicted (-2.458644): ein Morgen , an dem ich nie vergessen werde .
+Src: a real school .
+Ground Truth: eine richtige Schule .
+Predicted (-0.320393): eine echte Schule .
+Src: you see , I was six when the Taliban took over Afghanistan and made it illegal for girls to go to school .
+Ground Truth: die Taliban ergri@@ ffen die Macht in Afghanistan , als ich sechs war , und verboten es Mädchen , zur Schule zu gehen .
+Predicted (-8.222051): ich war sechs , als die Taliban Afghanistan übernommen und es illegal machte , für Mädchen zur Schule zu gehen .
+Src: so for the next five years , I dressed as a boy to esc@@ ort my older sister , who was no longer allowed to be outside alone , to a secret school .
+Ground Truth: deshalb ver@@ klei@@ dete ich mich fünf Jahre lang als Junge und beglei@@ tete meine ältere Schwester , die nicht mehr alleine ausgehen durfte , zu einer geheimen Schule .
+Predicted (-29.900757): in den nächsten fünf Jahren be@@ zog ich mich als Junge , um meine ältere Schwester zu Zeit@@ ab@@ drücke , die nicht mehr mehr mehr mehr außerhalb erlaubt war , in eine Geheim@@ schule zu gehen .
+Src: it was the only way we both could be educated .
+Ground Truth: nur so konnten wir beide zur Schule gehen .
+Predicted (-3.570777): es war die einzige Art , wie wir beide ausgebildet werden konnten .
+Src: each day , we took a different route so that no one would suspect where we were going .
+Ground Truth: jeden Tag nahmen wir einen anderen Weg , sodass niemand erraten konnte , wohin wir gingen .
+Predicted (-5.893412): jeden Tag nahmen wir eine andere Route , damit niemand vermute , wohin wir gehen .
+Src: we would cover our books in grocery bags so it would seem we were just out shopping .
+Ground Truth: wir versteckten unsere Bücher in Ein@@ kauf@@ stü@@ ten , damit es so aussah , als würden wir nur einkaufen gehen .
+Predicted (-12.951318): wir würden unsere Bücher in Lebensmittel@@ sä@@ cken bedecken , damit es so aussieht , als wären wir einfach einkaufen .
+Src: the school was in a house , more than 100 of us packed in one small living room .
+Ground Truth: unterrichtet wurden wir in einem Haus , über 100 Mädchen in einem kleinen Wohnzimmer .
+Predicted (-4.656363): die Schule war in einem Haus , mehr als 100 von uns voll@@ gestopft in einem kleinen Wohnzimmer .
+Src: it was co@@ zy in winter but extremely hot in summer .
+Ground Truth: im Winter war es gemü@@ tlich , aber im Sommer war es unglaublich heiß .
+Predicted (-7.488830): im Winter war es sehr heiß , aber im Sommer extrem heiß .
+Src: we all knew we were ris@@ king our lives -- the teacher , the students and our parents .
+Ground Truth: wir alle wussten , dass wir unser Leben riski@@ erten : Lehrer , Schüler und unsere Eltern .
+Predicted (-5.069282): wir wussten alle , dass wir unser Leben riskieren - der Lehrer , die Studenten und unsere Eltern .
+Src: from time to time , the school would suddenly be can@@ cel@@ ed for a week because Taliban were suspicious .
+Ground Truth: immer wieder musste der Unterricht plötzlich für eine Woche aus@@ fallen , weil die Taliban Ver@@ dacht gesch@@ ö@@ pft hatten .
+Predicted (-12.251380): zu Zeit war die Schule plötzlich eine Woche aufge@@ worfen , weil die Taliban verdäch@@ tig waren .
+Src: we always wondered what they knew about us .
+Ground Truth: wir waren uns nie sicher , wie viel sie über uns wussten .
+Predicted (-1.856641): wir fragten uns immer , was sie über uns wussten .
+Src: were we being followed ?
+Ground Truth: verfolgten sie uns ?
+Predicted (-1.430218): sind wir gefolgt ?
+Src: do they know where we live ?
+Ground Truth: wussten sie , wo wir wohnen ?
+Predicted (-0.898780): wissen sie , wo wir leben ?
+Src: we were scared , but still , school was where we wanted to be .
+Ground Truth: wir hatten Angst , aber wir wollten trotzdem zur Schule gehen .
+Predicted (-6.223760): wir hatten Angst , aber trotzdem war die Schule , wo wir sein wollten .
+Src: I was very lucky to grow up in a family where education was pri@@ zed and daughters were treas@@ ured .
+Ground Truth: ich hatte großes Glück in einer Familie aufzu@@ wachsen , in der Bildung als wichtig galt und Töchter geschätzt wurden .
+Predicted (-13.356207): ich hatte Glück , in einer Familie zu wachsen , in der Bildung von pri@@ tzt und Tö@@ chtern waren .
+Src: my grandfather was an extraordinary man for his time .
+Ground Truth: mein Großvater war seiner Zeit weit voraus .
+Predicted (-1.993125): mein Gross@@ vater war seine Zeit ein außergewöhnlicher Mann .
+Src: a total ma@@ ver@@ ick from a remote province of Afghanistan , he insisted that his daughter , my mom , go to school , and for that he was dis@@ owned by his father .
+Ground Truth: ein Außensei@@ ter aus einer entlegenen Provinz Afghan@@ ist@@ ans . er bestand darauf , seine Tochter - meine Mutter - zur Schule zu schicken und wurde dafür von seinem Vater ver@@ stoßen .
+Predicted (-20.633682): ein totaler Außensei@@ ter aus einer Fernbedienung einer Fernbedienung , die darauf bestand , dass seine Tochter , meine Mutter zur Schule gehen , und dafür wurde er von seinem Vater besessen .
+Src: but my educated mother became a teacher .
+Ground Truth: meine gebildete Mutter aber wurde Lehrerin .
+Predicted (-1.741278): aber meine Mutter wurde Lehrerin .
+Src: there she is .
+Ground Truth: das ist sie .
+Predicted (-1.142701): da ist sie .
+Src: she retired two years ago , only to turn our house into a school for girls and women in our neighborhood .
+Ground Truth: vor zwei Jahren ging sie in den Ruhestand , nur um unser Haus in eine Schule für Mädchen und Frauen aus der Nachbarschaft zu verwandeln .
+Predicted (-6.019580): sie ging vor zwei Jahren nur um unser Haus in eine Schule für Mädchen und Frauen in unserer Nachbarschaft zu verwandeln .
+Src: and my father -- that &apos;s him -- he was the first ever in his family to receive an education .
+Ground Truth: und mein Vater - hier zu sehen - war der Erste in seiner Familie , der jemals eine Schulbildung erhielt .
+Predicted (-4.836338): und mein Vater - das war er - er war das erste Mal in seiner Familie , um eine Ausbildung zu erhalten .
+Src: there was no question that his children would receive an education , including his daughters , despite the Taliban , despite the risks .

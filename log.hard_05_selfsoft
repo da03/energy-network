@@ -1,0 +1,796 @@
+train.py --dataset iwslt/en-de --save_to models/hard/t05 --mode hard --temperature 0.5 --selftemperature 2 --selfmode soft
+SRC Vocab Size: 39553, TRG Vocab Size: 39553
+Building Model
+Model(
+  (encoder): Encoder(
+    (layers): ModuleList(
+      (0): EncoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (1): EncoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (2): EncoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (3): EncoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (4): EncoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+    )
+    (norm): LayerNorm()
+  )
+  (decoder): Decoder(
+    (layers): ModuleList(
+      (0): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (1): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (2): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (3): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (4): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+    )
+    (norm): LayerNorm()
+  )
+  (src_embed): Sequential(
+    (0): Embeddings(
+      (lut): Embedding(39553, 278)
+    )
+    (1): PositionalEncoding(
+      (dropout): Dropout(p=0.1)
+    )
+  )
+  (trg_embed): Sequential(
+    (0): Embeddings(
+      (lut): Embedding(39553, 278)
+    )
+    (1): PositionalEncoding(
+      (dropout): Dropout(p=0.1)
+    )
+  )
+  (inference_network): InferenceNetwork(
+    (layers): ModuleList(
+      (0): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (1): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (2): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (3): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (4): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+    )
+  )
+  (generator): Generator(
+    (proj): Linear(in_features=278, out_features=39553, bias=True)
+  )
+)Unexpected end of /proc/mounts line `overlay / overlay rw,relatime,lowerdir=/raid/docker/overlay2/l/BRGDUA2HBI662QX7MPJAKAL3YT:/raid/docker/overlay2/l/BQ5UIPCQTWKCMS4GC73Q4B3AYI:/raid/docker/overlay2/l/X7HV3IJKDBUC57A7A7PD3QCPDO:/raid/docker/overlay2/l/KOKGCQVXCBDOPGO3R2ECSDK74V:/raid/docker/overlay2/l/EASY637QBL5KKMMUGCYRMOTREU:/raid/docker/overlay2/l/EK76IYFVRALHMMDTRXK3HZVEYG:/raid/docker/overlay2/l/D3C6RVSGSIRP2DHFT7QWDECMPB:/raid/docker/overlay2/l/VRJ24HDHBV2VA5KCN6V7VWEYHT:/raid/docker/overlay2/l/NBSCYFS4AVRZ5BEJ4A6ODVQWEA:/raid/docker/'
+
+Namespace(accum_grad=1, anneal_kl=1, anneal_temperature=0, batch_size=3200, dataset='iwslt/en-de', dependent_posterior=1, direction='ende', epochs=50, fix_model_steps=-1, heads=2, learning_rate=0.001, max_src_len=150, max_trg_len=150, mode='hard', residual_var=0, save_to='models/hard/t05', selfdependent_posterior=1, selfmode='soft', selftemperature=2.0, share_decoder_embeddings=1, share_word_embeddings=0, sharelstm=0, temperature=0.5, train_from='')
+
+Epoch: 0
+Training
+Epoch Step: 1 temperature: 0.500000 selft: 2.000000, lr: 0.000300, PPL: 40102.819304, Acc: 0.000000, exp xent: 40102.819304, xent: 10.599202, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 4023.467567
+Epoch Step: 51 temperature: 0.500000 selft: 2.000000, lr: 0.000300, PPL: 6373.296370, Acc: 0.055246, exp xent: 6373.296370, xent: 8.759872, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20425.858100
+Epoch Step: 101 temperature: 0.500000 selft: 2.000000, lr: 0.000300, PPL: 1180.645016, Acc: 0.064277, exp xent: 1180.645016, xent: 7.073816, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20157.684411
+Epoch Step: 151 temperature: 0.500000 selft: 2.000000, lr: 0.000300, PPL: 1116.498448, Acc: 0.078560, exp xent: 1116.498448, xent: 7.017953, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20134.587540
+Epoch Step: 201 temperature: 0.500000 selft: 2.000000, lr: 0.000300, PPL: 1006.435446, Acc: 0.092489, exp xent: 1006.435446, xent: 6.914170, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21078.136823
+Epoch Step: 251 temperature: 0.500000 selft: 2.000000, lr: 0.000300, PPL: 883.390028, Acc: 0.115609, exp xent: 883.390028, xent: 6.783767, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21011.651977
+Epoch Step: 301 temperature: 0.500000 selft: 2.000000, lr: 0.000300, PPL: 853.811848, Acc: 0.129953, exp xent: 853.811848, xent: 6.749711, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19931.006002
+Epoch Step: 351 temperature: 0.500000 selft: 2.000000, lr: 0.000300, PPL: 813.662780, Acc: 0.130956, exp xent: 813.662780, xent: 6.701546, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19610.257262
+Epoch Step: 401 temperature: 0.500000 selft: 2.000000, lr: 0.000300, PPL: 785.397100, Acc: 0.139302, exp xent: 785.397100, xent: 6.666189, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20507.598877
+Epoch Step: 451 temperature: 0.500000 selft: 2.000000, lr: 0.000299, PPL: 853.568093, Acc: 0.126139, exp xent: 853.568093, xent: 6.749425, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20053.480743
+Epoch Step: 501 temperature: 0.500000 selft: 2.000000, lr: 0.000299, PPL: 728.069775, Acc: 0.145968, exp xent: 728.069775, xent: 6.590397, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21007.064721
+Epoch Step: 551 temperature: 0.500000 selft: 2.000000, lr: 0.000299, PPL: 723.981425, Acc: 0.139613, exp xent: 723.981425, xent: 6.584766, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20402.508653
+Epoch Step: 601 temperature: 0.500000 selft: 2.000000, lr: 0.000299, PPL: 650.410312, Acc: 0.151051, exp xent: 650.410312, xent: 6.477603, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20973.032845
+Epoch Step: 651 temperature: 0.500000 selft: 2.000000, lr: 0.000299, PPL: 658.227887, Acc: 0.145025, exp xent: 658.227887, xent: 6.489551, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20331.270956
+Epoch Step: 701 temperature: 0.500000 selft: 2.000000, lr: 0.000299, PPL: 693.461035, Acc: 0.138935, exp xent: 693.461035, xent: 6.541695, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20822.772608
+Epoch Step: 751 temperature: 0.500000 selft: 2.000000, lr: 0.000299, PPL: 607.694532, Acc: 0.151614, exp xent: 607.694532, xent: 6.409672, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19985.660618
+Epoch Step: 801 temperature: 0.500000 selft: 2.000000, lr: 0.000299, PPL: 604.516299, Acc: 0.146858, exp xent: 604.516299, xent: 6.404429, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19679.825535
+Epoch Step: 851 temperature: 0.500000 selft: 2.000000, lr: 0.000299, PPL: 541.268774, Acc: 0.155514, exp xent: 541.268774, xent: 6.293916, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20785.094259
+Epoch Step: 901 temperature: 0.500000 selft: 2.000000, lr: 0.000299, PPL: 529.383817, Acc: 0.156441, exp xent: 529.383817, xent: 6.271714, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20155.738274
+Epoch Step: 951 temperature: 0.500000 selft: 2.000000, lr: 0.000299, PPL: 537.702217, Acc: 0.148245, exp xent: 537.702217, xent: 6.287305, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20673.647505
+Epoch Step: 1001 temperature: 0.500000 selft: 2.000000, lr: 0.000299, PPL: 476.668683, Acc: 0.158390, exp xent: 476.668683, xent: 6.166822, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20859.149088
+Epoch Step: 1051 temperature: 0.500000 selft: 2.000000, lr: 0.000299, PPL: 498.738499, Acc: 0.152644, exp xent: 498.738499, xent: 6.212082, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20721.832416
+Epoch Step: 1101 temperature: 0.500000 selft: 2.000000, lr: 0.000299, PPL: 461.441495, Acc: 0.153393, exp xent: 461.441495, xent: 6.134355, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19910.308086
+Epoch Step: 1151 temperature: 0.500000 selft: 2.000000, lr: 0.000299, PPL: 441.994036, Acc: 0.160960, exp xent: 441.994036, xent: 6.091296, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19695.891268
+Epoch Step: 1201 temperature: 0.500000 selft: 2.000000, lr: 0.000299, PPL: 404.451092, Acc: 0.168636, exp xent: 404.451092, xent: 6.002531, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21333.624913
+Epoch Step: 1251 temperature: 0.500000 selft: 2.000000, lr: 0.000299, PPL: 389.522751, Acc: 0.168932, exp xent: 389.522751, xent: 5.964922, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19866.232977
+Epoch Step: 1301 temperature: 0.500000 selft: 2.000000, lr: 0.000298, PPL: 411.687026, Acc: 0.160185, exp xent: 411.687026, xent: 6.020263, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20099.147416
+Epoch Step: 1351 temperature: 0.500000 selft: 2.000000, lr: 0.000298, PPL: 392.923004, Acc: 0.164780, exp xent: 392.923004, xent: 5.973614, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20678.537957
+Epoch Step: 1401 temperature: 0.500000 selft: 2.000000, lr: 0.000298, PPL: 368.205001, Acc: 0.174465, exp xent: 368.205001, xent: 5.908640, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19928.048967
+Epoch Step: 1451 temperature: 0.500000 selft: 2.000000, lr: 0.000298, PPL: 356.730364, Acc: 0.176477, exp xent: 356.730364, xent: 5.876980, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20746.381028
+Validation
+Val Result: PPL: 315.779433, Acc: 0.175338. exp xent: 315.779433, xent: 5.755044, kl: 0.000000
+
+Epoch: 1
+Training
+Epoch Step: 1 temperature: 0.500000 selft: 2.000000, lr: 0.000298, PPL: 290.733218, Acc: 0.197316, exp xent: 290.733218, xent: 5.672406, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 44122.696491
+Epoch Step: 51 temperature: 0.500000 selft: 2.000000, lr: 0.000298, PPL: 352.979867, Acc: 0.171983, exp xent: 352.979867, xent: 5.866411, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19828.876800
+Epoch Step: 101 temperature: 0.500000 selft: 2.000000, lr: 0.000298, PPL: 312.715050, Acc: 0.186946, exp xent: 312.715050, xent: 5.745292, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20000.396216
+Epoch Step: 151 temperature: 0.500000 selft: 2.000000, lr: 0.000298, PPL: 298.973191, Acc: 0.190410, exp xent: 298.973191, xent: 5.700354, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19695.867768
+Epoch Step: 201 temperature: 0.500000 selft: 2.000000, lr: 0.000298, PPL: 291.847304, Acc: 0.191847, exp xent: 291.847304, xent: 5.676231, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20559.230729
+Epoch Step: 251 temperature: 0.500000 selft: 2.000000, lr: 0.000298, PPL: 298.850867, Acc: 0.189233, exp xent: 298.850867, xent: 5.699945, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19753.009936
+Epoch Step: 301 temperature: 0.500000 selft: 2.000000, lr: 0.000298, PPL: 271.752814, Acc: 0.200132, exp xent: 271.752814, xent: 5.604893, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20718.425621
+Epoch Step: 351 temperature: 0.500000 selft: 2.000000, lr: 0.000298, PPL: 262.134083, Acc: 0.208646, exp xent: 262.134083, xent: 5.568856, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20866.169653
+Epoch Step: 401 temperature: 0.500000 selft: 2.000000, lr: 0.000298, PPL: 257.986594, Acc: 0.206571, exp xent: 257.986594, xent: 5.552908, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20991.191424
+Epoch Step: 451 temperature: 0.500000 selft: 2.000000, lr: 0.000298, PPL: 245.843577, Acc: 0.212431, exp xent: 245.843577, xent: 5.504695, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20536.354443
+Epoch Step: 501 temperature: 0.500000 selft: 2.000000, lr: 0.000298, PPL: 266.868304, Acc: 0.203224, exp xent: 266.868304, xent: 5.586755, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19300.817131
+Epoch Step: 551 temperature: 0.500000 selft: 2.000000, lr: 0.000298, PPL: 235.673644, Acc: 0.216963, exp xent: 235.673644, xent: 5.462448, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20441.065017
+Epoch Step: 601 temperature: 0.500000 selft: 2.000000, lr: 0.000298, PPL: 247.657202, Acc: 0.211441, exp xent: 247.657202, xent: 5.512046, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20939.671391
+Epoch Step: 651 temperature: 0.500000 selft: 2.000000, lr: 0.000298, PPL: 214.373907, Acc: 0.226201, exp xent: 214.373907, xent: 5.367722, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20461.497335
+Epoch Step: 701 temperature: 0.500000 selft: 2.000000, lr: 0.000297, PPL: 220.079341, Acc: 0.222893, exp xent: 220.079341, xent: 5.393988, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20570.019292
+Epoch Step: 751 temperature: 0.500000 selft: 2.000000, lr: 0.000297, PPL: 212.713217, Acc: 0.228363, exp xent: 212.713217, xent: 5.359945, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20559.801759
+Epoch Step: 801 temperature: 0.500000 selft: 2.000000, lr: 0.000297, PPL: 207.615651, Acc: 0.230643, exp xent: 207.615651, xent: 5.335689, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20858.769795
+Epoch Step: 851 temperature: 0.500000 selft: 2.000000, lr: 0.000297, PPL: 205.731727, Acc: 0.228987, exp xent: 205.731727, xent: 5.326573, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20771.131435
+Epoch Step: 901 temperature: 0.500000 selft: 2.000000, lr: 0.000297, PPL: 190.355616, Acc: 0.235673, exp xent: 190.355616, xent: 5.248894, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19769.730799
+Epoch Step: 951 temperature: 0.500000 selft: 2.000000, lr: 0.000297, PPL: 192.124145, Acc: 0.238459, exp xent: 192.124145, xent: 5.258142, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20477.591921
+Epoch Step: 1001 temperature: 0.500000 selft: 2.000000, lr: 0.000297, PPL: 214.040816, Acc: 0.223528, exp xent: 214.040816, xent: 5.366167, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20139.593686
+Epoch Step: 1051 temperature: 0.500000 selft: 2.000000, lr: 0.000297, PPL: 169.222733, Acc: 0.251094, exp xent: 169.222733, xent: 5.131216, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19429.956064
+Epoch Step: 1101 temperature: 0.500000 selft: 2.000000, lr: 0.000297, PPL: 156.270883, Acc: 0.264530, exp xent: 156.270883, xent: 5.051591, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20766.417244
+Epoch Step: 1151 temperature: 0.500000 selft: 2.000000, lr: 0.000297, PPL: 186.114756, Acc: 0.236819, exp xent: 186.114756, xent: 5.226363, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20319.905062
+Epoch Step: 1201 temperature: 0.500000 selft: 2.000000, lr: 0.000297, PPL: 159.778211, Acc: 0.256869, exp xent: 159.778211, xent: 5.073787, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20888.903318
+Epoch Step: 1251 temperature: 0.500000 selft: 2.000000, lr: 0.000297, PPL: 179.570965, Acc: 0.238989, exp xent: 179.570965, xent: 5.190570, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20057.678543
+Epoch Step: 1301 temperature: 0.500000 selft: 2.000000, lr: 0.000297, PPL: 163.939740, Acc: 0.253435, exp xent: 163.939740, xent: 5.099499, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20500.761844
+Epoch Step: 1351 temperature: 0.500000 selft: 2.000000, lr: 0.000297, PPL: 161.424124, Acc: 0.256470, exp xent: 161.424124, xent: 5.084035, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20233.055850
+Epoch Step: 1401 temperature: 0.500000 selft: 2.000000, lr: 0.000297, PPL: 160.866039, Acc: 0.256507, exp xent: 160.866039, xent: 5.080572, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20544.654654
+Epoch Step: 1451 temperature: 0.500000 selft: 2.000000, lr: 0.000297, PPL: 170.633494, Acc: 0.245626, exp xent: 170.633494, xent: 5.139518, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19774.015954
+Validation
+Val Result: PPL: 129.656842, Acc: 0.266914. exp xent: 129.656842, xent: 4.864891, kl: 0.000000
+
+Epoch: 2
+Training
+Epoch Step: 1 temperature: 0.500000 selft: 2.000000, lr: 0.000297, PPL: 154.067322, Acc: 0.258945, exp xent: 154.067322, xent: 5.037390, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 45182.518231
+Epoch Step: 51 temperature: 0.500000 selft: 2.000000, lr: 0.000297, PPL: 144.273963, Acc: 0.260870, exp xent: 144.273963, xent: 4.971714, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19994.987487
+Epoch Step: 101 temperature: 0.500000 selft: 2.000000, lr: 0.000296, PPL: 139.786879, Acc: 0.266752, exp xent: 139.786879, xent: 4.940119, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20737.851396
+Epoch Step: 151 temperature: 0.500000 selft: 2.000000, lr: 0.000296, PPL: 140.030348, Acc: 0.264683, exp xent: 140.030348, xent: 4.941859, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20893.103887
+Epoch Step: 201 temperature: 0.500000 selft: 2.000000, lr: 0.000296, PPL: 135.364761, Acc: 0.271255, exp xent: 135.364761, xent: 4.907973, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20632.774053
+Epoch Step: 251 temperature: 0.500000 selft: 2.000000, lr: 0.000296, PPL: 148.927453, Acc: 0.254469, exp xent: 148.927453, xent: 5.003459, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20574.403560
+Epoch Step: 301 temperature: 0.500000 selft: 2.000000, lr: 0.000296, PPL: 138.342600, Acc: 0.266830, exp xent: 138.342600, xent: 4.929733, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20037.148908
+Epoch Step: 351 temperature: 0.500000 selft: 2.000000, lr: 0.000296, PPL: 134.854745, Acc: 0.267227, exp xent: 134.854745, xent: 4.904198, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20030.593270
+Epoch Step: 401 temperature: 0.500000 selft: 2.000000, lr: 0.000296, PPL: 120.158483, Acc: 0.282999, exp xent: 120.158483, xent: 4.788812, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20273.132116
+Epoch Step: 451 temperature: 0.500000 selft: 2.000000, lr: 0.000296, PPL: 117.238534, Acc: 0.286474, exp xent: 117.238534, xent: 4.764211, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20863.709522
+Epoch Step: 501 temperature: 0.500000 selft: 2.000000, lr: 0.000296, PPL: 104.248869, Acc: 0.301949, exp xent: 104.248869, xent: 4.646781, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20138.752613
+Epoch Step: 551 temperature: 0.500000 selft: 2.000000, lr: 0.000296, PPL: 108.943757, Acc: 0.295319, exp xent: 108.943757, xent: 4.690832, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20134.349980
+Epoch Step: 601 temperature: 0.500000 selft: 2.000000, lr: 0.000296, PPL: 123.364499, Acc: 0.277179, exp xent: 123.364499, xent: 4.815143, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20638.040746
+Epoch Step: 651 temperature: 0.500000 selft: 2.000000, lr: 0.000296, PPL: 120.023670, Acc: 0.280359, exp xent: 120.023670, xent: 4.787689, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20068.159374
+Epoch Step: 701 temperature: 0.500000 selft: 2.000000, lr: 0.000296, PPL: 114.197853, Acc: 0.290006, exp xent: 114.197853, xent: 4.737932, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20974.268768
+Epoch Step: 751 temperature: 0.500000 selft: 2.000000, lr: 0.000296, PPL: 119.455928, Acc: 0.284305, exp xent: 119.455928, xent: 4.782948, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20614.296496
+Epoch Step: 801 temperature: 0.500000 selft: 2.000000, lr: 0.000296, PPL: 106.662612, Acc: 0.295145, exp xent: 106.662612, xent: 4.669671, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20516.918889
+Epoch Step: 851 temperature: 0.500000 selft: 2.000000, lr: 0.000296, PPL: 108.186400, Acc: 0.293757, exp xent: 108.186400, xent: 4.683856, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20390.895119
+Epoch Step: 901 temperature: 0.500000 selft: 2.000000, lr: 0.000296, PPL: 105.808063, Acc: 0.295975, exp xent: 105.808063, xent: 4.661627, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20402.778207
+Epoch Step: 951 temperature: 0.500000 selft: 2.000000, lr: 0.000295, PPL: 117.568755, Acc: 0.280861, exp xent: 117.568755, xent: 4.767023, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19369.926379
+Epoch Step: 1001 temperature: 0.500000 selft: 2.000000, lr: 0.000295, PPL: 105.352693, Acc: 0.299611, exp xent: 105.352693, xent: 4.657314, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20497.912200
+Epoch Step: 1051 temperature: 0.500000 selft: 2.000000, lr: 0.000295, PPL: 110.873957, Acc: 0.289821, exp xent: 110.873957, xent: 4.708394, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20051.429496
+Epoch Step: 1101 temperature: 0.500000 selft: 2.000000, lr: 0.000295, PPL: 102.360201, Acc: 0.299194, exp xent: 102.360201, xent: 4.628498, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20699.046585
+Epoch Step: 1151 temperature: 0.500000 selft: 2.000000, lr: 0.000295, PPL: 114.126805, Acc: 0.286118, exp xent: 114.126805, xent: 4.737310, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20277.633418
+Epoch Step: 1201 temperature: 0.500000 selft: 2.000000, lr: 0.000295, PPL: 109.395853, Acc: 0.288701, exp xent: 109.395853, xent: 4.694973, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20604.702338
+Epoch Step: 1251 temperature: 0.500000 selft: 2.000000, lr: 0.000295, PPL: 96.636678, Acc: 0.305499, exp xent: 96.636678, xent: 4.570958, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20634.787690
+Epoch Step: 1301 temperature: 0.500000 selft: 2.000000, lr: 0.000295, PPL: 87.235619, Acc: 0.321006, exp xent: 87.235619, xent: 4.468613, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20559.507885
+Epoch Step: 1351 temperature: 0.500000 selft: 2.000000, lr: 0.000295, PPL: 85.537869, Acc: 0.325516, exp xent: 85.537869, xent: 4.448959, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20925.344972
+Epoch Step: 1401 temperature: 0.500000 selft: 2.000000, lr: 0.000295, PPL: 94.445888, Acc: 0.309545, exp xent: 94.445888, xent: 4.548027, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20545.858465
+Epoch Step: 1451 temperature: 0.500000 selft: 2.000000, lr: 0.000295, PPL: 86.882149, Acc: 0.321398, exp xent: 86.882149, xent: 4.464553, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20614.254434
+Validation
+Val Result: PPL: 70.351411, Acc: 0.343693. exp xent: 70.351411, xent: 4.253503, kl: 0.000000
+
+Epoch: 3
+Training
+Epoch Step: 1 temperature: 0.500000 selft: 2.000000, lr: 0.000295, PPL: 88.505753, Acc: 0.318649, exp xent: 88.505753, xent: 4.483068, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 45259.548794
+Epoch Step: 51 temperature: 0.500000 selft: 2.000000, lr: 0.000295, PPL: 80.400426, Acc: 0.324805, exp xent: 80.400426, xent: 4.387019, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21190.469030
+Epoch Step: 101 temperature: 0.500000 selft: 2.000000, lr: 0.000295, PPL: 67.949256, Acc: 0.347372, exp xent: 67.949256, xent: 4.218761, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21256.528696
+Epoch Step: 151 temperature: 0.500000 selft: 2.000000, lr: 0.000295, PPL: 85.108968, Acc: 0.315844, exp xent: 85.108968, xent: 4.443932, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20626.517008
+Epoch Step: 201 temperature: 0.500000 selft: 2.000000, lr: 0.000295, PPL: 78.842049, Acc: 0.327981, exp xent: 78.842049, xent: 4.367446, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20503.059574
+Epoch Step: 251 temperature: 0.500000 selft: 2.000000, lr: 0.000295, PPL: 72.924121, Acc: 0.337148, exp xent: 72.924121, xent: 4.289419, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20661.397309
+Epoch Step: 301 temperature: 0.500000 selft: 2.000000, lr: 0.000295, PPL: 80.857671, Acc: 0.322924, exp xent: 80.857671, xent: 4.392690, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20593.733425
+Epoch Step: 351 temperature: 0.500000 selft: 2.000000, lr: 0.000294, PPL: 79.320538, Acc: 0.325772, exp xent: 79.320538, xent: 4.373497, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20945.762766
+Epoch Step: 401 temperature: 0.500000 selft: 2.000000, lr: 0.000294, PPL: 69.234596, Acc: 0.342020, exp xent: 69.234596, xent: 4.237501, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19955.040714
+Epoch Step: 451 temperature: 0.500000 selft: 2.000000, lr: 0.000294, PPL: 75.110064, Acc: 0.329758, exp xent: 75.110064, xent: 4.318955, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20563.591551
+Epoch Step: 501 temperature: 0.500000 selft: 2.000000, lr: 0.000294, PPL: 76.212633, Acc: 0.332114, exp xent: 76.212633, xent: 4.333527, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20862.099737
+Epoch Step: 551 temperature: 0.500000 selft: 2.000000, lr: 0.000294, PPL: 77.786470, Acc: 0.328002, exp xent: 77.786470, xent: 4.353968, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20512.039011
+Epoch Step: 601 temperature: 0.500000 selft: 2.000000, lr: 0.000294, PPL: 71.484553, Acc: 0.337645, exp xent: 71.484553, xent: 4.269481, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19912.377511
+Epoch Step: 651 temperature: 0.500000 selft: 2.000000, lr: 0.000294, PPL: 69.170282, Acc: 0.343869, exp xent: 69.170282, xent: 4.236571, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20989.323470
+Epoch Step: 701 temperature: 0.500000 selft: 2.000000, lr: 0.000294, PPL: 65.768302, Acc: 0.353280, exp xent: 65.768302, xent: 4.186138, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21446.577000
+Epoch Step: 751 temperature: 0.500000 selft: 2.000000, lr: 0.000294, PPL: 74.516053, Acc: 0.331885, exp xent: 74.516053, xent: 4.311015, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20634.732640
+Epoch Step: 801 temperature: 0.500000 selft: 2.000000, lr: 0.000294, PPL: 63.350177, Acc: 0.355760, exp xent: 63.350177, xent: 4.148678, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21374.894846
+Epoch Step: 851 temperature: 0.500000 selft: 2.000000, lr: 0.000294, PPL: 73.644166, Acc: 0.335730, exp xent: 73.644166, xent: 4.299245, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20248.438302
+Epoch Step: 901 temperature: 0.500000 selft: 2.000000, lr: 0.000294, PPL: 60.135311, Acc: 0.363661, exp xent: 60.135311, xent: 4.096597, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21153.719885
+Epoch Step: 951 temperature: 0.500000 selft: 2.000000, lr: 0.000294, PPL: 67.027804, Acc: 0.348671, exp xent: 67.027804, xent: 4.205108, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21460.430189
+Epoch Step: 1001 temperature: 0.500000 selft: 2.000000, lr: 0.000294, PPL: 65.160676, Acc: 0.349670, exp xent: 65.160676, xent: 4.176856, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20369.276715
+Epoch Step: 1051 temperature: 0.500000 selft: 2.000000, lr: 0.000294, PPL: 56.467705, Acc: 0.369522, exp xent: 56.467705, xent: 4.033669, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21655.977082
+Epoch Step: 1101 temperature: 0.500000 selft: 2.000000, lr: 0.000294, PPL: 57.834196, Acc: 0.367366, exp xent: 57.834196, xent: 4.057580, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21203.694257
+Epoch Step: 1151 temperature: 0.500000 selft: 2.000000, lr: 0.000294, PPL: 63.826303, Acc: 0.354983, exp xent: 63.826303, xent: 4.156165, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20920.641704
+Epoch Step: 1201 temperature: 0.500000 selft: 2.000000, lr: 0.000294, PPL: 54.082300, Acc: 0.374401, exp xent: 54.082300, xent: 3.990507, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21184.980247
+Epoch Step: 1251 temperature: 0.500000 selft: 2.000000, lr: 0.000293, PPL: 71.552965, Acc: 0.335559, exp xent: 71.552965, xent: 4.270438, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20028.328345
+Epoch Step: 1301 temperature: 0.500000 selft: 2.000000, lr: 0.000293, PPL: 57.823827, Acc: 0.367715, exp xent: 57.823827, xent: 4.057401, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20667.275325
+Epoch Step: 1351 temperature: 0.500000 selft: 2.000000, lr: 0.000293, PPL: 58.655365, Acc: 0.363314, exp xent: 58.655365, xent: 4.071679, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19314.821468
+Epoch Step: 1401 temperature: 0.500000 selft: 2.000000, lr: 0.000293, PPL: 58.628701, Acc: 0.359101, exp xent: 58.628701, xent: 4.071224, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 18971.688187
+Epoch Step: 1451 temperature: 0.500000 selft: 2.000000, lr: 0.000293, PPL: 61.322390, Acc: 0.356247, exp xent: 61.322390, xent: 4.116145, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 18870.724037
+Validation
+Val Result: PPL: 43.797876, Acc: 0.401091. exp xent: 43.797876, xent: 3.779585, kl: 0.000000
+
+Epoch: 4
+Training
+Epoch Step: 1 temperature: 0.500000 selft: 2.000000, lr: 0.000293, PPL: 58.782326, Acc: 0.359641, exp xent: 58.782326, xent: 4.073841, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 41857.041557
+Epoch Step: 51 temperature: 0.500000 selft: 2.000000, lr: 0.000293, PPL: 50.339085, Acc: 0.377284, exp xent: 50.339085, xent: 3.918782, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 18176.654324
+Epoch Step: 101 temperature: 0.500000 selft: 2.000000, lr: 0.000293, PPL: 56.707033, Acc: 0.359199, exp xent: 56.707033, xent: 4.037898, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19993.638043
+Epoch Step: 151 temperature: 0.500000 selft: 2.000000, lr: 0.000293, PPL: 54.334396, Acc: 0.367381, exp xent: 54.334396, xent: 3.995157, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20031.964085
+Epoch Step: 201 temperature: 0.500000 selft: 2.000000, lr: 0.000293, PPL: 47.833001, Acc: 0.385275, exp xent: 47.833001, xent: 3.867716, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20712.727398
+Epoch Step: 251 temperature: 0.500000 selft: 2.000000, lr: 0.000293, PPL: 55.898423, Acc: 0.364343, exp xent: 55.898423, xent: 4.023536, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20018.905323
+Epoch Step: 301 temperature: 0.500000 selft: 2.000000, lr: 0.000293, PPL: 47.417784, Acc: 0.386263, exp xent: 47.417784, xent: 3.858997, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20648.406664
+Epoch Step: 351 temperature: 0.500000 selft: 2.000000, lr: 0.000293, PPL: 51.489713, Acc: 0.373100, exp xent: 51.489713, xent: 3.941382, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20009.489724
+Epoch Step: 401 temperature: 0.500000 selft: 2.000000, lr: 0.000293, PPL: 47.398419, Acc: 0.384403, exp xent: 47.398419, xent: 3.858589, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20526.698424
+Epoch Step: 451 temperature: 0.500000 selft: 2.000000, lr: 0.000293, PPL: 44.564949, Acc: 0.396045, exp xent: 44.564949, xent: 3.796948, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20794.678660
+Epoch Step: 501 temperature: 0.500000 selft: 2.000000, lr: 0.000293, PPL: 43.848775, Acc: 0.398116, exp xent: 43.848775, xent: 3.780747, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20438.473157
+Epoch Step: 551 temperature: 0.500000 selft: 2.000000, lr: 0.000293, PPL: 48.621585, Acc: 0.383716, exp xent: 48.621585, xent: 3.884068, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20202.953318
+Epoch Step: 601 temperature: 0.500000 selft: 2.000000, lr: 0.000292, PPL: 38.584089, Acc: 0.415729, exp xent: 38.584089, xent: 3.652840, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21192.506398
+Epoch Step: 651 temperature: 0.500000 selft: 2.000000, lr: 0.000292, PPL: 56.603904, Acc: 0.363191, exp xent: 56.603904, xent: 4.036078, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19813.482293
+Epoch Step: 701 temperature: 0.500000 selft: 2.000000, lr: 0.000292, PPL: 45.813788, Acc: 0.392895, exp xent: 45.813788, xent: 3.824585, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20623.413611
+Epoch Step: 751 temperature: 0.500000 selft: 2.000000, lr: 0.000292, PPL: 40.110486, Acc: 0.409876, exp xent: 40.110486, xent: 3.691638, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21611.801822
+Epoch Step: 801 temperature: 0.500000 selft: 2.000000, lr: 0.000292, PPL: 42.296024, Acc: 0.402748, exp xent: 42.296024, xent: 3.744693, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20865.470413
+Epoch Step: 851 temperature: 0.500000 selft: 2.000000, lr: 0.000292, PPL: 44.075064, Acc: 0.395501, exp xent: 44.075064, xent: 3.785894, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20753.101997
+Epoch Step: 901 temperature: 0.500000 selft: 2.000000, lr: 0.000292, PPL: 41.831128, Acc: 0.401264, exp xent: 41.831128, xent: 3.733641, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21315.057133
+Epoch Step: 951 temperature: 0.500000 selft: 2.000000, lr: 0.000292, PPL: 47.121395, Acc: 0.386369, exp xent: 47.121395, xent: 3.852727, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20820.069207
+Epoch Step: 1001 temperature: 0.500000 selft: 2.000000, lr: 0.000292, PPL: 46.828915, Acc: 0.387023, exp xent: 46.828915, xent: 3.846501, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20828.298115
+Epoch Step: 1051 temperature: 0.500000 selft: 2.000000, lr: 0.000292, PPL: 47.280899, Acc: 0.385989, exp xent: 47.280899, xent: 3.856106, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20660.356793
+Epoch Step: 1101 temperature: 0.500000 selft: 2.000000, lr: 0.000292, PPL: 43.745469, Acc: 0.397585, exp xent: 43.745469, xent: 3.778388, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20087.343977
+Epoch Step: 1151 temperature: 0.500000 selft: 2.000000, lr: 0.000292, PPL: 42.032425, Acc: 0.401334, exp xent: 42.032425, xent: 3.738441, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20590.704359
+Epoch Step: 1201 temperature: 0.500000 selft: 2.000000, lr: 0.000292, PPL: 39.959143, Acc: 0.406355, exp xent: 39.959143, xent: 3.687858, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20228.564926
+Epoch Step: 1251 temperature: 0.500000 selft: 2.000000, lr: 0.000292, PPL: 43.944740, Acc: 0.395468, exp xent: 43.944740, xent: 3.782933, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20914.693257
+Epoch Step: 1301 temperature: 0.500000 selft: 2.000000, lr: 0.000292, PPL: 42.119876, Acc: 0.401343, exp xent: 42.119876, xent: 3.740520, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20069.711607
+Epoch Step: 1351 temperature: 0.500000 selft: 2.000000, lr: 0.000292, PPL: 39.049596, Acc: 0.412242, exp xent: 39.049596, xent: 3.664833, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21119.661003
+Epoch Step: 1401 temperature: 0.500000 selft: 2.000000, lr: 0.000292, PPL: 42.542090, Acc: 0.400989, exp xent: 42.542090, xent: 3.750494, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20154.966510
+Epoch Step: 1451 temperature: 0.500000 selft: 2.000000, lr: 0.000292, PPL: 43.686959, Acc: 0.395989, exp xent: 43.686959, xent: 3.777050, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20213.102667
+Validation
+Val Result: PPL: 31.484530, Acc: 0.439153. exp xent: 31.484530, xent: 3.449496, kl: 0.000000
+
+Epoch: 5
+Training
+Epoch Step: 1 temperature: 0.500000 selft: 2.000000, lr: 0.000291, PPL: 42.462406, Acc: 0.394004, exp xent: 42.462406, xent: 3.748619, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 42906.469147
+Epoch Step: 51 temperature: 0.500000 selft: 2.000000, lr: 0.000291, PPL: 33.423700, Acc: 0.425351, exp xent: 33.423700, xent: 3.509265, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20942.600608
+Epoch Step: 101 temperature: 0.500000 selft: 2.000000, lr: 0.000291, PPL: 43.141894, Acc: 0.388665, exp xent: 43.141894, xent: 3.764495, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19708.788684
+Epoch Step: 151 temperature: 0.500000 selft: 2.000000, lr: 0.000291, PPL: 37.070917, Acc: 0.410781, exp xent: 37.070917, xent: 3.612833, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20329.806100
+Epoch Step: 201 temperature: 0.500000 selft: 2.000000, lr: 0.000291, PPL: 37.284680, Acc: 0.408792, exp xent: 37.284680, xent: 3.618583, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20710.912752
+Epoch Step: 251 temperature: 0.500000 selft: 2.000000, lr: 0.000291, PPL: 31.957729, Acc: 0.432298, exp xent: 31.957729, xent: 3.464414, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20791.304252
+Epoch Step: 301 temperature: 0.500000 selft: 2.000000, lr: 0.000291, PPL: 39.860924, Acc: 0.401191, exp xent: 39.860924, xent: 3.685396, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19898.092555
+Epoch Step: 351 temperature: 0.500000 selft: 2.000000, lr: 0.000291, PPL: 36.671843, Acc: 0.412784, exp xent: 36.671843, xent: 3.602009, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20660.764082
+Epoch Step: 401 temperature: 0.500000 selft: 2.000000, lr: 0.000291, PPL: 29.740621, Acc: 0.443283, exp xent: 29.740621, xent: 3.392514, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20834.464124
+Epoch Step: 451 temperature: 0.500000 selft: 2.000000, lr: 0.000291, PPL: 35.346876, Acc: 0.419334, exp xent: 35.346876, xent: 3.565210, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19863.349286
+Epoch Step: 501 temperature: 0.500000 selft: 2.000000, lr: 0.000291, PPL: 39.911746, Acc: 0.400315, exp xent: 39.911746, xent: 3.686671, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19703.955978
+Epoch Step: 551 temperature: 0.500000 selft: 2.000000, lr: 0.000291, PPL: 35.401366, Acc: 0.416571, exp xent: 35.401366, xent: 3.566750, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20814.171582
+Epoch Step: 601 temperature: 0.500000 selft: 2.000000, lr: 0.000291, PPL: 33.149417, Acc: 0.428324, exp xent: 33.149417, xent: 3.501025, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21623.858269
+Epoch Step: 651 temperature: 0.500000 selft: 2.000000, lr: 0.000291, PPL: 33.814458, Acc: 0.426862, exp xent: 33.814458, xent: 3.520888, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20321.820704
+Epoch Step: 701 temperature: 0.500000 selft: 2.000000, lr: 0.000291, PPL: 30.410316, Acc: 0.440424, exp xent: 30.410316, xent: 3.414782, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21677.081972
+Epoch Step: 751 temperature: 0.500000 selft: 2.000000, lr: 0.000291, PPL: 33.183508, Acc: 0.422717, exp xent: 33.183508, xent: 3.502053, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20861.524928
+Epoch Step: 801 temperature: 0.500000 selft: 2.000000, lr: 0.000291, PPL: 31.667446, Acc: 0.431271, exp xent: 31.667446, xent: 3.455289, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20173.970313
+Epoch Step: 851 temperature: 0.500000 selft: 2.000000, lr: 0.000291, PPL: 34.035058, Acc: 0.422567, exp xent: 34.035058, xent: 3.527391, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20349.998139
+Epoch Step: 901 temperature: 0.500000 selft: 2.000000, lr: 0.000290, PPL: 35.124523, Acc: 0.417469, exp xent: 35.124523, xent: 3.558900, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20234.376570
+Epoch Step: 951 temperature: 0.500000 selft: 2.000000, lr: 0.000290, PPL: 32.575294, Acc: 0.429620, exp xent: 32.575294, xent: 3.483554, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20397.523520
+Epoch Step: 1001 temperature: 0.500000 selft: 2.000000, lr: 0.000290, PPL: 28.076965, Acc: 0.452965, exp xent: 28.076965, xent: 3.334949, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21391.777642
+Epoch Step: 1051 temperature: 0.500000 selft: 2.000000, lr: 0.000290, PPL: 32.140074, Acc: 0.433321, exp xent: 32.140074, xent: 3.470104, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21289.415867
+Epoch Step: 1101 temperature: 0.500000 selft: 2.000000, lr: 0.000290, PPL: 35.586094, Acc: 0.414309, exp xent: 35.586094, xent: 3.571955, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19944.230378
+Epoch Step: 1151 temperature: 0.500000 selft: 2.000000, lr: 0.000290, PPL: 30.098776, Acc: 0.440756, exp xent: 30.098776, xent: 3.404484, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21006.998804
+Epoch Step: 1201 temperature: 0.500000 selft: 2.000000, lr: 0.000290, PPL: 34.452561, Acc: 0.420154, exp xent: 34.452561, xent: 3.539583, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20133.939455
+Epoch Step: 1251 temperature: 0.500000 selft: 2.000000, lr: 0.000290, PPL: 32.925362, Acc: 0.428173, exp xent: 32.925362, xent: 3.494243, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20659.135116
+Epoch Step: 1301 temperature: 0.500000 selft: 2.000000, lr: 0.000290, PPL: 33.827406, Acc: 0.421415, exp xent: 33.827406, xent: 3.521271, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20216.525973
+Epoch Step: 1351 temperature: 0.500000 selft: 2.000000, lr: 0.000290, PPL: 36.727895, Acc: 0.411729, exp xent: 36.727895, xent: 3.603537, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20006.976559
+Epoch Step: 1401 temperature: 0.500000 selft: 2.000000, lr: 0.000290, PPL: 34.319524, Acc: 0.419052, exp xent: 34.319524, xent: 3.535714, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20157.634239
+Epoch Step: 1451 temperature: 0.500000 selft: 2.000000, lr: 0.000290, PPL: 27.740581, Acc: 0.452865, exp xent: 27.740581, xent: 3.322896, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21319.386751
+Validation
+Val Result: PPL: 24.511544, Acc: 0.468180. exp xent: 24.511544, xent: 3.199144, kl: 0.000000
+
+Epoch: 6
+Training
+Epoch Step: 1 temperature: 0.500000 selft: 2.000000, lr: 0.000290, PPL: 33.118147, Acc: 0.426257, exp xent: 33.118147, xent: 3.500081, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 46792.335871
+Epoch Step: 51 temperature: 0.500000 selft: 2.000000, lr: 0.000290, PPL: 28.641247, Acc: 0.438811, exp xent: 28.641247, xent: 3.354848, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20411.062013
+Epoch Step: 101 temperature: 0.500000 selft: 2.000000, lr: 0.000290, PPL: 26.435797, Acc: 0.451271, exp xent: 26.435797, xent: 3.274719, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21278.648757
+Epoch Step: 151 temperature: 0.500000 selft: 2.000000, lr: 0.000290, PPL: 27.538571, Acc: 0.444585, exp xent: 27.538571, xent: 3.315588, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20399.019437
+Epoch Step: 201 temperature: 0.500000 selft: 2.000000, lr: 0.000290, PPL: 27.755580, Acc: 0.445521, exp xent: 27.755580, xent: 3.323437, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 21138.207276
+Epoch Step: 251 temperature: 0.500000 selft: 2.000000, lr: 0.000289, PPL: 29.130495, Acc: 0.438570, exp xent: 29.130495, xent: 3.371786, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20735.833816
+Epoch Step: 301 temperature: 0.500000 selft: 2.000000, lr: 0.000289, PPL: 29.861618, Acc: 0.431550, exp xent: 29.861618, xent: 3.396574, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20304.540176
+Epoch Step: 351 temperature: 0.500000 selft: 2.000000, lr: 0.000289, PPL: 29.434344, Acc: 0.430990, exp xent: 29.434344, xent: 3.382162, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20267.889843
+Epoch Step: 401 temperature: 0.500000 selft: 2.000000, lr: 0.000289, PPL: 27.972428, Acc: 0.442303, exp xent: 27.972428, xent: 3.331219, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19992.998809
+Epoch Step: 451 temperature: 0.500000 selft: 2.000000, lr: 0.000289, PPL: 26.239172, Acc: 0.455771, exp xent: 26.239172, xent: 3.267253, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20481.862942
+Epoch Step: 501 temperature: 0.500000 selft: 2.000000, lr: 0.000289, PPL: 29.254091, Acc: 0.435137, exp xent: 29.254091, xent: 3.376019, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20555.636809
+Epoch Step: 551 temperature: 0.500000 selft: 2.000000, lr: 0.000289, PPL: 29.125443, Acc: 0.437723, exp xent: 29.125443, xent: 3.371612, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20024.581693
+Epoch Step: 601 temperature: 0.500000 selft: 2.000000, lr: 0.000289, PPL: 30.189326, Acc: 0.433980, exp xent: 30.189326, xent: 3.407488, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20579.849108
+Epoch Step: 651 temperature: 0.500000 selft: 2.000000, lr: 0.000289, PPL: 27.473641, Acc: 0.447537, exp xent: 27.473641, xent: 3.313227, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19732.178116
+Epoch Step: 701 temperature: 0.500000 selft: 2.000000, lr: 0.000289, PPL: 24.030535, Acc: 0.465361, exp xent: 24.030535, xent: 3.179325, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20163.494855
+Epoch Step: 751 temperature: 0.500000 selft: 2.000000, lr: 0.000289, PPL: 28.213740, Acc: 0.441364, exp xent: 28.213740, xent: 3.339809, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20207.664141
+Epoch Step: 801 temperature: 0.500000 selft: 2.000000, lr: 0.000289, PPL: 26.170420, Acc: 0.453098, exp xent: 26.170420, xent: 3.264630, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20057.928213
+Epoch Step: 851 temperature: 0.500000 selft: 2.000000, lr: 0.000289, PPL: 29.927905, Acc: 0.433499, exp xent: 29.927905, xent: 3.398791, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19659.450012
+Epoch Step: 901 temperature: 0.500000 selft: 2.000000, lr: 0.000289, PPL: 24.030413, Acc: 0.467523, exp xent: 24.030413, xent: 3.179320, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20957.302905
+Epoch Step: 951 temperature: 0.500000 selft: 2.000000, lr: 0.000289, PPL: 28.397440, Acc: 0.442406, exp xent: 28.397440, xent: 3.346299, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 19909.610544
+Epoch Step: 1001 temperature: 0.500000 selft: 2.000000, lr: 0.000289, PPL: 25.779523, Acc: 0.457685, exp xent: 25.779523, xent: 3.249581, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20216.363352
+Epoch Step: 1051 temperature: 0.500000 selft: 2.000000, lr: 0.000289, PPL: 25.877503, Acc: 0.455597, exp xent: 25.877503, xent: 3.253374, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20235.289014
+Epoch Step: 1101 temperature: 0.500000 selft: 2.000000, lr: 0.000289, PPL: 27.468680, Acc: 0.446545, exp xent: 27.468680, xent: 3.313046, kl: 0.000000. alpha: 1.000000, Tokens per Sec: 20979.370064

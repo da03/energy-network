@@ -27,7 +27,7 @@ parser.add_argument("--direction", default="ende",
                     choices=["ende", "deen"],  help="Direction of translation")
 parser.add_argument("--mode", default="soft",
                     choices=["soft", "var"],  help="Training model. Default to be vanilla transformer with soft attention.")
-parser.add_argument("--beam_size", type=int, default=5, help="Beam Size.")
+parser.add_argument("--beam_size", type=int, default=1, help="Beam Size.")
 parser.add_argument("--max_trg_len", type=int, default=150, help="Maximum Trg Length")
 parser.add_argument("--model", default="", help="Model Path")
 opts = parser.parse_args()
@@ -63,10 +63,17 @@ def main(opts):
     TRG.vocab = checkpoint['trg_vocab']
     src_vocab_size = len(SRC.vocab.itos)
     trg_vocab_size = len(TRG.vocab.itos)
+    sharelstm = checkpoint['opts'].sharelstm if hasattr(checkpoint['opts'], 'lstm') else 0
+    residual_var = checkpoint['opts'].residualvar if hasattr(checkpoint['opts'], 'residualvar') else 0
     print ('SRC Vocab Size: %d, TRG Vocab Size: %d'%(src_vocab_size, trg_vocab_size))
+    #model = make_model(checkpoint['opts'].mode, src_vocab_size, trg_vocab_size, n_enc=5, n_dec=5,
+    #               d_model=278, d_ff=507, h=2, dropout=0.1)
     model = make_model(checkpoint['opts'].mode, src_vocab_size, trg_vocab_size, n_enc=5, n_dec=5,
-                   d_model=278, d_ff=507, h=2, dropout=0.1)
+                   d_model=278, d_ff=507, h=2, dropout=0.1, share_decoder_embeddings=checkpoint['opts'].share_decoder_embeddings,
+                   share_word_embeddings=checkpoint['opts'].share_word_embeddings, dependent_posterior=checkpoint['opts'].dependent_posterior,
+                   sharelstm=sharelstm, residual_var=residual_var)
     model.load_state_dict(checkpoint['model'])
+    model.trg_pad = TRG.vocab.stoi["<blank>"]
     model.cuda()
     optimizer = checkpoint['optimizer']
 
@@ -100,18 +107,17 @@ def main(opts):
                 trg_mask = trg_mask & Variable(subsequent_mask(trg.size(-1)).to(trg_mask))
                 trg_y = trg[:, 1:]
                 ntokens = (trg_y != TRG.vocab.stoi["<blank>"]).data.view(-1).sum().item()
-                decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model(src, trg, src_mask, trg_mask, None)
-                word_probs = model.generator(decoder_output)
-                model.decoder.decoder_output = decoder_output
+                #decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model(src, trg, src_mask, trg_mask, None)
+                #word_probs = model.generator(decoder_output)
+                #model.decoder.decoder_output = decoder_output
                 model.decoder.trg_mask = trg_mask
                 model.decoder.src_mask = src_mask
 
-                #import pdb; pdb.set_trace() 
 
-                if opts.mode == 'soft': # vanilla beam search
+                if checkpoint['opts'].mode == 'soft': # vanilla beam search
                     hypothesis, score = model.beam_search_soft(opts.beam_size, src, src_mask, BOS, EOS, opts.max_trg_len)
                 else:
-                    raise NotImplementedError
+                    hypothesis, score = model.beam_search_hard(opts.beam_size, src, src_mask, BOS, EOS, opts.max_trg_len)
                 words = []
                 for word_id in src.view(-1):
                     words.append(SRC.vocab.itos[word_id.item()])

@@ -30,8 +30,10 @@ parser = argparse.ArgumentParser(
 parser.add_argument("--dataset", required=True, help="Path to the dataset")
 parser.add_argument("--direction", default="ende",
                     choices=["ende", "deen"],  help="Direction of translation")
-parser.add_argument("--mode", default="soft",
+parser.add_argument("--mode", required=True,
                     choices=["soft", "var", "hard"],  help="Training model. Default to be vanilla transformer with soft attention.")
+parser.add_argument("--selfmode", required=True,
+                    choices=["soft", "var", "hard", "lstmvar"],  help="Training model. Default to be vanilla transformer with soft attention.")
 parser.add_argument("--split", default="train",
                     choices=["train", "val"],  help="Training model. Default to be vanilla transformer with soft attention.")
 parser.add_argument("--env", required=True,
@@ -98,10 +100,12 @@ def main(opts):
     trg_vocab_size = len(TRG.vocab.itos)
     print ('SRC Vocab Size: %d, TRG Vocab Size: %d'%(src_vocab_size, trg_vocab_size))
     print ('Building Model')
+    sharelstm = checkpoint['opts'].sharelstm if hasattr(checkpoint['opts'], 'lstm') else 0
+    residual_var = checkpoint['opts'].residualvar if hasattr(checkpoint['opts'], 'residualvar') else 0
     model = make_model(opts.mode, src_vocab_size, trg_vocab_size, n_enc=5, n_dec=5,
                    d_model=278, d_ff=507, h=2, dropout=0.1, share_decoder_embeddings=opts.share_decoder_embeddings,
                    share_word_embeddings=opts.share_word_embeddings, dependent_posterior=opts.dependent_posterior,
-                   sharelstm=opts.sharelstm, residual_var=opts.residual_var)
+                   sharelstm=sharelstm, residual_var=residual_var, selfmode=opts.selfmode)
     model.trg_pad = TRG.vocab.stoi["<blank>"]
     print (model)
     if opts.train_from != '':
@@ -149,7 +153,7 @@ def main(opts):
             trg_mask = trg_mask & Variable(subsequent_mask(trg.size(-1)).to(trg_mask))
             trg_y = trg[:, 1:]
             ntokens = (trg_y != TRG.vocab.stoi["<blank>"]).data.view(-1).sum().item()
-            decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model(src, trg, src_mask, trg_mask, 0)
+            decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors = model(src, trg, src_mask, trg_mask, 0, selftemperature=0)
             samples = model.samples
             outputs = model.generator(decoder_output)[0]
             log_probs = outputs.gather(1, trg_y.view(-1, 1)).view(-1)
@@ -202,10 +206,12 @@ def main(opts):
                 vis.plotlyplot(fig)
             elif opts.mode == 'hard':
                 assert samples is not None
-                attentions = posterior_attentions
-                if opts.mode == 'hard':
-                    attentions = prior_attentions
+                attentions = prior_attentions
                 attentions = [attention[0] for attention in attentions]
+                self_attention_priors = [attention[0] for attention in self_attention_priors]
+                self_attention_samples = model.self_attention_samples
+                
+                self_attention_samples = [attention[0] for attention in self_attention_samples]
                 samples = [sample[0] for sample in samples]
                 num_layers = len(attentions)
                 num_heads = attentions[0].size(0)
@@ -215,8 +221,10 @@ def main(opts):
                         title = 'layer: %d, head: %d'%(l, h)
                         subplot_titles.append(title + ' probs')
                         subplot_titles.append(title + ' sample')
-                fig = plotly.tools.make_subplots(rows=num_layers*num_heads, cols=2, subplot_titles=subplot_titles)
-                fig['layout'].update(width=600*2, height=600*num_layers*num_heads, autosize=False, showlegend=False)
+                        subplot_titles.append(title + ' probs self')
+                        subplot_titles.append(title + ' sample self')
+                fig = plotly.tools.make_subplots(rows=num_layers*num_heads, cols=4, subplot_titles=subplot_titles)
+                fig['layout'].update(width=400*4, height=600*num_layers*num_heads, autosize=False, showlegend=False)
                 for l in range(num_layers):
                     for h in range(num_heads):
                         attention = attentions[l][h].transpose(0 ,1).cpu().data.numpy() # trg by src
@@ -231,33 +239,90 @@ def main(opts):
                         f = go.Heatmap(z=sample, x=col_names, y=row_names, colorscale='Hot', legendgroup=title+' sample', showscale=False, showlegend=False)
                         #f.legendgroup(title + ' sample')
                         fig.append_trace(f, l*num_heads+h+1, 2)
-                fig['layout'].update(width=600*2, height=600*num_layers*num_heads, showlegend=False, autosize=False, title='Mode: %s'%opts.mode)
+                        row_names = [TRG.vocab.itos[i]+' %f'%(1/p) for i,p in zip(trg[:,:-1].contiguous().view(-1).cpu().data.numpy(), probs.cpu().data.numpy())]
+                        attention = self_attention_priors[l][h].transpose(0 ,1).cpu().data.numpy() # trg by src
+                        f = go.Heatmap(z=attention, x=col_names, y=row_names, colorscale='Hot', legendgroup=title+' probs', showscale=False, showlegend=False)
+                        fig.append_trace(f, l*num_heads+h+1, 3)
+                        attention = self_attention_samples[l][h].transpose(0 ,1).cpu().data.numpy() # trg by src
+                        f = go.Heatmap(z=attention, x=col_names, y=row_names, colorscale='Hot', legendgroup=title+' probs', showscale=False, showlegend=False)
+                        fig.append_trace(f, l*num_heads+h+1, 4)
+                        #f.legendgroup(title + ' probs')
+                fig['layout'].update(width=400*4, height=600*num_layers*num_heads, showlegend=False, autosize=False, title='Mode: %s'%opts.mode)
 
 
                 #fig['layout'] = layout
                 vis.plotlyplot(fig)
-            else:
-                attentions = prior_attentions
-                attentions = [attention[0] for attention in attentions]
-                num_layers = len(attentions)
-                num_heads = attentions[0].size(0)
-                subplot_titles = []
-                for l in range(num_layers):
-                    for h in range(num_heads):
-                        title = 'layer: %d, head: %d'%(l, h)
-                        subplot_titles.append(title + ' probs')
-                fig = plotly.tools.make_subplots(rows=num_layers*num_heads, cols=1, subplot_titles=subplot_titles)
-                fig['layout'].update(width=600, height=600*num_layers*num_heads, autosize=False, showlegend=False)
-                for l in range(num_layers):
-                    for h in range(num_heads):
-                        attention = attentions[l][h].transpose(0 ,1).cpu().data.numpy() # trg by src
-                        row_names = [SRC.vocab.itos[i] for i in src.contiguous().view(-1).cpu().data.numpy()]
-                        print (row_names)
-                        col_names = [TRG.vocab.itos[i]+' %f'%(1/p) for i,p in zip(trg_y.contiguous().view(-1).cpu().data.numpy(), probs.cpu().data.numpy())]
-                        title = 'layer: %d, head: %d'%(l, h)
-                        f = go.Heatmap(z=attention, x=col_names, y=row_names, colorscale='Hot', legendgroup=title+' probs', showscale=False, showlegend=False)
-                        fig.append_trace(f, l*num_heads+h+1, 1)
-                fig['layout'].update(width=600, height=600*num_layers*num_heads, showlegend=False, autosize=False, title='Mode: %s'%opts.mode)
+            else: #log_self_attention_priors, self_attention_priorsj
+                if opts.selfmode == 'soft':
+                    attentions = prior_attentions
+                    attentions = [attention[0] for attention in attentions]
+                    self_attention_priors = [attention[0] for attention in self_attention_priors]
+                    num_layers = len(attentions)
+                    num_heads = attentions[0].size(0)
+                    subplot_titles = []
+                    for l in range(num_layers):
+                        for h in range(num_heads):
+                            title = 'layer: %d, head: %d'%(l, h)
+                            subplot_titles.append(title + ' probs inter')
+                            subplot_titles.append(title + ' probs self')
+                    fig = plotly.tools.make_subplots(rows=num_layers*num_heads, cols=2, subplot_titles=subplot_titles)
+                    fig['layout'].update(width=600*2, height=600*num_layers*num_heads, autosize=False, showlegend=False)
+                    for l in range(num_layers):
+                        for h in range(num_heads):
+                            attention = attentions[l][h].transpose(0 ,1).cpu().data.numpy() # trg by src
+                            row_names = [SRC.vocab.itos[i] for i in src.contiguous().view(-1).cpu().data.numpy()]
+                            print (row_names)
+                            col_names = [TRG.vocab.itos[i]+' %f'%(1/p) for i,p in zip(trg_y.contiguous().view(-1).cpu().data.numpy(), probs.cpu().data.numpy())]
+                            title = 'layer: %d, head: %d'%(l, h)
+                            f = go.Heatmap(z=attention, x=col_names, y=row_names, colorscale='Hot', legendgroup=title+' probs', showscale=False, showlegend=False)
+                            fig.append_trace(f, l*num_heads+h+1, 1)
+                            attention = self_attention_priors[l][h].transpose(0 ,1).cpu().data.numpy() # trg by src
+                            col_names = [TRG.vocab.itos[i]+' %f'%(1/p) for i,p in zip(trg_y.contiguous().view(-1).cpu().data.numpy(), probs.cpu().data.numpy())]
+                            row_names = [TRG.vocab.itos[i]+' %f'%(1/p) for i,p in zip(trg[:,:-1].contiguous().view(-1).cpu().data.numpy(), probs.cpu().data.numpy())]
+                            title = 'layer: %d, head: %d'%(l, h)
+                            f = go.Heatmap(z=attention, x=col_names, y=row_names, colorscale='Hot', legendgroup=title+' probs self', showscale=False, showlegend=False)
+                            fig.append_trace(f, l*num_heads+h+1, 2)
+                    fig['layout'].update(width=600*2, height=600*num_layers*num_heads, showlegend=False, autosize=False, title='Mode: %s'%opts.mode)
+                else:
+                    attentions = prior_attentions
+                    attentions = [attention[0] for attention in attentions]
+                    self_attention_samples = model.self_attention_samples
+                
+                    self_attention_samples = [attention[0] for attention in self_attention_samples]
+                    self_attention_priors = [attention[0] for attention in self_attention_priors]
+                    num_layers = len(attentions)
+                    num_heads = attentions[0].size(0)
+                    subplot_titles = []
+                    for l in range(num_layers):
+                        for h in range(num_heads):
+                            title = 'layer: %d, head: %d'%(l, h)
+                            subplot_titles.append(title + ' probs inter')
+                            subplot_titles.append(title + ' probs self')
+                            subplot_titles.append(title + ' samples self')
+                    fig = plotly.tools.make_subplots(rows=num_layers*num_heads, cols=3, subplot_titles=subplot_titles)
+                    fig['layout'].update(width=500*3, height=600*num_layers*num_heads, autosize=False, showlegend=False)
+                    for l in range(num_layers):
+                        for h in range(num_heads):
+                            attention = attentions[l][h].transpose(0 ,1).cpu().data.numpy() # trg by src
+                            row_names = [SRC.vocab.itos[i] for i in src.contiguous().view(-1).cpu().data.numpy()]
+                            print (row_names)
+                            col_names = [TRG.vocab.itos[i]+' %f'%(1/p) for i,p in zip(trg_y.contiguous().view(-1).cpu().data.numpy(), probs.cpu().data.numpy())]
+                            title = 'layer: %d, head: %d'%(l, h)
+                            f = go.Heatmap(z=attention, x=col_names, y=row_names, colorscale='Hot', legendgroup=title+' probs', showscale=False, showlegend=False)
+                            fig.append_trace(f, l*num_heads+h+1, 1)
+                            attention = self_attention_priors[l][h].transpose(0 ,1).cpu().data.numpy() # trg by src
+                            col_names = [TRG.vocab.itos[i]+' %f'%(1/p) for i,p in zip(trg_y.contiguous().view(-1).cpu().data.numpy(), probs.cpu().data.numpy())]
+                            row_names = [TRG.vocab.itos[i]+' %f'%(1/p) for i,p in zip(trg[:,:-1].contiguous().view(-1).cpu().data.numpy(), probs.cpu().data.numpy())]
+                            title = 'layer: %d, head: %d'%(l, h)
+                            f = go.Heatmap(z=attention, x=col_names, y=row_names, colorscale='Hot', legendgroup=title+' probs self', showscale=False, showlegend=False)
+                            fig.append_trace(f, l*num_heads+h+1, 2)
+                            attention = self_attention_samples[l][h].transpose(0 ,1).cpu().data.numpy() # trg by src
+                            col_names = [TRG.vocab.itos[i]+' %f'%(1/p) for i,p in zip(trg_y.contiguous().view(-1).cpu().data.numpy(), probs.cpu().data.numpy())]
+                            row_names = [TRG.vocab.itos[i]+' %f'%(1/p) for i,p in zip(trg[:,:-1].contiguous().view(-1).cpu().data.numpy(), probs.cpu().data.numpy())]
+                            title = 'layer: %d, head: %d'%(l, h)
+                            f = go.Heatmap(z=attention, x=col_names, y=row_names, colorscale='Hot', legendgroup=title+' probs self', showscale=False, showlegend=False)
+                            fig.append_trace(f, l*num_heads+h+1, 3)
+                    fig['layout'].update(width=500*3, height=600*num_layers*num_heads, showlegend=False, autosize=False, title='Mode: %s'%opts.mode)
 
 
                 vis.plotlyplot(fig)

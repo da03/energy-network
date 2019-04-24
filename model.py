@@ -30,9 +30,10 @@ class Model(nn.Module):
     A standard Encoder-Decoder architecture. Base for this and many 
     other models.
     """
-    def __init__(self, mode, encoder, decoder, src_embed, trg_embed, inference_network, generator, residual_var=0):
+    def __init__(self, mode, encoder, decoder, src_embed, trg_embed, inference_network, generator, residual_var=0, selfmode='soft', selfdependent_posterior=0):
         super(Model, self).__init__()
         self.mode = mode
+        self.selfmode = selfmode
         self.encoder = encoder
         self.decoder = decoder
         self.src_embed = src_embed
@@ -41,8 +42,9 @@ class Model(nn.Module):
         self.inference_network = inference_network
         self.residual_var = residual_var
         self.generator = generator
+        self.selfdependent_posterior = selfdependent_posterior
                                                                                     
-    def forward(self, src, trg, src_mask, trg_mask, temperature=None):
+    def forward(self, src, trg, src_mask, trg_mask, temperature=None, selftemperature=None):
         assert self.trg_pad is not None
         self.samples = None
         src_embeddings = self.src_embed(src)
@@ -50,6 +52,7 @@ class Model(nn.Module):
         h = self.encoder(src_embeddings, src_mask)
         if trg is not None: # try both self attn and inter attn
             if self.mode == 'var' or self.mode == 'lstmvar':
+                assert self.selfmode == 'soft'
                 assert temperature is not None
                 if self.residual_var == 0:
                     log_posterior_attentions, posterior_attentions, posterior_samples = self.inference_network(h, trg_embeddings[:, 1:], src_mask, temperature, trg_mask=trg[:,1:].ne(self.trg_pad), src=src_embeddings) # a list of attentions, we need to sample
@@ -58,21 +61,39 @@ class Model(nn.Module):
                 else:
                     decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, samples = self.decoder.forward_withinf(
                         h, trg_embeddings[:, 1:], src_mask, temperature, trg[:,1:].ne(self.trg_pad), src_embeddings, trg_embeddings[:, :-1], trg_mask[:, :-1, :-1], attn_dropout=False, inference_network=self.inference_network)
+                    log_self_attention_priors, self_attention_priors = None, None
                     self.samples = samples
             elif self.mode == 'soft':
+                if self.selfmode == 'soft':
+                    selftemperature = None
+                    selfdependent_posterior = 0
+                    selfattn_dropout = True 
+                else:
+                    selfdependent_posterior = 1
+                    selfattn_dropout = False
                 if trg_mask is not None:
                     trg_mask = trg_mask[:, :-1, :-1]
                 trg_embeddings = trg_embeddings[:, :-1]
-                decoder_output, log_prior_attentions, prior_attentions = self.decoder(h, trg_embeddings, src_mask, trg_mask, attn_dropout=True)
+                decoder_output, log_prior_attentions, prior_attentions, log_self_attention_priors, self_attention_priors, self_attention_samples = self.decoder(h, trg_embeddings, src_mask, trg_mask, attn_dropout=True, selftemperature=selftemperature, selfdependent_posterior=selfdependent_posterior, selfattn_dropout=selfattn_dropout)
+                self.self_attention_samples = self_attention_samples
                 log_posterior_attentions, posterior_attentions = None, None
             elif self.mode == 'hard':
                 if trg_mask is not None:
                     trg_mask = trg_mask[:, :-1, :-1]
                 trg_embeddings = trg_embeddings[:, :-1]
-                decoder_output, log_prior_attentions, prior_attentions, prior_samples = self.decoder(h, trg_embeddings, src_mask, trg_mask, attn_dropout=False, temperature=temperature, dependent_posterior=1)
+                if self.selfmode == 'soft':
+                    selftemperature = None
+                    selfdependent_posterior = 0
+                    selfattn_dropout = True 
+                else:
+                    selfdependent_posterior = 1
+                    selfattn_dropout = False
+                    assert selftemperature is not None
+                decoder_output, log_prior_attentions, prior_attentions, prior_samples, log_self_attention_priors, self_attention_priors, self_attention_samples = self.decoder(h, trg_embeddings, src_mask, trg_mask, attn_dropout=False, temperature=temperature, dependent_posterior=1, selftemperature=selftemperature, selfdependent_posterior=selfdependent_posterior, selfattn_dropout=selfattn_dropout)
                 self.samples = prior_samples
+                self.self_attention_samples = self_attention_samples
                 log_posterior_attentions, posterior_attentions = None, None
-            return decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions
+            return decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors
         else:
             assert False
 
@@ -80,9 +101,18 @@ class Model(nn.Module):
         assert not self.training
         src_embeddings = self.src_embed(src)
         h = self.encoder(src_embeddings, src_mask)
+        # soft always attn_dropout
         hypothesis, score = self.decoder.beam_search_soft(beam_size, self.generator, self.trg_embed, h, src_mask, sos, eos, max_length, attn_dropout=True)
         return hypothesis, score
  
+    def beam_search_hard(self, beam_size, src, src_mask, sos, eos, max_length):
+        assert not self.training
+        src_embeddings = self.src_embed(src)
+        h = self.encoder(src_embeddings, src_mask)
+        # soft always attn_dropout
+        hypothesis, score = self.decoder.beam_search_hard(beam_size, self.generator, self.trg_embed, h, src_mask, sos, eos, max_length, attn_dropout=False)
+        return hypothesis, score
+
 
 class Generator(nn.Module):
     "Define standard linear + softmax generation step."
@@ -164,32 +194,44 @@ class Decoder(nn.Module):
         self.layers = clones(layer, N)
         self.norm = LayerNorm(layer.size)
                                                
-    def forward(self, h, trg, src_mask, trg_mask=None, posterior_attentions=None, attn_dropout=False, temperature=None, dependent_posterior=0):
+    def forward(self, h, trg, src_mask, trg_mask=None, posterior_attentions=None, attn_dropout=False, temperature=None, dependent_posterior=0, selftemperature=None, selfdependent_posterior=0, selfattn_dropout=False):
         #import pdb; pdb.set_trace()
         z = trg
         prior_attentions = []
         log_prior_attentions = []
+        log_self_attention_priors = []
+        self_attention_priors = []
+        self_attention_samples = []
         samples = []
+        global flag
+        flag = True
         if posterior_attentions is not None:
             for posterior_attention, layer in zip(posterior_attentions, self.layers):
                 #import pdb; pdb.set_trace()
-                log_prior_attention, prior_attention, sample, z = layer(z, h, src_mask, trg_mask, posterior_attention, attn_dropout=attn_dropout)
+                log_prior_attention, prior_attention, sample, z, log_self_attention_prior, self_attention_prior, self_attention_sample = layer(z, h, src_mask, trg_mask, posterior_attention, attn_dropout=attn_dropout)
                 prior_attentions.append(prior_attention)
                 log_prior_attentions.append(log_prior_attention)
+                log_self_attention_priors.append(log_self_attention_prior)
+                self_attention_priors.append(self_attention_prior)
+                self_attention_samples.append(self_attention_sample)
             z = self.norm(z)
-            return z, log_prior_attentions, prior_attentions
+            return z, log_prior_attentions, prior_attentions, log_self_attention_priors, self_attention_priors, self_attention_samples
         else:
             for layer in self.layers:
-                log_prior_attention, prior_attention, sample, z = layer(z, h, src_mask, trg_mask, attn_dropout=attn_dropout, temperature=temperature, dependent_posterior=dependent_posterior)
+                log_prior_attention, prior_attention, sample, z, log_self_attention_prior, self_attention_prior, self_attention_sample = layer(z, h, src_mask, trg_mask, attn_dropout=attn_dropout, temperature=temperature, dependent_posterior=dependent_posterior, selftemperature=selftemperature, selfdependent_posterior=selfdependent_posterior, selfattn_dropout=selfattn_dropout)
                 prior_attentions.append(prior_attention)
                 log_prior_attentions.append(log_prior_attention)
                 if sample is not None:
                     samples.append(sample)
+                log_self_attention_priors.append(log_self_attention_prior)
+                self_attention_priors.append(self_attention_prior)
+                if self_attention_sample is not None:
+                    self_attention_samples.append(self_attention_sample)
             z = self.norm(z)
             if len(samples) > 0:
-                return z, log_prior_attentions, prior_attentions, samples
+                return z, log_prior_attentions, prior_attentions, samples, log_self_attention_priors, self_attention_priors, self_attention_samples
             else:
-                return z, log_prior_attentions, prior_attentions
+                return z, log_prior_attentions, prior_attentions, log_self_attention_priors, self_attention_priors, self_attention_samples
 
     def forward_withinf(self, h, trg_output, src_mask, temperature, trg_output_mask=None, src_embeddings=None, trg_input=None, trg_input_mask=None, attn_dropout=False, inference_network=None):
         log_posterior_attentions = []
@@ -248,7 +290,7 @@ class Decoder(nn.Module):
                 scores = torch.bmm(trg_memory_bank, src_memory_bank).contiguous().view(bsz, h, trg_len, src_len)
                 #p_attn = F.softmax(scores, dim = -1)
                 #log_p_attn = F.log_softmax(scores, dim = -1)
-                log_prior_attention, prior_attention, _, z_tmp = layer(z, h_enc, src_mask, trg_input_mask, attn_dropout=attn_dropout)
+                log_prior_attention, prior_attention, _, z_tmp, _, _, _ = layer(z, h_enc, src_mask, trg_input_mask, attn_dropout=attn_dropout)
                 log_posterior_attention = log_prior_attention + scores
                 log_posterior_attention.data.masked_fill_(src_mask.unsqueeze(1).expand(bsz, h, trg_len, src_len)==0, -1e9)
                 posterior_attention = F.softmax(log_posterior_attention, dim=-1)
@@ -271,7 +313,7 @@ class Decoder(nn.Module):
                     sample = p_attn.new_full(p_attn.size(), 0.).to(p_attn)
                     sample.scatter_(3, sample_id, 1.)
                 samples.append(sample)
-                _, _, _, z = layer(z, h_enc, src_mask, trg_input_mask, sample, attn_dropout=attn_dropout)
+                _, _, _, z, _, _, _ = layer(z, h_enc, src_mask, trg_input_mask, sample, attn_dropout=attn_dropout)
             z = self.norm(z)
         return z, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, samples
 
@@ -297,7 +339,73 @@ class Decoder(nn.Module):
                     z_selfattend = current_inputs 
                 else:
                     z_selfattend = hiddens[i-1]
-                log_prior_attention, prior_attention, z = layer(z, memory, src_mask, trg_mask=None, attn_dropout=attn_dropout, z_selfattend=z_selfattend)
+                log_prior_attention, prior_attention, sample, z, _, _, _ = layer(z, memory, src_mask, trg_mask=None, attn_dropout=attn_dropout, z_selfattend=z_selfattend)
+                if hiddens[i] is None:
+                    hiddens[i] = z
+                else:
+                    hiddens[i] = torch.cat([hiddens[i], z], 1)
+            z = self.norm(z)
+            decoder_output = z
+            word_log_probs = generator(decoder_output).view(z.size(0), -1) # 1, V for first step
+            vocab_size = word_log_probs.size(1)
+            if total_scores is None:
+                total_scores = word_log_probs # 1, v
+            else:
+                total_scores = total_scores.view(-1, 1) + word_log_probs # 5, v
+            total_scores = total_scores.view(-1)
+            beam_scores, beam_word_ids = total_scores.topk(beam_size, 0, sorted=True) # 5
+            beam_word_ids = beam_word_ids.view(-1) % vocab_size
+            total_scores = beam_scores.view(-1) # 5
+            beam_from = beam_word_ids / vocab_size
+            for i, hidden in enumerate(hiddens):
+                hiddens[i] = hidden.gather(0, beam_from.view(-1, 1, 1).expand(-1, hidden.size(1), hidden.size(2)))
+            beam_word_ids = beam_word_ids.view(-1, 1)
+            #print (beam_word_ids)
+            if current_hypotheses is not None:
+                current_hypotheses = current_hypotheses.gather(0, beam_from.view(-1, 1).expand(-1, current_hypotheses.size(1)))
+                current_hypotheses = torch.cat([current_hypotheses, beam_word_ids.view(-1, 1)], 1)
+            else:
+                current_hypotheses = beam_word_ids.view(-1, 1)
+            current_inputs = current_inputs.gather(0, beam_from.view(-1, 1, 1).expand(-1, current_inputs.size(1), current_inputs.size(2)))
+            trg_embed[1].offset = t + 1
+            trg_embeddings = trg_embed(beam_word_ids) # 5, 1, hidden
+            current_inputs = torch.cat([current_inputs, trg_embeddings], 1) # 5, 2, hidden
+            for k in range(beam_size):
+                if current_hypotheses[k][-1] == eos:
+                    score = total_scores[k].item()
+                    if score > best_finished_score:
+                        best_finished_score = score
+                        best_finished_hypothesis = current_hypotheses[k].data.clone()
+                    total_scores[k] = -float('inf')
+                    if k == 0:
+                        break
+
+        trg_embed[1].offset = 0
+        return best_finished_hypothesis if best_finished_hypothesis is not None else current_hypotheses[0], best_finished_score if best_finished_hypothesis is not None else total_scores[0]
+
+    def beam_search_hard(self, beam_size, generator, trg_embed, memory, src_mask, sos, eos, max_length, attn_dropout=True):
+        trg_embed[1].offset = 0
+        batch_size, src_length, _ = memory.size()
+        assert batch_size == 1
+        trg = memory.new_full((1, 1), sos).long()
+        trg_embeddings = trg_embed(trg) # 1, 1, hidden
+        hiddens = [None for _ in self.layers]
+        total_scores = None
+        current_inputs = trg_embeddings
+        best_finished_hypothesis = None
+        best_finished_score = -float('inf')
+        current_hypotheses = None
+        for t in range(max_length):
+            z = trg_embeddings
+            if memory.size(0) != z.size(0):
+                memory = memory.expand(beam_size, -1, -1)
+                src_mask = src_mask.expand(beam_size, -1, -1)
+            for i, layer in enumerate(self.layers):
+                if i == 0:
+                    z_selfattend = current_inputs 
+                else:
+                    z_selfattend = hiddens[i-1]
+                log_prior_attention, prior_attention, sample, z, _, _, _ = layer(z, memory, src_mask, trg_mask=None, attn_dropout=attn_dropout, z_selfattend=z_selfattend, temperature=-1)
                 if hiddens[i] is None:
                     hiddens[i] = z
                 else:
@@ -352,7 +460,7 @@ class DecoderLayer(nn.Module):
         self.feed_forward = feed_forward
         self.sublayer = clones(SublayerConnection(size, dropout), 3)
                                                                  
-    def forward(self, x, h, src_mask, trg_mask=None, posterior_attention=None, attn_dropout=False, z_selfattend=None, dependent_posterior=0, temperature=None):
+    def forward(self, x, h, src_mask, trg_mask=None, posterior_attention=None, attn_dropout=False, z_selfattend=None, dependent_posterior=0, temperature=None, selftemperature=None, selfdependent_posterior=0, selfattn_dropout = False):
         "Follow Figure 1 (right) for connections."
         if z_selfattend is None:
             z_selfattend = x
@@ -360,13 +468,13 @@ class DecoderLayer(nn.Module):
         #    x = self.sublayer[0](x, lambda x: self.self_attn(x, z_selfattend, z_selfattend))
         #else:
         #    x = self.sublayer[0](x, lambda x: self.self_attn(x, z_selfattend, z_selfattend, trg_mask))
-        x = self.sublayer[0](x, lambda x: self.self_attn(x, z_selfattend, z_selfattend, trg_mask))
         global flag
         if flag:
             global flag2
             flag2 = True
+        log_self_attention_prior, self_attention_prior, self_attention_sample, x = self.sublayer[0](x, lambda x: self.self_attn(x, z_selfattend, z_selfattend, trg_mask, num_outputs=2, dependent_posterior=selfdependent_posterior, temperature=selftemperature, attn_dropout=selfattn_dropout), num_outputs=2)
         log_prior_attention, prior_attention, sample, x = self.sublayer[1](x, lambda x: self.src_attn(x, h, h, src_mask, num_outputs=2, attn=posterior_attention, attn_dropout=attn_dropout, dependent_posterior=dependent_posterior, temperature=temperature), num_outputs=2)
-        return log_prior_attention, prior_attention, sample, self.sublayer[2](x, self.feed_forward)
+        return log_prior_attention, prior_attention, sample, self.sublayer[2](x, self.feed_forward), log_self_attention_prior, self_attention_prior, self_attention_sample
 
 class InferenceNetwork(nn.Module):
     "Generic N layer decoder with masking."
@@ -494,6 +602,14 @@ def attention(query, key, value, mask=None, dropout=None, attn=None, attn_dropou
             return torch.matmul(p_attn, value), log_p_attn, p_attn, None
         if temperature > 0:
             sample = gumbel_softmax_sample(log_p_attn, temperature)
+        elif temperature < 0:
+            h1, h2, h3, h4 = p_attn.size()
+            #p = Categorical(p_attn.view(-1, h4))
+            _, sample_id = torch.max(p_attn.view(-1, h4), -1)
+            #sample_id = p.sample().view(h1, h2, h3, 1)
+            sample_id = sample_id.view(h1, h2, h3, 1)
+            sample = p_attn.new_full(p_attn.size(), 0.).to(p_attn)
+            sample.scatter_(3, sample_id, 1.)
         else: # true categorical sample, equivalently we can use argmax to replace softmax in gumbel, here we use categorical for sanity check.
             #import pdb; pdb.set_trace()
             h1, h2, h3, h4 = p_attn.size()
@@ -591,7 +707,7 @@ class PositionalEncoding(nn.Module):
 
 def make_model(mode, src_vocab, trg_vocab, n_enc=6, n_dec=6,
                        d_model=512, d_ff=2048, h=8, dropout=0.1, share_decoder_embeddings=0,
-                       share_word_embeddings=0, dependent_posterior=0, sharelstm=0, residual_var=0):
+                       share_word_embeddings=0, dependent_posterior=0, sharelstm=0, residual_var=0, selfmode='soft', selfdependent_posterior=0):
     "Helper: Construct a model from hyperparameters."
     c = copy.deepcopy
     attn = MultiHeadedAttention(h, d_model)
@@ -618,7 +734,7 @@ def make_model(mode, src_vocab, trg_vocab, n_enc=6, n_dec=6,
                   src_emb,
                   trg_emb,
                   inference_network,
-                  generator, residual_var=residual_var)
+                  generator, residual_var=residual_var, selfmode=selfmode, selfdependent_posterior=selfdependent_posterior)
 
     if share_decoder_embeddings == 1:
         model.generator.proj.weight = model.trg_embed[0].lut.weight
