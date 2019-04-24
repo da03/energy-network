@@ -1,4 +1,5 @@
 from torchtext import data
+import io
 
 class MyIterator(data.Iterator):
     def create_batches(self):
@@ -25,4 +26,52 @@ def rebatch(pad_idx, batch):
 
 
 
+class MyLanguageModelingDataset(data.Dataset):
+    """Defines a dataset for language modeling."""
+
+    def __init__(self, path, text_field, newline_eos=True,
+                 encoding='utf-8', **kwargs):
+        """Create a LanguageModelingDataset given a path and a field.
+        Arguments:
+            path: Path to the data file.
+            text_field: The field that will be used for text data.
+            newline_eos: Whether to add an <eos> token for every newline in the
+                data file. Default: True.
+            Remaining keyword arguments: Passed to the constructor of
+                data.Dataset.
+        """
+        fields = [('trg', text_field)]
+        texts = []
+        with io.open(path, encoding=encoding) as f:
+            for line in f:
+                text = ['<s>']
+                text += text_field.preprocess(line)
+                text.append('</s>')
+                texts.append(text)
+
+        examples = [data.Example.fromlist([text], fields) for text in texts]
+        super(MyLanguageModelingDataset, self).__init__(
+            examples, fields, **kwargs)
+
+
+    @classmethod
+    def splits(cls, text_field, root='.data', train='wiki.train.tokens',
+               validation='wiki.valid.tokens', test='wiki.test.tokens',
+               **kwargs):
+        """Create dataset objects for splits of the WikiText-2 dataset.
+        This is the most flexible way to use the dataset.
+        Arguments:
+            text_field: The field that will be used for text data.
+            root: The root directory that the dataset's zip archive will be
+                expanded into; therefore the directory in whose wikitext-2
+                subdirectory the data files will be stored.
+            train: The filename of the train data. Default: 'wiki.train.tokens'.
+            validation: The filename of the validation data, or None to not
+                load the validation set. Default: 'wiki.valid.tokens'.
+            test: The filename of the test data, or None to not load the test
+                set. Default: 'wiki.test.tokens'.
+        """
+        return super(MyLanguageModelingDataset, cls).splits(
+            root=root, train=train, validation=validation, test=test,
+            text_field=text_field, **kwargs)
 

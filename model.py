@@ -112,6 +112,21 @@ class Model(nn.Module):
         # soft always attn_dropout
         hypothesis, score = self.decoder.beam_search_hard(beam_size, self.generator, self.trg_embed, h, src_mask, sos, eos, max_length, attn_dropout=False)
         return hypothesis, score
+    def beam_search_soft_selfhard(self, beam_size, src, src_mask, sos, eos, max_length):
+        assert not self.training
+        src_embeddings = self.src_embed(src)
+        h = self.encoder(src_embeddings, src_mask)
+        # soft always attn_dropout
+        hypothesis, score = self.decoder.beam_search_soft_selfhard(beam_size, self.generator, self.trg_embed, h, src_mask, sos, eos, max_length, attn_dropout=True)
+        return hypothesis, score
+ 
+    def beam_search_hard_selfhard(self, beam_size, src, src_mask, sos, eos, max_length):
+        assert not self.training
+        src_embeddings = self.src_embed(src)
+        h = self.encoder(src_embeddings, src_mask)
+        # soft always attn_dropout
+        hypothesis, score = self.decoder.beam_search_hard_selfhard(beam_size, self.generator, self.trg_embed, h, src_mask, sos, eos, max_length, attn_dropout=False)
+        return hypothesis, score
 
 
 class Generator(nn.Module):
@@ -383,6 +398,72 @@ class Decoder(nn.Module):
         trg_embed[1].offset = 0
         return best_finished_hypothesis if best_finished_hypothesis is not None else current_hypotheses[0], best_finished_score if best_finished_hypothesis is not None else total_scores[0]
 
+    def beam_search_soft_selfhard(self, beam_size, generator, trg_embed, memory, src_mask, sos, eos, max_length, attn_dropout=True):
+        trg_embed[1].offset = 0
+        batch_size, src_length, _ = memory.size()
+        assert batch_size == 1
+        trg = memory.new_full((1, 1), sos).long()
+        trg_embeddings = trg_embed(trg) # 1, 1, hidden
+        hiddens = [None for _ in self.layers]
+        total_scores = None
+        current_inputs = trg_embeddings
+        best_finished_hypothesis = None
+        best_finished_score = -float('inf')
+        current_hypotheses = None
+        for t in range(max_length):
+            z = trg_embeddings
+            if memory.size(0) != z.size(0):
+                memory = memory.expand(beam_size, -1, -1)
+                src_mask = src_mask.expand(beam_size, -1, -1)
+            for i, layer in enumerate(self.layers):
+                if i == 0:
+                    z_selfattend = current_inputs 
+                else:
+                    z_selfattend = hiddens[i-1]
+                log_prior_attention, prior_attention, sample, z, _, _, _ = layer(z, memory, src_mask, trg_mask=None, attn_dropout=attn_dropout, z_selfattend=z_selfattend, selftemperature=-1)
+                if hiddens[i] is None:
+                    hiddens[i] = z
+                else:
+                    hiddens[i] = torch.cat([hiddens[i], z], 1)
+            z = self.norm(z)
+            decoder_output = z
+            word_log_probs = generator(decoder_output).view(z.size(0), -1) # 1, V for first step
+            vocab_size = word_log_probs.size(1)
+            if total_scores is None:
+                total_scores = word_log_probs # 1, v
+            else:
+                total_scores = total_scores.view(-1, 1) + word_log_probs # 5, v
+            total_scores = total_scores.view(-1)
+            beam_scores, beam_word_ids = total_scores.topk(beam_size, 0, sorted=True) # 5
+            beam_word_ids = beam_word_ids.view(-1) % vocab_size
+            total_scores = beam_scores.view(-1) # 5
+            beam_from = beam_word_ids / vocab_size
+            for i, hidden in enumerate(hiddens):
+                hiddens[i] = hidden.gather(0, beam_from.view(-1, 1, 1).expand(-1, hidden.size(1), hidden.size(2)))
+            beam_word_ids = beam_word_ids.view(-1, 1)
+            #print (beam_word_ids)
+            if current_hypotheses is not None:
+                current_hypotheses = current_hypotheses.gather(0, beam_from.view(-1, 1).expand(-1, current_hypotheses.size(1)))
+                current_hypotheses = torch.cat([current_hypotheses, beam_word_ids.view(-1, 1)], 1)
+            else:
+                current_hypotheses = beam_word_ids.view(-1, 1)
+            current_inputs = current_inputs.gather(0, beam_from.view(-1, 1, 1).expand(-1, current_inputs.size(1), current_inputs.size(2)))
+            trg_embed[1].offset = t + 1
+            trg_embeddings = trg_embed(beam_word_ids) # 5, 1, hidden
+            current_inputs = torch.cat([current_inputs, trg_embeddings], 1) # 5, 2, hidden
+            for k in range(beam_size):
+                if current_hypotheses[k][-1] == eos:
+                    score = total_scores[k].item()
+                    if score > best_finished_score:
+                        best_finished_score = score
+                        best_finished_hypothesis = current_hypotheses[k].data.clone()
+                    total_scores[k] = -float('inf')
+                    if k == 0:
+                        break
+
+        trg_embed[1].offset = 0
+        return best_finished_hypothesis if best_finished_hypothesis is not None else current_hypotheses[0], best_finished_score if best_finished_hypothesis is not None else total_scores[0]
+
     def beam_search_hard(self, beam_size, generator, trg_embed, memory, src_mask, sos, eos, max_length, attn_dropout=True):
         trg_embed[1].offset = 0
         batch_size, src_length, _ = memory.size()
@@ -406,6 +487,72 @@ class Decoder(nn.Module):
                 else:
                     z_selfattend = hiddens[i-1]
                 log_prior_attention, prior_attention, sample, z, _, _, _ = layer(z, memory, src_mask, trg_mask=None, attn_dropout=attn_dropout, z_selfattend=z_selfattend, temperature=-1)
+                if hiddens[i] is None:
+                    hiddens[i] = z
+                else:
+                    hiddens[i] = torch.cat([hiddens[i], z], 1)
+            z = self.norm(z)
+            decoder_output = z
+            word_log_probs = generator(decoder_output).view(z.size(0), -1) # 1, V for first step
+            vocab_size = word_log_probs.size(1)
+            if total_scores is None:
+                total_scores = word_log_probs # 1, v
+            else:
+                total_scores = total_scores.view(-1, 1) + word_log_probs # 5, v
+            total_scores = total_scores.view(-1)
+            beam_scores, beam_word_ids = total_scores.topk(beam_size, 0, sorted=True) # 5
+            beam_word_ids = beam_word_ids.view(-1) % vocab_size
+            total_scores = beam_scores.view(-1) # 5
+            beam_from = beam_word_ids / vocab_size
+            for i, hidden in enumerate(hiddens):
+                hiddens[i] = hidden.gather(0, beam_from.view(-1, 1, 1).expand(-1, hidden.size(1), hidden.size(2)))
+            beam_word_ids = beam_word_ids.view(-1, 1)
+            #print (beam_word_ids)
+            if current_hypotheses is not None:
+                current_hypotheses = current_hypotheses.gather(0, beam_from.view(-1, 1).expand(-1, current_hypotheses.size(1)))
+                current_hypotheses = torch.cat([current_hypotheses, beam_word_ids.view(-1, 1)], 1)
+            else:
+                current_hypotheses = beam_word_ids.view(-1, 1)
+            current_inputs = current_inputs.gather(0, beam_from.view(-1, 1, 1).expand(-1, current_inputs.size(1), current_inputs.size(2)))
+            trg_embed[1].offset = t + 1
+            trg_embeddings = trg_embed(beam_word_ids) # 5, 1, hidden
+            current_inputs = torch.cat([current_inputs, trg_embeddings], 1) # 5, 2, hidden
+            for k in range(beam_size):
+                if current_hypotheses[k][-1] == eos:
+                    score = total_scores[k].item()
+                    if score > best_finished_score:
+                        best_finished_score = score
+                        best_finished_hypothesis = current_hypotheses[k].data.clone()
+                    total_scores[k] = -float('inf')
+                    if k == 0:
+                        break
+
+        trg_embed[1].offset = 0
+        return best_finished_hypothesis if best_finished_hypothesis is not None else current_hypotheses[0], best_finished_score if best_finished_hypothesis is not None else total_scores[0]
+
+    def beam_search_hard_selfhard(self, beam_size, generator, trg_embed, memory, src_mask, sos, eos, max_length, attn_dropout=True):
+        trg_embed[1].offset = 0
+        batch_size, src_length, _ = memory.size()
+        assert batch_size == 1
+        trg = memory.new_full((1, 1), sos).long()
+        trg_embeddings = trg_embed(trg) # 1, 1, hidden
+        hiddens = [None for _ in self.layers]
+        total_scores = None
+        current_inputs = trg_embeddings
+        best_finished_hypothesis = None
+        best_finished_score = -float('inf')
+        current_hypotheses = None
+        for t in range(max_length):
+            z = trg_embeddings
+            if memory.size(0) != z.size(0):
+                memory = memory.expand(beam_size, -1, -1)
+                src_mask = src_mask.expand(beam_size, -1, -1)
+            for i, layer in enumerate(self.layers):
+                if i == 0:
+                    z_selfattend = current_inputs 
+                else:
+                    z_selfattend = hiddens[i-1]
+                log_prior_attention, prior_attention, sample, z, _, _, _ = layer(z, memory, src_mask, trg_mask=None, attn_dropout=attn_dropout, z_selfattend=z_selfattend, temperature=-1, selftemperature=-1)
                 if hiddens[i] is None:
                     hiddens[i] = z
                 else:

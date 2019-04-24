@@ -21,6 +21,7 @@ parser = argparse.ArgumentParser(
     description='train.py',
     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("--dataset", required=True, help="Path to the dataset")
+parser.add_argument("--mono", required=True, type=int,  help="Monolingual or not")
 parser.add_argument("--direction", default="ende",
                     choices=["ende", "deen"],  help="Direction of translation")
 parser.add_argument("--mode", default="soft",
@@ -84,20 +85,30 @@ def main(opts):
         exts = ['.de', '.en']
     else:
         raise NotImplementedError
-    SRC = torchtext.data.Field(
-            pad_token=PAD_WORD,
-            include_lengths=True)
+
+
+    if opts.mono == 0:
+        SRC = torchtext.data.Field(
+                pad_token=PAD_WORD,
+                include_lengths=True)
     TRG = torchtext.data.Field(
             init_token=BOS_WORD, eos_token=EOS_WORD,
             pad_token=PAD_WORD)
     def filter_pred(example):
         return 0 < len(example.src) <= opts.max_src_len \
             and 0 < len(example.trg) <= opts.max_trg_len 
-    train, val = torchtext.datasets.TranslationDataset.splits(
-            path=opts.dataset, train='train/train.tags.en-de.bpe',
-            validation='dev/valid.en-de.bpe', test=None,
-            exts=exts, filter_pred=filter_pred,
-            fields=[('src', SRC), ('trg', TRG)])
+
+    if opts.mono == 0:
+        train, val = torchtext.datasets.TranslationDataset.splits(
+                path=opts.dataset, train='train/train.tags.en-de.bpe',
+                validation='dev/valid.en-de.bpe', test=None,
+                exts=exts, filter_pred=filter_pred,
+                fields=[('src', SRC), ('trg', TRG)])
+    else:
+        train, val, test = MyLanguageModelingDataset.splits(TRG,
+                path=opts.dataset, train='train.tok.txt',
+                validation='valid.tok.txt', test='test.tok.txt',
+                )
 
     def dyn_batch_without_padding(new, i, sofar):
         return sofar + max(len(new.src), len(new.trg))
@@ -127,19 +138,26 @@ def main(opts):
 
     BATCH_SIZE = opts.batch_size
     train_iter = MyIterator(train, batch_size=BATCH_SIZE, device=torch.device('cuda:0'),
-                            repeat=False, sort_key=lambda x: (len(x.src), len(x.trg)),
+                            repeat=False, sort_key=lambda x: (len(x.src), len(x.trg)) if hasattr(x, 'src') else len(x.trg),
                             batch_size_fn=batch_size_fn, train=True, shuffle=True, sort_within_batch=True)
     val_iter = MyIterator(val, batch_size=BATCH_SIZE, device=torch.device('cuda:0'),
-                            repeat=False, sort_key=lambda x: (len(x.src), len(x.trg)),
+                            repeat=False, sort_key=lambda x: (len(x.src), len(x.trg)) if hasattr(x, 'trg') else len(x.src),
                             batch_size_fn=batch_size_fn, train=False)
-    TRG.build_vocab(train.src, train.trg)
-    SRC.vocab = TRG.vocab
+    if opts.mono == 0:
+        TRG.build_vocab(train.src, train.trg)
+        SRC.vocab = TRG.vocab
+    else:
+        TRG.build_vocab(train.trg, min_freq=2)
 
     # Build Model
-    src_vocab_size = len(SRC.vocab.itos)
-    trg_vocab_size = len(TRG.vocab.itos)
     print (' '.join(sys.argv))
-    print ('SRC Vocab Size: %d, TRG Vocab Size: %d'%(src_vocab_size, trg_vocab_size))
+    trg_vocab_size = len(TRG.vocab.itos)
+    if opts.mono == 0:
+        src_vocab_size = len(SRC.vocab.itos)
+        print ('SRC Vocab Size: %d, TRG Vocab Size: %d'%(src_vocab_size, trg_vocab_size))
+    else:
+        src_voab_size = None
+        print ('TRG Vocab Size: %d'%(trg_vocab_size))
     print ('Building Model')
     model = make_model(opts.mode, src_vocab_size, trg_vocab_size, n_enc=5, n_dec=5,
                    d_model=278, d_ff=507, h=opts.heads, dropout=0.1, share_decoder_embeddings=opts.share_decoder_embeddings,

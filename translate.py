@@ -115,9 +115,15 @@ def main(opts):
 
 
                 if checkpoint['opts'].mode == 'soft': # vanilla beam search
-                    hypothesis, score = model.beam_search_soft(opts.beam_size, src, src_mask, BOS, EOS, opts.max_trg_len)
+                    if checkpoint['opts'].selfmode == 'soft':
+                        hypothesis, score = model.beam_search_soft(opts.beam_size, src, src_mask, BOS, EOS, opts.max_trg_len)
+                    else:
+                        hypothesis, score = model.beam_search_soft_selfhard(opts.beam_size, src, src_mask, BOS, EOS, opts.max_trg_len)
                 else:
-                    hypothesis, score = model.beam_search_hard(opts.beam_size, src, src_mask, BOS, EOS, opts.max_trg_len)
+                    if checkpoint['opts'].selfmode == 'soft':
+                        hypothesis, score = model.beam_search_hard(opts.beam_size, src, src_mask, BOS, EOS, opts.max_trg_len)
+                    else:
+                        hypothesis, score = model.beam_search_hard_selfhard(opts.beam_size, src, src_mask, BOS, EOS, opts.max_trg_len)
                 words = []
                 for word_id in src.view(-1):
                     words.append(SRC.vocab.itos[word_id.item()])
