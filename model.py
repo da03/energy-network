@@ -120,33 +120,33 @@ class Model(nn.Module):
         else:
             assert False
 
-    def beam_search_soft(self, beam_size, src, src_mask, sos, eos, max_length):
+    def beam_search_soft(self, beam_size, src, src_mask, sos, eos, max_length, encselftemperature=None, encselfdependent_posterior=0, encattn_dropout=True):
         assert not self.training
         src_embeddings = self.src_embed(src)
-        h = self.encoder(src_embeddings, src_mask)
+        h = self.encoder(src_embeddings, src_mask, temperature=encselftemperature, dependent_posterior=encselfdependent_posterior, attn_dropout=encattn_dropout)
         # soft always attn_dropout
         hypothesis, score = self.decoder.beam_search_soft(beam_size, self.generator, self.trg_embed, h, src_mask, sos, eos, max_length, attn_dropout=True)
         return hypothesis, score
  
-    def beam_search_hard(self, beam_size, src, src_mask, sos, eos, max_length):
+    def beam_search_hard(self, beam_size, src, src_mask, sos, eos, max_length,  encselftemperature=None, encselfdependent_posterior=0, encattn_dropout=True):
         assert not self.training
         src_embeddings = self.src_embed(src)
-        h, _, _, _ = self.encoder(src_embeddings, src_mask)
+        h, _, _, _ = self.encoder(src_embeddings, src_mask, temperature=encselftemperature, dependent_posterior=encselfdependent_posterior, attn_dropout=encattn_dropout)
         # soft always attn_dropout
         hypothesis, score = self.decoder.beam_search_hard(beam_size, self.generator, self.trg_embed, h, src_mask, sos, eos, max_length, attn_dropout=False, dependent_posterior=1)
         return hypothesis, score
-    def beam_search_soft_selfhard(self, beam_size, src, src_mask, sos, eos, max_length):
+    def beam_search_soft_selfhard(self, beam_size, src, src_mask, sos, eos, max_length,  encselftemperature=None, encselfdependent_posterior=0, encattn_dropout=True):
         assert not self.training
         src_embeddings = self.src_embed(src)
-        h = self.encoder(src_embeddings, src_mask)
+        h, _, _, _ = self.encoder(src_embeddings, src_mask, temperature=encselftemperature, dependent_posterior=encselfdependent_posterior, attn_dropout=encattn_dropout)
         # soft always attn_dropout
         hypothesis, score = self.decoder.beam_search_soft_selfhard(beam_size, self.generator, self.trg_embed, h, src_mask, sos, eos, max_length, attn_dropout=True)
         return hypothesis, score
  
-    def beam_search_hard_selfhard(self, beam_size, src, src_mask, sos, eos, max_length):
+    def beam_search_hard_selfhard(self, beam_size, src, src_mask, sos, eos, max_length,  encselftemperature=None, encselfdependent_posterior=0, encattn_dropout=True):
         assert not self.training
         src_embeddings = self.src_embed(src)
-        h = self.encoder(src_embeddings, src_mask)
+        h, _, _, _ = self.encoder(src_embeddings, src_mask, temperature=encselftemperature, dependent_posterior=encselfdependent_posterior, attn_dropout=encattn_dropout)
         # soft always attn_dropout
         hypothesis, score = self.decoder.beam_search_hard_selfhard(beam_size, self.generator, self.trg_embed, h, src_mask, sos, eos, max_length, attn_dropout=False)
         return hypothesis, score
@@ -587,7 +587,7 @@ class Decoder(nn.Module):
                     z_selfattend = current_inputs 
                 else:
                     z_selfattend = hiddens[i-1]
-                log_prior_attention, prior_attention, sample, z, _, _, _ = layer(z, memory, src_mask, trg_mask=None, attn_dropout=attn_dropout, z_selfattend=z_selfattend, temperature=-1, selftemperature=-1)
+                log_prior_attention, prior_attention, sample, z, _, _, _ = layer(z, memory, src_mask, trg_mask=None, attn_dropout=attn_dropout, z_selfattend=z_selfattend, temperature=-1, selftemperature=-1, dependent_posterior=1, selfdependent_posterior=1)
                 if hiddens[i] is None:
                     hiddens[i] = z
                 else:
