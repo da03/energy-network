@@ -44,9 +44,8 @@ class MyLanguageModelingDataset(data.Dataset):
         texts = []
         with io.open(path, encoding=encoding) as f:
             for line in f:
-                text = ['<s>']
+                text = []
                 text += text_field.preprocess(line)
-                text.append('</s>')
                 texts.append(text)
 
         examples = [data.Example.fromlist([text], fields) for text in texts]

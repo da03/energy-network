@@ -30,10 +30,12 @@ class Model(nn.Module):
     A standard Encoder-Decoder architecture. Base for this and many 
     other models.
     """
-    def __init__(self, mode, encoder, decoder, src_embed, trg_embed, inference_network, generator, residual_var=0, selfmode='soft', selfdependent_posterior=0):
+    def __init__(self, mode, encoder, decoder, src_embed, trg_embed, inference_network, generator, residual_var=0, selfmode='soft', encselfmode='soft', selfdependent_posterior=0, mono=0):
         super(Model, self).__init__()
         self.mode = mode
+        self.mono = mono
         self.selfmode = selfmode
+        self.encselfmode = encselfmode
         self.encoder = encoder
         self.decoder = decoder
         self.src_embed = src_embed
@@ -44,17 +46,36 @@ class Model(nn.Module):
         self.generator = generator
         self.selfdependent_posterior = selfdependent_posterior
                                                                                     
-    def forward(self, src, trg, src_mask, trg_mask, temperature=None, selftemperature=None):
+    def forward(self, src, trg, src_mask, trg_mask, temperature=None, selftemperature=None, encselftemperature=None):
         assert self.trg_pad is not None
         self.samples = None
-        src_embeddings = self.src_embed(src)
+        if self.mono == 0:
+            src_embeddings = self.src_embed(src)
+            if self.encselfmode == 'soft':
+                encselftemperature = None
+                encselfdependent_posterior = 0
+                encselfattn_dropout = True
+            else:
+                encselfdependent_posterior = 1
+                encselfattn_dropout = False
+            h, log_enc_self_attention_priors, enc_self_attention_priors, enc_self_attention_samples = self.encoder(src_embeddings, src_mask, temperature=encselftemperature, dependent_posterior=encselfdependent_posterior, attn_dropout=encselfattn_dropout)
+        else:
+            h, log_enc_self_attention_priors, enc_self_attention_priors, enc_self_attention_samples = None, None, None, None
+        self.enc_self_attention_samples = enc_self_attention_samples
         trg_embeddings = self.trg_embed(trg)
-        h = self.encoder(src_embeddings, src_mask)
         if trg is not None: # try both self attn and inter attn
             if self.mode == 'var' or self.mode == 'lstmvar':
-                assert self.selfmode == 'soft'
                 assert temperature is not None
+                if self.selfmode == 'soft':
+                    selftemperature = None
+                    selfdependent_posterior = 0
+                    selfattn_dropout = True 
+                else:
+                    selfdependent_posterior = 1
+                    assert selftemperature is not None
+                    selfattn_dropout = False
                 if self.residual_var == 0:
+                    assert self.selfmode == 'soft'
                     log_posterior_attentions, posterior_attentions, posterior_samples = self.inference_network(h, trg_embeddings[:, 1:], src_mask, temperature, trg_mask=trg[:,1:].ne(self.trg_pad), src=src_embeddings) # a list of attentions, we need to sample
                     self.samples = posterior_samples
                     decoder_output, log_prior_attentions, prior_attentions = self.decoder(h, trg_embeddings[:, :-1], src_mask, trg_mask[:, :-1, :-1], posterior_samples, attn_dropout=False)
@@ -70,6 +91,7 @@ class Model(nn.Module):
                     selfattn_dropout = True 
                 else:
                     selfdependent_posterior = 1
+                    assert selftemperature is not None
                     selfattn_dropout = False
                 if trg_mask is not None:
                     trg_mask = trg_mask[:, :-1, :-1]
@@ -93,7 +115,7 @@ class Model(nn.Module):
                 self.samples = prior_samples
                 self.self_attention_samples = self_attention_samples
                 log_posterior_attentions, posterior_attentions = None, None
-            return decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors
+            return decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors, log_enc_self_attention_priors, enc_self_attention_priors
         else:
             assert False
 
@@ -149,11 +171,16 @@ class Encoder(nn.Module):
         self.layers = clones(layer, N)
         self.norm = LayerNorm(layer.size)
                                                 
-    def forward(self, x, mask):
+    def forward(self, x, mask, temperature=None, dependent_posterior=0, attn_dropout=True):
+        log_enc_self_attention_priors, enc_self_attention_priors, enc_self_attention_samples = [], [], []
         "Pass the input (and mask) through each layer in turn."
         for layer in self.layers:
-            x = layer(x, mask)
-        return self.norm(x)
+            x, log_enc_self_attention_prior, enc_self_attention_prior, enc_self_attention_sample = layer(x, mask, temperature=temperature, dependent_posterior=dependent_posterior, attn_dropout=attn_dropout)
+            log_enc_self_attention_priors.append(log_enc_self_attention_prior)
+            enc_self_attention_priors.append(enc_self_attention_prior)
+            enc_self_attention_samples.append(enc_self_attention_sample)
+ 
+        return self.norm(x), log_enc_self_attention_priors, enc_self_attention_priors, enc_self_attention_samples
 
 class LayerNorm(nn.Module):
     "Construct a layernorm module (See citation for details)."
@@ -197,10 +224,11 @@ class EncoderLayer(nn.Module):
         self.sublayer = clones(SublayerConnection(size, dropout), 2)
         self.size = size
 
-    def forward(self, x, mask):
+    def forward(self, x, mask, temperature=None, dependent_posterior=0, attn_dropout=False):
         "Follow Figure 1 (left) for connections."
-        x = self.sublayer[0](x, lambda x: self.self_attn(x, x, x, mask))
-        return self.sublayer[1](x, self.feed_forward)
+        #x = self.sublayer[0](x, lambda x: self.self_attn(x, x, x, mask))
+        log_self_attention_prior, self_attention_prior, self_attention_sample, x = self.sublayer[0](x, lambda x: self.self_attn(x, x, x, mask, num_outputs=2, dependent_posterior=dependent_posterior, temperature=temperature, attn_dropout=attn_dropout), num_outputs=2)
+        return self.sublayer[1](x, self.feed_forward), log_self_attention_prior, self_attention_prior, self_attention_sample
 
 class Decoder(nn.Module):
     "Generic N layer decoder with masking."
@@ -620,7 +648,10 @@ class DecoderLayer(nn.Module):
             global flag2
             flag2 = True
         log_self_attention_prior, self_attention_prior, self_attention_sample, x = self.sublayer[0](x, lambda x: self.self_attn(x, z_selfattend, z_selfattend, trg_mask, num_outputs=2, dependent_posterior=selfdependent_posterior, temperature=selftemperature, attn_dropout=selfattn_dropout), num_outputs=2)
-        log_prior_attention, prior_attention, sample, x = self.sublayer[1](x, lambda x: self.src_attn(x, h, h, src_mask, num_outputs=2, attn=posterior_attention, attn_dropout=attn_dropout, dependent_posterior=dependent_posterior, temperature=temperature), num_outputs=2)
+        if h is not None:
+            log_prior_attention, prior_attention, sample, x = self.sublayer[1](x, lambda x: self.src_attn(x, h, h, src_mask, num_outputs=2, attn=posterior_attention, attn_dropout=attn_dropout, dependent_posterior=dependent_posterior, temperature=temperature), num_outputs=2)
+        else:
+            log_prior_attention, prior_attention, sample = None, None, None
         return log_prior_attention, prior_attention, sample, self.sublayer[2](x, self.feed_forward), log_self_attention_prior, self_attention_prior, self_attention_sample
 
 class InferenceNetwork(nn.Module):
@@ -854,7 +885,7 @@ class PositionalEncoding(nn.Module):
 
 def make_model(mode, src_vocab, trg_vocab, n_enc=6, n_dec=6,
                        d_model=512, d_ff=2048, h=8, dropout=0.1, share_decoder_embeddings=0,
-                       share_word_embeddings=0, dependent_posterior=0, sharelstm=0, residual_var=0, selfmode='soft', selfdependent_posterior=0):
+                       share_word_embeddings=0, dependent_posterior=0, sharelstm=0, residual_var=0, selfmode='soft', encselfmode='soft', selfdependent_posterior=0, mono=0):
     "Helper: Construct a model from hyperparameters."
     c = copy.deepcopy
     attn = MultiHeadedAttention(h, d_model)
@@ -862,9 +893,13 @@ def make_model(mode, src_vocab, trg_vocab, n_enc=6, n_dec=6,
     position = PositionalEncoding(d_model, dropout)
 
 
-    encoder = Encoder(EncoderLayer(d_model, c(attn), c(ff), dropout), n_enc)
+    if mono == 0:
+        encoder = Encoder(EncoderLayer(d_model, c(attn), c(ff), dropout), n_enc)
+        src_emb = nn.Sequential(Embeddings(d_model, src_vocab), c(position))
+    else:
+        encoder = None
+        src_emb = None
     decoder = Decoder(DecoderLayer(d_model, c(attn), c(attn), c(ff), dropout), n_dec)
-    src_emb = nn.Sequential(Embeddings(d_model, src_vocab), c(position))
     trg_emb = nn.Sequential(Embeddings(d_model, trg_vocab), c(position))
     if mode != 'lstmvar':
         inference_network = InferenceNetwork(DecoderLayer(d_model, c(attn), c(attn), c(ff), dropout), n_dec, dependent_posterior)
@@ -881,7 +916,7 @@ def make_model(mode, src_vocab, trg_vocab, n_enc=6, n_dec=6,
                   src_emb,
                   trg_emb,
                   inference_network,
-                  generator, residual_var=residual_var, selfmode=selfmode, selfdependent_posterior=selfdependent_posterior)
+                  generator, residual_var=residual_var, selfmode=selfmode, encselfmode=encselfmode, selfdependent_posterior=selfdependent_posterior, mono=mono)
 
     if share_decoder_embeddings == 1:
         model.generator.proj.weight = model.trg_embed[0].lut.weight
