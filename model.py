@@ -56,6 +56,7 @@ class Model(nn.Module):
                 encselfdependent_posterior = 0
                 encselfattn_dropout = True
             else:
+                assert encselftemperature is not None
                 encselfdependent_posterior = 1
                 encselfattn_dropout = False
             h, log_enc_self_attention_priors, enc_self_attention_priors, enc_self_attention_samples = self.encoder(src_embeddings, src_mask, temperature=encselftemperature, dependent_posterior=encselfdependent_posterior, attn_dropout=encselfattn_dropout)
@@ -80,9 +81,9 @@ class Model(nn.Module):
                     self.samples = posterior_samples
                     decoder_output, log_prior_attentions, prior_attentions = self.decoder(h, trg_embeddings[:, :-1], src_mask, trg_mask[:, :-1, :-1], posterior_samples, attn_dropout=False)
                 else:
-                    decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, samples = self.decoder.forward_withinf(
-                        h, trg_embeddings[:, 1:], src_mask, temperature, trg[:,1:].ne(self.trg_pad), src_embeddings, trg_embeddings[:, :-1], trg_mask[:, :-1, :-1], attn_dropout=False, inference_network=self.inference_network)
-                    log_self_attention_priors, self_attention_priors = None, None
+                    decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, samples, log_self_attention_priors, self_attention_priors, self_attention_samples = self.decoder.forward_withinf(
+                        h, trg_embeddings[:, 1:], src_mask, temperature, trg[:,1:].ne(self.trg_pad), src_embeddings, trg_embeddings[:, :-1], trg_mask[:, :-1, :-1], attn_dropout=False, inference_network=self.inference_network, selftemperature=selftemperature, selfdependent_posterior=selfdependent_posterior, selfattn_dropout=selfattn_dropout)
+                    self.self_attention_samples = self_attention_samples
                     self.samples = samples
             elif self.mode == 'soft':
                 if self.selfmode == 'soft':
@@ -130,9 +131,9 @@ class Model(nn.Module):
     def beam_search_hard(self, beam_size, src, src_mask, sos, eos, max_length):
         assert not self.training
         src_embeddings = self.src_embed(src)
-        h = self.encoder(src_embeddings, src_mask)
+        h, _, _, _ = self.encoder(src_embeddings, src_mask)
         # soft always attn_dropout
-        hypothesis, score = self.decoder.beam_search_hard(beam_size, self.generator, self.trg_embed, h, src_mask, sos, eos, max_length, attn_dropout=False)
+        hypothesis, score = self.decoder.beam_search_hard(beam_size, self.generator, self.trg_embed, h, src_mask, sos, eos, max_length, attn_dropout=False, dependent_posterior=1)
         return hypothesis, score
     def beam_search_soft_selfhard(self, beam_size, src, src_mask, sos, eos, max_length):
         assert not self.training
@@ -276,11 +277,12 @@ class Decoder(nn.Module):
             else:
                 return z, log_prior_attentions, prior_attentions, log_self_attention_priors, self_attention_priors, self_attention_samples
 
-    def forward_withinf(self, h, trg_output, src_mask, temperature, trg_output_mask=None, src_embeddings=None, trg_input=None, trg_input_mask=None, attn_dropout=False, inference_network=None):
+    def forward_withinf(self, h, trg_output, src_mask, temperature, trg_output_mask=None, src_embeddings=None, trg_input=None, trg_input_mask=None, attn_dropout=False, inference_network=None, selftemperature=None, selfdependent_posterior=0, selfattn_dropout=True):
         log_posterior_attentions = []
         posterior_attentions = []
         log_prior_attentions = []
         prior_attentions = []
+        log_self_attention_priors, self_attention_priors, self_attention_samples = [], [], []
         trg_lengths = trg_output_mask.sum(-1).contiguous().view(-1)
         src_lengths = src_mask.sum(-1).contiguous().view(-1).cpu().numpy()
         samples = []
@@ -333,7 +335,12 @@ class Decoder(nn.Module):
                 scores = torch.bmm(trg_memory_bank, src_memory_bank).contiguous().view(bsz, h, trg_len, src_len)
                 #p_attn = F.softmax(scores, dim = -1)
                 #log_p_attn = F.log_softmax(scores, dim = -1)
-                log_prior_attention, prior_attention, _, z_tmp, _, _, _ = layer(z, h_enc, src_mask, trg_input_mask, attn_dropout=attn_dropout)
+                log_prior_attention, prior_attention, _, z_tmp, log_self_attention_prior, self_attention_prior, self_attention_sample = layer(z, h_enc, src_mask, trg_input_mask, attn_dropout=attn_dropout, selftemperature=selftemperature, selfdependent_posterior=selfdependent_posterior, selfattn_dropout=selfattn_dropout)
+                log_self_attention_priors.append(log_self_attention_prior)
+                self_attention_priors.append(self_attention_prior)
+                self_attention_samples.append(self_attention_sample)
+                if selftemperature is None:
+                    self_attention_sample = None
                 log_posterior_attention = log_prior_attention + scores
                 log_posterior_attention.data.masked_fill_(src_mask.unsqueeze(1).expand(bsz, h, trg_len, src_len)==0, -1e9)
                 posterior_attention = F.softmax(log_posterior_attention, dim=-1)
@@ -356,9 +363,9 @@ class Decoder(nn.Module):
                     sample = p_attn.new_full(p_attn.size(), 0.).to(p_attn)
                     sample.scatter_(3, sample_id, 1.)
                 samples.append(sample)
-                _, _, _, z, _, _, _ = layer(z, h_enc, src_mask, trg_input_mask, sample, attn_dropout=attn_dropout)
+                _, _, _, z, _, _, _ = layer(z, h_enc, src_mask, trg_input_mask, sample, attn_dropout=attn_dropout, self_attention_sample=self_attention_sample)
             z = self.norm(z)
-        return z, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, samples
+        return z, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, samples, log_self_attention_priors, self_attention_priors, self_attention_samples
 
     def beam_search_soft(self, beam_size, generator, trg_embed, memory, src_mask, sos, eos, max_length, attn_dropout=True):
         trg_embed[1].offset = 0
@@ -492,7 +499,7 @@ class Decoder(nn.Module):
         trg_embed[1].offset = 0
         return best_finished_hypothesis if best_finished_hypothesis is not None else current_hypotheses[0], best_finished_score if best_finished_hypothesis is not None else total_scores[0]
 
-    def beam_search_hard(self, beam_size, generator, trg_embed, memory, src_mask, sos, eos, max_length, attn_dropout=True):
+    def beam_search_hard(self, beam_size, generator, trg_embed, memory, src_mask, sos, eos, max_length, attn_dropout=True, dependent_posterior=1):
         trg_embed[1].offset = 0
         batch_size, src_length, _ = memory.size()
         assert batch_size == 1
@@ -514,7 +521,7 @@ class Decoder(nn.Module):
                     z_selfattend = current_inputs 
                 else:
                     z_selfattend = hiddens[i-1]
-                log_prior_attention, prior_attention, sample, z, _, _, _ = layer(z, memory, src_mask, trg_mask=None, attn_dropout=attn_dropout, z_selfattend=z_selfattend, temperature=-1)
+                log_prior_attention, prior_attention, sample, z, _, _, _ = layer(z, memory, src_mask, trg_mask=None, attn_dropout=attn_dropout, z_selfattend=z_selfattend, temperature=-1, dependent_posterior=dependent_posterior)
                 if hiddens[i] is None:
                     hiddens[i] = z
                 else:
@@ -635,7 +642,7 @@ class DecoderLayer(nn.Module):
         self.feed_forward = feed_forward
         self.sublayer = clones(SublayerConnection(size, dropout), 3)
                                                                  
-    def forward(self, x, h, src_mask, trg_mask=None, posterior_attention=None, attn_dropout=False, z_selfattend=None, dependent_posterior=0, temperature=None, selftemperature=None, selfdependent_posterior=0, selfattn_dropout = False):
+    def forward(self, x, h, src_mask, trg_mask=None, posterior_attention=None, attn_dropout=False, z_selfattend=None, dependent_posterior=0, temperature=None, selftemperature=None, selfdependent_posterior=0, selfattn_dropout = True, self_attention_sample=None):
         "Follow Figure 1 (right) for connections."
         if z_selfattend is None:
             z_selfattend = x
@@ -647,7 +654,10 @@ class DecoderLayer(nn.Module):
         if flag:
             global flag2
             flag2 = True
-        log_self_attention_prior, self_attention_prior, self_attention_sample, x = self.sublayer[0](x, lambda x: self.self_attn(x, z_selfattend, z_selfattend, trg_mask, num_outputs=2, dependent_posterior=selfdependent_posterior, temperature=selftemperature, attn_dropout=selfattn_dropout), num_outputs=2)
+        if self_attention_sample is not None:
+            log_self_attention_prior, self_attention_prior, self_attention_sample, x = self.sublayer[0](x, lambda x: self.self_attn(x, z_selfattend, z_selfattend, trg_mask, num_outputs=2, dependent_posterior=selfdependent_posterior, temperature=selftemperature, attn_dropout=selfattn_dropout, attn=self_attention_sample), num_outputs=2)
+        else:
+            log_self_attention_prior, self_attention_prior, self_attention_sample, x = self.sublayer[0](x, lambda x: self.self_attn(x, z_selfattend, z_selfattend, trg_mask, num_outputs=2, dependent_posterior=selfdependent_posterior, temperature=selftemperature, attn_dropout=selfattn_dropout), num_outputs=2)
         if h is not None:
             log_prior_attention, prior_attention, sample, x = self.sublayer[1](x, lambda x: self.src_attn(x, h, h, src_mask, num_outputs=2, attn=posterior_attention, attn_dropout=attn_dropout, dependent_posterior=dependent_posterior, temperature=temperature), num_outputs=2)
         else:
@@ -764,6 +774,8 @@ def subsequent_mask(size):
     return torch.from_numpy(subsequent_mask) == 0
 
 def attention(query, key, value, mask=None, dropout=None, attn=None, attn_dropout=True, dependent_posterior=0, temperature=None):
+    if temperature is not None:
+        assert dependent_posterior == 1
     "Compute 'Scaled Dot Product Attention'"
     global flag2
     d_k = query.size(-1)

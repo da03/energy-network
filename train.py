@@ -94,8 +94,9 @@ def main(opts):
         raise NotImplementedError
 
 
-    if opts.mono == 0:
+    if opts.mono == 1:
         opts.mode = 'soft'
+    if opts.mono == 0:
         SRC = torchtext.data.Field(
                 pad_token=PAD_WORD,
                 include_lengths=True)
@@ -268,7 +269,8 @@ def main(opts):
             else:
                 temperature = opts.temperature
             selftemperature = opts.selftemperature
-            decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors, log_enc_self_attention_priors, enc_self_attention_priors = model_par(src, trg, src_mask, trg_mask, temperature, selftemperature=selftemperature)
+            encselftemperature = opts.encselftemperature
+            decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors, log_enc_self_attention_priors, enc_self_attention_priors = model_par(src, trg, src_mask, trg_mask, temperature, selftemperature=selftemperature, encselftemperature=encselftemperature)
             l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions)
             total_loss += l
             total_xent += l_xent
@@ -282,8 +284,8 @@ def main(opts):
             tokens += ntokens
             if i % 50 == 1:
                 elapsed = max(0.1, time.time() - start)
-                print("Epoch Step: %d temperature: %f selft: %f, lr: %f, PPL: %f, Acc: %f, exp xent: %f, xent: %f, kl: %f. alpha: %f, Tokens per Sec: %f" %
-                (i, temperature, selftemperature, loss_compute.optimizer._rate, math.exp(min(100, loss_all / tokens)), float(total_correct)/total_nonpadding,  math.exp(min(100, loss_xent / tokens)), loss_xent/tokens, loss_kl/tokens, loss_compute.alpha, tokens / elapsed))
+                print("Epoch Step: %d temperature: %f selft: %f, encselft: %f, lr: %f, PPL: %f, Acc: %f, exp xent: %f, xent: %f, kl: %f. alpha: %f, Tokens per Sec: %f" %
+                (i, temperature, selftemperature, encselftemperature, loss_compute.optimizer._rate, math.exp(min(100, loss_all / tokens)), float(total_correct)/total_nonpadding,  math.exp(min(100, loss_xent / tokens)), loss_xent/tokens, loss_kl/tokens, loss_compute.alpha, tokens / elapsed))
                 sys.stdout.flush()
                 start = time.time()
                 tokens = 0
@@ -318,7 +320,7 @@ def main(opts):
                 optimizer = loss_compute.optimizer
                 loss_compute.optimizer = None
                 #import pdb; pdb.set_trace()
-                decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors, log_enc_self_attention_priors, enc_self_attention_priors = model_par(src, trg, src_mask, trg_mask, 0, selftemperature=0)
+                decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors, log_enc_self_attention_priors, enc_self_attention_priors = model_par(src, trg, src_mask, trg_mask, 0, selftemperature=0, encselftemperature=0)
                 l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions)
                 #decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model_par(src, trg, src_mask, trg_mask, 0)
                 #word_probs = model.generator(decoder_output)
@@ -364,7 +366,7 @@ def main(opts):
                     optimizer = loss_compute.optimizer
                     loss_compute.optimizer = None
                     #import pdb; pdb.set_trace()
-                    decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors, log_enc_self_attention_priors, enc_self_attention_priors = model_par(src, trg, src_mask, trg_mask, 0, selftemperature=-1)
+                    decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors, log_enc_self_attention_priors, enc_self_attention_priors = model_par(src, trg, src_mask, trg_mask, 0, selftemperature=-1, encselftemperature=-1)
                     l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions)
                     #decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model_par(src, trg, src_mask, trg_mask, 0)
                     #word_probs = model.generator(decoder_output)
