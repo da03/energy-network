@@ -292,6 +292,8 @@ def main(opts):
                 total_nonpadding = 0
 
         print ('Validation')
+        if mono == 1:
+            val_iter = test_iter
         model.eval()
         val_loss_all = 0
         val_loss_xent = 0
@@ -374,50 +376,6 @@ def main(opts):
             print ('enc self: mean %f'%np.mean(np.array(total_encselfent)))
             print (total_encselfent)
             print("Val Result: PPL: %f, Acc: %f. exp xent: %f, xent: %f, kl: %f" %
-                (math.exp(min(100, val_loss_all / val_tokens)), float(val_total_correct)/val_total_nonpadding, math.exp(val_loss_xent/val_tokens), val_loss_xent/val_tokens, val_loss_kl/val_tokens))
-        if mono == 1:
-            print ('Test')
-            model.eval()
-            val_loss_all = 0
-            val_loss_xent = 0
-            val_loss_kl = 0
-            val_tokens = 0
-            val_total_correct = 0
-            val_total_nonpadding = 0
-            with torch.no_grad():
-                for i, batch in enumerate(test_iter):
-                    num_steps += 1
-                    if mono == 0:
-                        src = batch.src[0].transpose(0, 1) # batch, len
-                        src_mask = (src != SRC.vocab.stoi["<blank>"]).unsqueeze(-2)
-                    else:
-                        src, src_mask = None, None
-                    trg = batch.trg.transpose(0, 1) # batch, len
-                    trg_mask = (trg != TRG.vocab.stoi["<blank>"]).unsqueeze(-2)
-                    trg_mask = trg_mask & Variable(subsequent_mask(trg.size(-1)).to(trg_mask))
-                    trg_y = trg[:, 1:]
-                    ntokens = (trg_y != TRG.vocab.stoi["<blank>"]).data.view(-1).sum().item()
-                    #decoder_output, prior_attentions, posterior_attentions = model_par(src, trg, src_mask, trg_mask)
-                    optimizer = loss_compute.optimizer
-                    loss_compute.optimizer = None
-                    #import pdb; pdb.set_trace()
-                    decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors, log_enc_self_attention_priors, enc_self_attention_priors = model_par(src, trg, src_mask, trg_mask, 0, selftemperature=-1, encselftemperature=-1)
-                    l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions)
-                    #decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model_par(src, trg, src_mask, trg_mask, 0)
-                    #word_probs = model.generator(decoder_output)
-
-                    #l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions)
-                    #l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, mus, sigmas, decoder_mus, decoder_sigmas)
-                    loss_compute.optimizer = optimizer
-                    val_loss_all += l
-                    val_loss_xent += l_xent
-                    val_loss_kl += l_kl
-                    val_tokens += ntokens
-                    val_total_correct += l_correct
-                    val_total_nonpadding += l_nonpadding
-                print("Test Result: PPL: %f, Acc: %f. exp xent: %f, xent: %f, kl: %f" %
-                    (math.exp(min(100, val_loss_all / val_tokens)), float(val_total_correct)/val_total_nonpadding, math.exp(val_loss_xent/val_tokens), val_loss_xent/val_tokens, val_loss_kl/val_tokens))
-        model.train()
 
 if __name__ == '__main__':
     main(opts)
