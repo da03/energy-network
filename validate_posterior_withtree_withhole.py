@@ -166,7 +166,7 @@ def main(opts):
     #val_total_correct = 0
     #val_total_nonpadding = 0
     with torch.no_grad():
-        vis = visdom.Visdom(env='%s_%s'%(opts.split, opts.env))
+        vis = visdom.Visdom(env='%s'%(opts.env), port=7098)
         assert vis.check_connection(timeout_seconds=3), \
             'No connection could be formed quickly'
 
@@ -247,6 +247,7 @@ def main(opts):
             log_probs = outputs.gather(1, trg_y.view(-1, 1)).view(-1)
             probs = log_probs.exp()
             tot_cols = 0
+            self_attention_priors = None
             if prior_attentions is not None and len(prior_attentions)>0 and prior_attentions[0] is not None:
                 tot_cols += 1
                 prior_attentions = [attention[0] for attention in prior_attentions]
@@ -260,7 +261,7 @@ def main(opts):
                 tot_cols += 1
                 self_attention_priors = [attention[0] for attention in self_attention_priors]
             if self_attention_samples is not None and len(self_attention_samples) > 0:
-                tot_cols += 1
+                tot_cols += 2
                 self_attention_samples = [attention[0] for attention in self_attention_samples]
             if enc_self_attention_priors is not None and len(enc_self_attention_priors)>0 and enc_self_attention_priors[0] is not None:
                 tot_cols += 1
@@ -270,8 +271,8 @@ def main(opts):
                 enc_self_attention_samples = [attention[0] for attention in enc_self_attention_samples]
             
             
-            num_layers = len(self_attention_priors)
-            num_heads = self_attention_priors[0].size(0)
+            num_layers = len(self_attention_samples)
+            num_heads = self_attention_samples[0].size(0)
             subplot_titles = []
             for l in range(num_layers):
                 for h in range(num_heads):
@@ -286,13 +287,22 @@ def main(opts):
                         subplot_titles.append(title + ' probs self')
                     if self_attention_samples is not None and len(self_attention_samples) > 0:
                         subplot_titles.append(title + ' sample self')
+                    if self_attention_samples is not None and len(self_attention_samples) > 0:
+                        if h == num_heads-1:
+                            subplot_titles.append('layer: %d dependencies'%l)
+                        elif h == num_heads-2:
+                            subplot_titles.append('layer: %d dependencies with distances'%l)
+                        else:
+                            subplot_titles.append(title + ' dependencies')
                     if enc_self_attention_priors is not None and len(enc_self_attention_priors)>0:
                         subplot_titles.append(title + ' probs self enc')
                     if enc_self_attention_samples is not None and len(enc_self_attention_samples) > 0 and enc_self_attention_priors[0] is not None:
                         subplot_titles.append(title + ' sample self enc')
             fig = plotly.tools.make_subplots(rows=num_layers*num_heads, cols=tot_cols, subplot_titles=subplot_titles)
-            fig['layout'].update(width=400*tot_cols, height=600*num_layers*num_heads, autosize=False, showlegend=False)
+            fig['layout'].update(width=700*tot_cols, height=900*num_layers*num_heads, autosize=False, showlegend=False)
             connectivity = {}
+            prev_attention_dependencies = None
+            prev_attention_dependencies_dist = None
             for l in range(num_layers):
                 for h in range(num_heads):
                     idx = 0
@@ -321,11 +331,12 @@ def main(opts):
                     if self_attention_priors is not None and len(self_attention_priors)>0:
                         idx += 1
                         attention = self_attention_priors[l][h].transpose(0 ,1).cpu().data.numpy() # trg by src
-                        f = go.Heatmap(z=attention, x=trg_out_col_names, y=trg_row_names, colorscale='Hot', showscale=False)
+                        f = go.Heatmap(z=attention, x=trg_out_col_names, y=trg_row_names_noppl, colorscale='Hot', showscale=False)
                         fig.append_trace(f, l*num_heads+h+1, idx)
                     if self_attention_samples is not None and len(self_attention_samples) > 0:
                         idx += 1
                         attention = self_attention_samples[l][h].transpose(0 ,1).cpu().data.numpy() # trg by src
+                        attention_dependencies_dist = copy.deepcopy(attention)
                         for i in range(len(trg_row_names)):
                             for j in range(len(trg_out_col_names)):
                                 input_name = str(i) + ': '+trg_row_names_noppl[i]
@@ -352,8 +363,69 @@ def main(opts):
                                             if name not in connectivity[output_name]:
                                                 connectivity[output_name].append(name)
                                     
-                        f = go.Heatmap(z=attention, x=trg_out_col_names, y=trg_row_names, colorscale='Hot', showscale=False)
+                        f = go.Heatmap(z=attention, x=trg_out_col_names, y=trg_row_names_noppl, colorscale='Hot', showscale=False)
                         fig.append_trace(f, l*num_heads+h+1, idx)
+                        idx += 1
+                        if h == num_heads-2:
+                            for i in range(len(trg_row_names)):
+                                for j in range(len(trg_out_col_names)):
+                                    if attention_dependencies_dist[i][j] == 1:
+                                        attention_dependencies_dist[i][j] = 1
+                                    else:
+                                        attention_dependencies_dist[i][j] = float('inf')
+                                    if i == j:
+                                        attention_dependencies_dist[i][j] = 0
+                            for h2 in list(range(num_heads-2)) + [h+1]:
+                                attention_dependencies2= self_attention_samples[l][h2].transpose(0 ,1).cpu().data.numpy() # trg by src
+                                for i in range(len(trg_row_names)):
+                                    for j in range(len(trg_out_col_names)):
+                                        if attention_dependencies2[i][j] == 1:
+                                            attention_dependencies_dist[i][j] = min(1, attention_dependencies_dist[i][j])
+          
+                            if prev_attention_dependencies_dist is not None:
+                                for k in range(len(trg_row_names)):
+                                    for i in range(len(trg_row_names)):
+                                        for j in range(len(trg_out_col_names)):
+                                            if prev_attention_dependencies_dist[k][i] < float('inf') and attention_dependencies_dist[i][j] < float('inf'):
+                                                attention_dependencies_dist[k][j] = min(attention_dependencies_dist[k][j], prev_attention_dependencies_dist[k][i]+attention_dependencies_dist[i][j])
+                            prev_attention_dependencies_dist = attention_dependencies_dist
+                            attention_dependencies_dist2 = copy.deepcopy(attention_dependencies_dist)
+                            hovertext = []
+                            for i in range(len(trg_row_names)):
+                                hovertext_ = []
+                                for j in range(len(trg_out_col_names)):
+                                    if attention_dependencies_dist2[i][j] == float('inf'):
+                                        attention_dependencies_dist2[i][j] = -4.4
+                                        hovertext_.append('out: %s<br>in: %s<br>dist: inf'%(trg_out_col_names[j], trg_row_names_noppl[i]))
+                                    else:
+                                        attention_dependencies_dist2[i][j] = -attention_dependencies_dist2[i][j]
+                                        #hovertext_.append('dist: %d'%(-attention_dependencies_dist2[i][j]))
+                                        hovertext_.append('out: %s<br>in: %s<br>dist: %d'%(trg_out_col_names[j], trg_row_names_noppl[i], -attention_dependencies_dist2[i][j]))
+                                hovertext.append(hovertext_)
+                            f = go.Heatmap(z=attention_dependencies_dist2, x=trg_out_col_names, y=trg_row_names_noppl, colorscale='Hot', showscale=False, hovertext=hovertext, hoverinfo="text")
+                            fig.append_trace(f, l*num_heads+h+1, idx)
+                        elif h == num_heads-1:
+                            attention_dependencies = attention
+                            for h2 in range(num_heads-1):
+                                attention_dependencies2= self_attention_samples[l][h2].transpose(0 ,1).cpu().data.numpy() # trg by src
+                                for i in range(len(trg_row_names)):
+                                    for j in range(len(trg_out_col_names)):
+                                        if i == j:
+                                            attention_dependencies[i][j] = 1
+                                        if attention_dependencies2[i][j] == 1:
+                                            attention_dependencies[i][j] = 1
+          
+                            if prev_attention_dependencies is not None:
+                                for k in range(len(trg_row_names)):
+                                    for i in range(len(trg_row_names)):
+                                        for j in range(len(trg_out_col_names)):
+                                            if prev_attention_dependencies[k][i] == 1 and attention_dependencies[i][j] == 1:
+                                                attention_dependencies[k][j] = 1
+                            prev_attention_dependencies = attention_dependencies
+                                    
+                            f = go.Heatmap(z=attention_dependencies, x=trg_out_col_names, y=trg_row_names_noppl, colorscale='Hot', showscale=False)
+                            fig.append_trace(f, l*num_heads+h+1, idx)
+                            
                     if enc_self_attention_priors is not None and len(enc_self_attention_priors)>0 and enc_self_attention_priors[0] is not None:
                         idx += 1
                         attention = enc_self_attention_priors[l][h].transpose(0 ,1).cpu().data.numpy() # trg by src
@@ -365,8 +437,8 @@ def main(opts):
                         f = go.Heatmap(z=attention, x=trg_out_col_names, y=trg_row_names, colorscale='Hot', showscale=False)
                         fig.append_trace(f, l*num_heads+h+1, idx)
                     #f.legendgroup(title + ' probs')
-            width = 400*tot_cols if tot_cols > 2 else 600*tot_cols
-            height = 600*num_layers*num_heads+3
+            width = 400*tot_cols if tot_cols > 3 else 700*tot_cols
+            height = 900*num_layers*num_heads
             fig['layout'].update(width=width, height=height, showlegend=False, autosize=False, title='Mode: %s'%opts.mode)
             H=pgv.AGraph(strict=True, directed=True)
             if collapsed:
