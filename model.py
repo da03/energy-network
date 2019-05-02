@@ -30,10 +30,9 @@ class Model(nn.Module):
     A standard Encoder-Decoder architecture. Base for this and many 
     other models.
     """
-    def __init__(self, mode, encoder, decoder, src_embed, trg_embed, inference_network, generator, residual_var=0, selfmode='soft', encselfmode='soft', selfdependent_posterior=0, mono=0):
+    def __init__(self, mode, encoder, decoder, src_embed, trg_embed, inference_network, generator, residual_var=0, selfmode='soft', encselfmode='soft', selfdependent_posterior=0):
         super(Model, self).__init__()
         self.mode = mode
-        self.mono = mono
         self.selfmode = selfmode
         self.encselfmode = encselfmode
         self.encoder = encoder
@@ -49,83 +48,29 @@ class Model(nn.Module):
     def forward(self, src, trg, src_mask, trg_mask, temperature=None, selftemperature=None, encselftemperature=None):
         assert self.trg_pad is not None
         self.samples = None
-        if self.mono == 0:
-            src_embeddings = self.src_embed(src)
-            if self.encselfmode == 'soft':
-                encselftemperature = None
-                encselfdependent_posterior = 0
-                encselfattn_dropout = True
-            else:
-                assert encselftemperature is not None
-                encselfdependent_posterior = 1
-                encselfattn_dropout = False
-            h, log_enc_self_attention_priors, enc_self_attention_priors, enc_self_attention_samples = self.encoder(src_embeddings, src_mask, temperature=encselftemperature, dependent_posterior=encselfdependent_posterior, attn_dropout=encselfattn_dropout)
-        else:
-            h, log_enc_self_attention_priors, enc_self_attention_priors, enc_self_attention_samples = None, None, None, None
+        src_embeddings = self.src_embed(src)
+        h, log_enc_self_attention_priors, enc_self_attention_priors, enc_self_attention_samples = self.encoder(src_embeddings, src_mask)
+        h = h.mean(1).view(h.size(0), 1, h.size(-1))
         self.enc_self_attention_samples = enc_self_attention_samples
         trg_embeddings = self.trg_embed(trg)
         if trg is not None: # try both self attn and inter attn
-            if self.mode == 'var' or self.mode == 'lstmvar':
-                assert temperature is not None
-                if self.selfmode == 'soft':
-                    selftemperature = None
-                    selfdependent_posterior = 0
-                    selfattn_dropout = True 
-                else:
-                    selfdependent_posterior = 1
-                    assert selftemperature is not None
-                    selfattn_dropout = False
-                if self.residual_var == 0:
-                    assert self.selfmode == 'soft'
-                    log_posterior_attentions, posterior_attentions, posterior_samples = self.inference_network(h, trg_embeddings[:, 1:], src_mask, temperature, trg_mask=trg[:,1:].ne(self.trg_pad), src=src_embeddings) # a list of attentions, we need to sample
-                    self.samples = posterior_samples
-                    decoder_output, log_prior_attentions, prior_attentions = self.decoder(h, trg_embeddings[:, :-1], src_mask, trg_mask[:, :-1, :-1], posterior_samples, attn_dropout=False)
-                else:
-                    decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, samples, log_self_attention_priors, self_attention_priors, self_attention_samples = self.decoder.forward_withinf(
-                        h, trg_embeddings[:, 1:], src_mask, temperature, trg[:,1:].ne(self.trg_pad), src_embeddings, trg_embeddings[:, :-1], trg_mask[:, :-1, :-1], attn_dropout=False, inference_network=self.inference_network, selftemperature=selftemperature, selfdependent_posterior=selfdependent_posterior, selfattn_dropout=selfattn_dropout)
-                    self.self_attention_samples = self_attention_samples
-                    self.samples = samples
-            elif self.mode == 'soft':
-                if self.selfmode == 'soft':
-                    selftemperature = None
-                    selfdependent_posterior = 0
-                    selfattn_dropout = True 
-                else:
-                    selfdependent_posterior = 1
-                    assert selftemperature is not None
-                    selfattn_dropout = False
-                if trg_mask is not None:
-                    trg_mask = trg_mask[:, :-1, :-1]
-                trg_embeddings = trg_embeddings[:, :-1]
-                decoder_output, log_prior_attentions, prior_attentions, log_self_attention_priors, self_attention_priors, self_attention_samples = self.decoder(h, trg_embeddings, src_mask, trg_mask, attn_dropout=True, selftemperature=selftemperature, selfdependent_posterior=selfdependent_posterior, selfattn_dropout=selfattn_dropout)
-                self.self_attention_samples = self_attention_samples
-                log_posterior_attentions, posterior_attentions = None, None
-            elif self.mode == 'hard':
-                if trg_mask is not None:
-                    trg_mask = trg_mask[:, :-1, :-1]
-                trg_embeddings = trg_embeddings[:, :-1]
-                if self.selfmode == 'soft':
-                    selftemperature = None
-                    selfdependent_posterior = 0
-                    selfattn_dropout = True 
-                else:
-                    selfdependent_posterior = 1
-                    selfattn_dropout = False
-                    assert selftemperature is not None
-                decoder_output, log_prior_attentions, prior_attentions, prior_samples, log_self_attention_priors, self_attention_priors, self_attention_samples = self.decoder(h, trg_embeddings, src_mask, trg_mask, attn_dropout=False, temperature=temperature, dependent_posterior=1, selftemperature=selftemperature, selfdependent_posterior=selfdependent_posterior, selfattn_dropout=selfattn_dropout)
-                self.samples = prior_samples
-                self.self_attention_samples = self_attention_samples
-                log_posterior_attentions, posterior_attentions = None, None
+            if trg_mask is not None:
+                trg_mask = trg_mask[:, :-1, :-1]
+            trg_embeddings = trg_embeddings[:, :-1]
+            decoder_output, log_prior_attentions, prior_attentions, log_self_attention_priors, self_attention_priors, self_attention_samples = self.decoder(h, trg_embeddings, src_mask, trg_mask)
+            self.self_attention_samples = self_attention_samples
+            log_posterior_attentions, posterior_attentions = None, None
             return decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors, log_enc_self_attention_priors, enc_self_attention_priors
         else:
             assert False
 
-    def beam_search_soft(self, beam_size, src, src_mask, sos, eos, max_length, encselftemperature=None, encselfdependent_posterior=0, encattn_dropout=True):
+    def beam_search_soft(self, beam_size, src, src_mask, sos, eos, max_length):
         assert not self.training
         src_embeddings = self.src_embed(src)
-        h = self.encoder(src_embeddings, src_mask, temperature=encselftemperature, dependent_posterior=encselfdependent_posterior, attn_dropout=encattn_dropout)
+        h, _, _, _ = self.encoder(src_embeddings, src_mask)
+        h = h.mean(1).view(h.size(0), 1, h.size(-1))
         # soft always attn_dropout
-        hypothesis, score = self.decoder.beam_search_soft(beam_size, self.generator, self.trg_embed, h, src_mask, sos, eos, max_length, attn_dropout=True)
+        hypothesis, score = self.decoder.beam_search_soft(beam_size, self.generator, self.trg_embed, h, src_mask, sos, eos, max_length)
         return hypothesis, score
  
     def beam_search_hard(self, beam_size, src, src_mask, sos, eos, max_length,  encselftemperature=None, encselfdependent_posterior=0, encattn_dropout=True):
@@ -225,7 +170,7 @@ class EncoderLayer(nn.Module):
         self.sublayer = clones(SublayerConnection(size, dropout), 2)
         self.size = size
 
-    def forward(self, x, mask, temperature=None, dependent_posterior=0, attn_dropout=False):
+    def forward(self, x, mask, temperature=None, dependent_posterior=0, attn_dropout=True):
         "Follow Figure 1 (left) for connections."
         #x = self.sublayer[0](x, lambda x: self.self_attn(x, x, x, mask))
         log_self_attention_prior, self_attention_prior, self_attention_sample, x = self.sublayer[0](x, lambda x: self.self_attn(x, x, x, mask, num_outputs=2, dependent_posterior=dependent_posterior, temperature=temperature, attn_dropout=attn_dropout), num_outputs=2)
@@ -238,136 +183,33 @@ class Decoder(nn.Module):
         self.layers = clones(layer, N)
         self.norm = LayerNorm(layer.size)
                                                
-    def forward(self, h, trg, src_mask, trg_mask=None, posterior_attentions=None, attn_dropout=False, temperature=None, dependent_posterior=0, selftemperature=None, selfdependent_posterior=0, selfattn_dropout=False):
+    def forward(self, h, trg, src_mask, trg_mask=None):
         #import pdb; pdb.set_trace()
-        z = trg
+        z = trg + h
         prior_attentions = []
         log_prior_attentions = []
         log_self_attention_priors = []
         self_attention_priors = []
         self_attention_samples = []
         samples = []
-        global flag
-        flag = True
-        if posterior_attentions is not None:
-            for posterior_attention, layer in zip(posterior_attentions, self.layers):
-                #import pdb; pdb.set_trace()
-                log_prior_attention, prior_attention, sample, z, log_self_attention_prior, self_attention_prior, self_attention_sample = layer(z, h, src_mask, trg_mask, posterior_attention, attn_dropout=attn_dropout)
-                prior_attentions.append(prior_attention)
-                log_prior_attentions.append(log_prior_attention)
-                log_self_attention_priors.append(log_self_attention_prior)
-                self_attention_priors.append(self_attention_prior)
-                self_attention_samples.append(self_attention_sample)
-            z = self.norm(z)
-            return z, log_prior_attentions, prior_attentions, log_self_attention_priors, self_attention_priors, self_attention_samples
-        else:
-            for layer in self.layers:
-                log_prior_attention, prior_attention, sample, z, log_self_attention_prior, self_attention_prior, self_attention_sample = layer(z, h, src_mask, trg_mask, attn_dropout=attn_dropout, temperature=temperature, dependent_posterior=dependent_posterior, selftemperature=selftemperature, selfdependent_posterior=selfdependent_posterior, selfattn_dropout=selfattn_dropout)
-                prior_attentions.append(prior_attention)
-                log_prior_attentions.append(log_prior_attention)
-                if sample is not None:
-                    samples.append(sample)
-                log_self_attention_priors.append(log_self_attention_prior)
-                self_attention_priors.append(self_attention_prior)
-                if self_attention_sample is not None:
-                    self_attention_samples.append(self_attention_sample)
-            z = self.norm(z)
-            if len(samples) > 0:
-                return z, log_prior_attentions, prior_attentions, samples, log_self_attention_priors, self_attention_priors, self_attention_samples
-            else:
-                return z, log_prior_attentions, prior_attentions, log_self_attention_priors, self_attention_priors, self_attention_samples
-
-    def forward_withinf(self, h, trg_output, src_mask, temperature, trg_output_mask=None, src_embeddings=None, trg_input=None, trg_input_mask=None, attn_dropout=False, inference_network=None, selftemperature=None, selfdependent_posterior=0, selfattn_dropout=True):
-        log_posterior_attentions = []
-        posterior_attentions = []
-        log_prior_attentions = []
-        prior_attentions = []
-        log_self_attention_priors, self_attention_priors, self_attention_samples = [], [], []
-        trg_lengths = trg_output_mask.sum(-1).contiguous().view(-1)
-        src_lengths = src_mask.sum(-1).contiguous().view(-1).cpu().numpy()
-        samples = []
-        z = trg_input
-        h_enc = h
-        if type(inference_network) is LSTMInferenceNetwork:
-            src = src_embeddings
-            src = src.transpose(0, 1)
-            trg = trg_output
-            # pack them up nicely
-            trg_lengths_s, perm_index = trg_lengths.sort(0, descending=True)
-            trg = trg[perm_index]
-            trg = trg.transpose(0, 1)
-            packed_trg = pack_padded_sequence(trg, trg_lengths_s.cpu().numpy())
-
-            packed_src = pack_padded_sequence(src, src_lengths)
-
-            s1 = None
-            s2 = None
-            for src_layer, trg_layer, W, layer in zip(inference_network.layers_src, inference_network.layers_trg, inference_network.Ws, self.layers):
-                if s1 is None:
-                    s1 = src_layer
-                if s2 is None:
-                    s2 = trg_layer
-                if inference_network.sharelstm != 0:
-                    src_layer = s1
-                    trg_layer = s2
-                #print (z.size()) # batch_size, trg_len, hidden
-                packed_trg_, _ = trg_layer(packed_trg)
-                trg_outputs = pad_packed_sequence(packed_trg_)[0]
-                packed_src_, _ = src_layer(packed_src)
-                src_outputs = pad_packed_sequence(packed_src_)[0]
-                src_memory_bank = src_outputs.transpose(0, 1)
-                src_memory_bank = src_memory_bank.transpose(1, 2) # bsz, rnn, src_len
-
-
-                bsz = src_memory_bank.size(0)
-                rnn = src_memory_bank.size(1)
-                src_len = src_memory_bank.size(-1)
-                h = inference_network.h
-                src_memory_bank = src_memory_bank.contiguous().view(bsz, h, rnn//h, -1).contiguous().view(-1, rnn//h, src_len)
-                trg_outputs = trg_outputs.transpose(0, 1)
-                odx = perm_index.contiguous().view(-1, 1).unsqueeze(1).expand(trg_outputs.size(0), trg_outputs.size(1), trg_outputs.size(2))
-                trg_outputs = trg_outputs.gather(0, odx)
-                trg_memory_bank = W(trg_outputs) # bsz, trg_len, rnn_size
-                trg_memory_bank = trg_memory_bank.transpose(1, 2)
-                trg_len = trg_memory_bank.size(-1)
-                trg_memory_bank = trg_memory_bank.contiguous().view(bsz, h, rnn//h, -1).contiguous().view(-1, rnn//h, trg_len).transpose(1,2)
-
-                scores = torch.bmm(trg_memory_bank, src_memory_bank).contiguous().view(bsz, h, trg_len, src_len)
-                #p_attn = F.softmax(scores, dim = -1)
-                #log_p_attn = F.log_softmax(scores, dim = -1)
-                log_prior_attention, prior_attention, _, z_tmp, log_self_attention_prior, self_attention_prior, self_attention_sample = layer(z, h_enc, src_mask, trg_input_mask, attn_dropout=attn_dropout, selftemperature=selftemperature, selfdependent_posterior=selfdependent_posterior, selfattn_dropout=selfattn_dropout)
-                log_self_attention_priors.append(log_self_attention_prior)
-                self_attention_priors.append(self_attention_prior)
-                self_attention_samples.append(self_attention_sample)
-                if selftemperature is None:
-                    self_attention_sample = None
-                log_posterior_attention = log_prior_attention + scores
-                log_posterior_attention.data.masked_fill_(src_mask.unsqueeze(1).expand(bsz, h, trg_len, src_len)==0, -1e9)
-                posterior_attention = F.softmax(log_posterior_attention, dim=-1)
-                log_posterior_attention = F.log_softmax(log_posterior_attention, dim=-1)
-                log_prior_attentions.append(log_prior_attention)
-                prior_attentions.append(prior_attention)
-                log_posterior_attentions.append(log_posterior_attention)
-                posterior_attentions.append(posterior_attention)
-                log_p_attn = log_posterior_attention
-                p_attn = posterior_attention
-
-                assert temperature is not None
-                if temperature > 0:
-                    sample = gumbel_softmax_sample(log_p_attn, temperature)
-                else: # true categorical sample, equivalently we can use argmax to replace softmax in gumbel, here we use categorical for sanity check.
-                    #import pdb; pdb.set_trace()
-                    h1, h2, h3, h4 = p_attn.size()
-                    p = Categorical(p_attn.view(-1, h4))
-                    sample_id = p.sample().view(h1, h2, h3, 1)
-                    sample = p_attn.new_full(p_attn.size(), 0.).to(p_attn)
-                    sample.scatter_(3, sample_id, 1.)
+        for layer in self.layers:
+            log_prior_attention, prior_attention, sample, z, log_self_attention_prior, self_attention_prior, self_attention_sample = layer(z, h, src_mask, trg_mask)
+            prior_attentions.append(prior_attention)
+            log_prior_attentions.append(log_prior_attention)
+            if sample is not None:
                 samples.append(sample)
-                _, _, _, z, _, _, _ = layer(z, h_enc, src_mask, trg_input_mask, sample, attn_dropout=attn_dropout, self_attention_sample=self_attention_sample)
-            z = self.norm(z)
-        return z, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, samples, log_self_attention_priors, self_attention_priors, self_attention_samples
+            log_self_attention_priors.append(log_self_attention_prior)
+            self_attention_priors.append(self_attention_prior)
+            if self_attention_sample is not None:
+                self_attention_samples.append(self_attention_sample)
+        z = self.norm(z)
+        if len(samples) > 0:
+            return z, log_prior_attentions, prior_attentions, samples, log_self_attention_priors, self_attention_priors, self_attention_samples
+        else:
+            return z, log_prior_attentions, prior_attentions, log_self_attention_priors, self_attention_priors, self_attention_samples
 
-    def beam_search_soft(self, beam_size, generator, trg_embed, memory, src_mask, sos, eos, max_length, attn_dropout=True):
+
+    def beam_search_soft(self, beam_size, generator, trg_embed, memory, src_mask, sos, eos, max_length):
         trg_embed[1].offset = 0
         batch_size, src_length, _ = memory.size()
         assert batch_size == 1
@@ -380,16 +222,16 @@ class Decoder(nn.Module):
         best_finished_score = -float('inf')
         current_hypotheses = None
         for t in range(max_length):
-            z = trg_embeddings
-            if memory.size(0) != z.size(0):
+            if memory.size(0) != trg_embeddings.size(0):
                 memory = memory.expand(beam_size, -1, -1)
                 src_mask = src_mask.expand(beam_size, -1, -1)
+            z = trg_embeddings + memory
             for i, layer in enumerate(self.layers):
                 if i == 0:
                     z_selfattend = current_inputs 
                 else:
                     z_selfattend = hiddens[i-1]
-                log_prior_attention, prior_attention, sample, z, _, _, _ = layer(z, memory, src_mask, trg_mask=None, attn_dropout=attn_dropout, z_selfattend=z_selfattend)
+                log_prior_attention, prior_attention, sample, z, _, _, _ = layer(z, memory, src_mask, trg_mask=None, z_selfattend=z_selfattend)
                 if hiddens[i] is None:
                     hiddens[i] = z
                 else:
@@ -642,7 +484,7 @@ class DecoderLayer(nn.Module):
         self.feed_forward = feed_forward
         self.sublayer = clones(SublayerConnection(size, dropout), 3)
                                                                  
-    def forward(self, x, h, src_mask, trg_mask=None, posterior_attention=None, attn_dropout=False, z_selfattend=None, dependent_posterior=0, temperature=None, selftemperature=None, selfdependent_posterior=0, selfattn_dropout = True, self_attention_sample=None):
+    def forward(self, x, h, src_mask, trg_mask=None, z_selfattend=None):
         "Follow Figure 1 (right) for connections."
         if z_selfattend is None:
             z_selfattend = x
@@ -650,19 +492,9 @@ class DecoderLayer(nn.Module):
         #    x = self.sublayer[0](x, lambda x: self.self_attn(x, z_selfattend, z_selfattend))
         #else:
         #    x = self.sublayer[0](x, lambda x: self.self_attn(x, z_selfattend, z_selfattend, trg_mask))
-        global flag
-        if flag:
-            global flag2
-            flag2 = True
-        if self_attention_sample is not None:
-            log_self_attention_prior, self_attention_prior, self_attention_sample, x = self.sublayer[0](x, lambda x: self.self_attn(x, z_selfattend, z_selfattend, trg_mask, num_outputs=2, dependent_posterior=selfdependent_posterior, temperature=selftemperature, attn_dropout=selfattn_dropout, attn=self_attention_sample), num_outputs=2)
-        else:
-            log_self_attention_prior, self_attention_prior, self_attention_sample, x = self.sublayer[0](x, lambda x: self.self_attn(x, z_selfattend, z_selfattend, trg_mask, num_outputs=2, dependent_posterior=selfdependent_posterior, temperature=selftemperature, attn_dropout=selfattn_dropout), num_outputs=2)
-        if h is not None:
-            log_prior_attention, prior_attention, sample, x = self.sublayer[1](x, lambda x: self.src_attn(x, h, h, src_mask, num_outputs=2, attn=posterior_attention, attn_dropout=attn_dropout, dependent_posterior=dependent_posterior, temperature=temperature), num_outputs=2)
-        else:
-            log_prior_attention, prior_attention, sample = None, None, None
-        return log_prior_attention, prior_attention, sample, self.sublayer[2](x, self.feed_forward), log_self_attention_prior, self_attention_prior, self_attention_sample
+        log_self_attention_prior, self_attention_prior, self_attention_sample, x = self.sublayer[0](x, lambda x: self.self_attn(x, z_selfattend, z_selfattend, trg_mask, num_outputs=2), num_outputs=2)
+        #log_prior_attention, prior_attention, sample, x = self.sublayer[1](x, lambda x: self.src_attn(x, h, h, src_mask, num_outputs=2), num_outputs=2)
+        return None, None, None, self.sublayer[2](x, self.feed_forward), log_self_attention_prior, self_attention_prior, self_attention_sample
 
 class InferenceNetwork(nn.Module):
     "Generic N layer decoder with masking."
@@ -756,7 +588,6 @@ class LSTMInferenceNetwork(nn.Module):
             if temperature > 0:
                 sample = gumbel_softmax_sample(log_p_attn, temperature)
             else: # true categorical sample, equivalently we can use argmax to replace softmax in gumbel, here we use categorical for sanity check.
-                #import pdb; pdb.set_trace()
                 h1, h2, h3, h4 = p_attn.size()
                 p = Categorical(p_attn.view(-1, h4))
                 sample_id = p.sample().view(h1, h2, h3, 1)
@@ -801,7 +632,6 @@ def attention(query, key, value, mask=None, dropout=None, attn=None, attn_dropou
             sample = p_attn.new_full(p_attn.size(), 0.).to(p_attn)
             sample.scatter_(3, sample_id, 1.)
         else: # true categorical sample, equivalently we can use argmax to replace softmax in gumbel, here we use categorical for sanity check.
-            #import pdb; pdb.set_trace()
             h1, h2, h3, h4 = p_attn.size()
             p = Categorical(p_attn.view(-1, h4))
             sample_id = p.sample().view(h1, h2, h3, 1)
@@ -897,7 +727,7 @@ class PositionalEncoding(nn.Module):
 
 def make_model(mode, src_vocab, trg_vocab, n_enc=6, n_dec=6,
                        d_model=512, d_ff=2048, h=8, dropout=0.1, share_decoder_embeddings=0,
-                       share_word_embeddings=0, dependent_posterior=0, sharelstm=0, residual_var=0, selfmode='soft', encselfmode='soft', selfdependent_posterior=0, mono=0):
+                       share_word_embeddings=0, dependent_posterior=0, sharelstm=0, residual_var=0, selfmode='soft', encselfmode='soft', selfdependent_posterior=0):
     "Helper: Construct a model from hyperparameters."
     c = copy.deepcopy
     attn = MultiHeadedAttention(h, d_model)
@@ -905,12 +735,8 @@ def make_model(mode, src_vocab, trg_vocab, n_enc=6, n_dec=6,
     position = PositionalEncoding(d_model, dropout)
 
 
-    if mono == 0:
-        encoder = Encoder(EncoderLayer(d_model, c(attn), c(ff), dropout), n_enc)
-        src_emb = nn.Sequential(Embeddings(d_model, src_vocab), c(position))
-    else:
-        encoder = None
-        src_emb = None
+    encoder = Encoder(EncoderLayer(d_model, c(attn), c(ff), dropout), n_enc)
+    src_emb = nn.Sequential(Embeddings(d_model, src_vocab), c(position))
     decoder = Decoder(DecoderLayer(d_model, c(attn), c(attn), c(ff), dropout), n_dec)
     trg_emb = nn.Sequential(Embeddings(d_model, trg_vocab), c(position))
     if mode != 'lstmvar':
@@ -928,7 +754,7 @@ def make_model(mode, src_vocab, trg_vocab, n_enc=6, n_dec=6,
                   src_emb,
                   trg_emb,
                   inference_network,
-                  generator, residual_var=residual_var, selfmode=selfmode, encselfmode=encselfmode, selfdependent_posterior=selfdependent_posterior, mono=mono)
+                  generator, residual_var=residual_var, selfmode=selfmode, encselfmode=encselfmode, selfdependent_posterior=selfdependent_posterior)
 
     if share_decoder_embeddings == 1:
         model.generator.proj.weight = model.trg_embed[0].lut.weight

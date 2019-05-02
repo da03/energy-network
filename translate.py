@@ -122,30 +122,30 @@ def main(opts):
                     encselfdependent_posterior = 0
                     encattn_dropout = True
 
-                if checkpoint['opts'].mode == 'soft': # vanilla beam search
-                    if checkpoint['opts'].selfmode == 'soft':
-                        hypothesis, score = model.beam_search_soft(opts.beam_size, src, src_mask, BOS, EOS, opts.max_trg_len, encselftemperature=encselftemperature, encselfdependent_posterior=encselfdependent_posterior, encattn_dropout=encattn_dropout)
-                    else:
-                        hypothesis, score = model.beam_search_soft_selfhard(opts.beam_size, src, src_mask, BOS, EOS, opts.max_trg_len, encselftemperature=encselftemperature,encselfdependent_posterior=encselfdependent_posterior,encattn_dropout=encattn_dropout)
-                else:
-                    if not hasattr(checkpoint['opts'], 'selfmode') or checkpoint['opts'].selfmode == 'soft':
-                        hypothesis, score = model.beam_search_hard(opts.beam_size, src, src_mask, BOS, EOS, opts.max_trg_len, encselftemperature=encselftemperature, encselfdependent_posterior=encselfdependent_posterior, encattn_dropout=encattn_dropout)
-                    else:
-                        hypothesis, score = model.beam_search_hard_selfhard(opts.beam_size, src, src_mask, BOS, EOS, opts.max_trg_len, encselftemperature=encselftemperature, encselfdependent_posterior=encselfdependent_posterior, encattn_dropout=encattn_dropout)
+                hypothesis, score = model.beam_search_soft(opts.beam_size, src, src_mask, BOS, EOS, opts.max_trg_len)
                 words = []
                 for word_id in src.view(-1):
                     words.append(SRC.vocab.itos[word_id.item()])
-                print ('Src: %s'%(' '.join(words)))
+                try:
+                    print ('Src: %s'%(' '.join(words)))
+                except Exception as e:
+                    pass
                 words = []
                 for word_id in trg.view(-1)[1:-1]:
                     words.append(TRG.vocab.itos[word_id.item()])
-                print ('Ground Truth: %s'%(' '.join(words)))
+                try:
+                    print ('Ground Truth: %s'%(' '.join(words)))
+                except Exception as e:
+                    pass
                 words = []
                 for word_id in hypothesis:
                     if word_id.item() == EOS:
                         break
                     words.append(TRG.vocab.itos[word_id.item()])
-                print ('Predicted (%f): %s'%(score, ' '.join(words)))
+                try:
+                    print ('Predicted (%f): %s'%(score, ' '.join(words)))
+                except Exception as e:
+                    pass
                 fout.write(' '.join(words)+'\n')
 
 

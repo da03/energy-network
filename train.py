@@ -21,7 +21,6 @@ parser = argparse.ArgumentParser(
     description='train.py',
     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("--dataset", required=True, help="Path to the dataset")
-parser.add_argument("--mono", required=True, type=int,  help="Monolingual or not")
 parser.add_argument("--direction", default="ende",
                     choices=["ende", "deen"],  help="Direction of translation")
 parser.add_argument("--mode", default="soft",
@@ -94,10 +93,7 @@ def main(opts):
         raise NotImplementedError
 
 
-    if opts.mono == 1:
-        opts.mode = 'soft'
-    if opts.mono == 0:
-        SRC = torchtext.data.Field(
+    SRC = torchtext.data.Field(
                 pad_token=PAD_WORD,
                 include_lengths=True)
     TRG = torchtext.data.Field(
@@ -107,17 +103,11 @@ def main(opts):
         return 0 < len(example.src) <= opts.max_src_len \
             and 0 < len(example.trg) <= opts.max_trg_len 
 
-    if opts.mono == 0:
-        train, val = torchtext.datasets.TranslationDataset.splits(
-                path=opts.dataset, train='train/train.tags.en-de.bpe',
-                validation='dev/valid.en-de.bpe', test=None,
-                exts=exts, filter_pred=filter_pred,
-                fields=[('src', SRC), ('trg', TRG)])
-    else:
-        train, val, test = MyLanguageModelingDataset.splits(TRG,
-                path=opts.dataset, train='train.tok.txt',
-                validation='valid.tok.txt', test='test.tok.txt',
-                )
+    train, val = torchtext.datasets.TranslationDataset.splits(
+            path=opts.dataset, train='train/train.tags.en-de.bpe',
+            validation='dev/valid.en-de.bpe', test=None,
+            exts=exts, filter_pred=filter_pred,
+            fields=[('src', SRC), ('trg', TRG)])
 
     def dyn_batch_without_padding(new, i, sofar):
         if not hasattr(new, 'src'):
@@ -160,30 +150,19 @@ def main(opts):
     val_iter = MyIterator(val, batch_size=BATCH_SIZE, device=torch.device('cuda:0'),
                             repeat=False, sort_key=lambda x: (len(x.src), len(x.trg)) if hasattr(x, 'src') else len(x.trg),
                             batch_size_fn=batch_size_fn, train=False)
-    if opts.mono == 1:
-        test_iter = MyIterator(test, batch_size=BATCH_SIZE, device=torch.device('cuda:0'),
-                                repeat=False, sort_key=lambda x: (len(x.src), len(x.trg)) if hasattr(x, 'src') else len(x.trg),
-                                batch_size_fn=batch_size_fn, train=False)
-    if opts.mono == 0:
-        TRG.build_vocab(train.src, train.trg)
-        SRC.vocab = TRG.vocab
-    else:
-        TRG.build_vocab(train.trg, min_freq=2)
+    TRG.build_vocab(train.src, train.trg)
+    SRC.vocab = TRG.vocab
 
     # Build Model
     print (' '.join(sys.argv))
     trg_vocab_size = len(TRG.vocab.itos)
-    if opts.mono == 0:
-        src_vocab_size = len(SRC.vocab.itos)
-        print ('SRC Vocab Size: %d, TRG Vocab Size: %d'%(src_vocab_size, trg_vocab_size))
-    else:
-        src_vocab_size = None
-        print ('TRG Vocab Size: %d'%(trg_vocab_size))
+    src_vocab_size = len(SRC.vocab.itos)
+    print ('SRC Vocab Size: %d, TRG Vocab Size: %d'%(src_vocab_size, trg_vocab_size))
     print ('Building Model')
     model = make_model(opts.mode, src_vocab_size, trg_vocab_size, n_enc=5, n_dec=5,
                    d_model=278, d_ff=507, h=opts.heads, dropout=opts.dropout, share_decoder_embeddings=opts.share_decoder_embeddings,
                    share_word_embeddings=opts.share_word_embeddings, dependent_posterior=opts.dependent_posterior,
-                   sharelstm=opts.sharelstm, residual_var=opts.residual_var, selfmode = opts.selfmode, encselfmode=opts.encselfmode, selfdependent_posterior=opts.selfdependent_posterior, mono=opts.mono)
+                   sharelstm=opts.sharelstm, residual_var=opts.residual_var, selfmode = opts.selfmode, encselfmode=opts.encselfmode, selfdependent_posterior=opts.selfdependent_posterior)
     print (model)
     if opts.train_from != '':
         print ('Loading Model from %s'%opts.train_from)
@@ -254,11 +233,8 @@ def main(opts):
                     loss_compute.t_ = True
             global_steps += 1
             num_steps += 1
-            if opts.mono == 0:
-                src = batch.src[0].transpose(0, 1) # batch, len
-                src_mask = (src != SRC.vocab.stoi["<blank>"]).unsqueeze(-2)
-            else:
-                src, src_mask = None, None
+            src = batch.src[0].transpose(0, 1) # batch, len
+            src_mask = (src != SRC.vocab.stoi["<blank>"]).unsqueeze(-2)
             trg = batch.trg.transpose(0, 1) # batch, len
             trg_mask = (trg != TRG.vocab.stoi["<blank>"]).unsqueeze(-2)
             trg_mask = trg_mask & Variable(subsequent_mask(trg.size(-1)).to(trg_mask))
@@ -306,11 +282,8 @@ def main(opts):
         with torch.no_grad():
             for i, batch in enumerate(val_iter):
                 num_steps += 1
-                if opts.mono == 0:
-                    src = batch.src[0].transpose(0, 1) # batch, len
-                    src_mask = (src != SRC.vocab.stoi["<blank>"]).unsqueeze(-2)
-                else:
-                    src, src_mask = None, None
+                src = batch.src[0].transpose(0, 1) # batch, len
+                src_mask = (src != SRC.vocab.stoi["<blank>"]).unsqueeze(-2)
                 trg = batch.trg.transpose(0, 1) # batch, len
                 trg_mask = (trg != TRG.vocab.stoi["<blank>"]).unsqueeze(-2)
                 trg_mask = trg_mask & Variable(subsequent_mask(trg.size(-1)).to(trg_mask))
@@ -336,52 +309,7 @@ def main(opts):
                 val_total_nonpadding += l_nonpadding
             print("Val Result: PPL: %f, Acc: %f. exp xent: %f, xent: %f, kl: %f" %
                 (math.exp(min(100, val_loss_all / val_tokens)), float(val_total_correct)/val_total_nonpadding, math.exp(val_loss_xent/val_tokens), val_loss_xent/val_tokens, val_loss_kl/val_tokens))
-            if opts.mono == 0:
-                torch.save({'model': model.state_dict(), 'src_vocab': SRC.vocab, 'trg_vocab': TRG.vocab, 'opts': opts, 'optimizer': optimizer}, '%s.e%d.pt'%(opts.save_to, epoch))
-            else:
-                torch.save({'model': model.state_dict(), 'src_vocab': None, 'trg_vocab': TRG.vocab, 'opts': opts, 'optimizer': optimizer}, '%s.e%d.pt'%(opts.save_to, epoch))
-        if opts.mono == 1:
-            print ('Test')
-            model.eval()
-            val_loss_all = 0
-            val_loss_xent = 0
-            val_loss_kl = 0
-            val_tokens = 0
-            val_total_correct = 0
-            val_total_nonpadding = 0
-            with torch.no_grad():
-                for i, batch in enumerate(test_iter):
-                    num_steps += 1
-                    if opts.mono == 0:
-                        src = batch.src[0].transpose(0, 1) # batch, len
-                        src_mask = (src != SRC.vocab.stoi["<blank>"]).unsqueeze(-2)
-                    else:
-                        src, src_mask = None, None
-                    trg = batch.trg.transpose(0, 1) # batch, len
-                    trg_mask = (trg != TRG.vocab.stoi["<blank>"]).unsqueeze(-2)
-                    trg_mask = trg_mask & Variable(subsequent_mask(trg.size(-1)).to(trg_mask))
-                    trg_y = trg[:, 1:]
-                    ntokens = (trg_y != TRG.vocab.stoi["<blank>"]).data.view(-1).sum().item()
-                    #decoder_output, prior_attentions, posterior_attentions = model_par(src, trg, src_mask, trg_mask)
-                    optimizer = loss_compute.optimizer
-                    loss_compute.optimizer = None
-                    #import pdb; pdb.set_trace()
-                    decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors, log_enc_self_attention_priors, enc_self_attention_priors = model_par(src, trg, src_mask, trg_mask, 0, selftemperature=-1, encselftemperature=-1)
-                    l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions)
-                    #decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model_par(src, trg, src_mask, trg_mask, 0)
-                    #word_probs = model.generator(decoder_output)
-
-                    #l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions)
-                    #l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute(decoder_output, trg_y, ntokens, mus, sigmas, decoder_mus, decoder_sigmas)
-                    loss_compute.optimizer = optimizer
-                    val_loss_all += l
-                    val_loss_xent += l_xent
-                    val_loss_kl += l_kl
-                    val_tokens += ntokens
-                    val_total_correct += l_correct
-                    val_total_nonpadding += l_nonpadding
-                print("Test Result: PPL: %f, Acc: %f. exp xent: %f, xent: %f, kl: %f" %
-                    (math.exp(min(100, val_loss_all / val_tokens)), float(val_total_correct)/val_total_nonpadding, math.exp(val_loss_xent/val_tokens), val_loss_xent/val_tokens, val_loss_kl/val_tokens))
+            torch.save({'model': model.state_dict(), 'src_vocab': SRC.vocab, 'trg_vocab': TRG.vocab, 'opts': opts, 'optimizer': optimizer}, '%s.e%d.pt'%(opts.save_to, epoch))
         model.train()
 
 if __name__ == '__main__':
