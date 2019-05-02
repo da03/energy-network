@@ -92,26 +92,30 @@ def main(opts):
 
     BOS = TRG.vocab.stoi[BOS_WORD]
     EOS = TRG.vocab.stoi[EOS_WORD]
-    model.decoder.vocab = TRG.vocab
+    model.decoder_gy.vocab = TRG.vocab
     with torch.no_grad():
         with codecs.open(opts.output, 'w', 'utf-8') as fout:
             for i, batch in enumerate(val_iter):
                 src = batch.src[0].transpose(0, 1) # 1, len
                 trg = batch.trg.transpose(0, 1) # 1, len
 
-                assert src.size(0) == 1
+                src_in = src[:, :-1]
+                src_out = src[:, 1:]
                 src_mask = (src != SRC.vocab.stoi["<blank>"]).unsqueeze(-2)
+                src_mask_out = src_mask & Variable(subsequent_mask(src.size(-1)).to(src_mask))
+                assert src.size(0) == 1
 
                 trg = batch.trg.transpose(0, 1) # batch, len
                 trg_mask = (trg != TRG.vocab.stoi["<blank>"]).unsqueeze(-2)
-                trg_mask = trg_mask & Variable(subsequent_mask(trg.size(-1)).to(trg_mask))
-                trg_y = trg[:, 1:]
-                ntokens = (trg_y != TRG.vocab.stoi["<blank>"]).data.view(-1).sum().item()
+                trg_mask_out = trg_mask & Variable(subsequent_mask(trg.size(-1)).to(trg_mask))
+                trg_in = trg[:, :-1]
+                trg_out = trg[:, 1:]
+                ntokens = (trg_out != TRG.vocab.stoi["<blank>"]).data.view(-1).sum().item()
                 #decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model(src, trg, src_mask, trg_mask, None)
                 #word_probs = model.generator(decoder_output)
                 #model.decoder.decoder_output = decoder_output
-                model.decoder.trg_mask = trg_mask
-                model.decoder.src_mask = src_mask
+                model.decoder_gy.trg_mask = trg_mask_out
+                model.decoder_gy.src_mask = src_mask
 
                 if checkpoint['opts'].encselfmode != 'soft':
                     encselftemperature = -1

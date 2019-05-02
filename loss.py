@@ -121,9 +121,9 @@ class MultiGPULossCompute:
                 #print([x[0] for x in nans])
                 for _, param in nans:
                     param.grad[param.grad!=param.grad] = 0
+            self.count_ += 1
             if self.count_ == self.accum_grad:
                 self.optimizer.step()
                 self.optimizer.zero_grad()
                 self.count_ = 0
-            self.count_ += 1
         return total * normalize, total_xent * normalize, total_kl * normalize, total_correct, total_nonpadding

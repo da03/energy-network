@@ -30,47 +30,88 @@ class Model(nn.Module):
     A standard Encoder-Decoder architecture. Base for this and many 
     other models.
     """
-    def __init__(self, mode, encoder, decoder, src_embed, trg_embed, inference_network, generator, residual_var=0, selfmode='soft', encselfmode='soft', selfdependent_posterior=0):
+    def __init__(self, mode, encoder_fx, encoder_fy, decoder_gx, decoder_gy, init_x, init_y, src_embed, trg_embed, generator_gx, generator_gy, residual_var=0, selfmode='soft', encselfmode='soft', selfdependent_posterior=0):
         super(Model, self).__init__()
         self.mode = mode
         self.selfmode = selfmode
         self.encselfmode = encselfmode
-        self.encoder = encoder
-        self.decoder = decoder
+        self.encoder_fx = encoder_fx
+        self.encoder_fy = encoder_fy
+        self.decoder_gx = decoder_gx
+        self.decoder_gy = decoder_gy
+        self.init_x = init_x
+        self.init_y = init_y
         self.src_embed = src_embed
         self.trg_embed = trg_embed
         self.trg_pad = None
-        self.inference_network = inference_network
         self.residual_var = residual_var
-        self.generator = generator
+        self.generator_gx = generator_gx
+        self.generator_gy = generator_gy
         self.selfdependent_posterior = selfdependent_posterior
                                                                                     
-    def forward(self, src, trg, src_mask, trg_mask, temperature=None, selftemperature=None, encselftemperature=None):
+    def forward_gy_fy_y(self, src, trg, src_mask, trg_mask, src_in=None, src_out=None, trg_in=None, trg_out=None, src_mask_out=None, trg_mask_out=None, temperature=None, selftemperature=None, encselftemperature=None):
+        assert self.trg_pad is not None
+        self.samples = None
+        trg_embeddings = self.trg_embed(trg)
+        h, log_enc_self_attention_priors, enc_self_attention_priors, enc_self_attention_samples = self.encoder_fy(trg_embeddings, trg_mask)
+        h = h.mean(1).view(h.size(0), 1, -1)
+        if trg_mask_out is not None:
+            trg_mask_out = trg_mask_out[:, :-1, :-1]
+        trg_embeddings = trg_embeddings[:, :-1]
+        decoder_output, log_prior_attentions, prior_attentions, log_self_attention_priors, self_attention_priors, self_attention_samples = self.decoder_gy(h, trg_embeddings, src_mask, trg_mask_out)
+        self.self_attention_samples = self_attention_samples
+        log_posterior_attentions, posterior_attentions = None, None
+        return decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors, log_enc_self_attention_priors, enc_self_attention_priors
+
+    def forward_gx_fx_x(self, src, trg, src_mask, trg_mask, src_in=None, src_out=None, trg_in=None, trg_out=None, src_mask_out=None, trg_mask_out=None, temperature=None, selftemperature=None, encselftemperature=None):
         assert self.trg_pad is not None
         self.samples = None
         src_embeddings = self.src_embed(src)
-        h, log_enc_self_attention_priors, enc_self_attention_priors, enc_self_attention_samples = self.encoder(src_embeddings, src_mask)
-        h = h.mean(1).view(h.size(0), 1, h.size(-1))
+        h, log_enc_self_attention_priors, enc_self_attention_priors, enc_self_attention_samples = self.encoder_fx(src_embeddings, src_mask)
+        h = h.mean(1).view(h.size(0), 1, -1)
+        if src_mask_out is not None:
+            src_mask_out = src_mask_out[:, :-1, :-1]
+        src_embeddings = src_embeddings[:, :-1]
+        decoder_output, log_prior_attentions, prior_attentions, log_self_attention_priors, self_attention_priors, self_attention_samples = self.decoder_gx(h, src_embeddings, src_mask, src_mask_out)
+        self.self_attention_samples = self_attention_samples
+        log_posterior_attentions, posterior_attentions = None, None
+        return decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors, log_enc_self_attention_priors, enc_self_attention_priors
+    def forward_gy_inity_fx_x(self, src, trg, src_mask, trg_mask, src_in=None, src_out=None, trg_in=None, trg_out=None, src_mask_out=None, trg_mask_out=None, temperature=None, selftemperature=None, encselftemperature=None):
+        assert self.trg_pad is not None
+        self.samples = None
+        src_embeddings = self.src_embed(src)
+        h, log_enc_self_attention_priors, enc_self_attention_priors, enc_self_attention_samples = self.encoder_fx(src_embeddings, src_mask)
+        h = self.init_y(h.mean(1)).view(h.size(0), 1, -1)
         self.enc_self_attention_samples = enc_self_attention_samples
-        trg_embeddings = self.trg_embed(trg)
-        if trg is not None: # try both self attn and inter attn
-            if trg_mask is not None:
-                trg_mask = trg_mask[:, :-1, :-1]
-            trg_embeddings = trg_embeddings[:, :-1]
-            decoder_output, log_prior_attentions, prior_attentions, log_self_attention_priors, self_attention_priors, self_attention_samples = self.decoder(h, trg_embeddings, src_mask, trg_mask)
-            self.self_attention_samples = self_attention_samples
-            log_posterior_attentions, posterior_attentions = None, None
-            return decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors, log_enc_self_attention_priors, enc_self_attention_priors
-        else:
-            assert False
+        trg_embeddings = self.trg_embed(trg_in)
+        if trg_mask_out is not None:
+            trg_mask_out = trg_mask_out[:, :-1, :-1]
+        decoder_output, log_prior_attentions, prior_attentions, log_self_attention_priors, self_attention_priors, self_attention_samples = self.decoder_gy(h, trg_embeddings, src_mask, trg_mask_out)
+        self.self_attention_samples = self_attention_samples
+        log_posterior_attentions, posterior_attentions = None, None
+        return decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors, log_enc_self_attention_priors, enc_self_attention_priors
+    def forward_gx_initx_fy_y(self, src, trg, src_mask, trg_mask, src_in=None, src_out=None, trg_in=None, trg_out=None, src_mask_out=None, trg_mask_out=None, temperature=None, selftemperature=None, encselftemperature=None):
+        assert self.trg_pad is not None
+        self.samples = None
+        trg_embeddings = self.src_embed(trg)
+        h, log_enc_self_attention_priors, enc_self_attention_priors, enc_self_attention_samples = self.encoder_fx(trg_embeddings, trg_mask)
+        h = self.init_x(h.mean(1)).view(h.size(0), 1, -1)
+        self.enc_self_attention_samples = enc_self_attention_samples
+        src_embeddings = self.src_embed(src_in)
+        if src_mask_out is not None:
+            src_mask_out = src_mask_out[:, :-1, :-1]
+        decoder_output, log_prior_attentions, prior_attentions, log_self_attention_priors, self_attention_priors, self_attention_samples = self.decoder_gx(h, src_embeddings, src_mask, src_mask_out)
+        self.self_attention_samples = self_attention_samples
+        log_posterior_attentions, posterior_attentions = None, None
+        return decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions, log_self_attention_priors, self_attention_priors, log_enc_self_attention_priors, enc_self_attention_priors
 
     def beam_search_soft(self, beam_size, src, src_mask, sos, eos, max_length):
         assert not self.training
         src_embeddings = self.src_embed(src)
-        h, _, _, _ = self.encoder(src_embeddings, src_mask)
-        h = h.mean(1).view(h.size(0), 1, h.size(-1))
+        h, _, _, _ = self.encoder_fx(src_embeddings, src_mask)
+        h = self.init_y(h.mean(1)).view(h.size(0), 1, h.size(-1))
         # soft always attn_dropout
-        hypothesis, score = self.decoder.beam_search_soft(beam_size, self.generator, self.trg_embed, h, src_mask, sos, eos, max_length)
+        hypothesis, score = self.decoder_gy.beam_search_soft(beam_size, self.generator_gy, self.trg_embed, h, src_mask, sos, eos, max_length)
         return hypothesis, score
  
     def beam_search_hard(self, beam_size, src, src_mask, sos, eos, max_length,  encselftemperature=None, encselfdependent_posterior=0, encattn_dropout=True):
@@ -735,29 +776,31 @@ def make_model(mode, src_vocab, trg_vocab, n_enc=6, n_dec=6,
     position = PositionalEncoding(d_model, dropout)
 
 
-    encoder = Encoder(EncoderLayer(d_model, c(attn), c(ff), dropout), n_enc)
+    encoder_fx = Encoder(EncoderLayer(d_model, c(attn), c(ff), dropout), n_enc)
+    encoder_fy = Encoder(EncoderLayer(d_model, c(attn), c(ff), dropout), n_enc)
     src_emb = nn.Sequential(Embeddings(d_model, src_vocab), c(position))
-    decoder = Decoder(DecoderLayer(d_model, c(attn), c(attn), c(ff), dropout), n_dec)
+    decoder_gx = Decoder(DecoderLayer(d_model, c(attn), c(attn), c(ff), dropout), n_dec)
+    decoder_gy = Decoder(DecoderLayer(d_model, c(attn), c(attn), c(ff), dropout), n_dec)
+    init_x = nn.Sequential(nn.Linear(d_model, d_ff), nn.LeakyReLU(), nn.Linear(d_ff, d_model))
+    init_y = nn.Sequential(nn.Linear(d_model, d_ff), nn.LeakyReLU(), nn.Linear(d_ff, d_model))
     trg_emb = nn.Sequential(Embeddings(d_model, trg_vocab), c(position))
-    if mode != 'lstmvar':
-        inference_network = InferenceNetwork(DecoderLayer(d_model, c(attn), c(attn), c(ff), dropout), n_dec, dependent_posterior)
-    else:
-        W = torch.nn.Linear(d_model*2, d_model*2, bias=False)
-        layer = torch.nn.LSTM(d_model, d_model, 2, dropout=dropout, bidirectional=True)
-        inference_network = LSTMInferenceNetwork(layer, W, n_dec, sharelstm)
-        inference_network.h = h
-    generator = Generator(d_model, trg_vocab)
+    generator_gx = Generator(d_model, src_vocab)
+    generator_gy = Generator(d_model, trg_vocab)
     model = Model(
                   mode,
-                  encoder,
-                  decoder,
+                  encoder_fx,
+                  encoder_fy,
+                  decoder_gx,
+                  decoder_gy,
+                  init_x,
+                  init_y,
                   src_emb,
                   trg_emb,
-                  inference_network,
-                  generator, residual_var=residual_var, selfmode=selfmode, encselfmode=encselfmode, selfdependent_posterior=selfdependent_posterior)
+                  generator_gx, generator_gy, residual_var=residual_var, selfmode=selfmode, encselfmode=encselfmode, selfdependent_posterior=selfdependent_posterior)
 
     if share_decoder_embeddings == 1:
-        model.generator.proj.weight = model.trg_embed[0].lut.weight
+        model.generator_gy.proj.weight = model.trg_embed[0].lut.weight
+        model.generator_gx.proj.weight = model.src_embed[0].lut.weight
         #model.generator.proj.bias = None
     #if share_word_embeddings == 1:
     #    model.src_embed[0].lut.weight = model.trg_embed[0].lut.weight
