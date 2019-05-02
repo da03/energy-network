@@ -21,6 +21,7 @@ class MultiGPULossCompute:
         self.count_ = 0
         self.steps = 0
         self.anneal_kl = anneal_kl
+        self.wk=None
         
     def __call__(self, out, targets, normalize, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions):
         total = 0.0
@@ -72,6 +73,9 @@ class MultiGPULossCompute:
             l = l.sum() / normalize
             total += l.item()
             total_xent += l.item()
+            if self.wk is not None:
+                l = l * self.wk
+                self.wk = None
 
             # Backprop loss to output of transformer
             if (self.optimizer is not None) and self.t_:

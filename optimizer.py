@@ -41,3 +41,6 @@ class NoamOpt:
 def get_std_opt(model, WARMUP, d_model, lr_begin, lr_end, anneal_steps):
     return NoamOpt(d_model, 0.5, WARMUP,
             torch.optim.Adam(model.parameters(), lr=0, betas=(0.9, 0.98), eps=1e-9), lr_begin=lr_begin, lr_end=lr_end, anneal_steps=anneal_steps)
+def get_std_opt2(energy_network, model, WARMUP, d_model, lr_begin, lr_end, anneal_steps):
+    return NoamOpt(d_model, 0.5, WARMUP,
+            torch.optim.Adam(energy_network.parameters(), lr=0, betas=(0.9, 0.98), eps=1e-9), lr_begin=lr_begin, lr_end=lr_end, anneal_steps=anneal_steps)

@@ -25,6 +25,17 @@ def gumbel_softmax_sample(log_probs, temperature):
     x = F.softmax(x, dim=-1)
     return x.view_as(log_probs)
 
+class EnergyNetwork(nn.Module):
+    def __init__(self, d_model, d_ff):
+        super(EnergyNetwork, self).__init__()
+        self.linear_x = nn.Linear(d_model, d_ff)
+        self.linear_y = nn.Linear(d_model, d_ff)
+        
+        self.out = nn.Sequential(nn.LeakyReLU(), nn.Linear(d_ff, 1))
+
+    def forward(self, hx, hy):
+        return self.out(self.linear_x(hx) + self.linear_y(hy)).view(-1).sum()
+
 class Model(nn.Module):
     """
     A standard Encoder-Decoder architecture. Base for this and many 
