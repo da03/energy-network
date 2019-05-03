@@ -1,3 +1,5 @@
+# taken from https://github.com/harvardnlp/sa-vae/blob/master/optim_n2n.py
+# Author: Yoon Kim
 #!/usr/bin/env python3
 
 import sys
