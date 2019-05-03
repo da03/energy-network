@@ -4,6 +4,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.distributions.normal import Normal
 import math, copy, time
+from optim_n2n import *
 from torch.autograd import Variable
 from torch.distributions.categorical import Categorical
 from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
@@ -132,12 +133,23 @@ class Model(nn.Module):
         hy_init_ = self.init_y(hx_init.mean(1)).view(hx_init.size(0), 1, -1)
         hy_init = hy_init_.data.clone()
         hy_init.requires_grad = True
-        for k2 in range(unroll):
-            energy = energy_network(hx_init.detach(), hy_init)
-            hy_init_grad =  torch.autograd.grad(energy, hy_init)[0]
-            hy_init = hy_init - eta*hy_init_grad
+        def loss_fn(input):
+            hy = input[0]
+            energy = energy_network(hx_init.detach(), hy)
+            return energy
+        
+        update_params = list(energy_network.parameters())
+        meta_optimizer = OptimN2N(loss_fn, update_params, eps = 1e-5, 
+                                    lr = eta,
+                                    iters = unroll, momentum = 0.5,
+                                    acc_param_grads=True,  
+                                    max_grad_norm = 5)
+        if unroll == 0:
+            hy = hy_init
+        else:
+            hy = meta_optimizer.forward([hy_init])[0]
         # soft always attn_dropout
-        h = hy_init
+        h = hy
         hypothesis, score = self.decoder_gy.beam_search_soft(beam_size, self.generator_gy, self.trg_embed, h, src_mask, sos, eos, max_length)
         return hypothesis, score
  

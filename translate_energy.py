@@ -6,6 +6,7 @@ import codecs
 import torch
 import torchtext
 import torch.optim as optim
+from optim_n2n import *
 
 from data import *
 from model import *

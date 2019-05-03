@@ -1,0 +1,531 @@
+Loading Model from models/de-en/10/default_00.e6.pt
+SRC Vocab Size: 39553, TRG Vocab Size: 39553
+Ground Truth: when I was 11 , I remember waking up one morning to the sound of joy in my house .
+Predicted (-11.954948): when I was 11 years old , I was a little bit of silence .
+Ground Truth: my father was listening to BBC News on his small , gray radio .
+Predicted (-21.729656): my friend was sitting in the room , the cover of the radio waves .
+Ground Truth: there was a big smile on his face which was unusual then , because the news mostly depressed him .
+Predicted (-27.850044): it was a little bit like this , and it was pretty amazing when they were all in the morning .
+Src: er rief : &quot; die Taliban sind weg ! &quot;
+Ground Truth: &quot; the Taliban are gone ! &quot; my father sh@@ ou@@ ted .
+Predicted (-12.044004): he said , &quot; We &apos;re going to the Taliban . &quot;
+Ground Truth: I didn &apos;t know what it meant , but I could see that my father was very , very happy .
+Predicted (-21.780277): I didn &apos;t know what it meant , but I was very afraid of being a very good job .
+Src: &quot; jetzt kannst du auf eine richtige Schule gehen &quot; , sagte er .
+Ground Truth: &quot; you can go to a real school now , &quot; he said .
+Predicted (-16.954510): you can go to the school , &quot; I have to be there .
+Src: diesen Morgen werde ich niemals vergessen .
+Ground Truth: a morning that I will never forget .
+Predicted (-5.320271): I &apos;ll never forget that morning .
+Src: eine richtige Schule .
+Ground Truth: a real school .
+Predicted (-4.262164): a good school .
+Ground Truth: you see , I was six when the Taliban took over Afghanistan and made it illegal for girls to go to school .
+Predicted (-24.729733): the women were in the &apos; 80s , and when I was a farmer , I was still in school .
+Ground Truth: so for the next five years , I dressed as a boy to esc@@ ort my older sister , who was no longer allowed to be outside alone , to a secret school .
+Predicted (-57.828621): so I was working for the age of my life , and I was not going to be a kid who was still going to be a little bit more than my parents .
+Src: nur so konnten wir beide zur Schule gehen .
+Ground Truth: it was the only way we both could be educated .
+Predicted (-12.554256): and so we just could go to the school .
+Src: jeden Tag nahmen wir einen anderen Weg , sodass niemand erraten konnte , wohin wir gingen .
+Ground Truth: each day , we took a different route so that no one would suspect where we were going .
+Predicted (-26.304459): and every day we had to take a look , and we could get out of the road .
+Ground Truth: we would cover our books in grocery bags so it would seem we were just out shopping .
+Predicted (-31.726593): we were designing the food , and we would make it more than what we would expect .
+Ground Truth: the school was in a house , more than 100 of us packed in one small living room .
+Predicted (-21.062519): we were in a school , and we &apos;re going to live in a little girl .
+Ground Truth: it was co@@ zy in winter but extremely hot in summer .
+Predicted (-7.787011): it was in winter , but it was pretty cool .
+Ground Truth: we all knew we were ris@@ king our lives -- the teacher , the students and our parents .
+Predicted (-21.870197): we all know that our teachers were going to change our lives , and we told our students .
+Ground Truth: from time to time , the school would suddenly be can@@ cel@@ ed for a week because Taliban were suspicious .
+Predicted (-28.720055): and in fact , every time , the news was that they had never been killed .
+Ground Truth: we always wondered what they knew about us .
+Predicted (-5.504497): we didn &apos;t know how much it was .
+Src: verfolgten sie uns ?
+Ground Truth: were we being followed ?
+Predicted (-5.274752): did they take us ?
+Src: wussten sie , wo wir wohnen ?
+Ground Truth: do they know where we live ?
+Predicted (-1.635632): did we know where ?
+Src: wir hatten Angst , aber wir wollten trotzdem zur Schule gehen .
+Ground Truth: we were scared , but still , school was where we wanted to be .
+Predicted (-12.991163): we had to do it , but we had to go .
+Ground Truth: I was very lucky to grow up in a family where education was pri@@ zed and daughters were treas@@ ured .
+Predicted (-21.980225): I had a lot of time in education , and it was a challenge for women to be born .
+Ground Truth: my grandfather was an extraordinary man for his time .
+Predicted (-6.598513): my grandfather had been in a way .
+Ground Truth: a total ma@@ ver@@ ick from a remote province of Afghanistan , he insisted that his daughter , my mom , go to school , and for that he was dis@@ owned by his father .
+Predicted (-43.107277): a group of doctors , a woman who was in his own backyard , and she was forced to take care of her daughter .
+Src: meine gebildete Mutter aber wurde Lehrerin .
+Ground Truth: but my educated mother became a teacher .
+Predicted (-6.843373): my mother was too shy .
+Src: das ist sie .
+Ground Truth: there she is .
+Predicted (-1.607026): it &apos;s the one .
+Ground Truth: she retired two years ago , only to turn our house into a school for girls and women in our neighborhood .
+Predicted (-34.331207): and then we had a third of the women in the room , and it was a school for the rest of our country .
+Src: und mein Vater - hier zu sehen - war der Erste in seiner Familie , der jemals eine Schulbildung erhielt .
+Ground Truth: and my father -- that &apos;s him -- he was the first ever in his family to receive an education .
+Predicted (-29.416122): and here was my son -- he was the only one who was in the world -- to be a child .
+Ground Truth: there was no question that his children would receive an education , including his daughters , despite the Taliban , despite the risks .
+Predicted (-54.212143): and it was very difficult to tell that if the parents had to be able to support their families , and then the answer was a lot of aid .
+Ground Truth: to him , there was greater risk in not educating his children .
+Predicted (-14.311392): she was a lot better than taking care of her .
+Ground Truth: during Taliban years , I remember there were times I would get so frustrated by our life and always being scared and not seeing a future .
+Predicted (-48.354210): I know that there was no reason for the past , and I was afraid of the war , and the fact that we were living in a lot of time .
+Ground Truth: I would want to quit , but my father , he would say , &quot; Listen , my daughter , you can lose everything you own in your life .
+Predicted (-39.143833): well , I was very lucky , because I was going to love your father , and I said , &quot; You know , I can &apos;t get it . &quot;
+Src: dein Geld kann gestohlen werden . du kannst im Krieg aus deinem Haus vertrieben werden .
+Ground Truth: your money can be stolen . you can be forced to leave your home during a war .
+Predicted (-17.845863): you can &apos;t get your money . you can get into the house .
+Ground Truth: but the one thing that will always remain with you is what is here , and if we have to sell our blood to pay your school fees , we will .
+Predicted (-46.828354): it &apos;s a good thing . if you &apos;re in the middle of the room , and we &apos;re going to have to do that , because we &apos;re going to have money .
+Src: also - willst du immer noch aufgeben ? &quot;
+Ground Truth: so do you still not want to continue ? &quot;
+Predicted (-10.950811): so , you need to go for that ?
+Src: heute bin ich 22 Jahre alt .
+Ground Truth: today I am 22 .
+Predicted (-5.838329): I &apos;m now 14 years old .
+Ground Truth: I was raised in a country that has been destroyed by decades of war .
+Predicted (-14.365664): I &apos;ve been born in a country where the wars were .
+Ground Truth: fewer than six percent of women my age have made it beyond high school , and had my family not been so committed to my education , I would be one of them .
+Predicted (-61.123024): when I was a third of my family , I was still a lot of women , and I was not going to have a lot of time , but my response was a better way .
+Src: stattdessen stehe ich heute hier , als stol@@ ze Absol@@ venti@@ n des Mi@@ dd@@ leb@@ ury College .
+Ground Truth: instead , I stand here a proud graduate of Mi@@ dd@@ leb@@ ury College .
+Predicted (-31.043364): now , I &apos;m going to talk to you about a lot of the same as a teenager .
+Ground Truth: when I returned to Afghanistan , my grandfather , the one ex@@ iled from his home for dar@@ ing to educate his daughters , was among the first to congrat@@ ulate me .
+Predicted (-52.799992): when I was born , I was forced to say that my father was born with the first time , and he was forced to give the money to the death of a woman .
+Ground Truth: he not only bra@@ gs about my college degree , but also that I was the first woman , and that I am the first woman to drive him through the streets of Kabul .
+Predicted (-45.685455): I just didn &apos;t feel the only way to do it , but I was a kid with my daughter , and I was just the only child .
+Src: meine Familie glaubt an mich .
+Ground Truth: my family believes in me .
+Predicted (-8.396197): my wife is going to me .
+Ground Truth: I dream big , but my family dreams even bigger for me .
+Predicted (-18.092037): I &apos;ve been working with passion , but my dreams have always been .
+Ground Truth: that &apos;s why I am a global ambassador for 10@@ x@@ 10 , a global campaign to educate women .
+Predicted (-17.222565): so I &apos;m a nonprofit organization , which is one of the best companies for the world .
+Ground Truth: that &apos;s why I co@@ founded Sol@@ a , the first and perhaps only boarding school for girls in Afghanistan , a country where it &apos;s still risky for girls to go to school .
+Predicted (-59.238720): I was also a business business , and I decided to go to the next year , and the only one in the United States , and maybe a child in the country .
+Ground Truth: the exciting thing is that I see students at my school with ambition grabbing at opportunity .
+Predicted (-28.310915): it &apos;s like the story that we &apos;ve been working with with their own personal personal kids .
+Ground Truth: and I see their parents and their fathers who , like my own , advocate for them , despite and even in the face of daunting opposition .
+Predicted (-50.376869): and they &apos;re like , and as they &apos;re , my parents , and as they &apos;re , they &apos;re very concerned for their own sake .
+Ground Truth: like Ahmed . that &apos;s not his real name , and I cannot show you his face , but Ahmed is the father of one of my students .
+Predicted (-44.177090): and the trick is , I don &apos;t think it &apos;s not just the way to be able to do this , but my father is a beautiful part of the book .
+Ground Truth: less than a month ago , he and his daughter were on their way from Sol@@ a to their village , and they literally missed being killed by a road@@ side bomb by minutes .
+Predicted (-52.286972): a man , she was in the hospital , and she was walking down to a small house , and she was going to be able to see the rest of his life .
+Ground Truth: as he arrived home , the phone rang , a voice warning him that if he sent his daughter back to school , they would try again .
+Predicted (-48.603199): when he was a teenager , he was going to take his phone , and he got to give him a phone , and he was going to give him a child .
+Ground Truth: &quot; kill me now , if you wish , &quot; he said , &quot; but I will not ruin my daughter &apos;s future because of your old and backward ideas . &quot;
+Predicted (-41.881264): he said , &quot; Well , I don &apos;t want to be the only person in your life , because I &apos;m going to take a look for the future . &quot;
+Src: was Afghanistan angeht , so habe ich etwas erkannt , das im Westen oftmals ab@@ getan wird : hinter den meisten von uns , die Erfolg haben , steht ein Vater , der den Wert seiner Tochter erkennt und dem bewusst ist , dass ihr Erfolg auch sein Erfolg ist .
+Ground Truth: what I &apos;ve come to realize about Afghanistan , and this is something that is often dis@@ missed in the West , that behind most of us who succeed is a father who recognizes the value in his daughter and who sees that her success is his success .
+Predicted (-71.385178): so , as we &apos;ve been talking about the problem , the only thing that is that the most important thing that we &apos;ve done is that the president of the country is , in fact , the success of their success .
+Ground Truth: it &apos;s not to say that our mothers aren &apos;t key in our success .
+Predicted (-14.289449): that &apos;s not our reason to teach our teachers .
+Ground Truth: in fact , they &apos;re often the initial and convincing negoti@@ ators of a bright future for their daughters , but in the context of a society like in Afghanistan , we must have the support of men .
+Predicted (-55.852509): they &apos;re also very often more likely to be interested in the case of the people who are in the future , and they &apos;re not going to be a case of the war .
+Ground Truth: under the Taliban , girls who went to school num@@ bered in the hundreds -- remember , it was illegal .
+Predicted (-17.763214): and at the same time , they were only a few months ago .
+Ground Truth: but today , more than three million girls are in school in Afghanistan .
+Predicted (-25.150532): but now , in the next few years , the women are working on their business .
+Src: Afghanistan erscheint , von Amerika aus betrachtet , so anders .
+Ground Truth: Afghanistan looks so different from here in America .
+Predicted (-9.631024): Ghana is like this .
+Ground Truth: I find that Americans see the fragi@@ lity in changes .
+Predicted (-13.569913): the Americans think they &apos;re going to be very good .
+Ground Truth: I fear that these changes will not last much beyond the U.S. troops &apos; with@@ dra@@ wal .
+Predicted (-33.262131): I think that the price of the people in the 1990s is not just a lot of the damage .
+Ground Truth: but when I am back in Afghanistan , when I see the students in my school and their parents who advocate for them , who encourage them , I see a promising future and lasting change .
+Predicted (-53.857124): but when I go home , I &apos;m in the school , I &apos;m going to tell you that the kids are in a way , and they &apos;re going to be a part of the research .
+Ground Truth: to me , Afghanistan is a country of hope and bo@@ und@@ less possibilities , and every single day the girls of Sol@@ a remind me of that .
+Predicted (-45.709396): and I &apos;m a reason for the future , and the reason that I have to be living with is to be a woman .
+Ground Truth: like me , they are dreaming big .
+Predicted (-13.568968): and as they were , I &apos;ve got the great dreams .
+Src: vielen Dank .
+Ground Truth: thank you .
+Predicted (-1.126441): thank you .
+Ground Truth: everything I do , and everything I do profession@@ ally -- my life -- has been shaped by seven years of work as a young man in Africa .
+Predicted (-35.045795): and all right , I think , in the life of the world , was a great example of all over the years .
+Ground Truth: from 1971 to 1977 -- I look young , but I &apos;m not - -- I worked in Zambia , Kenya , I@@ vory Coast , Al@@ geria , Somalia , in projects of technical cooperation with African countries .
+Predicted (-70.019791): and in fact , I &apos;m not sure -- I &apos;m a young man , but I &apos;ve been working on the rise of the Caribbean -- in Brazil , in the 1990s , and in the developing world .
+Ground Truth: I worked for an Italian NGO , and every single project that we set up in Africa failed .
+Predicted (-31.415028): I was a company that was made in a world where we had all of these things , and we did it .
+Src: ich war verzweifelt .
+Ground Truth: and I was di@@ strau@@ ght .
+Predicted (-4.590510): I was very afraid .
+Src: ich , 21 Jahre , dachte , dass wir Itali@@ ener gute Menschen sind und gute Arbeit in Afrika lei@@ steten .
+Ground Truth: I thought , age 21 , that we Itali@@ ans were good people and we were doing good work in Africa .
+Predicted (-27.096619): I said , &quot; Well , we have good jobs for the world , and it &apos;s good for the people .
+Ground Truth: instead , everything we touched we killed .
+Predicted (-6.698930): instead of killing everything we did .
+Src: unser erstes Projekt , was mein erstes Buch &quot; Ri@@ p@@ ples from the Z@@ am@@ be@@ z@@ i &quot; inspirierte , war eines , in dem wir Itali@@ ener den Menschen Sam@@ bias zeigen wollten , wie Nahrung an@@ gebaut wird .
+Ground Truth: our first project , the one that has inspired my first book , &quot; rip@@ ples from the Z@@ am@@ be@@ z@@ i , &quot; was a project where we Itali@@ ans decided to teach Z@@ ambi@@ an people how to grow food .
+Predicted (-64.650436): the first project I was working on is the first time we had to call &quot; The Li@@ g@@ g@@ g@@ g@@ g@@ ar , &quot; which is a world where it was made by people .
+Ground Truth: so we arrived there with Italian seeds in southern Zambia in this absolutely magnificent valley going down to the Z@@ am@@ be@@ z@@ i River , and we taught the local people how to grow Italian tom@@ atoes and zu@@ c@@ ch@@ ini and ...
+Predicted (-82.511528): we were in a group of women , and we went to the local area , and we found that it was a state of the state of the country , and we called &quot; The Vagina Monolo@@ gues &quot; --
+Ground Truth: and of course the local people had absolutely no interest in doing that , so we paid them to come and work , and sometimes they would show up .
+Predicted (-40.915901): and the fact that we had no interest in this , and they were very good at all , and they were doing it .
+Src: wir waren erstaunt , dass es in einem so frucht@@ baren Tal keine Landwirtschaft gab .
+Ground Truth: and we were amazed that the local people , in such a fer@@ tile valley , would not have any agriculture .
+Predicted (-20.918854): we were also afraid of being a living in this desert .
+Src: aber anstatt zu fragen , warum sie nichts an@@ bauten , sagten wir einfach &quot; Gott sei Dank , dass wir hier sind ! &quot;
+Ground Truth: but instead of asking them how come they were not growing anything , we simply said , &quot; Thank God we &apos;re here . &quot;
+Predicted (-24.837814): but instead , we said , &quot; Well , we don &apos;t have to be able to say that guy . &quot;
+Src: &quot; gerade noch rechtzeitig , um die Menschen Sam@@ bias vor dem Ver@@ hungern zu retten &quot; .
+Ground Truth: &quot; just in the nick of time to save the Z@@ ambi@@ an people from starvation . &quot;
+Predicted (-25.511641): &quot; all over the years , &quot; the people are doing in prison .
+Ground Truth: and of course , everything in Africa grew beautifully .
+Predicted (-12.634458): and suddenly , of course , there &apos;s a wonderful thing .
+Ground Truth: we had these magnificent tom@@ atoes . in Italy , a tomato would grow to this size . in Zambia , to this size .
+Predicted (-30.463955): we had this incredible resource , and it was a big , and it was a lot of women .
+Src: wir konnten es nicht glauben und sagten den Sam@@ bi@@ ern : &quot; schaut , wie einfach Landwirtschaft ist &quot; .
+Ground Truth: and we could not believe , and we were telling the Z@@ ambi@@ ans , &quot; Look how easy agriculture is . &quot;
+Predicted (-28.611862): we didn &apos;t know what the government was looking at , and we said , &quot; Well , this is a kind of thing . &quot;
+Ground Truth: when the tom@@ atoes were nice and ri@@ pe and red , overnight , some 200 hi@@ ppo@@ s came out from the river and they ate everything .
+Predicted (-54.800758): and as the Gulf of Mexico was dead , and we were going to get out of the night , and the whole thing was about to be a lot of water .
+Src: wir sagten zu den Sam@@ bi@@ ern : &quot; Oh Gott , die N@@ il@@ pfer@@ de ! &quot;
+Ground Truth: and we said to the Z@@ ambi@@ ans , &quot; My God , the hi@@ ppo@@ s ! &quot;
+Predicted (-21.080650): we said , &quot; You know , the man of God , we have this frog . &quot;
+Src: und sie sagten : &quot; ja , deswegen haben wir keine Landwirtschaft hier &quot; .
+Ground Truth: and the Z@@ ambi@@ ans said , &quot; Yes , that &apos;s why we have no agriculture here . &quot;
+Predicted (-6.337510): and they said , &quot; Well , we haven &apos;t been there .
+Src: &quot; warum habt ihr uns das nicht gesagt ? &quot; &quot; ihr habt uns niemals gefragt &quot; .
+Ground Truth: &quot; why didn &apos;t you tell us ? &quot; &quot; you never asked . &quot;
+Predicted (-20.831112): &quot; you know , what ? &quot; no , you don &apos;t have to tell us . &quot;
+Ground Truth: I thought it was only us Itali@@ ans bl@@ undering around Africa , but then I saw what the Americans were doing , what the English were doing , what the French were doing , and after seeing what they were doing , I became quite proud of our project in Zambia .
+Predicted (-73.163750): I was just a little bit of the Japanese , and I thought , &quot; Well , we had to do it , and I was going to look at the same time , and then we asked the people to see what was going on .
+Ground Truth: because , you see , at least we fed the hi@@ ppo@@ s .
+Predicted (-15.374668): we were finally able to fix the chicken .
+Src: sie sollten den Unsinn sehen - - Sie sollten den Unsinn sehen , den wir den nicht@@ sa@@ h@@ nenden afrikanischen Menschen besch@@ ert haben .
+Ground Truth: you should see the rub@@ bish - -- You should see the rub@@ bish that we have besto@@ wed on uns@@ us@@ pe@@ cting African people .
+Predicted (-33.533768): you know , we &apos;re going to say , &quot; We know the worst thing you can get to the people in the world .
+Src: sie sollten das Buch &quot; Dead Aid &quot; von Dam@@ bis@@ a Mo@@ yo lesen , sie ist eine sam@@ bische Wirtschafts@@ wissenschaft@@ lerin .
+Ground Truth: you want to read the book , read &quot; Dead Aid , &quot; by Dam@@ bis@@ a Mo@@ yo , Z@@ ambi@@ an woman economist .
+Predicted (-23.039959): they &apos;re going to read &quot; The Vagina Monolo@@ gues &quot; -- it &apos;s a lot of traditional art .
+Ground Truth: the book was published in 2009 .
+Predicted (-3.142589): this book was published .
+Ground Truth: we Western donor countries have given the African continent two trillion American dollars in the last 50 years .
+Predicted (-23.487232): we have the largest asset on the planet , and we &apos;ve got a half of the world .
+Ground Truth: I &apos;m not going to tell you the damage that that money has done .
+Predicted (-8.955202): I &apos;m not going to tell you what this is going on .
+Src: lesen Sie einfach ihr Buch .
+Ground Truth: just go and read her book .
+Predicted (-3.391020): just read it .
+Src: lesen Sie von einer Afri@@ kan@@ erin , was wir an@@ gerichtet haben .
+Ground Truth: read it from an African woman , the damage that we have done .
+Predicted (-12.763167): you &apos;re a person from what we call .
+Src: wir westlichen Menschen sind Imperi@@ alisten , Koloni@@ alisten , Mission@@ are und es gibt nur zwei Arten , wie wir mit Menschen umgehen . wir pat@@ ron@@ isieren sie oder wir sind patri@@ arch@@ al@@ isch .
+Ground Truth: we Western people are imperi@@ alist , coloni@@ alist mission@@ aries , and there are only two ways we deal with people : we either pat@@ ron@@ ize them , or we are pat@@ ern@@ alistic .
+Predicted (-55.246475): we are the European species , and we have a non @-@ governmental species , and we &apos;re also able to treat them as well as we &apos;re all of them .
+Ground Truth: the two words come from the Latin root &quot; p@@ ater , &quot; which means &quot; father . &quot;
+Predicted (-31.469694): both of the words , the &quot; the &quot; blue &quot; is called &quot; mis@@ use .
+Src: aber sie haben zwei verschiedene Bedeutungen .
+Ground Truth: but they mean two different things .
+Predicted (-6.561479): but they have two different kinds of things .
+Ground Truth: pat@@ ern@@ alistic , I treat anybody from a different culture as if they were my children . &quot; I love you so much . &quot;
+Predicted (-34.485649): so , in fact , I think , a lot of other people are going to be a little girl .
+Ground Truth: pat@@ ron@@ izing , I treat everybody from another culture as if they were my servan@@ ts .
+Predicted (-38.471588): SJ : so I &apos;m a person who &apos;s in charge of them , because I &apos;ve been able to do anything .
+Ground Truth: that &apos;s why the white people in Africa are called &quot; b@@ wana , &quot; boss .
+Predicted (-24.192913): and so these people are born , &quot; We &apos;re going to call the World . &quot;
+Ground Truth: I was given a sla@@ p in the face reading a book , &quot; Small is Be@@ auti@@ ful , &quot; written by Schu@@ macher , who said , above all in economic development , if people do not wish to be helped , leave them alone .
+Predicted (-55.900970): I was writing a book called &quot; The Vagina Monolo@@ gues &quot; -- when I was talking about it , and we have to do it , because we have no money to help them .
+Src: dies sollte das erste Prinzip der Hilfe sein .
+Ground Truth: this should be the first principle of aid .
+Predicted (-8.651704): that &apos;s the only way to do this .
+Src: das erste Prinzip der Hilfe ist Respekt .
+Ground Truth: the first principle of aid is respect .
+Predicted (-12.257114): the first thing is , it &apos;s a foundation for all .
+Ground Truth: this morning , the gentleman who opened this conference lay a stick on the floor , and said , &quot; Can we -- can you imagine a city that is not neo@@ colon@@ ial ? &quot;
+Predicted (-46.205704): and the guy who came to the National Park , and I said , &quot; Well , can you imagine that there &apos;s a building in the city of the world ? &quot;
+Ground Truth: I decided when I was 27 years old to only respond to people , and I invented a system called Enter@@ prise Fac@@ ili@@ tation , where you never initi@@ ate anything , you never motivate anybody , but you become a servant of the local passion , the servant of local people who have a dream to become a better person .
+Predicted (-98.069252): and I was very soon when I was told that , when I was a kid , and the only person in the city , the government is going to be able to get rid of the money , and the people who are not going to be able to do it in a new way .
+Ground Truth: so what you do -- you shut up .
+Predicted (-9.758295): and what you do is you &apos;re doing .
+Src: man erreicht niemals eine Gemeinde mit Ideen , man setzt sich mit den Ein@@ heimischen zusammen .
+Ground Truth: you never arrive in a community with any ideas , and you sit with the local people .
+Predicted (-20.986404): you have to be a leader , you have to share with people .
+Ground Truth: we don &apos;t work from offices .
+Predicted (-6.565480): we don &apos;t work in the office .
+Ground Truth: we meet at the cafe . we meet at the pu@@ b .
+Predicted (-13.831763): we &apos;re going to put them in the bush .
+Src: wir haben keine Infrastruktur .
+Ground Truth: we have zero infrastructure .
+Predicted (-0.821267): we have no infrastructure .
+Ground Truth: and what we do , we become friends , and we find out what that person wants to do .
+Predicted (-14.375261): we &apos;re looking at the way that people think about it .
+Src: das Wichtigste ist die Leidenschaft .
+Ground Truth: the most important thing is passion .
+Predicted (-5.019583): the most important thing is , it &apos;s passion .
+Src: man kann jemandem eine Idee vermitteln .
+Ground Truth: you can give somebody an idea .
+Predicted (-7.431067): you can make a sense of someone .
+Src: wenn diese Person diese nicht mag , was soll man tun ?
+Ground Truth: if that person doesn &apos;t want to do it , what are you going to do ?
+Predicted (-10.868958): if this person doesn &apos;t want to be , what do you do ?
+Ground Truth: the passion that the person has for her own growth is the most important thing .
+Predicted (-22.974693): it &apos;s the most important thing in your life is not the only way .
+Ground Truth: the passion that that man has for his own personal growth is the most important thing .
+Predicted (-22.729050): it &apos;s the most important thing to do is to be the most powerful thing .
+Src: wir helfen ihnen , das Wissen zu finden , denn niemand kann allein erfolgreich sein .
+Ground Truth: and then we help them to go and find the knowledge , because nobody in the world can succeed alone .
+Predicted (-16.959499): we need to help them , because we can &apos;t find a job .
+Ground Truth: the person with the idea may not have the knowledge , but the knowledge is available .
+Predicted (-21.894753): the idea of being a person who doesn &apos;t have any technology , but it &apos;s really possible .
+Ground Truth: so years and years ago , I had this idea : why don &apos;t we , for once , instead of arriving in the community to tell people what to do , why don &apos;t , for once , listen to them ? but not in community meetings .
+Predicted (-55.226112): I was a lot of people in the audience , and I asked them to ask why they don &apos;t want to be able to do anything in our country , because they don &apos;t know how to do that .
+Src: lassen Sie mich Ihnen ein Geheimnis verraten .
+Ground Truth: let me tell you a secret .
+Predicted (-7.679890): let me give you a sense of what it &apos;s .
+Src: es gibt ein Problem mit Gemeinde@@ versamm@@ lungen .
+Ground Truth: there is a problem with community meetings .
+Predicted (-8.643003): there &apos;s a problem with the community .
+Ground Truth: entrepreneurs never come , and they never tell you , in a public meeting , what they want to do with their own money , what opportunity they have identified .
+Predicted (-35.209435): they never have a product , and they &apos;re going to tell you what they &apos;re doing , and they &apos;re going to do with their own money .
+Src: Planung hat diesen blinden Fleck .
+Ground Truth: so planning has this blind spot .
+Predicted (-10.132474): so , you have to do this .
+Ground Truth: the smartest people in your community you don &apos;t even know , because they don &apos;t come to your public meetings .
+Predicted (-23.985563): the people who are not really aware of the world , because they never have a job .
+Src: wir arbeiten eins zu eins , um dies zu tun , muss eine soziale Infrastruktur hergestellt werden , die nicht existiert .
+Ground Truth: what we do , we work one @-@ on @-@ one , and to work one @-@ on @-@ one , you have to create a social infrastructure that doesn &apos;t exist .
+Predicted (-25.583502): we have to do something that &apos;s a project that has to do with all of the infrastructure .
+Src: ein neuer Beruf muss geschaffen werden .
+Ground Truth: you have to create a new profession .
+Predicted (-9.238445): a new way to have done .
+Ground Truth: the profession is the family doctor of enterprise , the family doctor of business , who sits with you in your house , at your kitchen table , at the cafe , and helps you find the resources to transform your passion into a way to make a living .
+Predicted (-59.097462): this is the school in the house , the kid who &apos;s working with a friend of mine , and you know , in the kitchen , is a place where you &apos;re going to work with your own lives .
+Src: ich habe dies in E@@ sper@@ ance , West @-@ Australien , versucht .
+Ground Truth: I started this as a try@@ out in E@@ sper@@ ance , in Western Australia .
+Predicted (-8.173691): I mean , this is the World Bank .
+Src: ich pro@@ movi@@ erte zu der Zeit und versuchte , dem herab@@ las@@ senden Schwach@@ sinn , wo wir anderen sagen , was sie tun sollen , zu entkommen .
+Ground Truth: I was a doing a Ph.D. at the time , trying to go away from this pat@@ ron@@ izing bull@@ shit that we arrive and tell you what to do .
+Predicted (-44.087902): I was able to go through the prison , and to get rid of what I do , and to say , &quot; You know , what happens .
+Ground Truth: and so what I did in E@@ sper@@ ance that first year was to just walk the streets , and in three days I had my first client , and I helped this first guy who was smoking fish from a garage , was a Ma@@ or@@ i guy , and I helped him to sell to the restaurant in Per@@ th , to get organized , and then the fishermen came to me to say , &quot; You the guy who helped Ma@@ or@@ i ? can you help us ? &quot;
+Predicted (-95.429527): and then I was in the first year , and I went back to the first time , and he was working with my wife , and I was asked to take a name , &quot; You know , I was going to take a c@@ ad@@ ore , and we had to take him out of the factory . &quot;
+Ground Truth: and I helped these five fishermen to work together and get this beautiful tuna not to the can@@ nery in Alb@@ any for 60 cents a kil@@ o , but we found a way to take the fish for sushi to Japan for 15 dollars a kil@@ o , and the farmers came to talk to me , said , &quot; Hey , you helped them . can you help us ? &quot;
+Predicted (-84.320900): I was working with these three @-@ year @-@ old workers , and they decided to sell a new business , and I decided to sell them to a company , and I don &apos;t want to go to the supermarket , and they &apos;d have to do something like this .
+Src: in einem Jahr hatte ich 27 Projekte laufen . die Regierung kam , um mich zu fragen : &quot; wie machen Sie das ?
+Ground Truth: in a year , I had 27 projects going on , and the government came to see me to say , &quot; How can you do that ?
+Predicted (-24.058601): I went to a few years ago , and I asked people to do this , &quot; What do you want ?
+Src: wie machen Sie ... ? &quot; ich sagte : &quot; ich mache etwas sehr , sehr Schwier@@ iges .
+Ground Truth: how can you do - ? &quot; and I said , &quot; I do something very , very , very difficult .
+Predicted (-15.902730): &quot; so , I &apos;m like , &quot; What do you do ? &quot;
+Ground Truth: I shut up , and listen to them . &quot;
+Predicted (-9.783475): I &apos;m going to listen to the pain .
+Src: also - - Also sagt die Regierung : &quot; machen Sie es nochmal &quot; .
+Ground Truth: so - - So the government says , &quot; Do it again . &quot;
+Predicted (-19.631851): so , the answer is , &quot; Well , you know , you &apos;re going to do it . &quot;
+Src: wir haben es weltweit in 300 Gemeinden gemacht .
+Ground Truth: we &apos;ve done it in 300 communities around the world .
+Predicted (-7.404725): we &apos;ve been working on the world .
+Ground Truth: we have helped to start 40,000 businesses .
+Predicted (-12.080038): we &apos;ve got a lot of companies to do that .
+Src: es gibt eine neue Generation von Unternehmen , die an Einsamkeit ver@@ gehen .
+Ground Truth: there is a new generation of entrepreneurs who are dying of soli@@ tude .
+Predicted (-16.376530): there &apos;s a new generation of companies that are going to be done .
+Src: Peter Drucker , einer der besten Unternehmens@@ berater der Geschichte , starb mit 96 vor einigen Jahren .
+Ground Truth: Peter Drucker , one of the greatest management consultants in history , died age 96 , a few years ago .
+Predicted (-31.083344): the classic example of a great , very popular child , who was still in the 1990s .
+Ground Truth: Peter Drucker was a professor of philosophy before becoming involved in business , and this is what Peter Drucker says : &quot; planning is actually in@@ compatible with an entrepreneurial society and economy . &quot;
+Predicted (-48.167313): and Alexander was very excited about this experiment , and he said , &quot; Well , if you were interested in a new way of thinking about the economics of democracy . &quot;
+Src: Planung ist der Todes@@ k@@ uss des Unternehmer@@ geist@@ es .
+Ground Truth: planning is the kiss of death of entrepreneurship .
+Predicted (-18.807575): the col@@ dest thing is about to the death of it .
+Ground Truth: so now you &apos;re rebuilding Christ@@ church without knowing what the smartest people in Christ@@ church want to do with their own money and their own energy .
+Predicted (-34.603790): so , you know , you know , a lot of people who are trying to get their own lives and not to do anything .
+Src: man muss lernen , wie man diese dazu bringt , auf einen zuzu@@ kommen .
+Ground Truth: you have to learn how to get these people to come and talk to you .
+Predicted (-12.183589): you have to do something that you can do with them .
+Ground Truth: you have to offer them confi@@ denti@@ ality , privacy , you have to be fantastic at helping them , and then they will come , and they will come in dro@@ ves .
+Predicted (-29.290979): you need to be able to do it , and you have to have to be a good thing to do with them .
+Src: in einer Gemeinde von 10 000 Menschen bekommen wir 200 Kunden .
+Ground Truth: in a community of 10,000 people , we get 200 clients .
+Predicted (-13.393915): in a group of people , we have to feed each other .
+Ground Truth: can you imagine a community of 400,000 people , the intelligence and the passion ?
+Predicted (-18.650230): can you imagine a lot of people who have been working with the intelligence of the world ?
+Ground Truth: which presentation have you applau@@ ded the most this morning ?
+Predicted (-16.358170): what &apos;s the most important thing you &apos;ve ever been doing in this morning ?
+Ground Truth: local , passionate people . that &apos;s who you have applau@@ ded .
+Predicted (-19.956161): people are a great , strong , educated .
+Ground Truth: so what I &apos;m saying is that entrepreneurship is where it &apos;s at .
+Predicted (-19.899176): I want to say that the way to do this is to be the right thing .
+Ground Truth: we are at the end of the first industrial revolution -- non@@ renewable fossil fuels , manufacturing -- and all of a sudden , we have systems which are not sustainable .
+Predicted (-42.179161): we &apos;re the first time in the era of technological revolution , and we &apos;re all familiar with the biological systems that are still alive .
+Src: die Verbrenn@@ ungs@@ kraft@@ maschine ist nicht nachhaltig .
+Ground Truth: the internal combustion engine is not sustainable .
+Predicted (-10.020345): the electric power is not a cost .
+Src: die Fre@@ on @-@ Art der In@@ stand@@ haltung ist nicht nachhaltig .
+Ground Truth: Fre@@ on way of maintaining things is not sustainable .
+Predicted (-15.070331): the rule of the traditional approach is not sustainable .
+Ground Truth: what we have to look at is at how we feed , cure , educate , transport , communicate for seven billion people in a sustainable way .
+Predicted (-43.461338): we &apos;re going to see how we &apos;re going to bring people to the planet , to make sure that we can grow up with them and make them healthy .
+Ground Truth: the technologies do not exist to do that .
+Predicted (-5.843029): the technologies don &apos;t have yet .
+Ground Truth: who is going to invent the technology for the green revolution ? universities ? forget about it !
+Predicted (-18.687010): what is the technology that you have in the world ? &quot;
+Src: die Regierung ? vergessen Sie &apos; s !
+Ground Truth: government ? forget about it !
+Predicted (-4.953277): the government ?
+Src: es werden Unternehmer sein . und sie machen es schon jetzt .
+Ground Truth: it will be entrepreneurs , and they &apos;re doing it now .
+Predicted (-12.712955): you &apos;re going to be a company , and it &apos;s going to be done .
+Src: ich las eine herr@@ liche Geschichte in einem futu@@ rist@@ ischen Magazin vor vielen Jahren .
+Ground Truth: there &apos;s a lovely story that I read in a futur@@ ist magazine many , many years ago .
+Predicted (-15.291877): I was a picture of a lot of scientific experiences .
+Src: es gab eine Gruppe von Experten , die eingeladen waren , um die Zukunft der Stadt New York im Jahr 18@@ 60 zu besprechen .
+Ground Truth: there was a group of experts who were invited to discuss the future of the city of New York in 18@@ 60 .
+Predicted (-24.558928): there were people who were just a few years ago , and they were in the New York Times .
+Ground Truth: and in 18@@ 60 , this group of people came together , and they all spec@@ ulated about what would happen to the city of New York in 100 years , and the conclusion was un@@ anim@@ ous : the city of New York would not exist in 100 years .
+Predicted (-51.512455): and they were in New York , and they were going to be able to look at the world , and I didn &apos;t think that the city was going to be about 10 million years ago .
+Ground Truth: why ? because they looked at the curve and said , if the population keeps growing at this rate , to move the population of New York around , they would have needed six million horses , and the manure created by six million horses would be impossible to deal with .
+Predicted (-56.729748): so what you see is that the population is going to take over the course of the oil , and they had a half of their DNA , and it &apos;s not going to get a lot of money .
+Src: denn sie gingen schon im Mist unter .
+Ground Truth: they were already drowning in manure .
+Predicted (-10.985631): and we were in the store .
+Src: 18@@ 60 sehen sie die schmutzige Technologie , die das Leben aus New York sau@@ gt .
+Ground Truth: so 18@@ 60 , they are seeing this dirty technology that is going to cho@@ ke the life out of New York .
+Predicted (-27.600918): in fact , the new way of doing it is to be the most expensive life .
+Ground Truth: so what happens ? in 40 years &apos; time , in the year 1900 , in the United States of America , there were 1,@@ 00@@ 1 car manufacturing companies -- 1,@@ 00@@ 1 .
+Predicted (-26.079922): what happened is that , if you &apos;ve been spending about 10 million dollars , in the United States .
+Src: die Idee , eine andere Technologie zu finden , hatte das Rennen gemacht . es gab winzig kleine Fabriken im Hinter@@ land .
+Ground Truth: the idea of finding a different technology had absolutely taken over , and there were tiny , tiny little factories in back@@ waters .
+Predicted (-24.680439): the idea was to make a new way of doing it , and it was a whole bunch of fish .
+Src: D@@ ear@@ born , Michigan . Henry Ford .
+Ground Truth: D@@ ear@@ born , Michigan . Henry Ford .
+Predicted (-11.022951): ( applause : Henry .
+Src: es gibt ein Geheimnis , um mit Unternehmern zu arbeiten .
+Ground Truth: however , there is a secret to work with entrepreneurs .
+Predicted (-9.367312): there &apos;s a secret to the partners .
+Src: als erstes muss ihnen Dis@@ kre@@ tion angeboten werden .
+Ground Truth: first , you have to offer them confi@@ denti@@ ality .
+Predicted (-16.628170): and the first thing you have to do is to get a decision .
+Src: ansonsten kommen sie nicht und sprechen mit Ihnen .
+Ground Truth: otherwise they don &apos;t come and talk to you .
+Predicted (-8.032442): they &apos;re not going to talk about it .
+Ground Truth: then you have to offer them absolute , dedicated , passionate service to them .
+Predicted (-32.392353): and if you have to be a very good job , you have to be able to share it .
+Ground Truth: and then you have to tell them the truth about entrepreneurship .
+Predicted (-15.910970): you need to say that all of you are in the Bible .
+Ground Truth: the smallest company , the biggest company , has to be capable of doing three things beautifully : the product that you want to sell has to be fantastic , you have to have fantastic marketing , and you have to have tremendous financial management .
+Predicted (-66.398148): and in the last three years , the only way to do it is to be able to get rid of all the things that have to be able to do , to make a new product , and to make a perfect name .
+Src: raten Sie mal ?
+Ground Truth: guess what ?
+Predicted (-1.813822): guess what ?
+Ground Truth: we have never met a single human being in the world who can make it , sell it and look after the money .
+Predicted (-23.366982): we &apos;ve never got one person who &apos;s going to do the same thing , and they can do it .
+Src: so etwas existiert nicht .
+Ground Truth: it doesn &apos;t exist .
+Predicted (-7.548746): so , no one does .
+Src: diese Person wurde niemals geboren .
+Ground Truth: this person has never been born .
+Predicted (-3.146367): this person was never born .
+Src: wir haben Forschung betrieben und uns die 100 i@@ kon@@ ischsten Firmen der Welt angeschaut - Carnegie , West@@ in@@ gh@@ ouse , Edison , Ford die neuen Firmen , Google , Yahoo .
+Ground Truth: we &apos;ve done the research , and we have looked at the 100 iconic companies of the world -- Carnegie , West@@ in@@ gh@@ ouse , Edison , Ford , all the new companies , Google , Yahoo .
+Predicted (-60.990738): we &apos;ve been working on the Internet , and we &apos;ve got to say , &quot; We &apos;re going to have a new Google , the most advanced , the world , the U.K.
+Ground Truth: there &apos;s only one thing that all the successful companies in the world have in common , only one : none were started by one person .
+Predicted (-40.896744): there &apos;s only one thing that the people who have ever been doing is , the only thing that is a company , not a company .
+Ground Truth: now we teach entrepreneurship to 16 @-@ year @-@ olds in Nor@@ thum@@ ber@@ land , and we start the class by giving them the first two pages of Richard Bran@@ son &apos;s autobi@@ ography , and the task of the 16 @-@ year @-@ olds is to under@@ line , in the first two pages of Richard Bran@@ son &apos;s autobi@@ ography how many times Richard uses the word &quot; I &quot; and how many times he uses the word &quot; we . &quot;
+Predicted (-90.156151): we &apos;re working with the first 12 @-@ year @-@ old version of the world , and we &apos;re going to try to see the story of the first two @-@ year @-@ old , and we &apos;re going to use it as a result of the English language of the world .
+Src: niemals &quot; ich &quot; und 32 Mal &quot; wir &quot; .
+Ground Truth: never the word &quot; I , &quot; and the word &quot; we &quot; 32 times .
+Predicted (-12.099821): &quot; I don &apos;t have a &quot; and &quot;
+Src: er war nicht allein , als er begann .
+Ground Truth: he wasn &apos;t alone when he started .
+Predicted (-1.615456): he wasn &apos;t alone .
+Ground Truth: nobody started a company alone . no one .
+Predicted (-10.149317): no one company . no one was going to work .
+Ground Truth: so we can create the community where we have facili@@ tators who come from a small business background sitting in c@@ af@@ es , in bars , and your dedicated bud@@ dies who will do to you , what somebody did for this gentleman who talks about this epic , somebody who will say to you , &quot; What do you need ?
+Predicted (-80.812866): so we have a kind of a company that &apos;s going to be able to put in the shoes , and they have to do something that &apos;s called the &quot; G@@ av@@ in , &quot; and you know , what &apos;s going on ? &quot;
+Ground Truth: what can you do ? can you make it ?
+Predicted (-2.367346): what can you do ?
+Ground Truth: okay , can you sell it ? can you look after the money ? &quot;
+Predicted (-10.689691): okay ? can you put it in the money ?
+Ground Truth: &quot; Oh , no , I cannot do this . &quot; &quot; would you like me to find you somebody ? &quot;
+Predicted (-21.237022): &quot; Oh , no , I mean , you can &apos;t say , &quot; I want to do something for you . &quot;
+Src: wir aktivieren Gemeinschaften .
+Ground Truth: we activate communities .
+Predicted (-6.194419): we take the identity .
+Ground Truth: we have groups of volunteers supporting the Enter@@ prise facili@@ tator to help you to find resources and people and we have discovered that the miracle of the intelligence of local people is such that you can change the culture and the economy of this community just by capturing the passion , the energy and imagination of your own people .
+Predicted (-95.425034): we &apos;ve been talking about the tools of the people who are working on the world , and we &apos;ve been trying to understand that the government is going to create a lot of information that is the only way that people are doing , and that we can use the culture of the society .
+Ground Truth: thank you .
+Predicted (-0.191460): thank you .
+Ground Truth: five years ago , I experienced a bit of what it must have been like to be Alice in W@@ onder@@ land .
+Predicted (-25.375496): I &apos;ve been talking about how long it would be , in fact , to be the worst way .
+Ground Truth: Penn State asked me , a communications teacher , to teach a communications class for engineering students .
+Predicted (-39.652325): the professor of mine was asked to talk about a team of designers -- to use the communication of the Internet .
+Src: ich hatte Angst -
+Ground Truth: and I was scared .
+Predicted (-2.071515): I had fear .
+Ground Truth: really scared . scared of these students with their big brains and their big books and their big , unfamiliar words .
+Predicted (-31.736832): so , not with their own friends , and they were very good at all of these ideas .
+Ground Truth: but as these conversations un@@ folded , I experienced what Alice must have when she went down that rabbit hole and saw that door to a whole new world .
+Predicted (-49.688099): but as the artist , they started to look at the way they were walking around and they were a little bit of a city .
+Ground Truth: that &apos;s just how I felt as I had those conversations with the students . I was amazed at the ideas that they had , and I wanted others to experience this wonder@@ land as well .
+Predicted (-44.536957): I was talking about the time , and I was thinking about the people who were interested in , and I was thinking that they had a lot of interest .
+Ground Truth: and I believe the key to opening that door is great communication .
+Predicted (-15.447421): I want to say that there &apos;s no power to be open .
+Ground Truth: we desperately need great communication from our scientists and engineers in order to change the world .
+Predicted (-16.604971): we have a lot of great ideas about our culture and our projects .
+Ground Truth: our scientists and engineers are the ones that are tackling our grand@@ est challenges , from energy to environment to health care , among others , and if we don &apos;t know about it and understand it , then the work isn &apos;t done , and I believe it &apos;s our responsibility as non @-@ scientists to have these interactions .
+Predicted (-75.718826): and the problem with our problems , and when we talk about technology , we have a lot of problems , we &apos;re talking about it , and it &apos;s a good way to understand why we &apos;re not going to do it , and it &apos;s not going to be a good way to change our environment .
+Ground Truth: but these great conversations can &apos;t occur if our scientists and engineers don &apos;t invite us in to see their wonder@@ land .
+Predicted (-25.686012): so , this is not a lot of people who are working on our governments , and we don &apos;t know .
+Ground Truth: so scientists and engineers , please , talk nerdy to us .
+Predicted (-13.812471): so scientists , engineers , and they &apos;re not going to do this .
+Ground Truth: I want to share a few keys on how you can do that to make sure that we can see that your science is sexy and that your engineering is engaging .
+Predicted (-37.425713): I want you to show you some of the things that we can do , and that &apos;s where we &apos;re going to work with , and that &apos;s what we &apos;re doing .
+Ground Truth: first question to answer for us : so what ?
+Predicted (-16.378258): the first question you have is , you know , is it going to be good .
+Ground Truth: tell us why your science is relevant to us .
+Predicted (-20.556927): and it &apos;s a very important question that we &apos;re doing today .
+Ground Truth: don &apos;t just tell me that you study tr@@ ab@@ ec@@ ul@@ ae , but tell me that you study tr@@ ab@@ ec@@ ul@@ ae , which is the mesh @-@ like structure of our bones because it &apos;s important to understanding and treating o@@ ste@@ op@@ or@@ osis .
+Predicted (-71.303436): and it &apos;s not that they say that we &apos;re going to look at the structure of the molecule , but they &apos;re also very , very important , and that &apos;s what we call the biological and the brain .
+Ground Truth: and when you &apos;re describing your science , be@@ ware of jargon .
+Predicted (-32.538765): and what you do is that they &apos;re doing , and they &apos;re going to kill your own success .
+Ground Truth: jargon is a barrier to our understanding of your ideas .
+Predicted (-24.707172): so , there &apos;s a lot of information that you &apos;re going to do .
+Ground Truth: sure , you can say &quot; spatial and temporal , &quot; but why not just say &quot; space and time , &quot; which is so much more accessible to us ?
+Predicted (-35.473297): &quot; but you don &apos;t have a lot of time , and it &apos;s not really , &quot; and what &apos;s going on ? &quot;
+Ground Truth: and making your ideas accessible is not the same as dum@@ bing it down .
+Predicted (-22.412991): you &apos;re going to make the difference , not just to do it .
+Ground Truth: instead , as Einstein said , make everything as simple as possible , but no simpler .
+Predicted (-19.751396): and as I said , &quot; Well , this is just a simple way of doing things . &quot;
+Ground Truth: you can clearly communicate your science without com@@ promising the ideas .
+Predicted (-29.902277): you can see that a lot of information that &apos;s going to be done , because we don &apos;t have to do something .
+Ground Truth: a few things to consider are having examples , stories and analogies . those are ways to engage and ex@@ cite us about your content .
+Predicted (-48.921490): and some of the things that are going to be very interesting , and we have to do this in a series of ways that you &apos;re going to go to the other .
+Ground Truth: and when presenting your work , drop the bullet points .
+Predicted (-19.197323): and if you &apos;re going to take those ideas , you &apos;ll get that .
+Ground Truth: have you ever wondered why they &apos;re called bullet points ?
+Predicted (-11.707655): you &apos;ve got to ask yourself , &quot; What is this ? &quot;
+Src: was geschieht , wenn jemand zu@@ sticht ? ein anderer wird er@@ sto@@ chen , und mit diesen Punkten er@@ ste@@ cht ihr euer Publikum .
+Ground Truth: what do bullets do ? bullets kill , and they will kill your presentation .
+Predicted (-38.955711): what happens is , if you &apos;re going to do something , and that &apos;s a little bit of a person , and you &apos;re going to do this .
+Ground Truth: a slide like this is not only boring , but it relies too much on the language area of our brain , and causes us to become overwhelmed .
+Predicted (-37.092651): and this is a very simple example , because it &apos;s not just the way we &apos;re doing , and it &apos;s not just a lot of time .
+Ground Truth: instead , this example slide by Gene@@ vie@@ ve Brown is much more effective . it &apos;s showing that the special structure of tr@@ ab@@ ec@@ ul@@ ae are so strong that they actually inspired the unique design of the Ei@@ ffel Tower .
+Predicted (-65.578522): so , the artist &apos;s favorite part of the study is that they &apos;re very much more complicated than the invention of the DNA , but it &apos;s a very powerful part of the atmosphere .
+Ground Truth: and the trick here is to use a single , read@@ able sentence that the audience can key into if they get a bit lost , and then provide visuals which appeal to our other senses and create a deeper sense of understanding of what &apos;s being described .
+Predicted (-84.565811): this is a piece of paper that &apos;s going to take a piece of the equation , and it &apos;s a piece of information that we can actually understand , and it &apos;s all about the way that we &apos;re going to do with the same way .
+Ground Truth: so I think these are just a few keys that can help the rest of us to open that door and see the wonder@@ land that is science and engineering .
+Predicted (-37.545963): so there &apos;s some of the things that are going to be able to come back to the community , and this is the idea of the art .
+Ground Truth: and because the engineers that I &apos;ve worked with have taught me to become really in touch with my inner nerd , I want to summarize with an equation .
+Predicted (-40.049419): and the scientists who I &apos;ve been working with , I &apos;ve been saying , &quot; I &apos;ve got to use a new set of devices . &quot;
+Ground Truth: take your science , subtra@@ ct your bullet points and your jargon , divide by relevance , meaning share what &apos;s relevant to the audience , and multiply it by the passion that you have for this incredible work that you &apos;re doing , and that is going to equal incredible interactions that are full of understanding .
+Predicted (-83.973557): so , if you look at your personal personal experience , you &apos;re going to have a lot of attention , and that &apos;s the story that you &apos;re doing , and the value of your ideas , and that &apos;s what you &apos;re doing , and that &apos;s the most important thing .
+Ground Truth: and so , scientists and engineers , when you &apos;ve solved this equation , by all means , talk nerdy to me .
+Predicted (-26.089594): so , scientists have the problem with this theory , and they &apos;re going to be a result .
+Src: vielen Dank .
+Ground Truth: thank you .
+Predicted (-1.126441): thank you .
+Src: Hi . das ist mein Handy .
+Ground Truth: Hi . this is my mobile phone .
+Predicted (-2.290471): Hi .
+Ground Truth: a mobile phone can change your life , and gives you individual freedom .
+Predicted (-25.944763): a cell can be a personal piece of money , and it &apos;s going to be able to change .
+Src: mit einem Handy kann man ein Verbrechen an der Menschheit in Syrien filmen .
+Ground Truth: with a mobile phone , you can shoot a crime against humanity in Syria .
+Predicted (-13.891566): you can take a look at a crime of people .

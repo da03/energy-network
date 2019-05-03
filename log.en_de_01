@@ -1,0 +1,1048 @@
+train.py --dataset iwslt/en-de --selfmode soft --encselfmode soft --temperature 0 --selftemperature 0 --encselftemperature 0 --encselfmode soft --save_to models/en-de/01/default --direction ende --yx 0 --xy 1
+SRC Vocab Size: 39553, TRG Vocab Size: 39553
+Building Model
+Model(
+  (encoder_fx): Encoder(
+    (layers): ModuleList(
+      (0): EncoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (1): EncoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (2): EncoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (3): EncoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (4): EncoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+    )
+    (norm): LayerNorm()
+  )
+  (encoder_fy): Encoder(
+    (layers): ModuleList(
+      (0): EncoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (1): EncoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (2): EncoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (3): EncoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (4): EncoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+    )
+    (norm): LayerNorm()
+  )
+  (decoder_gx): Decoder(
+    (layers): ModuleList(
+      (0): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (1): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (2): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (3): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (4): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+    )
+    (norm): LayerNorm()
+  )
+  (decoder_gy): Decoder(
+    (layers): ModuleList(
+      (0): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (1): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (2): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (3): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+      (4): DecoderLayer(
+        (self_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (src_attn): MultiHeadedAttention(
+          (linears): ModuleList(
+            (0): Linear(in_features=278, out_features=278, bias=True)
+            (1): Linear(in_features=278, out_features=278, bias=True)
+            (2): Linear(in_features=278, out_features=278, bias=True)
+            (3): Linear(in_features=278, out_features=278, bias=True)
+          )
+          (dropout): Dropout(p=0.1)
+        )
+        (feed_forward): PositionwiseFeedForward(
+          (w_1): Linear(in_features=278, out_features=507, bias=True)
+          (w_2): Linear(in_features=507, out_features=278, bias=True)
+          (dropout): Dropout(p=0.1)
+        )
+        (sublayer): ModuleList(
+          (0): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (1): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+          (2): SublayerConnection(
+            (norm): LayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+    )
+    (norm): LayerNorm()
+  )
+  (init_x): Sequential(
+    (0): Linear(in_features=278, out_features=507, bias=True)
+    (1): LeakyReLU(negative_slope=0.01)
+    (2): Linear(in_features=507, out_features=278, bias=True)
+  )
+  (init_y): Sequential(
+    (0): Linear(in_features=278, out_features=507, bias=True)
+    (1): LeakyReLU(negative_slope=0.01)
+    (2): Linear(in_features=507, out_features=278, bias=True)
+  )
+  (src_embed): Sequential(
+    (0): Embeddings(
+      (lut): Embedding(39553, 278)
+    )
+    (1): PositionalEncoding(
+      (dropout): Dropout(p=0.1)
+    )
+  )
+  (trg_embed): Sequential(
+    (0): Embeddings(
+      (lut): Embedding(39553, 278)
+    )
+    (1): PositionalEncoding(
+      (dropout): Dropout(p=0.1)
+    )
+  )
+  (generator_gx): Generator(
+    (proj): Linear(in_features=278, out_features=39553, bias=True)
+  )
+  (generator_gy): Generator(
+    (proj): Linear(in_features=278, out_features=39553, bias=True)
+  )
+)
+Namespace(accum_grad=1, anneal_kl=1, anneal_steps=250000, anneal_temperature=0, batch_size=3200, dataset='iwslt/en-de', dependent_posterior=1, direction='ende', dropout=0.1, encselfmode='soft', encselftemperature=0.0, epochs=50, fix_model_steps=-1, heads=2, learning_rate=0.001, lr_begin=0.0003, lr_end=1e-05, max_src_len=150, max_trg_len=150, mode='soft', residual_var=0, save_to='models/en-de/01/default', selfdependent_posterior=1, selfmode='soft', selftemperature=0.0, share_decoder_embeddings=1, share_word_embeddings=0, sharelstm=0, temperature=0.0, train_from='', xy=1, yx=0)
+
+Epoch: 0
+Training
+Epoch Step: 1 lr: 0.000300, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 33535.360601, Acc xy: 0.043852, PPL xx: 14806.525330, Acc xx: 0.047407, PPL yy: 36349.339240, Acc yy: 0.044776 , Tokens per Sec: 1458.825420
+Epoch Step: 51 lr: 0.000300, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 1376.892689, Acc xy: 0.046173, PPL xx: 1895.877482, Acc xx: 0.045482, PPL yy: 2804.012204, Acc yy: 0.053426 , Tokens per Sec: 6002.447251
+Epoch Step: 101 lr: 0.000300, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 657.189686, Acc xy: 0.048884, PPL xx: 707.234272, Acc xx: 0.048682, PPL yy: 1130.531888, Acc yy: 0.060240 , Tokens per Sec: 6524.455484
+Epoch Step: 151 lr: 0.000299, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 616.614765, Acc xy: 0.053939, PPL xx: 744.495693, Acc xx: 0.052439, PPL yy: 1096.594861, Acc yy: 0.055153 , Tokens per Sec: 6806.401520
+Epoch Step: 201 lr: 0.000299, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 622.882998, Acc xy: 0.055987, PPL xx: 743.447627, Acc xx: 0.056299, PPL yy: 1115.664844, Acc yy: 0.061552 , Tokens per Sec: 6483.696511
+Epoch Step: 251 lr: 0.000299, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 623.505915, Acc xy: 0.061633, PPL xx: 731.426756, Acc xx: 0.061942, PPL yy: 1111.723920, Acc yy: 0.066948 , Tokens per Sec: 6735.606738
+Epoch Step: 301 lr: 0.000299, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 627.304242, Acc xy: 0.064375, PPL xx: 709.523721, Acc xx: 0.068692, PPL yy: 1126.323052, Acc yy: 0.063298 , Tokens per Sec: 6469.218432
+Epoch Step: 351 lr: 0.000299, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 552.772870, Acc xy: 0.079373, PPL xx: 573.153900, Acc xx: 0.076767, PPL yy: 1019.046299, Acc yy: 0.058455 , Tokens per Sec: 6688.430601
+Epoch Step: 401 lr: 0.000299, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 582.923120, Acc xy: 0.078432, PPL xx: 541.773002, Acc xx: 0.076257, PPL yy: 1085.000689, Acc yy: 0.059181 , Tokens per Sec: 6470.706114
+Epoch Step: 451 lr: 0.000298, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 594.956557, Acc xy: 0.076166, PPL xx: 635.563404, Acc xx: 0.075120, PPL yy: 1098.851555, Acc yy: 0.064996 , Tokens per Sec: 6418.326097
+Epoch Step: 501 lr: 0.000298, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 616.431576, Acc xy: 0.067994, PPL xx: 561.720324, Acc xx: 0.074792, PPL yy: 1095.746634, Acc yy: 0.066887 , Tokens per Sec: 6512.161725
+Epoch Step: 551 lr: 0.000298, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 601.729820, Acc xy: 0.076443, PPL xx: 785.788304, Acc xx: 0.077260, PPL yy: 1126.904036, Acc yy: 0.073195 , Tokens per Sec: 6482.660704
+Epoch Step: 601 lr: 0.000298, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 625.687268, Acc xy: 0.074389, PPL xx: 569.358795, Acc xx: 0.076547, PPL yy: 1128.536336, Acc yy: 0.073290 , Tokens per Sec: 6512.770184
+Epoch Step: 651 lr: 0.000298, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 585.197620, Acc xy: 0.077282, PPL xx: 717.984161, Acc xx: 0.080082, PPL yy: 1105.781509, Acc yy: 0.071711 , Tokens per Sec: 6406.186633
+Epoch Step: 701 lr: 0.000298, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 591.071931, Acc xy: 0.080402, PPL xx: 633.011768, Acc xx: 0.082467, PPL yy: 1133.716215, Acc yy: 0.070706 , Tokens per Sec: 6321.760887
+Epoch Step: 751 lr: 0.000297, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 621.674938, Acc xy: 0.059184, PPL xx: 707.157527, Acc xx: 0.069521, PPL yy: 1073.722036, Acc yy: 0.068173 , Tokens per Sec: 6273.336477
+Epoch Step: 801 lr: 0.000297, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 605.720332, Acc xy: 0.066259, PPL xx: 644.315688, Acc xx: 0.082694, PPL yy: 1065.505787, Acc yy: 0.066592 , Tokens per Sec: 6505.724224
+Epoch Step: 851 lr: 0.000297, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 628.291178, Acc xy: 0.066955, PPL xx: 633.485743, Acc xx: 0.080980, PPL yy: 1087.734876, Acc yy: 0.066669 , Tokens per Sec: 6437.843696
+Epoch Step: 901 lr: 0.000297, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 678.929537, Acc xy: 0.070084, PPL xx: 600.536167, Acc xx: 0.077484, PPL yy: 1170.165654, Acc yy: 0.069853 , Tokens per Sec: 6437.830732
+Epoch Step: 951 lr: 0.000297, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 576.316954, Acc xy: 0.074090, PPL xx: 685.917279, Acc xx: 0.082885, PPL yy: 1082.995861, Acc yy: 0.059980 , Tokens per Sec: 6165.795182
+Epoch Step: 1001 lr: 0.000297, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 555.983283, Acc xy: 0.082692, PPL xx: 548.023440, Acc xx: 0.086612, PPL yy: 1026.075294, Acc yy: 0.064571 , Tokens per Sec: 6543.521796
+Epoch Step: 1051 lr: 0.000296, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 510.790565, Acc xy: 0.085814, PPL xx: 643.024077, Acc xx: 0.089594, PPL yy: 996.835456, Acc yy: 0.060620 , Tokens per Sec: 6221.939950
+Epoch Step: 1101 lr: 0.000296, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 598.592291, Acc xy: 0.074048, PPL xx: 634.792952, Acc xx: 0.079227, PPL yy: 1085.741056, Acc yy: 0.069353 , Tokens per Sec: 6443.677023
+Epoch Step: 1151 lr: 0.000296, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 600.529646, Acc xy: 0.075824, PPL xx: 655.665402, Acc xx: 0.081383, PPL yy: 1071.172539, Acc yy: 0.069056 , Tokens per Sec: 6524.278738
+Epoch Step: 1201 lr: 0.000296, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 523.047746, Acc xy: 0.083242, PPL xx: 637.875736, Acc xx: 0.089040, PPL yy: 999.577711, Acc yy: 0.066731 , Tokens per Sec: 6369.140203
+Epoch Step: 1251 lr: 0.000296, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 601.076110, Acc xy: 0.075516, PPL xx: 594.454004, Acc xx: 0.081392, PPL yy: 1095.876671, Acc yy: 0.071255 , Tokens per Sec: 6511.009759
+Epoch Step: 1301 lr: 0.000295, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 514.259711, Acc xy: 0.083503, PPL xx: 695.360318, Acc xx: 0.087366, PPL yy: 965.134284, Acc yy: 0.071469 , Tokens per Sec: 6424.543100
+Epoch Step: 1351 lr: 0.000295, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 628.421167, Acc xy: 0.068380, PPL xx: 685.352907, Acc xx: 0.073906, PPL yy: 1123.408867, Acc yy: 0.067968 , Tokens per Sec: 6319.819693
+Epoch Step: 1401 lr: 0.000295, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 592.045828, Acc xy: 0.071395, PPL xx: 572.277993, Acc xx: 0.079274, PPL yy: 1028.015684, Acc yy: 0.069201 , Tokens per Sec: 6622.150748
+Epoch Step: 1451 lr: 0.000295, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 583.695863, Acc xy: 0.072192, PPL xx: 727.456778, Acc xx: 0.078362, PPL yy: 1049.759156, Acc yy: 0.070689 , Tokens per Sec: 6402.965130
+Validation
+Val Result: PPL yx: 1.000000, Acc yx: 0.000000. PPL xy: 611.239700, Acc xy: 0.075268. PPL xx: 587.339865, Acc xx: 0.078558. PPL yy: 1124.078860, Acc yy: 0.065168
+
+Epoch: 1
+Training
+Epoch Step: 1 lr: 0.000295, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 592.963121, Acc xy: 0.079613, PPL xx: 680.920538, Acc xx: 0.079513, PPL yy: 1067.095970, Acc yy: 0.070106 , Tokens per Sec: 24405.223781
+Epoch Step: 51 lr: 0.000295, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 536.386926, Acc xy: 0.083257, PPL xx: 680.841409, Acc xx: 0.084041, PPL yy: 1003.153666, Acc yy: 0.070692 , Tokens per Sec: 6407.777667
+Epoch Step: 101 lr: 0.000295, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 562.047268, Acc xy: 0.082653, PPL xx: 659.911837, Acc xx: 0.081760, PPL yy: 1048.863948, Acc yy: 0.068525 , Tokens per Sec: 6322.103978
+Epoch Step: 151 lr: 0.000294, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 643.888313, Acc xy: 0.065291, PPL xx: 736.772270, Acc xx: 0.065402, PPL yy: 1093.722309, Acc yy: 0.073557 , Tokens per Sec: 6298.903606
+Epoch Step: 201 lr: 0.000294, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 648.165093, Acc xy: 0.063984, PPL xx: 703.280538, Acc xx: 0.065726, PPL yy: 1044.271005, Acc yy: 0.072219 , Tokens per Sec: 6265.988829
+Epoch Step: 251 lr: 0.000294, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 637.596525, Acc xy: 0.066147, PPL xx: 671.851185, Acc xx: 0.073140, PPL yy: 1073.832032, Acc yy: 0.071441 , Tokens per Sec: 6506.162887
+Epoch Step: 301 lr: 0.000294, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 595.248157, Acc xy: 0.072352, PPL xx: 611.757812, Acc xx: 0.080051, PPL yy: 970.562354, Acc yy: 0.069065 , Tokens per Sec: 6591.996766
+Epoch Step: 351 lr: 0.000294, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 609.895092, Acc xy: 0.074532, PPL xx: 550.460819, Acc xx: 0.084109, PPL yy: 971.133096, Acc yy: 0.069089 , Tokens per Sec: 6562.046196
+Epoch Step: 401 lr: 0.000293, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 616.800441, Acc xy: 0.067413, PPL xx: 752.388555, Acc xx: 0.073850, PPL yy: 994.568568, Acc yy: 0.072140 , Tokens per Sec: 6372.630041
+Epoch Step: 451 lr: 0.000293, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 607.982668, Acc xy: 0.069749, PPL xx: 730.246594, Acc xx: 0.069400, PPL yy: 1017.071957, Acc yy: 0.066602 , Tokens per Sec: 6410.629557
+Epoch Step: 501 lr: 0.000293, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 593.090493, Acc xy: 0.070610, PPL xx: 801.893087, Acc xx: 0.076955, PPL yy: 1012.060617, Acc yy: 0.067465 , Tokens per Sec: 6298.525501
+Epoch Step: 551 lr: 0.000293, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 632.756593, Acc xy: 0.069675, PPL xx: 557.315376, Acc xx: 0.076159, PPL yy: 1012.547276, Acc yy: 0.068354 , Tokens per Sec: 6361.652098
+Epoch Step: 601 lr: 0.000293, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 629.685312, Acc xy: 0.068031, PPL xx: 755.479490, Acc xx: 0.071608, PPL yy: 1057.191316, Acc yy: 0.069137 , Tokens per Sec: 6287.814094
+Epoch Step: 651 lr: 0.000293, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 615.728170, Acc xy: 0.069948, PPL xx: 646.803278, Acc xx: 0.073113, PPL yy: 986.227061, Acc yy: 0.072101 , Tokens per Sec: 6538.855114
+Epoch Step: 701 lr: 0.000292, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 652.383245, Acc xy: 0.058190, PPL xx: 629.521638, Acc xx: 0.065009, PPL yy: 1024.573330, Acc yy: 0.071099 , Tokens per Sec: 6549.452276
+Epoch Step: 751 lr: 0.000292, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 630.036020, Acc xy: 0.055346, PPL xx: 634.530138, Acc xx: 0.068367, PPL yy: 980.719533, Acc yy: 0.068741 , Tokens per Sec: 6310.908208
+Epoch Step: 801 lr: 0.000292, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 575.465876, Acc xy: 0.054339, PPL xx: 771.555425, Acc xx: 0.071992, PPL yy: 898.118365, Acc yy: 0.069947 , Tokens per Sec: 6302.699856
+Epoch Step: 851 lr: 0.000292, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 620.727073, Acc xy: 0.054700, PPL xx: 664.889684, Acc xx: 0.069049, PPL yy: 971.280886, Acc yy: 0.066262 , Tokens per Sec: 6382.554150
+Epoch Step: 901 lr: 0.000292, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 612.274056, Acc xy: 0.060659, PPL xx: 721.457068, Acc xx: 0.071228, PPL yy: 962.195032, Acc yy: 0.067631 , Tokens per Sec: 6343.003642
+Epoch Step: 951 lr: 0.000292, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 584.136467, Acc xy: 0.076728, PPL xx: 597.511096, Acc xx: 0.081953, PPL yy: 938.511103, Acc yy: 0.065204 , Tokens per Sec: 6538.683848
+Epoch Step: 1001 lr: 0.000291, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 642.137141, Acc xy: 0.067219, PPL xx: 667.413350, Acc xx: 0.067909, PPL yy: 1019.600275, Acc yy: 0.070981 , Tokens per Sec: 6255.364043
+Epoch Step: 1051 lr: 0.000291, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 637.631820, Acc xy: 0.064844, PPL xx: 617.824684, Acc xx: 0.071741, PPL yy: 980.283499, Acc yy: 0.070518 , Tokens per Sec: 6527.844934
+Epoch Step: 1101 lr: 0.000291, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 644.067100, Acc xy: 0.069082, PPL xx: 646.167430, Acc xx: 0.072072, PPL yy: 1019.606951, Acc yy: 0.073054 , Tokens per Sec: 6440.242501
+Epoch Step: 1151 lr: 0.000291, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 676.729585, Acc xy: 0.063053, PPL xx: 720.553083, Acc xx: 0.066995, PPL yy: 1060.064256, Acc yy: 0.074480 , Tokens per Sec: 6340.271084
+Epoch Step: 1201 lr: 0.000291, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 650.880222, Acc xy: 0.061554, PPL xx: 561.744106, Acc xx: 0.070774, PPL yy: 999.690804, Acc yy: 0.071423 , Tokens per Sec: 6610.777468
+Epoch Step: 1251 lr: 0.000291, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 598.577336, Acc xy: 0.065952, PPL xx: 683.065681, Acc xx: 0.073387, PPL yy: 975.376439, Acc yy: 0.069024 , Tokens per Sec: 6169.092064
+Epoch Step: 1301 lr: 0.000290, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 650.394182, Acc xy: 0.061571, PPL xx: 516.057654, Acc xx: 0.066825, PPL yy: 991.357647, Acc yy: 0.068525 , Tokens per Sec: 6570.157962
+Epoch Step: 1351 lr: 0.000290, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 595.758174, Acc xy: 0.069147, PPL xx: 604.141565, Acc xx: 0.073157, PPL yy: 939.507084, Acc yy: 0.067700 , Tokens per Sec: 6467.632960
+Epoch Step: 1401 lr: 0.000290, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 624.182202, Acc xy: 0.069176, PPL xx: 723.434193, Acc xx: 0.074040, PPL yy: 944.252376, Acc yy: 0.070717 , Tokens per Sec: 6238.446147
+Epoch Step: 1451 lr: 0.000290, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 635.442094, Acc xy: 0.062879, PPL xx: 761.090254, Acc xx: 0.064481, PPL yy: 1031.532799, Acc yy: 0.074700 , Tokens per Sec: 6167.396003
+Validation
+Val Result: PPL yx: 1.000000, Acc yx: 0.000000. PPL xy: 722.847006, Acc xy: 0.057869. PPL xx: 722.544655, Acc xx: 0.058605. PPL yy: 1016.235388, Acc yy: 0.069009
+
+Epoch: 2
+Training
+Epoch Step: 1 lr: 0.000290, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 671.004243, Acc xy: 0.061758, PPL xx: 729.176512, Acc xx: 0.061995, PPL yy: 1087.064248, Acc yy: 0.073070 , Tokens per Sec: 24970.072924
+Epoch Step: 51 lr: 0.000290, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 648.996435, Acc xy: 0.062257, PPL xx: 703.013268, Acc xx: 0.064859, PPL yy: 1045.251654, Acc yy: 0.068957 , Tokens per Sec: 6515.396353
+Epoch Step: 101 lr: 0.000289, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 627.434121, Acc xy: 0.064337, PPL xx: 742.538062, Acc xx: 0.073926, PPL yy: 1082.291457, Acc yy: 0.068073 , Tokens per Sec: 6396.026842
+Epoch Step: 151 lr: 0.000289, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 605.092243, Acc xy: 0.070009, PPL xx: 758.553259, Acc xx: 0.075130, PPL yy: 1035.919496, Acc yy: 0.071581 , Tokens per Sec: 6253.472985
+Epoch Step: 201 lr: 0.000289, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 604.861998, Acc xy: 0.072052, PPL xx: 599.643361, Acc xx: 0.077231, PPL yy: 1011.008912, Acc yy: 0.067811 , Tokens per Sec: 6517.399151
+Epoch Step: 251 lr: 0.000289, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 616.147293, Acc xy: 0.066705, PPL xx: 727.307057, Acc xx: 0.069409, PPL yy: 1055.772364, Acc yy: 0.068205 , Tokens per Sec: 6278.713540
+Epoch Step: 301 lr: 0.000289, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 588.580283, Acc xy: 0.069957, PPL xx: 635.241550, Acc xx: 0.073683, PPL yy: 967.629782, Acc yy: 0.065179 , Tokens per Sec: 6516.679929
+Epoch Step: 351 lr: 0.000289, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 581.587630, Acc xy: 0.071775, PPL xx: 631.838353, Acc xx: 0.076743, PPL yy: 1000.256105, Acc yy: 0.067612 , Tokens per Sec: 6389.306132
+Epoch Step: 401 lr: 0.000288, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 637.766334, Acc xy: 0.067148, PPL xx: 584.394215, Acc xx: 0.068995, PPL yy: 1044.480793, Acc yy: 0.071386 , Tokens per Sec: 6566.353860
+Epoch Step: 451 lr: 0.000288, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 579.841024, Acc xy: 0.070274, PPL xx: 637.685521, Acc xx: 0.071639, PPL yy: 972.373432, Acc yy: 0.062880 , Tokens per Sec: 6399.102101
+Epoch Step: 501 lr: 0.000288, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 595.176811, Acc xy: 0.072264, PPL xx: 719.479849, Acc xx: 0.071772, PPL yy: 999.986728, Acc yy: 0.064949 , Tokens per Sec: 6205.532848
+Epoch Step: 551 lr: 0.000288, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 558.390407, Acc xy: 0.076833, PPL xx: 579.534751, Acc xx: 0.079888, PPL yy: 939.670867, Acc yy: 0.062201 , Tokens per Sec: 6411.473215
+Epoch Step: 601 lr: 0.000288, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 623.132290, Acc xy: 0.067608, PPL xx: 764.405754, Acc xx: 0.072046, PPL yy: 1010.992002, Acc yy: 0.070783 , Tokens per Sec: 6307.797342
+Epoch Step: 651 lr: 0.000288, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 563.195921, Acc xy: 0.075330, PPL xx: 666.672129, Acc xx: 0.080954, PPL yy: 921.703455, Acc yy: 0.067071 , Tokens per Sec: 6519.735557
+Epoch Step: 701 lr: 0.000287, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 583.612010, Acc xy: 0.074610, PPL xx: 736.365337, Acc xx: 0.080977, PPL yy: 975.936554, Acc yy: 0.066247 , Tokens per Sec: 5952.581413
+Epoch Step: 751 lr: 0.000287, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 622.810777, Acc xy: 0.071899, PPL xx: 527.262526, Acc xx: 0.078254, PPL yy: 1017.996435, Acc yy: 0.068583 , Tokens per Sec: 6361.400485
+Epoch Step: 801 lr: 0.000287, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 575.490833, Acc xy: 0.076697, PPL xx: 665.206140, Acc xx: 0.080405, PPL yy: 958.990290, Acc yy: 0.067191 , Tokens per Sec: 6384.983167
+Epoch Step: 851 lr: 0.000287, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 615.425348, Acc xy: 0.071900, PPL xx: 596.706959, Acc xx: 0.079514, PPL yy: 1027.569424, Acc yy: 0.070751 , Tokens per Sec: 6564.543687
+Epoch Step: 901 lr: 0.000287, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 629.410443, Acc xy: 0.069322, PPL xx: 698.319702, Acc xx: 0.075869, PPL yy: 1050.614438, Acc yy: 0.071224 , Tokens per Sec: 6419.140050
+Epoch Step: 951 lr: 0.000286, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 551.910444, Acc xy: 0.074673, PPL xx: 663.339548, Acc xx: 0.082742, PPL yy: 948.199100, Acc yy: 0.063642 , Tokens per Sec: 6273.562238
+Epoch Step: 1001 lr: 0.000286, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 561.509736, Acc xy: 0.074490, PPL xx: 682.018665, Acc xx: 0.085061, PPL yy: 967.990684, Acc yy: 0.067330 , Tokens per Sec: 6395.213608
+Epoch Step: 1051 lr: 0.000286, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 618.236530, Acc xy: 0.068444, PPL xx: 614.029520, Acc xx: 0.076198, PPL yy: 1020.480336, Acc yy: 0.069030 , Tokens per Sec: 6530.180353
+Epoch Step: 1101 lr: 0.000286, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 583.178687, Acc xy: 0.068527, PPL xx: 581.443279, Acc xx: 0.082419, PPL yy: 953.225107, Acc yy: 0.064188 , Tokens per Sec: 6352.596086
+Epoch Step: 1151 lr: 0.000286, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 569.918272, Acc xy: 0.076550, PPL xx: 724.969644, Acc xx: 0.084265, PPL yy: 976.755627, Acc yy: 0.066189 , Tokens per Sec: 6381.795964
+Epoch Step: 1201 lr: 0.000286, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 583.913265, Acc xy: 0.074625, PPL xx: 699.450041, Acc xx: 0.079807, PPL yy: 963.539800, Acc yy: 0.062355 , Tokens per Sec: 6506.669218
+Epoch Step: 1251 lr: 0.000285, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 612.156645, Acc xy: 0.071824, PPL xx: 588.925860, Acc xx: 0.075346, PPL yy: 1017.047669, Acc yy: 0.067211 , Tokens per Sec: 6454.720778
+Epoch Step: 1301 lr: 0.000285, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 589.944305, Acc xy: 0.073642, PPL xx: 617.984114, Acc xx: 0.077198, PPL yy: 1014.108276, Acc yy: 0.066238 , Tokens per Sec: 6163.572799
+Epoch Step: 1351 lr: 0.000285, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 620.920936, Acc xy: 0.070968, PPL xx: 626.165328, Acc xx: 0.077212, PPL yy: 1013.425962, Acc yy: 0.070589 , Tokens per Sec: 6264.078143
+Epoch Step: 1401 lr: 0.000285, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 635.600322, Acc xy: 0.066177, PPL xx: 605.692477, Acc xx: 0.072692, PPL yy: 1010.069713, Acc yy: 0.069920 , Tokens per Sec: 6454.749724
+Epoch Step: 1451 lr: 0.000285, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 593.667411, Acc xy: 0.071639, PPL xx: 670.711812, Acc xx: 0.077415, PPL yy: 984.310218, Acc yy: 0.066879 , Tokens per Sec: 6280.580784
+Validation
+Val Result: PPL yx: 1.000000, Acc yx: 0.000000. PPL xy: 703.406390, Acc xy: 0.064188. PPL xx: 616.753429, Acc xx: 0.075485. PPL yy: 1157.365594, Acc yy: 0.067612
+
+Epoch: 3
+Training
+Epoch Step: 1 lr: 0.000285, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 611.155693, Acc xy: 0.066845, PPL xx: 892.210799, Acc xx: 0.070657, PPL yy: 1082.487843, Acc yy: 0.068683 , Tokens per Sec: 23639.224383
+Epoch Step: 51 lr: 0.000285, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 606.056062, Acc xy: 0.069666, PPL xx: 620.199698, Acc xx: 0.077178, PPL yy: 1023.616555, Acc yy: 0.066876 , Tokens per Sec: 6340.064619
+Epoch Step: 101 lr: 0.000284, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 597.579050, Acc xy: 0.069950, PPL xx: 759.365944, Acc xx: 0.076300, PPL yy: 1039.310142, Acc yy: 0.066099 , Tokens per Sec: 6238.149849
+Epoch Step: 151 lr: 0.000284, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 617.787120, Acc xy: 0.069571, PPL xx: 572.479638, Acc xx: 0.076645, PPL yy: 1009.188775, Acc yy: 0.067803 , Tokens per Sec: 6514.451108
+Epoch Step: 201 lr: 0.000284, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 541.249637, Acc xy: 0.074741, PPL xx: 701.870119, Acc xx: 0.083057, PPL yy: 951.831700, Acc yy: 0.059914 , Tokens per Sec: 6285.062027
+Epoch Step: 251 lr: 0.000284, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 572.188958, Acc xy: 0.074876, PPL xx: 608.133935, Acc xx: 0.082461, PPL yy: 975.685811, Acc yy: 0.064135 , Tokens per Sec: 6326.619431
+Epoch Step: 301 lr: 0.000284, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 586.721177, Acc xy: 0.071226, PPL xx: 712.117926, Acc xx: 0.080343, PPL yy: 997.540034, Acc yy: 0.066093 , Tokens per Sec: 6131.114856
+Epoch Step: 351 lr: 0.000283, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 603.420784, Acc xy: 0.077555, PPL xx: 572.385237, Acc xx: 0.081155, PPL yy: 1011.684454, Acc yy: 0.067310 , Tokens per Sec: 6340.718046
+Epoch Step: 401 lr: 0.000283, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 599.033908, Acc xy: 0.074605, PPL xx: 436.316584, Acc xx: 0.082331, PPL yy: 992.203066, Acc yy: 0.065648 , Tokens per Sec: 6422.879590
+Epoch Step: 451 lr: 0.000283, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 604.632475, Acc xy: 0.071857, PPL xx: 545.645523, Acc xx: 0.077218, PPL yy: 1007.401612, Acc yy: 0.068238 , Tokens per Sec: 6348.023912
+Epoch Step: 501 lr: 0.000283, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 598.996136, Acc xy: 0.071324, PPL xx: 521.651782, Acc xx: 0.079420, PPL yy: 982.319510, Acc yy: 0.064293 , Tokens per Sec: 6425.222439
+Epoch Step: 551 lr: 0.000283, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 599.075494, Acc xy: 0.075248, PPL xx: 630.244688, Acc xx: 0.082329, PPL yy: 1004.733241, Acc yy: 0.067463 , Tokens per Sec: 6238.358456
+Epoch Step: 601 lr: 0.000283, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 570.100314, Acc xy: 0.070824, PPL xx: 689.283453, Acc xx: 0.080569, PPL yy: 954.712317, Acc yy: 0.065632 , Tokens per Sec: 6536.772683
+Epoch Step: 651 lr: 0.000282, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 568.211502, Acc xy: 0.072723, PPL xx: 659.956858, Acc xx: 0.081470, PPL yy: 953.018485, Acc yy: 0.066036 , Tokens per Sec: 6448.393595
+Epoch Step: 701 lr: 0.000282, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 617.209422, Acc xy: 0.068361, PPL xx: 692.133757, Acc xx: 0.077093, PPL yy: 1032.934727, Acc yy: 0.069952 , Tokens per Sec: 6282.035827
+Epoch Step: 751 lr: 0.000282, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 590.932975, Acc xy: 0.075068, PPL xx: 728.168497, Acc xx: 0.081105, PPL yy: 1022.815994, Acc yy: 0.066131 , Tokens per Sec: 6085.947376
+Epoch Step: 801 lr: 0.000282, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 559.895310, Acc xy: 0.078210, PPL xx: 744.271129, Acc xx: 0.084166, PPL yy: 976.325170, Acc yy: 0.065669 , Tokens per Sec: 6353.614599
+Epoch Step: 851 lr: 0.000282, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 569.894644, Acc xy: 0.077498, PPL xx: 558.138827, Acc xx: 0.083401, PPL yy: 953.565130, Acc yy: 0.065645 , Tokens per Sec: 6597.535749
+Epoch Step: 901 lr: 0.000282, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 582.496010, Acc xy: 0.076593, PPL xx: 617.109265, Acc xx: 0.079768, PPL yy: 988.582129, Acc yy: 0.066677 , Tokens per Sec: 6504.348556
+Epoch Step: 951 lr: 0.000281, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 572.959697, Acc xy: 0.077327, PPL xx: 674.389062, Acc xx: 0.078692, PPL yy: 1013.158922, Acc yy: 0.069528 , Tokens per Sec: 6297.483795
+Epoch Step: 1001 lr: 0.000281, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 526.076620, Acc xy: 0.082309, PPL xx: 726.029260, Acc xx: 0.081295, PPL yy: 957.611373, Acc yy: 0.063659 , Tokens per Sec: 6405.110247
+Epoch Step: 1051 lr: 0.000281, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 546.703910, Acc xy: 0.081007, PPL xx: 649.610268, Acc xx: 0.084432, PPL yy: 964.150357, Acc yy: 0.065405 , Tokens per Sec: 6284.658810
+Epoch Step: 1101 lr: 0.000281, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 549.969812, Acc xy: 0.078476, PPL xx: 533.578192, Acc xx: 0.087040, PPL yy: 906.680939, Acc yy: 0.067555 , Tokens per Sec: 6591.958706
+Epoch Step: 1151 lr: 0.000281, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 588.851918, Acc xy: 0.075474, PPL xx: 639.659742, Acc xx: 0.081002, PPL yy: 1002.714961, Acc yy: 0.069858 , Tokens per Sec: 6382.269188
+Epoch Step: 1201 lr: 0.000281, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 534.776022, Acc xy: 0.081201, PPL xx: 722.523678, Acc xx: 0.087702, PPL yy: 927.365244, Acc yy: 0.068656 , Tokens per Sec: 6376.543578
+Epoch Step: 1251 lr: 0.000280, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 569.899709, Acc xy: 0.079576, PPL xx: 628.175173, Acc xx: 0.083292, PPL yy: 961.002171, Acc yy: 0.071260 , Tokens per Sec: 6456.016130
+Epoch Step: 1301 lr: 0.000280, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 591.704613, Acc xy: 0.073809, PPL xx: 675.018800, Acc xx: 0.079158, PPL yy: 1012.326762, Acc yy: 0.071100 , Tokens per Sec: 6258.016122
+Epoch Step: 1351 lr: 0.000280, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 576.520155, Acc xy: 0.077955, PPL xx: 670.515450, Acc xx: 0.082436, PPL yy: 1019.262489, Acc yy: 0.067191 , Tokens per Sec: 6277.766426
+Epoch Step: 1401 lr: 0.000280, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 578.455677, Acc xy: 0.077758, PPL xx: 654.288637, Acc xx: 0.081618, PPL yy: 1008.867825, Acc yy: 0.066605 , Tokens per Sec: 6439.599803
+Epoch Step: 1451 lr: 0.000280, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 585.102318, Acc xy: 0.078048, PPL xx: 500.707795, Acc xx: 0.085312, PPL yy: 982.202258, Acc yy: 0.069136 , Tokens per Sec: 6688.907120
+Validation
+Val Result: PPL yx: 1.000000, Acc yx: 0.000000. PPL xy: 612.309696, Acc xy: 0.072974. PPL xx: 605.582186, Acc xx: 0.072845. PPL yy: 1186.142029, Acc yy: 0.054343
+
+Epoch: 4
+Training
+Epoch Step: 1 lr: 0.000280, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 547.206214, Acc xy: 0.072676, PPL xx: 796.321433, Acc xx: 0.081974, PPL yy: 937.696883, Acc yy: 0.066351 , Tokens per Sec: 24301.109188
+Epoch Step: 51 lr: 0.000279, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 591.702237, Acc xy: 0.070744, PPL xx: 608.648620, Acc xx: 0.083344, PPL yy: 974.606387, Acc yy: 0.073665 , Tokens per Sec: 6408.793059
+Epoch Step: 101 lr: 0.000279, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 600.875284, Acc xy: 0.065392, PPL xx: 632.221202, Acc xx: 0.076537, PPL yy: 954.649107, Acc yy: 0.069708 , Tokens per Sec: 6398.187627
+Epoch Step: 151 lr: 0.000279, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 614.613040, Acc xy: 0.061636, PPL xx: 800.880045, Acc xx: 0.072416, PPL yy: 1006.978216, Acc yy: 0.070339 , Tokens per Sec: 6241.105410
+Epoch Step: 201 lr: 0.000279, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 559.907230, Acc xy: 0.072506, PPL xx: 800.538526, Acc xx: 0.078144, PPL yy: 975.003706, Acc yy: 0.069106 , Tokens per Sec: 6125.072719
+Epoch Step: 251 lr: 0.000279, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 553.890933, Acc xy: 0.081336, PPL xx: 547.019429, Acc xx: 0.085659, PPL yy: 933.311456, Acc yy: 0.069054 , Tokens per Sec: 6544.572798
+Epoch Step: 301 lr: 0.000279, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 554.186356, Acc xy: 0.078264, PPL xx: 711.708477, Acc xx: 0.084503, PPL yy: 986.319029, Acc yy: 0.069512 , Tokens per Sec: 6348.878473
+Epoch Step: 351 lr: 0.000278, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 563.562183, Acc xy: 0.079009, PPL xx: 361.739864, Acc xx: 0.083689, PPL yy: 925.321614, Acc yy: 0.070218 , Tokens per Sec: 6606.806827
+Epoch Step: 401 lr: 0.000278, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 539.761582, Acc xy: 0.076702, PPL xx: 660.778211, Acc xx: 0.085571, PPL yy: 945.609821, Acc yy: 0.069818 , Tokens per Sec: 6484.296955
+Epoch Step: 451 lr: 0.000278, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 575.703803, Acc xy: 0.069541, PPL xx: 594.235649, Acc xx: 0.080986, PPL yy: 980.487555, Acc yy: 0.073858 , Tokens per Sec: 6458.127792
+Epoch Step: 501 lr: 0.000278, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 536.745829, Acc xy: 0.073984, PPL xx: 780.037351, Acc xx: 0.083753, PPL yy: 966.488334, Acc yy: 0.070921 , Tokens per Sec: 6371.934605
+Epoch Step: 551 lr: 0.000278, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 566.003451, Acc xy: 0.073751, PPL xx: 573.374770, Acc xx: 0.082558, PPL yy: 968.402971, Acc yy: 0.072422 , Tokens per Sec: 6445.408021
+Epoch Step: 601 lr: 0.000277, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 556.598991, Acc xy: 0.075534, PPL xx: 598.914488, Acc xx: 0.083499, PPL yy: 955.827094, Acc yy: 0.071513 , Tokens per Sec: 6418.684270
+Epoch Step: 651 lr: 0.000277, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 618.717621, Acc xy: 0.072010, PPL xx: 596.631078, Acc xx: 0.080311, PPL yy: 930.308563, Acc yy: 0.072945 , Tokens per Sec: 6449.440607
+Epoch Step: 701 lr: 0.000277, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 568.964815, Acc xy: 0.077447, PPL xx: 641.377718, Acc xx: 0.083322, PPL yy: 992.568267, Acc yy: 0.069983 , Tokens per Sec: 6416.563229
+Epoch Step: 751 lr: 0.000277, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 564.958797, Acc xy: 0.078530, PPL xx: 528.126257, Acc xx: 0.085185, PPL yy: 995.176947, Acc yy: 0.068806 , Tokens per Sec: 6460.901880
+Epoch Step: 801 lr: 0.000277, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 555.052143, Acc xy: 0.077552, PPL xx: 655.604769, Acc xx: 0.082282, PPL yy: 1001.262371, Acc yy: 0.069876 , Tokens per Sec: 6378.047422
+Epoch Step: 851 lr: 0.000277, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 585.722884, Acc xy: 0.077035, PPL xx: 630.288850, Acc xx: 0.079948, PPL yy: 1079.917547, Acc yy: 0.068655 , Tokens per Sec: 6408.130242
+Epoch Step: 901 lr: 0.000276, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 510.835819, Acc xy: 0.083275, PPL xx: 596.166484, Acc xx: 0.086604, PPL yy: 954.580161, Acc yy: 0.067739 , Tokens per Sec: 6523.868049
+Epoch Step: 951 lr: 0.000276, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 589.745625, Acc xy: 0.077396, PPL xx: 611.953124, Acc xx: 0.080164, PPL yy: 1024.140980, Acc yy: 0.066756 , Tokens per Sec: 6501.877124
+Epoch Step: 1001 lr: 0.000276, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 549.358958, Acc xy: 0.077773, PPL xx: 685.549150, Acc xx: 0.081293, PPL yy: 985.997393, Acc yy: 0.068263 , Tokens per Sec: 6363.333164
+Epoch Step: 1051 lr: 0.000276, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 529.678581, Acc xy: 0.083666, PPL xx: 557.867099, Acc xx: 0.084451, PPL yy: 985.511612, Acc yy: 0.067097 , Tokens per Sec: 6415.805339
+Epoch Step: 1101 lr: 0.000276, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 555.725255, Acc xy: 0.077260, PPL xx: 659.569602, Acc xx: 0.079942, PPL yy: 1031.478980, Acc yy: 0.069186 , Tokens per Sec: 6383.274720
+Epoch Step: 1151 lr: 0.000276, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 524.411937, Acc xy: 0.083437, PPL xx: 566.521103, Acc xx: 0.085001, PPL yy: 1018.915134, Acc yy: 0.063514 , Tokens per Sec: 6361.914630
+Epoch Step: 1201 lr: 0.000275, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 542.614582, Acc xy: 0.080076, PPL xx: 480.530502, Acc xx: 0.081836, PPL yy: 1018.300495, Acc yy: 0.064847 , Tokens per Sec: 6538.184038
+Epoch Step: 1251 lr: 0.000275, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 572.568364, Acc xy: 0.078340, PPL xx: 619.467082, Acc xx: 0.078510, PPL yy: 1061.203014, Acc yy: 0.066537 , Tokens per Sec: 6502.703332
+Epoch Step: 1301 lr: 0.000275, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 587.384495, Acc xy: 0.070738, PPL xx: 713.809070, Acc xx: 0.071211, PPL yy: 968.173880, Acc yy: 0.067556 , Tokens per Sec: 6308.034545
+Epoch Step: 1351 lr: 0.000275, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 585.771195, Acc xy: 0.074071, PPL xx: 636.327365, Acc xx: 0.076547, PPL yy: 967.629878, Acc yy: 0.069819 , Tokens per Sec: 6470.424132
+Epoch Step: 1401 lr: 0.000275, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 578.374350, Acc xy: 0.073701, PPL xx: 577.807857, Acc xx: 0.075119, PPL yy: 986.016475, Acc yy: 0.069942 , Tokens per Sec: 6532.164270
+Epoch Step: 1451 lr: 0.000275, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 562.802040, Acc xy: 0.076225, PPL xx: 500.735191, Acc xx: 0.080078, PPL yy: 973.594730, Acc yy: 0.069837 , Tokens per Sec: 6464.463115
+Validation
+Val Result: PPL yx: 1.000000, Acc yx: 0.000000. PPL xy: 600.359737, Acc xy: 0.068386. PPL xx: 578.044610, Acc xx: 0.071330. PPL yy: 991.861144, Acc yy: 0.065997
+
+Epoch: 5
+Training
+Epoch Step: 1 lr: 0.000274, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 546.612777, Acc xy: 0.067469, PPL xx: 837.683272, Acc xx: 0.078108, PPL yy: 959.801852, Acc yy: 0.064420 , Tokens per Sec: 23419.435808
+Epoch Step: 51 lr: 0.000274, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 513.726128, Acc xy: 0.075722, PPL xx: 689.845959, Acc xx: 0.081134, PPL yy: 920.635059, Acc yy: 0.070761 , Tokens per Sec: 6312.432231
+Epoch Step: 101 lr: 0.000274, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 529.426503, Acc xy: 0.078778, PPL xx: 596.129763, Acc xx: 0.084663, PPL yy: 939.546355, Acc yy: 0.070333 , Tokens per Sec: 6306.072160
+Epoch Step: 151 lr: 0.000274, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 575.197629, Acc xy: 0.074151, PPL xx: 655.069051, Acc xx: 0.080070, PPL yy: 1001.025519, Acc yy: 0.072068 , Tokens per Sec: 6363.715508
+Epoch Step: 201 lr: 0.000274, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 523.746484, Acc xy: 0.082212, PPL xx: 649.373369, Acc xx: 0.084306, PPL yy: 943.780059, Acc yy: 0.070321 , Tokens per Sec: 6302.581728
+Epoch Step: 251 lr: 0.000274, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 546.278482, Acc xy: 0.079581, PPL xx: 562.817964, Acc xx: 0.081969, PPL yy: 958.470422, Acc yy: 0.073076 , Tokens per Sec: 6486.854049
+Epoch Step: 301 lr: 0.000273, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 510.359471, Acc xy: 0.083359, PPL xx: 641.324469, Acc xx: 0.086480, PPL yy: 935.558716, Acc yy: 0.068246 , Tokens per Sec: 6203.143588
+Epoch Step: 351 lr: 0.000273, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 524.852153, Acc xy: 0.083281, PPL xx: 547.206070, Acc xx: 0.086666, PPL yy: 944.176159, Acc yy: 0.070317 , Tokens per Sec: 6550.048660
+Epoch Step: 401 lr: 0.000273, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 577.944693, Acc xy: 0.077266, PPL xx: 579.070627, Acc xx: 0.079413, PPL yy: 1006.598570, Acc yy: 0.071758 , Tokens per Sec: 6286.535791
+Epoch Step: 451 lr: 0.000273, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 571.198367, Acc xy: 0.076610, PPL xx: 552.605659, Acc xx: 0.080288, PPL yy: 992.278758, Acc yy: 0.071522 , Tokens per Sec: 6528.925554
+Epoch Step: 501 lr: 0.000273, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 560.559805, Acc xy: 0.079852, PPL xx: 646.301974, Acc xx: 0.082432, PPL yy: 1005.279581, Acc yy: 0.070936 , Tokens per Sec: 6293.091440
+Epoch Step: 551 lr: 0.000273, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 563.064287, Acc xy: 0.077136, PPL xx: 573.656058, Acc xx: 0.080089, PPL yy: 999.235911, Acc yy: 0.067756 , Tokens per Sec: 6528.505702
+Epoch Step: 601 lr: 0.000272, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 578.040850, Acc xy: 0.081370, PPL xx: 469.020132, Acc xx: 0.083351, PPL yy: 992.625576, Acc yy: 0.073437 , Tokens per Sec: 6710.384458
+Epoch Step: 651 lr: 0.000272, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 508.370114, Acc xy: 0.082524, PPL xx: 619.746358, Acc xx: 0.087776, PPL yy: 889.193406, Acc yy: 0.074759 , Tokens per Sec: 6581.522969
+Epoch Step: 701 lr: 0.000272, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 547.528529, Acc xy: 0.077608, PPL xx: 706.091983, Acc xx: 0.082124, PPL yy: 967.697155, Acc yy: 0.073499 , Tokens per Sec: 6404.383930
+Epoch Step: 751 lr: 0.000272, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 604.239829, Acc xy: 0.072765, PPL xx: 550.703979, Acc xx: 0.079172, PPL yy: 997.216465, Acc yy: 0.073414 , Tokens per Sec: 6660.552520
+Epoch Step: 801 lr: 0.000272, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 555.457630, Acc xy: 0.079239, PPL xx: 704.034294, Acc xx: 0.082720, PPL yy: 993.790329, Acc yy: 0.073423 , Tokens per Sec: 6270.911513
+Epoch Step: 851 lr: 0.000272, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 520.632275, Acc xy: 0.087505, PPL xx: 636.338674, Acc xx: 0.088991, PPL yy: 968.490264, Acc yy: 0.069797 , Tokens per Sec: 6176.387186
+Epoch Step: 901 lr: 0.000271, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 524.639097, Acc xy: 0.090621, PPL xx: 516.532628, Acc xx: 0.090300, PPL yy: 980.431482, Acc yy: 0.070224 , Tokens per Sec: 6462.908357
+Epoch Step: 951 lr: 0.000271, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 528.454056, Acc xy: 0.090801, PPL xx: 638.986899, Acc xx: 0.091894, PPL yy: 997.775183, Acc yy: 0.069097 , Tokens per Sec: 6364.047901
+Epoch Step: 1001 lr: 0.000271, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 556.478242, Acc xy: 0.091691, PPL xx: 550.798241, Acc xx: 0.090227, PPL yy: 1059.968189, Acc yy: 0.069734 , Tokens per Sec: 6083.036315
+Epoch Step: 1051 lr: 0.000271, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 534.869886, Acc xy: 0.096130, PPL xx: 546.098846, Acc xx: 0.098466, PPL yy: 1004.729878, Acc yy: 0.071347 , Tokens per Sec: 6380.885692
+Epoch Step: 1101 lr: 0.000271, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 521.759689, Acc xy: 0.098777, PPL xx: 542.273974, Acc xx: 0.098798, PPL yy: 972.083306, Acc yy: 0.073072 , Tokens per Sec: 6469.989685
+Epoch Step: 1151 lr: 0.000270, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 540.117253, Acc xy: 0.097077, PPL xx: 569.649118, Acc xx: 0.099113, PPL yy: 962.520403, Acc yy: 0.075284 , Tokens per Sec: 6503.480078
+Epoch Step: 1201 lr: 0.000270, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 522.402124, Acc xy: 0.093458, PPL xx: 635.163286, Acc xx: 0.097621, PPL yy: 969.767093, Acc yy: 0.075539 , Tokens per Sec: 6357.769695
+Epoch Step: 1251 lr: 0.000270, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 535.853408, Acc xy: 0.095350, PPL xx: 575.882976, Acc xx: 0.097569, PPL yy: 961.338719, Acc yy: 0.074225 , Tokens per Sec: 6480.774237
+Epoch Step: 1301 lr: 0.000270, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 558.809728, Acc xy: 0.093414, PPL xx: 656.557746, Acc xx: 0.094778, PPL yy: 1029.309810, Acc yy: 0.074941 , Tokens per Sec: 6255.492342
+Epoch Step: 1351 lr: 0.000270, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 466.242803, Acc xy: 0.110818, PPL xx: 612.099774, Acc xx: 0.110811, PPL yy: 946.878538, Acc yy: 0.070876 , Tokens per Sec: 6222.769909
+Epoch Step: 1401 lr: 0.000270, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 516.669996, Acc xy: 0.101926, PPL xx: 684.296134, Acc xx: 0.100877, PPL yy: 1015.733668, Acc yy: 0.069526 , Tokens per Sec: 6215.173386
+Epoch Step: 1451 lr: 0.000269, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 573.039199, Acc xy: 0.095868, PPL xx: 512.411509, Acc xx: 0.095560, PPL yy: 1049.382548, Acc yy: 0.073808 , Tokens per Sec: 6563.526584
+Validation
+Val Result: PPL yx: 1.000000, Acc yx: 0.000000. PPL xy: 588.113739, Acc xy: 0.094572. PPL xx: 544.025267, Acc xx: 0.099766. PPL yy: 1026.627905, Acc yy: 0.072152
+
+Epoch: 6
+Training
+Epoch Step: 1 lr: 0.000269, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 591.767512, Acc xy: 0.093630, PPL xx: 587.370267, Acc xx: 0.098620, PPL yy: 1001.195817, Acc yy: 0.075291 , Tokens per Sec: 25677.079412
+Epoch Step: 51 lr: 0.000269, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 633.861122, Acc xy: 0.071298, PPL xx: 573.327105, Acc xx: 0.094775, PPL yy: 988.876649, Acc yy: 0.075116 , Tokens per Sec: 6318.772232
+Epoch Step: 101 lr: 0.000269, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 618.679820, Acc xy: 0.064669, PPL xx: 560.749493, Acc xx: 0.094816, PPL yy: 959.801242, Acc yy: 0.074823 , Tokens per Sec: 6427.846107
+Epoch Step: 151 lr: 0.000269, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 608.188907, Acc xy: 0.068255, PPL xx: 488.598721, Acc xx: 0.093724, PPL yy: 958.569253, Acc yy: 0.076343 , Tokens per Sec: 6290.221136
+Epoch Step: 201 lr: 0.000269, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 597.361894, Acc xy: 0.065705, PPL xx: 541.883713, Acc xx: 0.093938, PPL yy: 955.298386, Acc yy: 0.074859 , Tokens per Sec: 6246.690340
+Epoch Step: 251 lr: 0.000268, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 552.300545, Acc xy: 0.090105, PPL xx: 594.408488, Acc xx: 0.093966, PPL yy: 1024.565404, Acc yy: 0.069883 , Tokens per Sec: 6479.911653
+Epoch Step: 301 lr: 0.000268, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 505.871495, Acc xy: 0.102923, PPL xx: 463.748290, Acc xx: 0.105784, PPL yy: 956.184133, Acc yy: 0.074330 , Tokens per Sec: 6408.573408
+Epoch Step: 351 lr: 0.000268, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 570.324048, Acc xy: 0.088126, PPL xx: 644.952194, Acc xx: 0.092828, PPL yy: 1059.322136, Acc yy: 0.072824 , Tokens per Sec: 6231.453484
+Epoch Step: 401 lr: 0.000268, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 580.718868, Acc xy: 0.088630, PPL xx: 684.976912, Acc xx: 0.089901, PPL yy: 1096.821461, Acc yy: 0.072055 , Tokens per Sec: 6276.727341
+Epoch Step: 451 lr: 0.000268, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 513.812055, Acc xy: 0.096543, PPL xx: 519.670813, Acc xx: 0.104015, PPL yy: 951.074666, Acc yy: 0.073989 , Tokens per Sec: 6314.736202
+Epoch Step: 501 lr: 0.000268, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 540.729609, Acc xy: 0.085441, PPL xx: 661.232943, Acc xx: 0.088883, PPL yy: 977.573556, Acc yy: 0.073726 , Tokens per Sec: 6181.314266
+Epoch Step: 551 lr: 0.000267, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 538.825454, Acc xy: 0.090702, PPL xx: 596.820120, Acc xx: 0.090496, PPL yy: 984.055836, Acc yy: 0.071980 , Tokens per Sec: 6100.692833
+Epoch Step: 601 lr: 0.000267, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 529.858173, Acc xy: 0.094119, PPL xx: 550.854868, Acc xx: 0.100001, PPL yy: 926.195823, Acc yy: 0.074562 , Tokens per Sec: 6176.800159
+Epoch Step: 651 lr: 0.000267, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 535.056700, Acc xy: 0.087989, PPL xx: 617.662377, Acc xx: 0.100353, PPL yy: 944.392127, Acc yy: 0.071605 , Tokens per Sec: 6365.711041
+Epoch Step: 701 lr: 0.000267, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 512.942390, Acc xy: 0.096076, PPL xx: 491.300803, Acc xx: 0.106973, PPL yy: 886.318758, Acc yy: 0.072991 , Tokens per Sec: 6487.604270
+Epoch Step: 751 lr: 0.000267, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 479.021074, Acc xy: 0.105577, PPL xx: 584.621117, Acc xx: 0.107610, PPL yy: 903.615530, Acc yy: 0.073444 , Tokens per Sec: 6444.539300
+Epoch Step: 801 lr: 0.000267, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 505.750777, Acc xy: 0.104425, PPL xx: 563.918106, Acc xx: 0.103746, PPL yy: 966.696358, Acc yy: 0.071777 , Tokens per Sec: 6544.230247
+Epoch Step: 851 lr: 0.000266, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 536.875684, Acc xy: 0.090104, PPL xx: 638.171091, Acc xx: 0.095612, PPL yy: 985.329527, Acc yy: 0.071519 , Tokens per Sec: 6277.308213
+Epoch Step: 901 lr: 0.000266, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 508.056766, Acc xy: 0.100500, PPL xx: 560.606856, Acc xx: 0.099792, PPL yy: 975.803535, Acc yy: 0.070677 , Tokens per Sec: 6212.213806
+Epoch Step: 951 lr: 0.000266, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 494.892496, Acc xy: 0.102308, PPL xx: 535.455647, Acc xx: 0.101413, PPL yy: 924.485833, Acc yy: 0.072823 , Tokens per Sec: 6320.740854
+Epoch Step: 1001 lr: 0.000266, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 532.982194, Acc xy: 0.091679, PPL xx: 685.356377, Acc xx: 0.093374, PPL yy: 1017.467762, Acc yy: 0.070124 , Tokens per Sec: 6224.256587
+Epoch Step: 1051 lr: 0.000266, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 495.840804, Acc xy: 0.095765, PPL xx: 655.852251, Acc xx: 0.095995, PPL yy: 956.691337, Acc yy: 0.070489 , Tokens per Sec: 6276.454965
+Epoch Step: 1101 lr: 0.000266, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 559.491549, Acc xy: 0.088801, PPL xx: 667.967533, Acc xx: 0.087142, PPL yy: 1037.802877, Acc yy: 0.071027 , Tokens per Sec: 6070.150940
+Epoch Step: 1151 lr: 0.000265, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 534.408108, Acc xy: 0.093416, PPL xx: 654.152258, Acc xx: 0.091323, PPL yy: 1010.627702, Acc yy: 0.070790 , Tokens per Sec: 6307.863651
+Epoch Step: 1201 lr: 0.000265, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 490.751433, Acc xy: 0.103712, PPL xx: 584.566534, Acc xx: 0.104175, PPL yy: 928.516675, Acc yy: 0.071541 , Tokens per Sec: 6461.147946
+Epoch Step: 1251 lr: 0.000265, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 504.971713, Acc xy: 0.102594, PPL xx: 602.449219, Acc xx: 0.102565, PPL yy: 954.548742, Acc yy: 0.073678 , Tokens per Sec: 6101.137283
+Epoch Step: 1301 lr: 0.000265, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 541.336031, Acc xy: 0.095815, PPL xx: 514.644219, Acc xx: 0.098438, PPL yy: 980.993901, Acc yy: 0.072660 , Tokens per Sec: 6304.051598
+Epoch Step: 1351 lr: 0.000265, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 545.575564, Acc xy: 0.093096, PPL xx: 589.285031, Acc xx: 0.095657, PPL yy: 992.401337, Acc yy: 0.071488 , Tokens per Sec: 6377.973633
+Epoch Step: 1401 lr: 0.000264, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 512.290192, Acc xy: 0.102446, PPL xx: 503.076063, Acc xx: 0.105983, PPL yy: 919.453000, Acc yy: 0.074090 , Tokens per Sec: 6337.434625
+Epoch Step: 1451 lr: 0.000264, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 569.849125, Acc xy: 0.092929, PPL xx: 527.421865, Acc xx: 0.096785, PPL yy: 1024.171737, Acc yy: 0.072443 , Tokens per Sec: 6414.729844
+Validation
+Val Result: PPL yx: 1.000000, Acc yx: 0.000000. PPL xy: 641.371684, Acc xy: 0.092884. PPL xx: 542.741160, Acc xx: 0.102104. PPL yy: 1096.507088, Acc yy: 0.050938
+
+Epoch: 7
+Training
+Epoch Step: 1 lr: 0.000264, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 590.478473, Acc xy: 0.076202, PPL xx: 748.124438, Acc xx: 0.103321, PPL yy: 866.746295, Acc yy: 0.081197 , Tokens per Sec: 22797.690128
+Epoch Step: 51 lr: 0.000264, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 586.529018, Acc xy: 0.084398, PPL xx: 519.680283, Acc xx: 0.100902, PPL yy: 940.905443, Acc yy: 0.073914 , Tokens per Sec: 6206.292087
+Epoch Step: 101 lr: 0.000264, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 594.895601, Acc xy: 0.086093, PPL xx: 589.356380, Acc xx: 0.094080, PPL yy: 994.633663, Acc yy: 0.073032 , Tokens per Sec: 6252.801987
+Epoch Step: 151 lr: 0.000264, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 556.181829, Acc xy: 0.090847, PPL xx: 654.564490, Acc xx: 0.103007, PPL yy: 918.101662, Acc yy: 0.077513 , Tokens per Sec: 5998.706061
+Epoch Step: 201 lr: 0.000264, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 623.058402, Acc xy: 0.080217, PPL xx: 668.609069, Acc xx: 0.092060, PPL yy: 1033.023013, Acc yy: 0.075235 , Tokens per Sec: 5993.562674
+Epoch Step: 251 lr: 0.000263, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 576.597801, Acc xy: 0.089121, PPL xx: 554.595497, Acc xx: 0.096642, PPL yy: 984.404686, Acc yy: 0.077343 , Tokens per Sec: 6142.523455
+Epoch Step: 301 lr: 0.000263, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 497.258022, Acc xy: 0.104846, PPL xx: 583.109143, Acc xx: 0.105155, PPL yy: 923.418953, Acc yy: 0.077118 , Tokens per Sec: 6280.595241
+Epoch Step: 351 lr: 0.000263, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 533.756611, Acc xy: 0.099502, PPL xx: 591.903424, Acc xx: 0.101808, PPL yy: 991.803746, Acc yy: 0.074549 , Tokens per Sec: 6360.182807
+Epoch Step: 401 lr: 0.000263, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 537.998157, Acc xy: 0.099615, PPL xx: 511.608023, Acc xx: 0.101454, PPL yy: 992.975554, Acc yy: 0.075068 , Tokens per Sec: 6399.212651
+Epoch Step: 451 lr: 0.000263, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 521.672557, Acc xy: 0.103577, PPL xx: 573.014660, Acc xx: 0.105151, PPL yy: 970.891125, Acc yy: 0.074712 , Tokens per Sec: 6150.761670
+Epoch Step: 501 lr: 0.000263, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 513.347375, Acc xy: 0.103222, PPL xx: 575.122909, Acc xx: 0.105657, PPL yy: 947.924385, Acc yy: 0.073883 , Tokens per Sec: 6198.189956
+Epoch Step: 551 lr: 0.000262, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 508.433028, Acc xy: 0.109822, PPL xx: 438.496861, Acc xx: 0.112824, PPL yy: 898.956406, Acc yy: 0.079009 , Tokens per Sec: 6556.719128
+Epoch Step: 601 lr: 0.000262, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 548.459514, Acc xy: 0.098768, PPL xx: 563.574760, Acc xx: 0.101698, PPL yy: 999.340939, Acc yy: 0.076345 , Tokens per Sec: 6204.452098
+Epoch Step: 651 lr: 0.000262, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 489.801899, Acc xy: 0.107117, PPL xx: 558.051903, Acc xx: 0.107567, PPL yy: 942.782519, Acc yy: 0.076179 , Tokens per Sec: 6392.892715
+Epoch Step: 701 lr: 0.000262, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 468.804704, Acc xy: 0.108964, PPL xx: 634.554874, Acc xx: 0.110649, PPL yy: 943.031902, Acc yy: 0.075397 , Tokens per Sec: 6174.653580
+Epoch Step: 751 lr: 0.000262, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 520.737661, Acc xy: 0.106683, PPL xx: 487.038253, Acc xx: 0.110093, PPL yy: 1001.184276, Acc yy: 0.076032 , Tokens per Sec: 6331.088282
+Epoch Step: 801 lr: 0.000261, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 546.754295, Acc xy: 0.099037, PPL xx: 574.718060, Acc xx: 0.102779, PPL yy: 1065.899565, Acc yy: 0.074788 , Tokens per Sec: 6261.782835
+Epoch Step: 851 lr: 0.000261, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 508.845877, Acc xy: 0.104293, PPL xx: 553.506528, Acc xx: 0.106524, PPL yy: 992.597088, Acc yy: 0.074769 , Tokens per Sec: 5891.424762
+Epoch Step: 901 lr: 0.000261, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 524.344532, Acc xy: 0.098212, PPL xx: 519.311957, Acc xx: 0.108797, PPL yy: 934.177741, Acc yy: 0.077019 , Tokens per Sec: 6056.445843
+Epoch Step: 951 lr: 0.000261, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 524.502099, Acc xy: 0.095670, PPL xx: 746.608568, Acc xx: 0.102038, PPL yy: 980.814074, Acc yy: 0.075726 , Tokens per Sec: 5405.681482
+Epoch Step: 1001 lr: 0.000261, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 554.073746, Acc xy: 0.095625, PPL xx: 588.264051, Acc xx: 0.100641, PPL yy: 973.519549, Acc yy: 0.077072 , Tokens per Sec: 6104.387256
+Epoch Step: 1051 lr: 0.000261, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 574.664157, Acc xy: 0.093473, PPL xx: 471.016842, Acc xx: 0.097591, PPL yy: 956.422166, Acc yy: 0.074137 , Tokens per Sec: 6353.916472
+Epoch Step: 1101 lr: 0.000260, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 576.266567, Acc xy: 0.090813, PPL xx: 622.759903, Acc xx: 0.098037, PPL yy: 970.633705, Acc yy: 0.075960 , Tokens per Sec: 6067.709856
+Epoch Step: 1151 lr: 0.000260, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 534.781594, Acc xy: 0.099321, PPL xx: 586.370182, Acc xx: 0.106158, PPL yy: 947.475606, Acc yy: 0.075814 , Tokens per Sec: 6182.221922
+Epoch Step: 1201 lr: 0.000260, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 528.530341, Acc xy: 0.097674, PPL xx: 625.045680, Acc xx: 0.100850, PPL yy: 953.066901, Acc yy: 0.073497 , Tokens per Sec: 6078.316245
+Epoch Step: 1251 lr: 0.000260, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 558.280959, Acc xy: 0.094935, PPL xx: 530.916272, Acc xx: 0.102224, PPL yy: 981.611966, Acc yy: 0.075180 , Tokens per Sec: 6195.611810
+Epoch Step: 1301 lr: 0.000260, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 548.768569, Acc xy: 0.090396, PPL xx: 696.630463, Acc xx: 0.096754, PPL yy: 955.172289, Acc yy: 0.076278 , Tokens per Sec: 6016.793673
+Epoch Step: 1351 lr: 0.000260, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 553.207332, Acc xy: 0.091818, PPL xx: 537.495727, Acc xx: 0.099476, PPL yy: 913.301848, Acc yy: 0.075350 , Tokens per Sec: 6167.812113
+Epoch Step: 1401 lr: 0.000259, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 529.401660, Acc xy: 0.085479, PPL xx: 613.555959, Acc xx: 0.098720, PPL yy: 837.382755, Acc yy: 0.077790 , Tokens per Sec: 6136.315049
+Epoch Step: 1451 lr: 0.000259, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 516.082145, Acc xy: 0.092785, PPL xx: 647.019438, Acc xx: 0.095360, PPL yy: 879.399938, Acc yy: 0.076993 , Tokens per Sec: 6039.674507
+Validation
+Val Result: PPL yx: 1.000000, Acc yx: 0.000000. PPL xy: 530.657364, Acc xy: 0.102753. PPL xx: 533.054029, Acc xx: 0.103662. PPL yy: 946.171428, Acc yy: 0.073636
+
+Epoch: 8
+Training
+Epoch Step: 1 lr: 0.000259, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 488.153181, Acc xy: 0.100915, PPL xx: 577.010019, Acc xx: 0.100669, PPL yy: 897.279924, Acc yy: 0.073911 , Tokens per Sec: 23954.510326
+Epoch Step: 51 lr: 0.000259, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 478.600139, Acc xy: 0.100402, PPL xx: 595.351643, Acc xx: 0.103813, PPL yy: 842.203603, Acc yy: 0.076678 , Tokens per Sec: 6063.740576
+Epoch Step: 101 lr: 0.000259, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 553.856086, Acc xy: 0.092837, PPL xx: 590.607907, Acc xx: 0.094695, PPL yy: 989.276097, Acc yy: 0.074082 , Tokens per Sec: 6216.408015
+Epoch Step: 151 lr: 0.000259, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 496.821556, Acc xy: 0.098798, PPL xx: 600.340535, Acc xx: 0.099929, PPL yy: 895.796198, Acc yy: 0.074694 , Tokens per Sec: 6165.908574
+Epoch Step: 201 lr: 0.000258, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 522.214465, Acc xy: 0.093291, PPL xx: 523.546082, Acc xx: 0.094772, PPL yy: 928.236676, Acc yy: 0.074321 , Tokens per Sec: 6220.400331
+Epoch Step: 251 lr: 0.000258, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 510.762624, Acc xy: 0.094647, PPL xx: 587.093595, Acc xx: 0.096998, PPL yy: 929.964273, Acc yy: 0.073883 , Tokens per Sec: 6033.236003
+Epoch Step: 301 lr: 0.000258, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 510.985760, Acc xy: 0.097510, PPL xx: 625.472477, Acc xx: 0.098987, PPL yy: 929.861980, Acc yy: 0.073923 , Tokens per Sec: 6077.158447
+Epoch Step: 351 lr: 0.000258, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 539.765474, Acc xy: 0.097131, PPL xx: 615.811612, Acc xx: 0.098018, PPL yy: 950.422479, Acc yy: 0.074819 , Tokens per Sec: 6223.771792
+Epoch Step: 401 lr: 0.000258, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 490.425297, Acc xy: 0.106526, PPL xx: 512.669974, Acc xx: 0.109269, PPL yy: 884.654306, Acc yy: 0.075756 , Tokens per Sec: 6174.629951
+Epoch Step: 451 lr: 0.000258, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 518.185651, Acc xy: 0.098060, PPL xx: 699.484434, Acc xx: 0.100480, PPL yy: 962.081927, Acc yy: 0.073424 , Tokens per Sec: 5898.689738
+Epoch Step: 501 lr: 0.000257, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 544.784944, Acc xy: 0.093271, PPL xx: 589.278439, Acc xx: 0.095254, PPL yy: 974.339332, Acc yy: 0.074509 , Tokens per Sec: 6132.969017
+Epoch Step: 551 lr: 0.000257, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 517.342651, Acc xy: 0.095292, PPL xx: 687.905356, Acc xx: 0.097004, PPL yy: 971.791517, Acc yy: 0.074057 , Tokens per Sec: 5966.952113
+Epoch Step: 601 lr: 0.000257, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 548.353647, Acc xy: 0.091286, PPL xx: 544.642447, Acc xx: 0.092392, PPL yy: 960.122188, Acc yy: 0.074766 , Tokens per Sec: 6051.978590
+Epoch Step: 651 lr: 0.000257, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 521.660430, Acc xy: 0.094261, PPL xx: 586.165350, Acc xx: 0.094784, PPL yy: 935.535176, Acc yy: 0.075908 , Tokens per Sec: 6063.991084
+Epoch Step: 701 lr: 0.000257, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 528.592032, Acc xy: 0.095900, PPL xx: 573.110859, Acc xx: 0.097312, PPL yy: 964.928221, Acc yy: 0.073707 , Tokens per Sec: 6241.443629
+Epoch Step: 751 lr: 0.000257, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 535.284679, Acc xy: 0.096685, PPL xx: 632.525424, Acc xx: 0.097115, PPL yy: 962.010967, Acc yy: 0.073553 , Tokens per Sec: 6312.938347
+Epoch Step: 801 lr: 0.000256, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 555.456488, Acc xy: 0.095622, PPL xx: 609.647394, Acc xx: 0.091061, PPL yy: 961.876017, Acc yy: 0.073216 , Tokens per Sec: 6301.388383
+Epoch Step: 851 lr: 0.000256, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 520.973211, Acc xy: 0.098946, PPL xx: 506.100020, Acc xx: 0.100457, PPL yy: 911.699829, Acc yy: 0.076385 , Tokens per Sec: 6158.281581
+Epoch Step: 901 lr: 0.000256, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 518.896150, Acc xy: 0.101448, PPL xx: 477.139399, Acc xx: 0.102959, PPL yy: 906.110214, Acc yy: 0.076449 , Tokens per Sec: 6496.433692
+Epoch Step: 951 lr: 0.000256, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 533.409490, Acc xy: 0.096917, PPL xx: 485.865410, Acc xx: 0.100765, PPL yy: 929.718277, Acc yy: 0.073802 , Tokens per Sec: 6168.949231
+Epoch Step: 1001 lr: 0.000256, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 591.450780, Acc xy: 0.090152, PPL xx: 619.795498, Acc xx: 0.095005, PPL yy: 1064.128381, Acc yy: 0.071905 , Tokens per Sec: 6245.825418
+Epoch Step: 1051 lr: 0.000256, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 529.486093, Acc xy: 0.095729, PPL xx: 651.811620, Acc xx: 0.102820, PPL yy: 949.592636, Acc yy: 0.070018 , Tokens per Sec: 6152.357963
+Epoch Step: 1101 lr: 0.000255, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 545.769643, Acc xy: 0.096730, PPL xx: 550.911174, Acc xx: 0.101431, PPL yy: 981.032130, Acc yy: 0.073794 , Tokens per Sec: 6213.464941
+Epoch Step: 1151 lr: 0.000255, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 508.033315, Acc xy: 0.101148, PPL xx: 560.358127, Acc xx: 0.103630, PPL yy: 950.472507, Acc yy: 0.074758 , Tokens per Sec: 6097.175935
+Epoch Step: 1201 lr: 0.000255, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 485.564560, Acc xy: 0.106258, PPL xx: 561.139577, Acc xx: 0.109721, PPL yy: 907.594725, Acc yy: 0.074111 , Tokens per Sec: 6118.126837
+Epoch Step: 1251 lr: 0.000255, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 469.580289, Acc xy: 0.110311, PPL xx: 521.125150, Acc xx: 0.115567, PPL yy: 860.544478, Acc yy: 0.076290 , Tokens per Sec: 6186.710014
+Epoch Step: 1301 lr: 0.000255, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 465.774712, Acc xy: 0.115072, PPL xx: 554.570204, Acc xx: 0.119822, PPL yy: 861.717110, Acc yy: 0.077338 , Tokens per Sec: 6073.258026
+Epoch Step: 1351 lr: 0.000254, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 537.410559, Acc xy: 0.099225, PPL xx: 564.339286, Acc xx: 0.101332, PPL yy: 990.146953, Acc yy: 0.073190 , Tokens per Sec: 6094.320637
+Epoch Step: 1401 lr: 0.000254, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 505.033861, Acc xy: 0.106128, PPL xx: 496.503063, Acc xx: 0.114520, PPL yy: 914.060661, Acc yy: 0.072912 , Tokens per Sec: 6430.270014
+Epoch Step: 1451 lr: 0.000254, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 538.368988, Acc xy: 0.096240, PPL xx: 577.204462, Acc xx: 0.101023, PPL yy: 1033.467599, Acc yy: 0.070382 , Tokens per Sec: 6078.565882
+Validation
+Val Result: PPL yx: 1.000000, Acc yx: 0.000000. PPL xy: 524.266025, Acc xy: 0.104398. PPL xx: 518.061841, Acc xx: 0.106302. PPL yy: 973.098328, Acc yy: 0.066434
+
+Epoch: 9
+Training
+Epoch Step: 1 lr: 0.000254, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 534.796935, Acc xy: 0.097715, PPL xx: 705.572806, Acc xx: 0.096341, PPL yy: 1073.141277, Acc yy: 0.065289 , Tokens per Sec: 22131.934710
+Epoch Step: 51 lr: 0.000254, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 485.240108, Acc xy: 0.110557, PPL xx: 464.535290, Acc xx: 0.110226, PPL yy: 897.786185, Acc yy: 0.070079 , Tokens per Sec: 6248.977441
+Epoch Step: 101 lr: 0.000254, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 529.612905, Acc xy: 0.099208, PPL xx: 561.662050, Acc xx: 0.103952, PPL yy: 934.346215, Acc yy: 0.069938 , Tokens per Sec: 6395.655799
+Epoch Step: 151 lr: 0.000254, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 508.621987, Acc xy: 0.102763, PPL xx: 508.919807, Acc xx: 0.109573, PPL yy: 894.039582, Acc yy: 0.073707 , Tokens per Sec: 6272.644861
+Epoch Step: 201 lr: 0.000253, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 544.085332, Acc xy: 0.097876, PPL xx: 516.409321, Acc xx: 0.102898, PPL yy: 962.243658, Acc yy: 0.071212 , Tokens per Sec: 6353.131804
+Epoch Step: 251 lr: 0.000253, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 556.054174, Acc xy: 0.093358, PPL xx: 503.885607, Acc xx: 0.099732, PPL yy: 991.936221, Acc yy: 0.071787 , Tokens per Sec: 6379.300264
+Epoch Step: 301 lr: 0.000253, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 554.383085, Acc xy: 0.093524, PPL xx: 549.696835, Acc xx: 0.096703, PPL yy: 994.544865, Acc yy: 0.074286 , Tokens per Sec: 6206.999533
+Epoch Step: 351 lr: 0.000253, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 483.315500, Acc xy: 0.106120, PPL xx: 565.999761, Acc xx: 0.104980, PPL yy: 872.090946, Acc yy: 0.076445 , Tokens per Sec: 6157.381187
+Epoch Step: 401 lr: 0.000253, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 492.346576, Acc xy: 0.103546, PPL xx: 552.851538, Acc xx: 0.103457, PPL yy: 919.798250, Acc yy: 0.072170 , Tokens per Sec: 6294.581011
+Epoch Step: 451 lr: 0.000252, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 523.813293, Acc xy: 0.097680, PPL xx: 578.896538, Acc xx: 0.097012, PPL yy: 970.917578, Acc yy: 0.072257 , Tokens per Sec: 6393.024020
+Epoch Step: 501 lr: 0.000252, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 511.225563, Acc xy: 0.098077, PPL xx: 534.421233, Acc xx: 0.097029, PPL yy: 968.061966, Acc yy: 0.072105 , Tokens per Sec: 6056.269475
+Epoch Step: 551 lr: 0.000252, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 471.495801, Acc xy: 0.106990, PPL xx: 580.863664, Acc xx: 0.108900, PPL yy: 874.856541, Acc yy: 0.075715 , Tokens per Sec: 6119.382543
+Epoch Step: 601 lr: 0.000252, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 483.765241, Acc xy: 0.105579, PPL xx: 662.016960, Acc xx: 0.103515, PPL yy: 899.387202, Acc yy: 0.077451 , Tokens per Sec: 6006.178746
+Epoch Step: 651 lr: 0.000252, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 565.814961, Acc xy: 0.094643, PPL xx: 613.712711, Acc xx: 0.094048, PPL yy: 1064.517389, Acc yy: 0.075496 , Tokens per Sec: 6042.247682
+Epoch Step: 701 lr: 0.000252, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 505.760940, Acc xy: 0.097345, PPL xx: 623.000966, Acc xx: 0.097892, PPL yy: 984.952013, Acc yy: 0.071752 , Tokens per Sec: 6193.552022
+Epoch Step: 751 lr: 0.000251, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 495.945303, Acc xy: 0.101861, PPL xx: 690.875151, Acc xx: 0.103350, PPL yy: 940.951604, Acc yy: 0.071264 , Tokens per Sec: 5889.837621
+Epoch Step: 801 lr: 0.000251, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 478.927495, Acc xy: 0.107423, PPL xx: 559.432030, Acc xx: 0.107780, PPL yy: 906.094444, Acc yy: 0.074964 , Tokens per Sec: 6131.262031
+Epoch Step: 851 lr: 0.000251, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 537.292897, Acc xy: 0.098287, PPL xx: 500.272441, Acc xx: 0.097656, PPL yy: 978.446231, Acc yy: 0.072933 , Tokens per Sec: 6119.887370
+Epoch Step: 901 lr: 0.000251, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 524.107974, Acc xy: 0.098751, PPL xx: 585.389283, Acc xx: 0.098216, PPL yy: 955.364499, Acc yy: 0.072770 , Tokens per Sec: 6245.254028
+Epoch Step: 951 lr: 0.000251, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 478.440809, Acc xy: 0.107261, PPL xx: 536.288260, Acc xx: 0.105715, PPL yy: 878.312867, Acc yy: 0.075870 , Tokens per Sec: 6100.783102
+Epoch Step: 1001 lr: 0.000251, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 535.411051, Acc xy: 0.099376, PPL xx: 531.077760, Acc xx: 0.102914, PPL yy: 980.533311, Acc yy: 0.073356 , Tokens per Sec: 6163.491866
+Epoch Step: 1051 lr: 0.000250, PPL yx: 1.000000, Acc yx: 0.000000, PPL xy: 505.288720, Acc xy: 0.100833, PPL xx: 553.402940, Acc xx: 0.103364, PPL yy: 972.659034, Acc yy: 0.070269 , Tokens per Sec: 6164.943471

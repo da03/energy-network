@@ -472,7 +472,7 @@ def main(opts):
                         val_total_correct_yxs[k1] += l_correct
                         val_total_nonpadding_yxs[k1] += l_nonpadding
                     loss_compute_gy.optimizer = optimizer
-            if opts.xy == 1:
+            if False and opts.xy == 1:
                 optimizer = loss_compute_gx.optimizer
                 loss_compute_gx.optimizer = None
                 with torch.cuda.device(0):
