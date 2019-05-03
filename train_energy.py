@@ -10,6 +10,7 @@ from data import *
 from model import *
 from loss import *
 from optimizer import *
+from optim_n2n import *
 
 PAD_WORD = '<blank>'
 UNK_WORD = '<unk>'
@@ -215,11 +216,12 @@ def main(opts):
         subsequent_mask = np.triu(np.ones(attn_shape), k=1).astype('uint8')
         return torch.from_numpy(subsequent_mask) == 0
     global_steps = 0
+
     for epoch in range(opts.epochs):
         print ('')
         print ('Epoch: %d' %epoch)
         print ('Training')
-        model.train()
+        model.eval()
         energy_network.train()
         start = time.time()
         for i, batch in enumerate(train_iter):
@@ -282,19 +284,36 @@ def main(opts):
                     for k1 in range(opts.unroll):
                         hy_init = hy_init_.data.clone()
                         hy_init.requires_grad = True
-                        for k2 in range(k1+1):
-                            energy = energy_network(hx_init.detach(), hy_init)
-                            hy_init_grad =  torch.autograd.grad(energy, hy_init)[0]
-                            hy_init = hy_init - opts.eta*hy_init_grad
+                        def loss_fn(input):
+                            hy = input[0]
+                            energy = energy_network(hx_init.detach(), hy)
+                            return energy
+                        
+                        update_params = list(energy_network.parameters())
+                        meta_optimizer = OptimN2N(loss_fn, update_params, eps = 1e-5, 
+                                                    lr = opts.eta,
+                                                    iters = k1+1, momentum = 0.5,
+                                                    acc_param_grads=True,  
+                                                    max_grad_norm = 5)
+                        hy = meta_optimizer.forward([hy_init])[0]
+                        #for k2 in range(k1+1):
+                        #    energy = energy_network(hx_init.detach(), hy_init)
+                        #    hy_init_grad =  torch.autograd.grad(energy, hy_init)[0]
+                        #    hy_init = hy_init - opts.eta*hy_init_grad
                         loss_compute_gy.wk = 1.0 / (opts.unroll-k1+1)
-                        decoder_output, _, _, _, _, _= model.decoder_gy(hy_init, trg_embeddings_in.detach(), src_mask, trg_mask_out_trunc)
+                        decoder_output, _, _, _, _, _= model.decoder_gy(hy, trg_embeddings_in.detach(), src_mask, trg_mask_out_trunc)
                         ntokens_trg = (trg_out != TRG.vocab.stoi["<blank>"]).data.view(-1).sum().item()
                         loss_compute_gy.pad = TRG.vocab.stoi["<blank>"]
                         loss_compute_gy.accum_grad = float('inf')
-                        if opts.xy == 0 and k1 == opts.unroll-1:
-                            loss_compute_gy.count_ = float('inf')
-                            loss_compute_gx.count_ = float('inf')
                         l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute_gy(decoder_output, trg_out, ntokens_trg, [], [], [], [])
+                        meta_optimizer.backward([hy.grad])
+                        if opts.xy == 0 and k1 == opts.unroll-1:
+                            optimizer.step()
+                            optimizer.zero_grad()
+                            #for p in energy_network.parameters():
+                                #import pdb; pdb.set_trace()
+                                #print('h')
+                        #import pdb; pdb.set_trace()
                     total_loss_yx += l
                     total_correct_yx += l_correct
                     total_nonpadding_yx += l_nonpadding
@@ -308,26 +327,46 @@ def main(opts):
                     for k1 in range(opts.unroll):
                         hx_init = hx_init_.data.clone()
                         hx_init.requires_grad = True
-                        for k2 in range(k1+1):
-                            energy = energy_network(hx_init, hy_init.detach())
-                            hx_init_grad =  torch.autograd.grad(energy, hx_init)[0]
-                            hx_init = hx_init - opts.eta*hx_init_grad
+                        def loss_fn(input):
+                            hx = input[0]
+                            energy = energy_network(hx, hy_init.detach())
+                            return energy
+                        
+                        update_params = list(energy_network.parameters())
+                        meta_optimizer = OptimN2N(loss_fn, update_params, eps = 1e-5, 
+                                                    lr = opts.eta,
+                                                    iters = k1+1, momentum = 0.5,
+                                                    acc_param_grads=True,  
+                                                    max_grad_norm = 5)
+                        hx = meta_optimizer.forward([hx_init])[0]
+                        #for k2 in range(k1+1):
+                        #    energy = energy_network(hx_init.detach(), hy_init)
+                        #    hy_init_grad =  torch.autograd.grad(energy, hy_init)[0]
+                        #    hy_init = hy_init - opts.eta*hy_init_grad
                         loss_compute_gx.wk = 1.0 / (opts.unroll-k1+1)
-                        decoder_output, _, _, _, _, _= model.decoder_gx(hx_init, src_embeddings_in.detach(), trg_mask, src_mask_out_trunc)
-                        ntokens_src = (src_out != TRG.vocab.stoi["<blank>"]).data.view(-1).sum().item()
-                        loss_compute_gx.pad = TRG.vocab.stoi["<blank>"]
+                        decoder_output, _, _, _, _, _= model.decoder_gx(hx, src_embeddings_in.detach(), trg_mask, src_mask_out_trunc)
+                        ntokens_src = (src_out != SRC.vocab.stoi["<blank>"]).data.view(-1).sum().item()
+                        loss_compute_gx.pad = SRC.vocab.stoi["<blank>"]
                         loss_compute_gx.accum_grad = float('inf')
+                        if opts.xy == 0 and k1 == opts.unroll-1:
+                            optimizer.step()
+                            optimizer.zero_grad()
+                            #for p in energy_network.parameters():
+                                #import pdb; pdb.set_trace()
+                                #print('h')
+                        #import pdb; pdb.set_trace()
+                        l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute_gx(decoder_output, src_out, ntokens_src, [], [], [], [])
+                        meta_optimizer.backward([hx.grad])
                         if k1 == opts.unroll-1:
                             loss_compute_gy.count_ = float('inf')
                             loss_compute_gx.count_ = float('inf')
-                        l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute_gx(decoder_output, src_out, ntokens_src, [], [], [], [])
                     total_loss_xy += l
                     total_correct_xy += l_correct
                     total_nonpadding_xy += l_nonpadding
                     loss_all_xy += l
                     total_tokens_xy += ntokens_src
                     tokens_xy += ntokens_src
-            if i % 50 == 1:
+            if i % 50 == 49:
                 elapsed = max(0.1, time.time() - start)
                 print("Epoch Step: %d lr: %f, PPL yx: %f, Acc yx: %f, PPL xy: %f, Acc xy: %f, PPL xx: %f, Acc xx: %f, PPL yy: %f, Acc yy: %f , Tokens per Sec: %f" %
                 (i, loss_compute_gy.optimizer._rate, math.exp(min(100, loss_all_yx / tokens_yx)), float(total_correct_yx)/total_nonpadding_yx, math.exp(min(100, loss_all_xy / tokens_xy)), float(total_correct_xy)/total_nonpadding_xy, math.exp(min(100, loss_all_xx / tokens_xx)), float(total_correct_xx)/total_nonpadding_xx, math.exp(min(100, loss_all_yy / tokens_yy)), float(total_correct_yy)/total_nonpadding_yy, tokens_yy / elapsed))
@@ -353,18 +392,18 @@ def main(opts):
         print ('Validation')
         model.eval()
         energy_network.eval()
-        val_loss_all_yxs =[ 0 for _ in range(opts.unroll)]
-        val_tokens_yxs = [1e-9 for _ in range(opts.unroll)]
-        val_total_correct_yxs = [0 for _ in range(opts.unroll)]
-        val_total_nonpadding_yxs =[ 1e-9 for _ in range(opts.unroll)]
+        val_loss_all_yxs =[ 0 for _ in range(opts.unroll+1)]
+        val_tokens_yxs = [1e-9 for _ in range(opts.unroll+1)]
+        val_total_correct_yxs = [0 for _ in range(opts.unroll+1)]
+        val_total_nonpadding_yxs =[ 1e-9 for _ in range(opts.unroll+1)]
         val_loss_all_xx = 0 
         val_tokens_xx = 1e-9 
         val_total_correct_xx = 0
         val_total_nonpadding_xx = 1e-9
-        val_loss_all_xys =[ 0 for _ in range(opts.unroll)]
-        val_tokens_xys = [1e-9 for _ in range(opts.unroll)]
-        val_total_correct_xys = [0 for _ in range(opts.unroll)]
-        val_total_nonpadding_xys = [1e-9 for _ in range(opts.unroll)]
+        val_loss_all_xys =[ 0 for _ in range(opts.unroll+1)]
+        val_tokens_xys = [1e-9 for _ in range(opts.unroll+1)]
+        val_total_correct_xys = [0 for _ in range(opts.unroll+1)]
+        val_total_nonpadding_xys = [1e-9 for _ in range(opts.unroll+1)]
         val_loss_all_yy = 0
         val_tokens_yy = 1e-9
         val_total_correct_yy = 0
@@ -400,15 +439,30 @@ def main(opts):
                 with torch.cuda.device(0):
                     hx_init, _, _, _= model.encoder_fx(src_embeddings_full, src_mask)
                     hy_init_ = model.init_y(hx_init.mean(1)).view(hx_init.size(0), 1, -1)
-                    for k1 in range(opts.unroll):
+                    for k1 in range(opts.unroll+1):
                         hy_init = hy_init_.data.clone()
                         hy_init.requires_grad = True
-                        for k2 in range(k1+1):
-                            energy = energy_network(hx_init.detach(), hy_init)
-                            hy_init_grad =  torch.autograd.grad(energy, hy_init)[0]
-                            hy_init = hy_init - opts.eta*hy_init_grad
+                        def loss_fn(input):
+                            hy = input[0]
+                            energy = energy_network(hx_init.detach(), hy)
+                            return energy
+                        
+                        update_params = list(energy_network.parameters())
+                        meta_optimizer = OptimN2N(loss_fn, update_params, eps = 1e-5, 
+                                                    lr = opts.eta,
+                                                    iters = k1+1, momentum = 0.5,
+                                                    acc_param_grads=True,  
+                                                    max_grad_norm = 5)
+                        if k1 == opts.unroll:
+                            hy = hy_init
+                        else:
+                            hy = meta_optimizer.forward([hy_init])[0]
+                        #for k2 in range(k1+1):
+                        #    energy = energy_network(hx_init.detach(), hy_init)
+                        #    hy_init_grad =  torch.autograd.grad(energy, hy_init)[0]
+                        #    hy_init = hy_init - opts.eta*hy_init_grad
                         loss_compute_gy.wk = 1.0 / (opts.unroll-k1+1)
-                        decoder_output, _, _, _, _, _= model.decoder_gy(hy_init, trg_embeddings_in.detach(), src_mask, trg_mask_out_trunc)
+                        decoder_output, _, _, _, _, _= model.decoder_gy(hy, trg_embeddings_in.detach(), src_mask, trg_mask_out_trunc)
                         ntokens_trg = (trg_out != TRG.vocab.stoi["<blank>"]).data.view(-1).sum().item()
                         loss_compute_gy.pad = TRG.vocab.stoi["<blank>"]
                         loss_compute_gy.accum_grad = float('inf')
@@ -442,7 +496,7 @@ def main(opts):
                         val_total_correct_xys[k1] += l_correct
                         val_total_nonpadding_xys[k1] += l_nonpadding
                     loss_compute_gx.optimizer = optimizer
-        for k1 in range(opts.unroll):
+        for k1 in range(opts.unroll+1):
             val_loss_all_yx=val_loss_all_yxs[k1]
             val_tokens_yx=val_tokens_yxs[k1]
             val_total_correct_yx=val_total_correct_yxs[k1]
@@ -454,7 +508,7 @@ def main(opts):
             print("Val Result (%d): PPL yx: %f, Acc yx: %f. PPL xy: %f, Acc xy: %f. PPL xx: %f, Acc xx: %f. PPL yy: %f, Acc yy: %f" %
                 (k1, math.exp(min(100, val_loss_all_yx / val_tokens_yx)), float(val_total_correct_yx)/val_total_nonpadding_yx, math.exp(min(100, val_loss_all_xy / val_tokens_xy)), float(val_total_correct_xy)/val_total_nonpadding_xy, math.exp(min(100, val_loss_all_xx / val_tokens_xx)), float(val_total_correct_xx)/val_total_nonpadding_xx, math.exp(min(100, val_loss_all_yy / val_tokens_yy)), float(val_total_correct_yy)/val_total_nonpadding_yy))
         torch.save({'model': model.state_dict(), 'src_vocab': SRC.vocab, 'trg_vocab': TRG.vocab, 'opts': opts, 'optimizer': optimizer, 'energy':energy_network.state_dict()}, '%s.e%d.pt'%(opts.save_to, epoch))
-        model.train()
+        model.eval()
         energy_network.train()
 
 if __name__ == '__main__':

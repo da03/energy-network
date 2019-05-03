@@ -23,6 +23,7 @@ parser = argparse.ArgumentParser(
     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("--dataset", required=True, help="Path to the dataset")
 parser.add_argument("--output", required=True, help="Output path")
+parser.add_argument("--unroll", type=int, default=5, help="Number of Epochs")
 parser.add_argument("--direction", default="ende",
                     choices=["ende", "deen"],  help="Direction of translation")
 parser.add_argument("--mode", default="soft",
@@ -75,6 +76,9 @@ def main(opts):
     model.load_state_dict(checkpoint['model'])
     model.trg_pad = TRG.vocab.stoi["<blank>"]
     model.cuda()
+    energy_network = EnergyNetwork(d_model=278, d_ff=507)
+    energy_network.load_state_dict(checkpoint['energy'])
+    energy_network.cuda()
     optimizer = checkpoint['optimizer']
 
     weight = torch.ones(trg_vocab_size)
@@ -93,64 +97,63 @@ def main(opts):
     BOS = TRG.vocab.stoi[BOS_WORD]
     EOS = TRG.vocab.stoi[EOS_WORD]
     model.decoder_gy.vocab = TRG.vocab
-    with torch.no_grad():
-        with codecs.open(opts.output, 'w', 'utf-8') as fout:
-            for i, batch in enumerate(val_iter):
-                src = batch.src[0].transpose(0, 1) # 1, len
-                trg = batch.trg.transpose(0, 1) # 1, len
+    with codecs.open(opts.output, 'w', 'utf-8') as fout:
+        for i, batch in enumerate(val_iter):
+            src = batch.src[0].transpose(0, 1) # 1, len
+            trg = batch.trg.transpose(0, 1) # 1, len
 
-                src_in = src[:, :-1]
-                src_out = src[:, 1:]
-                src_mask = (src != SRC.vocab.stoi["<blank>"]).unsqueeze(-2)
-                src_mask_out = src_mask & Variable(subsequent_mask(src.size(-1)).to(src_mask))
-                assert src.size(0) == 1
+            src_in = src[:, :-1]
+            src_out = src[:, 1:]
+            src_mask = (src != SRC.vocab.stoi["<blank>"]).unsqueeze(-2)
+            src_mask_out = src_mask & Variable(subsequent_mask(src.size(-1)).to(src_mask))
+            assert src.size(0) == 1
 
-                trg = batch.trg.transpose(0, 1) # batch, len
-                trg_mask = (trg != TRG.vocab.stoi["<blank>"]).unsqueeze(-2)
-                trg_mask_out = trg_mask & Variable(subsequent_mask(trg.size(-1)).to(trg_mask))
-                trg_in = trg[:, :-1]
-                trg_out = trg[:, 1:]
-                ntokens = (trg_out != TRG.vocab.stoi["<blank>"]).data.view(-1).sum().item()
-                #decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model(src, trg, src_mask, trg_mask, None)
-                #word_probs = model.generator(decoder_output)
-                #model.decoder.decoder_output = decoder_output
-                model.decoder_gy.trg_mask = trg_mask_out
-                model.decoder_gy.src_mask = src_mask
+            trg = batch.trg.transpose(0, 1) # batch, len
+            trg_mask = (trg != TRG.vocab.stoi["<blank>"]).unsqueeze(-2)
+            trg_mask_out = trg_mask & Variable(subsequent_mask(trg.size(-1)).to(trg_mask))
+            trg_in = trg[:, :-1]
+            trg_out = trg[:, 1:]
+            ntokens = (trg_out != TRG.vocab.stoi["<blank>"]).data.view(-1).sum().item()
+            #decoder_output, log_prior_attentions, prior_attentions, log_posterior_attentions, posterior_attentions = model(src, trg, src_mask, trg_mask, None)
+            #word_probs = model.generator(decoder_output)
+            #model.decoder.decoder_output = decoder_output
+            model.decoder_gy.trg_mask = trg_mask_out
+            model.decoder_gy.src_mask = src_mask
 
-                if checkpoint['opts'].encselfmode != 'soft':
-                    encselftemperature = -1
-                    encselfdependent_posterior = 1
-                    encattn_dropout = False
-                else:
-                    encselftemperature = None
-                    encselfdependent_posterior = 0
-                    encattn_dropout = True
+            if checkpoint['opts'].encselfmode != 'soft':
+                encselftemperature = -1
+                encselfdependent_posterior = 1
+                encattn_dropout = False
+            else:
+                encselftemperature = None
+                encselfdependent_posterior = 0
+                encattn_dropout = True
 
-                hypothesis, score = model.beam_search_soft(opts.beam_size, src, src_mask, BOS, EOS, opts.max_trg_len)
-                words = []
-                for word_id in src.view(-1):
-                    words.append(SRC.vocab.itos[word_id.item()])
-                try:
-                    print ('Src: %s'%(' '.join(words)))
-                except Exception as e:
-                    pass
-                words = []
-                for word_id in trg.view(-1)[1:-1]:
-                    words.append(TRG.vocab.itos[word_id.item()])
-                try:
-                    print ('Ground Truth: %s'%(' '.join(words)))
-                except Exception as e:
-                    pass
-                words = []
-                for word_id in hypothesis:
-                    if word_id.item() == EOS:
-                        break
-                    words.append(TRG.vocab.itos[word_id.item()])
-                try:
-                    print ('Predicted (%f): %s'%(score, ' '.join(words)))
-                except Exception as e:
-                    pass
-                fout.write(' '.join(words)+'\n')
+            hypothesis, score = model.beam_search_soft_energy(checkpoint['opts'].eta, energy_network, opts.unroll, opts.beam_size, src, src_mask, BOS, EOS, opts.max_trg_len)
+            words = []
+            for word_id in src.view(-1):
+                words.append(SRC.vocab.itos[word_id.item()])
+            try:
+                print ('Src: %s'%(' '.join(words)))
+            except Exception as e:
+                pass
+            words = []
+            for word_id in trg.view(-1)[1:-1]:
+                words.append(TRG.vocab.itos[word_id.item()])
+            try:
+                print ('Ground Truth: %s'%(' '.join(words)))
+            except Exception as e:
+                pass
+            words = []
+            for word_id in hypothesis:
+                if word_id.item() == EOS:
+                    break
+                words.append(TRG.vocab.itos[word_id.item()])
+            try:
+                print ('Predicted (%f): %s'%(score, ' '.join(words)))
+            except Exception as e:
+                pass
+            fout.write(' '.join(words)+'\n')
 
 
 if __name__ == '__main__':

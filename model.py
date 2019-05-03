@@ -125,6 +125,22 @@ class Model(nn.Module):
         hypothesis, score = self.decoder_gy.beam_search_soft(beam_size, self.generator_gy, self.trg_embed, h, src_mask, sos, eos, max_length)
         return hypothesis, score
  
+    def beam_search_soft_energy(self, eta, energy_network, unroll, beam_size, src, src_mask, sos, eos, max_length):
+        assert not self.training
+        src_embeddings_full = self.src_embed(src)
+        hx_init, _, _, _= self.encoder_fx(src_embeddings_full, src_mask)
+        hy_init_ = self.init_y(hx_init.mean(1)).view(hx_init.size(0), 1, -1)
+        hy_init = hy_init_.data.clone()
+        hy_init.requires_grad = True
+        for k2 in range(unroll):
+            energy = energy_network(hx_init.detach(), hy_init)
+            hy_init_grad =  torch.autograd.grad(energy, hy_init)[0]
+            hy_init = hy_init - eta*hy_init_grad
+        # soft always attn_dropout
+        h = hy_init
+        hypothesis, score = self.decoder_gy.beam_search_soft(beam_size, self.generator_gy, self.trg_embed, h, src_mask, sos, eos, max_length)
+        return hypothesis, score
+ 
     def beam_search_hard(self, beam_size, src, src_mask, sos, eos, max_length,  encselftemperature=None, encselfdependent_posterior=0, encattn_dropout=True):
         assert not self.training
         src_embeddings = self.src_embed(src)
