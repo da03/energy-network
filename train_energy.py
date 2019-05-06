@@ -324,6 +324,7 @@ def main(opts):
                 with torch.cuda.device(0):
                     hy_init, _, _, _= model.encoder_fy(trg_embeddings_full, trg_mask)
                     hx_init_ = model.init_x(hy_init.mean(1)).view(hy_init.size(0), 1, -1)
+                    import pdb; pdb.set_trace()
                     for k1 in range(opts.unroll):
                         hx_init = hx_init_.data.clone()
                         hx_init.requires_grad = True
@@ -348,9 +349,6 @@ def main(opts):
                         ntokens_src = (src_out != SRC.vocab.stoi["<blank>"]).data.view(-1).sum().item()
                         loss_compute_gx.pad = SRC.vocab.stoi["<blank>"]
                         loss_compute_gx.accum_grad = float('inf')
-                        if opts.xy == 0 and k1 == opts.unroll-1:
-                            optimizer.step()
-                            optimizer.zero_grad()
                             #for p in energy_network.parameters():
                                 #import pdb; pdb.set_trace()
                                 #print('h')
@@ -358,8 +356,8 @@ def main(opts):
                         l, l_xent, l_kl, l_correct, l_nonpadding = loss_compute_gx(decoder_output, src_out, ntokens_src, [], [], [], [])
                         meta_optimizer.backward([hx.grad])
                         if k1 == opts.unroll-1:
-                            loss_compute_gy.count_ = float('inf')
-                            loss_compute_gx.count_ = float('inf')
+                            optimizer.step()
+                            optimizer.zero_grad()
                     total_loss_xy += l
                     total_correct_xy += l_correct
                     total_nonpadding_xy += l_nonpadding

@@ -1,0 +1,82 @@
+
+
+CUDA_VISIBLE_DEVICES=1 python translate_energy.py --dataset iwslt/en-de/ --direction deen --model models/de-en/energy/11/default_5_01.e2.pt --output models/de-en/energy/11/default_5_01.e1.pt.out.0step --unroll 0 > log.de_en_energy_11_5_01_out0 2>&1&
+
+CUDA_VISIBLE_DEVICES=3 python translate_energy.py --dataset iwslt/en-de/ --direction deen --model models/de-en/energy/11/default_5_01.e2.pt --output models/de-en/energy/11/default_5_01.e1.pt.out.1step --unroll 1 > log.de_en_energy_11_5_01_out1 2>&1&
+
+
+
+
+
+
+
+CUDA_VISIBLE_DEVICES=4 python translate_energy.py --dataset iwslt/en-de/ --direction deen --model models/de-en/energy/11/default_5_01.e2.pt --output models/de-en/energy/11/default_5_01.e1.pt.out.2step --unroll 2 > log.de_en_energy_11_5_01_out2 2>&1&
+
+CUDA_VISIBLE_DEVICES=5 python translate_energy.py --dataset iwslt/en-de/ --direction deen --model models/de-en/energy/11/default_5_01.e2.pt --output models/de-en/energy/11/default_5_01.e1.pt.out.3step --unroll 3 > log.de_en_energy_11_5_01_out3 2>&1&
+
+CUDA_VISIBLE_DEVICES=6 python translate_energy.py --dataset iwslt/en-de/ --direction deen --model models/de-en/energy/11/default_5_01.e2.pt --output models/de-en/energy/11/default_5_01.e1.pt.out.4step --unroll 4 > log.de_en_energy_11_5_01_out4 2>&1&
+
+CUDA_VISIBLE_DEVICES=7 python translate_energy.py --dataset iwslt/en-de/ --direction deen --model models/de-en/energy/11/default_5_01.e2.pt --output models/de-en/energy/11/default_5_01.e1.pt.out.5step --unroll 5 > log.de_en_energy_11_5_01_out5 2>&1&
+
+
+
+
+[37]   Running                 CUDA_VISIBLE_DEVICES=6 python train_energy.py --dataset iwslt/en-de --selfmode soft --encselfmode soft --temperature 0 --selftemperature 0 --encselftemperature 0 --encselfmode soft --save_to models/de-en/energy/01/default_5_01 --direction deen --train_from models/de-en/10/default_00.e9.pt --yx 1 --xy 0 > log.de_en_energy_01_5_01 2>&1 &
+[38]-  Running                 CUDA_VISIBLE_DEVICES=1 python train_energy.py --dataset iwslt/en-de --selfmode soft --encselfmode soft --temperature 0 --selftemperature 0 --encselftemperature 0 --encselfmode soft --save_to models/de-en/energy/01/default_5_001 --direction deen --train_from models/de-en/10/default_00.e9.pt --yx 1 --xy 0 --eta 0.01 > log.de_en_energy_01_5_001 2>&1 &
+
+
+De-en: 10
+0: 0.070039
+1: 0.070697
+2: 0.067440
+3: 0.063807
+4: 0.059560
+5: 0.052340
+
+En-de: 10
+0: 0.069556
+1: 0.068858
+2: 0.065948
+3: 0.063050
+4:0.060487
+5:0.056624
+
+De-en: 11
+0: 0.078029
+1: 0.075026
+2: 0.073446
+3: 0.072046
+4: 0.068879
+5:
+
+En-de: 11
+0: 0.056504
+1: 0.054617
+2: 0.054628
+3: 0.053348
+4: 0.049776
+5: 0.047068
+
+CUDA_VISIBLE_DEVICES=6 python train_energy.py --dataset iwslt/en-de --selfmode soft --encselfmode soft --temperature 0 --selftemperature 0 --encselftemperature 0 --encselfmode soft --save_to models/en-de/energy/10/default_5_01 --direction ende --train_from models/en-de/10/default_00_pretrain.e14.pt --yx 1 --xy 0 --eta 0.1 > log.en_de_energy_10_5_01 2>&1
+
+
+CUDA_VISIBLE_DEVICES=1 python train_energy.py --dataset iwslt/en-de --selfmode soft --encselfmode soft --temperature 0 --selftemperature 0 --encselftemperature 0 --encselfmode soft --save_to models/en-de/energy/10/default_5_01 --direction ende --train_from models/en-de/11/default_00_pretrain.e11.pt --yx 1 --xy 1 --eta 0.1 > log.en_de_energy_11_5_01 2>&1
+
+
+CUDA_VISIBLE_DEVICES=3 python train_energy.py --dataset iwslt/en-de --selfmode soft --encselfmode soft --temperature 0 --selftemperature 0 --encselftemperature 0 --encselfmode soft --save_to models/de-en/energy/11/default_5_01 --direction deen --train_from models/de-en/11/default_00_pretrain.e11.pt --yx 1 --xy 1  > log.de_en_energy_11_5_01 2>&1
+
+
+
+
+
+CUDA_VISIBLE_DEVICES=0 python translate_energy.py --dataset iwslt/en-de/ --direction ende --model models/en-de/energy/11/default_5_01.e2.pt --output models/en-de/energy/11/default_5_01.e1.pt.out.0step --unroll 0 > log.en_de_energy_11_5_01_out0 2>&1&
+
+CUDA_VISIBLE_DEVICES=2 python translate_energy.py --dataset iwslt/en-de/ --direction ende --model models/en-de/energy/11/default_5_01.e2.pt --output models/en-de/energy/11/default_5_01.e1.pt.out.1step --unroll 1 > log.en_de_energy_11_5_01_out1 2>&1&
+
+CUDA_VISIBLE_DEVICES=4 python translate_energy.py --dataset iwslt/en-de/ --direction ende --model models/en-de/energy/11/default_5_01.e2.pt --output models/en-de/energy/11/default_5_01.e1.pt.out.2step --unroll 2 > log.en_de_energy_11_5_01_out2 2>&1&
+
+CUDA_VISIBLE_DEVICES=5 python translate_energy.py --dataset iwslt/en-de/ --direction ende --model models/en-de/energy/11/default_5_01.e2.pt --output models/en-de/energy/11/default_5_01.e1.pt.out.3step --unroll 3 > log.en_de_energy_11_5_01_out3 2>&1&
+
+CUDA_VISIBLE_DEVICES=6 python translate_energy.py --dataset iwslt/en-de/ --direction ende --model models/en-de/energy/11/default_5_01.e2.pt --output models/en-de/energy/11/default_5_01.e1.pt.out.4step --unroll 4 > log.en_de_energy_11_5_01_out4 2>&1&
+
+CUDA_VISIBLE_DEVICES=7 python translate_energy.py --dataset iwslt/en-de/ --direction ende --model models/en-de/energy/11/default_5_01.e2.pt --output models/en-de/energy/11/default_5_01.e1.pt.out.5step --unroll 5 > log.en_de_energy_11_5_01_out5 2>&1&

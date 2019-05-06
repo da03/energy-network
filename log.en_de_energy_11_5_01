@@ -710,52 +710,7 @@ Namespace(accum_grad=1, anneal_kl=1, anneal_steps=250000, anneal_temperature=0, 
 
 Epoch: 0
 Training
-Epoch Step: 49 lr: 0.000000, PPL yx: 19.255790, Acc yx: 0.438972, PPL xy: 7753.360042, Acc xy: 0.119461, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 99 lr: 0.000000, PPL yx: 16.887646, Acc yx: 0.463329, PPL xy: 6703.350552, Acc xy: 0.124173, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 149 lr: 0.000000, PPL yx: 22.073690, Acc yx: 0.419965, PPL xy: 10631.419412, Acc xy: 0.107142, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 199 lr: 0.000000, PPL yx: 19.014316, Acc yx: 0.441337, PPL xy: 8064.659750, Acc xy: 0.119721, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 249 lr: 0.000000, PPL yx: 19.861108, Acc yx: 0.435346, PPL xy: 8144.291406, Acc xy: 0.123363, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 299 lr: 0.000000, PPL yx: 24.666682, Acc yx: 0.400898, PPL xy: 12712.419114, Acc xy: 0.104998, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 349 lr: 0.000000, PPL yx: 21.655016, Acc yx: 0.416965, PPL xy: 9503.065434, Acc xy: 0.121479, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 399 lr: 0.000000, PPL yx: 19.267995, Acc yx: 0.441810, PPL xy: 8316.556373, Acc xy: 0.118755, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 449 lr: 0.000000, PPL yx: 18.227911, Acc yx: 0.448544, PPL xy: 7527.933605, Acc xy: 0.117011, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 499 lr: 0.000000, PPL yx: 16.796714, Acc yx: 0.464770, PPL xy: 6993.656016, Acc xy: 0.121493, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 549 lr: 0.000000, PPL yx: 21.229583, Acc yx: 0.422196, PPL xy: 9373.404650, Acc xy: 0.120842, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 599 lr: 0.000000, PPL yx: 20.888853, Acc yx: 0.426851, PPL xy: 9366.467532, Acc xy: 0.113648, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 649 lr: 0.000000, PPL yx: 18.998808, Acc yx: 0.440616, PPL xy: 7773.971659, Acc xy: 0.123002, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 699 lr: 0.000000, PPL yx: 20.609684, Acc yx: 0.427390, PPL xy: 9125.862212, Acc xy: 0.115501, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 749 lr: 0.000000, PPL yx: 18.678164, Acc yx: 0.446725, PPL xy: 7957.550491, Acc xy: 0.119458, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 799 lr: 0.000000, PPL yx: 17.645788, Acc yx: 0.455133, PPL xy: 7277.590392, Acc xy: 0.119332, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 849 lr: 0.000000, PPL yx: 19.919857, Acc yx: 0.434374, PPL xy: 7884.095982, Acc xy: 0.125111, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 899 lr: 0.000000, PPL yx: 20.679311, Acc yx: 0.428382, PPL xy: 9634.159957, Acc xy: 0.114100, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 949 lr: 0.000000, PPL yx: 17.322280, Acc yx: 0.456197, PPL xy: 6314.093874, Acc xy: 0.126397, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 999 lr: 0.000000, PPL yx: 17.915547, Acc yx: 0.449455, PPL xy: 7084.106324, Acc xy: 0.121748, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 1049 lr: 0.000000, PPL yx: 16.881401, Acc yx: 0.466011, PPL xy: 6173.264990, Acc xy: 0.121630, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 1099 lr: 0.000000, PPL yx: 20.151294, Acc yx: 0.431427, PPL xy: 8747.608908, Acc xy: 0.121848, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 1149 lr: 0.000000, PPL yx: 18.487884, Acc yx: 0.445574, PPL xy: 7571.814456, Acc xy: 0.120569, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 1199 lr: 0.000000, PPL yx: 19.780438, Acc yx: 0.433718, PPL xy: 8205.513398, Acc xy: 0.120084, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 1249 lr: 0.000000, PPL yx: 19.612203, Acc yx: 0.434894, PPL xy: 8437.986950, Acc xy: 0.117323, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 1299 lr: 0.000000, PPL yx: 21.336909, Acc yx: 0.420813, PPL xy: 9491.253973, Acc xy: 0.117543, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 1349 lr: 0.000000, PPL yx: 22.147361, Acc yx: 0.416863, PPL xy: 9449.389375, Acc xy: 0.117513, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 1399 lr: 0.000000, PPL yx: 17.491733, Acc yx: 0.457684, PPL xy: 6630.706197, Acc xy: 0.124676, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 1449 lr: 0.000000, PPL yx: 17.754481, Acc yx: 0.454228, PPL xy: 7111.937665, Acc xy: 0.125218, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Validation
-Val Result (0): PPL yx: 33.531908, Acc yx: 0.384286. PPL xy: 1.000000, Acc xy: 0.000000. PPL xx: 1.000000, Acc xx: 0.000000. PPL yy: 1.000000, Acc yy: 0.000000
-Val Result (1): PPL yx: 33.640047, Acc yx: 0.383544. PPL xy: 1.000000, Acc xy: 0.000000. PPL xx: 1.000000, Acc xx: 0.000000. PPL yy: 1.000000, Acc yy: 0.000000
-Val Result (2): PPL yx: 33.798147, Acc yx: 0.382671. PPL xy: 1.000000, Acc xy: 0.000000. PPL xx: 1.000000, Acc xx: 0.000000. PPL yy: 1.000000, Acc yy: 0.000000
-Val Result (3): PPL yx: 34.006238, Acc yx: 0.381580. PPL xy: 1.000000, Acc xy: 0.000000. PPL xx: 1.000000, Acc xx: 0.000000. PPL yy: 1.000000, Acc yy: 0.000000
-Val Result (4): PPL yx: 34.264350, Acc yx: 0.380576. PPL xy: 1.000000, Acc xy: 0.000000. PPL xx: 1.000000, Acc xx: 0.000000. PPL yy: 1.000000, Acc yy: 0.000000
-Val Result (5): PPL yx: 33.473650, Acc yx: 0.384417. PPL xy: 1.000000, Acc xy: 0.000000. PPL xx: 1.000000, Acc xx: 0.000000. PPL yy: 1.000000, Acc yy: 0.000000
-
-Epoch: 1
-Training
-Epoch Step: 49 lr: 0.000000, PPL yx: 20.267660, Acc yx: 0.430014, PPL xy: 8872.251931, Acc xy: 0.118403, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 99 lr: 0.000000, PPL yx: 17.360615, Acc yx: 0.456178, PPL xy: 6968.258188, Acc xy: 0.125005, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 149 lr: 0.000000, PPL yx: 19.538317, Acc yx: 0.434440, PPL xy: 8472.022976, Acc xy: 0.118249, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 199 lr: 0.000000, PPL yx: 20.018261, Acc yx: 0.433964, PPL xy: 7894.166540, Acc xy: 0.124612, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 249 lr: 0.000000, PPL yx: 21.576131, Acc yx: 0.420236, PPL xy: 10011.897297, Acc xy: 0.108792, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 299 lr: 0.000000, PPL yx: 19.422777, Acc yx: 0.438271, PPL xy: 8660.987547, Acc xy: 0.117379, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 349 lr: 0.000000, PPL yx: 21.261015, Acc yx: 0.424516, PPL xy: 9764.432398, Acc xy: 0.118270, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 399 lr: 0.000000, PPL yx: 19.631469, Acc yx: 0.435700, PPL xy: 8214.890624, Acc xy: 0.119949, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 449 lr: 0.000000, PPL yx: 17.984351, Acc yx: 0.452767, PPL xy: 7904.076950, Acc xy: 0.117951, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
-Epoch Step: 499 lr: 0.000000, PPL yx: 18.886377, Acc yx: 0.440374, PPL xy: 7754.851757, Acc xy: 0.121762, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
+Epoch Step: 49 lr: 0.000150, PPL yx: 18.687235, Acc yx: 0.445029, PPL xy: 7659.648336, Acc xy: 0.124713, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
+Epoch Step: 99 lr: 0.000150, PPL yx: 17.946385, Acc yx: 0.452039, PPL xy: 8292.501926, Acc xy: 0.118953, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
+Epoch Step: 149 lr: 0.000150, PPL yx: 19.686059, Acc yx: 0.436984, PPL xy: 9774.606150, Acc xy: 0.112916, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
+Epoch Step: 199 lr: 0.000150, PPL yx: 18.800962, Acc yx: 0.441859, PPL xy: 7833.035009, Acc xy: 0.122492, PPL xx: 1.000000, Acc xx: 0.000000, PPL yy: 1.000000, Acc yy: 0.000000 , Tokens per Sec: 0.000000
