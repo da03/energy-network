@@ -123,7 +123,7 @@ class Model(nn.Module):
     def beam_search_soft(self, beam_size, src, src_mask, sos, eos, max_length, encselftemperature=None, encselfdependent_posterior=0, encattn_dropout=True):
         assert not self.training
         src_embeddings = self.src_embed(src)
-        h = self.encoder(src_embeddings, src_mask, temperature=encselftemperature, dependent_posterior=encselfdependent_posterior, attn_dropout=encattn_dropout)
+        h, _, _, _ = self.encoder(src_embeddings, src_mask, temperature=encselftemperature, dependent_posterior=encselfdependent_posterior, attn_dropout=encattn_dropout)
         # soft always attn_dropout
         hypothesis, score = self.decoder.beam_search_soft(beam_size, self.generator, self.trg_embed, h, src_mask, sos, eos, max_length, attn_dropout=True)
         return hypothesis, score

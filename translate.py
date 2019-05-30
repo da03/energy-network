@@ -135,17 +135,26 @@ def main(opts):
                 words = []
                 for word_id in src.view(-1):
                     words.append(SRC.vocab.itos[word_id.item()])
-                print ('Src: %s'%(' '.join(words)))
+                try:
+                    print ('Src: %s'%(' '.join(words)))
+                except Exception as e:
+                    pass
                 words = []
                 for word_id in trg.view(-1)[1:-1]:
                     words.append(TRG.vocab.itos[word_id.item()])
-                print ('Ground Truth: %s'%(' '.join(words)))
+                try:
+                    print ('Ground Truth: %s'%(' '.join(words)))
+                except Exception as e:
+                    pass
                 words = []
                 for word_id in hypothesis:
                     if word_id.item() == EOS:
                         break
                     words.append(TRG.vocab.itos[word_id.item()])
-                print ('Predicted (%f): %s'%(score, ' '.join(words)))
+                try:
+                    print ('Predicted (%f): %s'%(score, ' '.join(words)))
+                except Exception as e:
+                    pass
                 fout.write(' '.join(words)+'\n')
 
 
